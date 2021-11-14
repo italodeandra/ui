@@ -1,0 +1,18 @@
+{
+  "name": "@italodeandra/dev",
+  "version": "0.1.1",
+  "description": "Collection of devDependencies used across several projects",
+  "scripts": {
+    "publish:yalc": "yalc publish"
+  },
+  "dependencies": {
+    "@types/lodash": "4.14.176",
+    "cross-env": "7.0.3",
+    "json": "11.0.0",
+    "nodemon": "2.0.15",
+    "prettier": "2.4.1",
+    "shx": "0.3.3",
+    "typescript": "4.4.4"
+  },
+  "yalcSig": "c294d7088f822d5ef9dde7285ce9c371"
+}

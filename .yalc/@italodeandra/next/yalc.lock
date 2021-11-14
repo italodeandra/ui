@@ -1,0 +1,9 @@
+{
+  "version": "v1",
+  "packages": {
+    "@italodeandra/dev": {
+      "signature": "c294d7088f822d5ef9dde7285ce9c371",
+      "file": true
+    }
+  }
+}

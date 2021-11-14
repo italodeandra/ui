@@ -1,0 +1,22 @@
+{
+  "name": "@italodeandra/next",
+  "version": "0.1.0",
+  "description": "Next.js library",
+  "dependencies": {
+    "@next-auth/mongodb-adapter": "0.0.2-next.285",
+    "@next/bundle-analyzer": "12.0.3",
+    "babel-plugin-superjson-next": "0.4.2",
+    "mailgen": "2.0.16",
+    "mongodb-memory-server": "8.0.2",
+    "next": "12.0.3",
+    "next-auth": "4.0.0-beta.6",
+    "next-seo": "4.28.1",
+    "nodemailer": "6.7.0",
+    "nookies": "2.5.2",
+    "socket.io": "4.3.2",
+    "socket.io-client": "4.3.2",
+    "superjson": "1.8.0",
+    "ts-node": "10.4.0"
+  },
+  "yalcSig": "cc902c32d7ecfccbfa457aee7f3ac700"
+}
