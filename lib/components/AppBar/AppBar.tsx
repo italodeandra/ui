@@ -23,6 +23,12 @@ const AppBar = styled<VFC<AppBarProps>>(
     )
   )
 )(({ theme, color = "default" }) => ({
+  transition: theme.transitions.create([
+    "backdrop-filter",
+    "background-color",
+    "box-shadow",
+  ]),
+  backgroundImage: "none",
   backdropFilter: color === "default" ? "saturate(180%) blur(5px)" : undefined,
   backgroundColor:
     color === "default"

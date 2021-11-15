@@ -2,13 +2,12 @@ import arrowLeft from "@iconify/icons-heroicons-solid/arrow-left";
 import { Box, Stack, Typography } from "@mui/material";
 import { NextSeo } from "next-seo";
 import Link from "next/link";
-import useWindowScroll from "react-use/esm/useWindowScroll";
-import { Button, Icon } from "..";
+import { useWindowScroll } from "react-use";
+import { Button, Icon, numericArray } from "../..";
 import DarkModeSelect from "../../../src/components/DarkModeSelect/DarkModeSelect";
-import { numericArray } from "../../utils";
 import AppBar from "./AppBar";
 
-const ButtonDemo = () => {
+const AppBarDemo = () => {
   const { y: scrollTop } = useWindowScroll();
 
   return (
@@ -45,7 +44,7 @@ const ButtonDemo = () => {
 
       <Stack p={2} spacing={2} minHeight={"100vh"}>
         {numericArray(20).map((i) => (
-          <Typography key={i}>
+          <Typography key={i} align={"justify"}>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam
             autem commodi, cum cupiditate dicta dignissimos doloribus dolorum
             ducimus eius error fuga iusto laudantium nihil non perferendis sed
@@ -61,4 +60,4 @@ const ButtonDemo = () => {
   );
 };
 
-export default ButtonDemo;
+export default AppBarDemo;

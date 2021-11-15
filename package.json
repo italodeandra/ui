@@ -6,7 +6,7 @@
     "yalc:update": "yalc update",
     "demo:dev": "cross-env PORT=3001 next",
     "build:lib": "shx rm -rf dist && tsc --build lib/tsconfig.json && shx cp package.json dist",
-    "pre-publish": "npm run build:lib && cd dist && json -I -f package.json -e \"this.devDependencies=undefined; this.scripts=undefined;\"",
+    "pre-publish": "npm run build:lib && cd dist && json -I -f package.json -e \"this.devDependencies=undefined; this.peerDependencies=this.dependencies; this.scripts=undefined;\"",
     "publish:github": "npm run pre-publish && cd dist && npm publish",
     "publish:yalc": "npm run pre-publish && shx cp -R yalc.lock .yalc dist && cd dist && yalc publish"
   },
