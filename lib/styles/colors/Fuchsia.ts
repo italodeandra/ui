@@ -13,4 +13,5 @@ enum Fuchsia {
   N900 = "#701A75",
 }
 
-export default Fuchsia
+// noinspection JSUnusedGlobalSymbols
+export default Fuchsia;

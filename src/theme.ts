@@ -1,4 +1,4 @@
-import { createTheme } from "../lib";
+import createTheme from "../lib/styles/createTheme";
 
 export const lightTheme = createTheme();
 

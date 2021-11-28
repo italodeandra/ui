@@ -60,7 +60,7 @@ function sendMail(to, subject, content) {
                 case 1:
                     testAccount = _a.sent();
                     smtp = {
-                        from: "Majapi <" + testAccount.user + ">",
+                        from: "Majapi <".concat(testAccount.user, ">"),
                         server: {
                             host: "smtp.ethereal.email",
                             port: 587,

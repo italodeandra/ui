@@ -13,4 +13,5 @@ enum Amber {
   N900 = "#78350F",
 }
 
-export default Amber
+// noinspection JSUnusedGlobalSymbols
+export default Amber;

@@ -1,7 +1,9 @@
-import { Card, Stack } from "@mui/material";
+import Card from "@mui/material/Card";
+import Stack from "@mui/material/Stack";
+import { VFC } from "react";
 import DemoTemplate from "../../../src/components/DemoTemplate/DemoTemplate";
 
-const IconDemo = () => (
+const IconDemo: VFC = () => (
   <DemoTemplate title header={"Shadows"}>
     <Stack spacing={2}>
       <Card elevation={0} sx={{ p: 1 }}>

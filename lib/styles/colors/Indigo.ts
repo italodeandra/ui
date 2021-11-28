@@ -13,4 +13,5 @@ enum Indigo {
   N900 = "#312E81",
 }
 
-export default Indigo
+// noinspection JSUnusedGlobalSymbols
+export default Indigo;

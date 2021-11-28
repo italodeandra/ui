@@ -1,5 +1,5 @@
-import { useMediaQuery } from "@mui/material";
-import { useMount } from "react-use";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import useMount from "react-use/lib/useMount";
 import { proxy, subscribe, useSnapshot } from "valtio";
 import packageJson from "../package.json";
 
@@ -23,7 +23,7 @@ subscribe(themeState, () => {
   localStorage.setItem(key, JSON.stringify(themeState));
 });
 
-export const useThemeModeOnApp = () => {
+export const useThemeModeOnApp = (): "light" | "dark" => {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
   const themeStateSnapshot = useSnapshot(themeState);
   const mode =

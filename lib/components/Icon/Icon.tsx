@@ -1,8 +1,8 @@
 /* istanbul ignore file */
 
 import { Icon as Iconify, InlineIcon } from "@iconify/react";
-import { SvgIcon } from "@mui/material";
-import { ComponentProps, forwardRef, VFC } from "react";
+import SvgIcon from "@mui/material/SvgIcon";
+import { ComponentProps, forwardRef, VFC, ElementType } from "react";
 
 export interface IconProps
   extends Omit<ComponentProps<typeof SvgIcon>, "children"> {
@@ -35,7 +35,7 @@ export interface IconProps
 const Icon: VFC<IconProps> = forwardRef(({ icon, inline, ...props }, ref) => (
   <SvgIcon
     ref={ref}
-    component={(!inline ? Iconify : InlineIcon) as any}
+    component={(!inline ? Iconify : InlineIcon) as ElementType}
     icon={icon}
     {...props}
   />

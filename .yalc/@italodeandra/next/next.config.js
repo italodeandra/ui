@@ -14,7 +14,8 @@ const smtp = {
   },
 };
 
-module.exports = withBundleAnalyzer({
+/** @type {import('next').NextConfig} */
+const config = {
   reactStrictMode: true,
   swcMinify: true,
   webpack: (config, { isServer }) => {
@@ -54,4 +55,6 @@ module.exports = withBundleAnalyzer({
       region: process.env.S3_REGION,
     },
   },
-});
+};
+
+module.exports = withBundleAnalyzer(config);

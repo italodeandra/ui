@@ -1,4 +1,4 @@
-import { Shadows } from "@mui/material/styles/shadows";
+import type { Shadows } from "@mui/material/styles/shadows";
 
 /** Based on Tailwind's "shadow-none" */
 const none = "none";

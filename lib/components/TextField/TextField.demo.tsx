@@ -1,8 +1,11 @@
-import { Box, Stack } from "@mui/material";
-import { FormLabel, TextField } from "..";
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+import { VFC } from "react";
+import TextField from "../TextField";
+import FormLabel from "../FormLabel";
 import DemoTemplate from "../../../src/components/DemoTemplate/DemoTemplate";
 
-const TextFieldDemo = () => (
+const TextFieldDemo: VFC = () => (
   <DemoTemplate title header={"Text field"}>
     <Stack spacing={1}>
       <Box>

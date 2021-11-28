@@ -13,4 +13,5 @@ enum Emerald {
   N900 = "#064E3B",
 }
 
-export default Emerald
+// noinspection JSUnusedGlobalSymbols
+export default Emerald;

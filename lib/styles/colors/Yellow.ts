@@ -13,4 +13,5 @@ enum Yellow {
   N900 = "#713F12",
 }
 
-export default Yellow
+// noinspection JSUnusedGlobalSymbols
+export default Yellow;

@@ -13,4 +13,5 @@ enum Purple {
   N900 = "#581C87",
 }
 
-export default Purple
+// noinspection JSUnusedGlobalSymbols
+export default Purple;

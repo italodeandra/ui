@@ -1,4 +1,7 @@
-import type { ComponentsOverrides, ComponentsProps } from "@mui/material";
+import type {
+  ComponentsOverrides,
+  ComponentsProps,
+} from "@mui/material/styles";
 
 const MuiCardOverride: {
   defaultProps?: ComponentsProps["MuiCard"];

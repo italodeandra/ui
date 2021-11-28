@@ -1,13 +1,15 @@
 {
   "version": "v1",
   "packages": {
-    "@italodeandra/next": {
-      "signature": "cc902c32d7ecfccbfa457aee7f3ac700",
-      "file": true
-    },
     "@italodeandra/dev": {
-      "signature": "c294d7088f822d5ef9dde7285ce9c371",
-      "file": true
+      "signature": "52fc5f3404c2fe248526a702befd5b5b",
+      "file": true,
+      "replaced": "0.1.2"
+    },
+    "@italodeandra/next": {
+      "signature": "13e60c90cd207164b9fc4a9cb27a9eaa",
+      "file": true,
+      "replaced": "0.1.5"
     }
   }
 }

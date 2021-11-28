@@ -1,18 +1,14 @@
 /* istanbul ignore file */
 
-import {
-  alpha,
-  formHelperTextClasses,
-  inputAdornmentClasses,
-  inputBaseClasses,
-  inputLabelClasses,
-  outlinedInputClasses,
-  OutlinedTextFieldProps,
-  styled,
-  TextField as MuiTextField,
-} from "@mui/material";
+import { formHelperTextClasses } from "@mui/material/FormHelperText";
+import { inputAdornmentClasses } from "@mui/material/InputAdornment";
+import { inputBaseClasses } from "@mui/material/InputBase";
+import { inputLabelClasses } from "@mui/material/InputLabel";
+import { outlinedInputClasses } from "@mui/material/OutlinedInput";
+import { alpha, styled } from "@mui/material/styles";
+import MuiTextField, { OutlinedTextFieldProps } from "@mui/material/TextField";
 import { forwardRef, VFC } from "react";
-import { formLabelStyles } from "../FormLabel/FormLabel";
+import { formLabelStyles } from "../FormLabel";
 
 export interface TextFieldProps
   extends Omit<OutlinedTextFieldProps, "variant" | "hiddenLabel"> {
@@ -20,6 +16,7 @@ export interface TextFieldProps
 }
 
 const TextField = styled<VFC<TextFieldProps>>(
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   forwardRef(({ alwaysShowPlaceholder, ...props }, ref) => (
     <MuiTextField inputRef={ref} {...props} />
   ))

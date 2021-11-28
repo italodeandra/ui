@@ -1,10 +1,13 @@
 import arrowLeft from "@iconify/icons-heroicons-solid/arrow-left";
-import { Box, Stack, Typography } from "@mui/material";
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 import { NextSeo } from "next-seo";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { ReactNode, VFC } from "react";
-import { Button, Icon } from "../../../lib";
+import Button from "../../../lib/components/Button";
+import Icon from "../../../lib/components/Icon";
 import DarkModeSelect from "../DarkModeSelect/DarkModeSelect";
 
 interface DemoTemplateProps {

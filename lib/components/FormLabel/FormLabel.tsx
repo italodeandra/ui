@@ -1,10 +1,5 @@
-import {
-  CSSObject,
-  FormLabel as MuiFormLabel,
-  FormLabelProps,
-  styled,
-  Theme,
-} from "@mui/material";
+import MuiFormLabel, { FormLabelProps } from "@mui/material/FormLabel";
+import { styled, CSSObject, Theme } from "@mui/material/styles";
 import { VFC } from "react";
 
 export type { FormLabelProps };

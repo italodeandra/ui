@@ -1,14 +1,12 @@
 /* istanbul ignore file */
 
-import {
-  alpha,
-  AppBar as MuiAppBar,
-  AppBarProps as MuiAppBarProps,
-  styled,
-} from "@mui/material";
+import type { AppBarProps } from "@mui/material/AppBar";
+import MuiAppBar from "@mui/material/AppBar";
+import { styled } from "@mui/material/styles";
+import { alpha } from "@mui/system/colorManipulator";
 import { forwardRef, VFC } from "react";
 
-export interface AppBarProps extends MuiAppBarProps {}
+export type { AppBarProps };
 
 const AppBar = styled<VFC<AppBarProps>>(
   forwardRef(

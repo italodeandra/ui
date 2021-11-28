@@ -1,13 +1,13 @@
 /* istanbul ignore file */
 
-import {
-  Button as MuiButton,
+import MuiButton, {
   buttonClasses,
   ButtonProps as MuiButtonProps,
-  Fade,
-  LinearProgress,
-  styled,
-} from "@mui/material";
+} from "@mui/material/Button";
+import Fade from "@mui/material/Fade";
+import LinearProgress from "@mui/material/LinearProgress";
+import { styled } from "@mui/material/styles";
+
 import { forwardRef, VFC } from "react";
 
 export interface ButtonProps extends MuiButtonProps {
@@ -57,7 +57,7 @@ const Button: VFC<ButtonProps> = styled<VFC<ButtonProps>>(
   )
 )(({ theme, color = "primary" }) => {
   const ringColor = theme.palette[color]?.main || "currentColor";
-  const ringShadow = (size: number) => `0 0 0 ${size}px ${ringColor}`;
+  const ringShadow = (size: number): string => `0 0 0 ${size}px ${ringColor}`;
   return {
     [`&:focus`]: {
       "&::after": {

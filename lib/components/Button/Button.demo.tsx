@@ -1,9 +1,12 @@
 import menuAlt2 from "@iconify/icons-heroicons-outline/menu-alt-2";
-import { Grid } from "@mui/material";
-import { Button, Icon, IconButton } from "..";
+import Grid from "@mui/material/Grid";
+import { VFC } from "react";
+import Button from "../Button";
+import Icon from "../Icon";
+import IconButton from "../IconButton";
 import DemoTemplate from "../../../src/components/DemoTemplate/DemoTemplate";
 
-const ButtonDemo = () => (
+const ButtonDemo: VFC = () => (
   <DemoTemplate title header={"Button"}>
     <Grid container spacing={1} direction={"row"}>
       <Grid item>
@@ -11,6 +14,9 @@ const ButtonDemo = () => (
       </Grid>
       <Grid item>
         <Button color={"secondary"}>Secondary color</Button>
+      </Grid>
+      <Grid item>
+        <Button color={"coolGray"}>Custom color</Button>
       </Grid>
       <Grid item>
         <Button variant={"text"}>Text</Button>

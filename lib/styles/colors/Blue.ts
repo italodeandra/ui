@@ -13,4 +13,5 @@ enum Blue {
   N900 = "#1E3A8A",
 }
 
-export default Blue
+// noinspection JSUnusedGlobalSymbols
+export default Blue;

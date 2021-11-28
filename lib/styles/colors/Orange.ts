@@ -13,4 +13,5 @@ enum Orange {
   N900 = "#7C2D12",
 }
 
-export default Orange
+// noinspection JSUnusedGlobalSymbols
+export default Orange;

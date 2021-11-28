@@ -13,4 +13,5 @@ enum Rose {
   N900 = "#881337",
 }
 
-export default Rose
+// noinspection JSUnusedGlobalSymbols
+export default Rose;

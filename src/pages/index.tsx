@@ -1,18 +1,27 @@
-import { Grid } from "@mui/material";
+import Grid from "@mui/material/Grid";
 import Link from "next/link";
-import { Button } from "../../lib";
+import { VFC } from "react";
+import Button from "../../lib/components/Button";
 import DemoTemplate from "../components/DemoTemplate/DemoTemplate";
 
 const demos = [
-  ["/button", "Button"],
-  ["/text-field", "Text field"],
   ["/app-bar", "App bar"],
-  ["/typography", "Typography"],
+  ["/button", "Button"],
+  ["/checkbox", "Checkbox"],
+  ["/date-distance-now", "Date distance now"],
+  ["/date-format", "Date format"],
+  ["/drawer", "Drawer"],
   ["/icon", "Icon"],
+  ["/image-upload", "Icon"],
+  ["/json", "Json"],
+  ["/nprogress", "NProgress"],
   ["/shadows", "Shadows"],
+  ["/snackbar", "Snackbar"],
+  ["/text-field", "Text field"],
+  ["/typography", "Typography"],
 ];
 
-const Index = () => (
+const Index: VFC = () => (
   <DemoTemplate header={"Demos"}>
     <Grid container spacing={1} direction="row">
       <Grid item>

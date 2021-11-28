@@ -1,13 +1,18 @@
 import arrowLeft from "@iconify/icons-heroicons-solid/arrow-left";
-import { Box, Stack, Typography } from "@mui/material";
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+import Typography from "../Typography";
 import { NextSeo } from "next-seo";
 import Link from "next/link";
-import { useWindowScroll } from "react-use";
-import { Button, Icon, numericArray } from "../..";
+import { VFC } from "react";
+import useWindowScroll from "react-use/lib/useWindowScroll";
 import DarkModeSelect from "../../../src/components/DarkModeSelect/DarkModeSelect";
+import Button from "../../components/Button";
+import Icon from "../../components/Icon";
+import numericArray from "../../utils/numericArray";
 import AppBar from "./AppBar";
 
-const AppBarDemo = () => {
+const AppBarDemo: VFC = () => {
   const { y: scrollTop } = useWindowScroll();
 
   return (

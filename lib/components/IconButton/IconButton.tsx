@@ -1,13 +1,12 @@
-import { forwardRef, VFC } from "react";
-import {
-  alpha,
-  buttonClasses,
-  Fade,
-  IconButton as MuiIconButton,
+import { buttonClasses } from "@mui/material/Button";
+import Fade from "@mui/material/Fade";
+import MuiIconButton, {
   IconButtonProps as MuiIconButtonProps,
-  LinearProgress,
-  styled,
-} from "@mui/material";
+} from "@mui/material/IconButton";
+import LinearProgress from "@mui/material/LinearProgress";
+import { styled } from "@mui/material/styles";
+import { alpha } from "@mui/system/colorManipulator";
+import { forwardRef, VFC } from "react";
 import Gray from "../../styles/colors/Gray";
 
 export interface IconButtonProps extends MuiIconButtonProps {

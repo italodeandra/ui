@@ -1,4 +1,7 @@
-import type { ComponentsOverrides, ComponentsProps } from "@mui/material";
+import type {
+  ComponentsOverrides,
+  ComponentsProps,
+} from "@mui/material/styles";
 import CoolGray from "../../styles/colors/CoolGray";
 import shadows from "../../styles/shadows";
 

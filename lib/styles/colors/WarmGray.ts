@@ -13,4 +13,5 @@ enum WarmGray {
   N900 = "#1C1917",
 }
 
-export default WarmGray
+// noinspection JSUnusedGlobalSymbols
+export default WarmGray;

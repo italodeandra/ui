@@ -1,4 +1,7 @@
-import { ComponentsOverrides, ComponentsProps } from "@mui/material/styles";
+import type {
+  ComponentsOverrides,
+  ComponentsProps,
+} from "@mui/material/styles";
 
 const MuiTableOverride: {
   defaultProps?: ComponentsProps["MuiTable"];

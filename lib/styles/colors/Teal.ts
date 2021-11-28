@@ -13,4 +13,5 @@ enum Teal {
   N900 = "#134E4A",
 }
 
-export default Teal
+// noinspection JSUnusedGlobalSymbols
+export default Teal;

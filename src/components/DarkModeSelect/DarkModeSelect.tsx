@@ -1,11 +1,14 @@
 import moonIcon from "@iconify/icons-heroicons-outline/moon";
 import sunIcon from "@iconify/icons-heroicons-outline/sun";
-import { Icon, TextField } from "../../../lib";
-import { MenuItem, useMediaQuery } from "@mui/material";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import MenuItem from "@mui/material/MenuItem";
+import { VFC } from "react";
 import { useSnapshot } from "valtio";
+import Icon from "../../../lib/components/Icon";
+import TextField from "../../../lib/components/TextField";
 import themeState, { ThemeMode } from "../../theme.state";
 
-const DarkModeSelect = () => {
+const DarkModeSelect: VFC = () => {
   const { mode, setMode } = useSnapshot(themeState);
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 

@@ -1,14 +1,16 @@
 {
   "name": "@italodeandra/next",
-  "version": "0.1.0",
+  "version": "0.1.5",
   "description": "Next.js library",
   "dependencies": {
     "@next-auth/mongodb-adapter": "0.0.2-next.285",
-    "@next/bundle-analyzer": "12.0.3",
-    "babel-plugin-superjson-next": "0.4.2",
+    "@next/bundle-analyzer": "12.0.4",
+    "bson-objectid": "2.0.1",
+    "date-fns": "2.25.0",
     "mailgen": "2.0.16",
     "mongodb-memory-server": "8.0.2",
-    "next": "12.0.3",
+    "next": "12.0.5-canary.8",
+    "next-api-middleware": "1.0.1",
     "next-auth": "4.0.0-beta.6",
     "next-seo": "4.28.1",
     "nodemailer": "6.7.0",
@@ -18,5 +20,27 @@
     "superjson": "1.8.0",
     "ts-node": "10.4.0"
   },
-  "yalcSig": "cc902c32d7ecfccbfa457aee7f3ac700"
+  "optionalDependencies": {
+    "react": "npm:react",
+    "react-dom": "npm:react-dom"
+  },
+  "peerDependencies": {
+    "@next-auth/mongodb-adapter": "0.0.2-next.285",
+    "@next/bundle-analyzer": "12.0.4",
+    "date-fns": "2.25.0",
+    "mailgen": "2.0.16",
+    "mongodb-memory-server": "8.0.2",
+    "next": "12.0.5-canary.8",
+    "next-api-middleware": "1.0.1",
+    "next-auth": "4.0.0-beta.6",
+    "next-seo": "4.28.1",
+    "nodemailer": "6.7.0",
+    "nookies": "2.5.2",
+    "socket.io": "4.3.2",
+    "socket.io-client": "4.3.2",
+    "ts-node": "10.4.0",
+    "superjson": "1.8.0",
+    "bson-objectid": "2.0.1"
+  },
+  "yalcSig": "13e60c90cd207164b9fc4a9cb27a9eaa"
 }

@@ -13,4 +13,5 @@ enum Lime {
   N900 = "#365314",
 }
 
-export default Lime
+// noinspection JSUnusedGlobalSymbols
+export default Lime;
