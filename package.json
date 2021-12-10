@@ -13,7 +13,7 @@
     "build:lib": "shx rm -rf dist && tsc --build lib/tsconfig.json && shx cp package.json dist",
     "pre-publish": "npm run build:lib && cd dist && json -I -f package.json -e \"this.devDependencies=undefined; this.peerDependencies=this.dependencies; this.optionalDependencies=undefined; this.scripts=undefined;\"",
     "publish:github": "npm run pre-publish && cd dist && npm publish",
-    "publish:yalc": "npm run pre-publish && shx cp -R yalc.lock .yalc dist && cd dist && yalc publish"
+    "publish:yalc": "npm run pre-publish && cd dist && yalc publish"
   },
   "dependencies": {
     "@emotion/cache": "^11.6.0",
@@ -24,7 +24,7 @@
     "@iconify/icons-heroicons-outline": "^1.1.3",
     "@iconify/icons-heroicons-solid": "^1.1.3",
     "@iconify/react": "^3.0.1",
-    "@italodeandra/next": "^0.2.0",
+    "@italodeandra/next": "^0.2.1",
     "@mui/lab": "^5.0.0-alpha.57",
     "@mui/material": "^5.2.2",
     "lodash": "^4.17.21",
