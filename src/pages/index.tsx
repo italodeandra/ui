@@ -17,6 +17,7 @@ const demos = [
   ["/nprogress", "NProgress"],
   ["/shadows", "Shadows"],
   ["/snackbar", "Snackbar"],
+  ["/switch", "Switch"],
   ["/text-field", "Text field"],
   ["/typography", "Typography"],
 ];
