@@ -41,6 +41,7 @@ const Button: VFC<ButtonProps> = styled<VFC<ButtonProps>>(
         <Fade in={loading} mountOnEnter unmountOnExit>
           <LinearProgress
             variant={"indeterminate"}
+            color={"inherit"}
             sx={{
               position: "absolute",
               bottom: 0,
