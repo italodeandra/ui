@@ -2,17 +2,20 @@ import Collapse from "@mui/material/Collapse";
 import Box from "@mui/material/Box";
 import Fade from "@mui/material/Fade";
 import { useSnapshot } from "valtio";
-import NProgressState from "./nProgress.state";
+import nProgressState, {
+  finishProgress,
+  startProgress,
+} from "./nProgressState";
 import * as React from "react";
 import { useEffect, VFC } from "react";
 import router from "next/router";
 
-router.events.on("routeChangeStart", NProgressState.start);
-router.events.on("routeChangeComplete", NProgressState.finish);
-router.events.on("routeChangeError", NProgressState.finish);
+router.events.on("routeChangeStart", startProgress);
+router.events.on("routeChangeComplete", finishProgress);
+router.events.on("routeChangeError", finishProgress);
 
 const NProgress: VFC = () => {
-  const { value, set } = useSnapshot(NProgressState);
+  const { value, set } = useSnapshot(nProgressState);
 
   useEffect(() => {
     const trickleTimer = setTimeout(() => {
