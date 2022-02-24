@@ -29,7 +29,7 @@ const useWhyDidYouUpdate = (
         console.info("[WDYU]", name, changesObj);
       }
     }
-    // Finally update previousProps with current props for next hook call
+    // Finally, update previousProps with current props for next hook call
     previousProps.current = props;
   });
 };

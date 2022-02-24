@@ -11,7 +11,7 @@ import Gray from "../../styles/colors/Gray";
 
 export interface IconButtonProps extends MuiIconButtonProps {
   /***
-   * If the button is a link, this will be it's target.
+   * If the button is a link, this will be its target.
    */
   target?: string;
   /**

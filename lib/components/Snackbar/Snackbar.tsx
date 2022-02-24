@@ -20,7 +20,7 @@ const snackbarContainerStyles: SxProps<Theme> = {
 
 /**
  * A snackbar that shows up in the top right of the page. The messages are
- * created by using it's API `notify` or `removeNotification`.
+ * created by using its API `notify` or `removeNotification`.
  *
  * [Demo](https://pijama.majapi.com/?path=/story/components-snackbar--snackbar)
  */

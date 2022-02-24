@@ -4,7 +4,7 @@ import { default as formatDate } from "date-fns/format";
 
 export interface DateFormatProps extends BoxProps {
   /**
-   * The date to be formatted.bambo
+   * The date to be formatted.
    */
   date: string | number | Date | undefined;
   /**

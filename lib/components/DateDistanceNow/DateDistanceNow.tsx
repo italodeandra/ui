@@ -10,11 +10,11 @@ export interface DateDistanceNowProps extends BoxProps {
    */
   date: string | number | Date | undefined;
   /**
-   * If should include the seconds.
+   * If it should include the seconds.
    */
   includeSeconds?: boolean;
   /**
-   * If should show the suffix.
+   * If it should show the suffix.
    */
   addSuffix?: boolean;
   /**

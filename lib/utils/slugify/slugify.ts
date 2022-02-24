@@ -1,3 +1,5 @@
+// noinspection SpellCheckingInspection
+
 const from = "ãàáäâẽèéëêìíïîõòóöôùúüûñç·/_,:;";
 const to = "aaaaaeeeeeiiiiooooouuuunc------";
 

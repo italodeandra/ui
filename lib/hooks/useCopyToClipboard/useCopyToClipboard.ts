@@ -35,7 +35,7 @@ export default function useCopyToClipboard(): [
     let noUserInteraction;
     let normalizedValue;
     try {
-      // only strings and numbers casted to strings can be copied to clipboard
+      // only strings and numbers can be copied to clipboard
       if (typeof value !== "string" && typeof value !== "number") {
         const error = new Error(
           `Cannot copy typeof ${typeof value} to clipboard, must be a string`

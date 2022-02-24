@@ -24,7 +24,7 @@ const snackbarStyles: SxProps<Theme> = {
   transition: (theme) => theme.transitions.create(["height", "transform"]),
 };
 
-/** The shadow used to bu cut because of the overflow=hidden, but this offset fix it */
+/** The shadow used to be cut because of the overflow=hidden, but this offset fix it */
 const shadowOffset = 1;
 
 const innerSnackbarStyles: SxProps<Theme> = {

@@ -1,3 +1,5 @@
+// noinspection SpellCheckingInspection
+
 import arrowLeft from "@iconify/icons-heroicons-solid/arrow-left";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
