@@ -10,6 +10,7 @@ const demos = [
   ["/checkbox", "Checkbox"],
   ["/date-distance-now", "Date distance now"],
   ["/date-format", "Date format"],
+  ["/dialog", "Dialog"],
   ["/drawer", "Drawer"],
   ["/icon", "Icon"],
   ["/image-upload", "Icon"],

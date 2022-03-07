@@ -10,6 +10,7 @@ import LightBlue from "../colors/LightBlue";
 import Pink from "../colors/Pink";
 import Red from "../colors/Red";
 import shadows from "../shadows";
+import MuiDialogOverride from "../../components/Dialog/MuiDialogOverride";
 
 const theme = createTheme();
 
@@ -20,6 +21,7 @@ const defaultThemeOptions = {
     MuiTooltip: MuiTooltipOverride,
     MuiCard: MuiCardOverride,
     MuiPopover: MuiPopoverOverride,
+    MuiDialog: MuiDialogOverride,
   },
   palette: {
     error: {
@@ -35,9 +37,11 @@ const defaultThemeOptions = {
     },
     gray: {
       main: Gray.N500,
+      contrastText: Gray.N50,
     },
     lightGray: {
       main: Gray.N100,
+      contrastText: Gray.N900,
     },
     coolGray: {
       main: CoolGray.N300,
