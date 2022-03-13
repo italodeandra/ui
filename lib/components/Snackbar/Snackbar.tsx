@@ -15,7 +15,7 @@ const snackbarContainerStyles: SxProps<Theme> = {
   position: "fixed",
   right: 0,
   top: 0,
-  zIndex: (theme) => theme.zIndex.appBar + 1,
+  zIndex: (theme) => theme.zIndex.snackbar,
 };
 
 /**
