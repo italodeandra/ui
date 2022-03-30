@@ -16,6 +16,12 @@ const DialogAction: typeof Button = (props) => (
         borderRightColor: "transparent",
         borderBottomColor: "transparent",
       },
+      "&:first-of-type": {
+        borderBottomLeftRadius: 4,
+      },
+      "&:last-of-type": {
+        borderBottomRightRadius: 4,
+      },
     }}
   />
 );
