@@ -9,8 +9,7 @@ const MuiDialogOverride: {
 } = {
   defaultProps: {
     PaperProps: {
-      variant: "outlined",
-      elevation: 0,
+      elevation: 4,
     },
   },
 };

@@ -64,6 +64,7 @@
   },
   "optionalDependencies": {
     "bson": "npm:bson",
-    "prettier": "npm:prettier"
+    "prettier": "npm:prettier",
+    "react": "npm:react"
   }
 }
