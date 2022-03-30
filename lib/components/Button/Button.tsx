@@ -57,7 +57,7 @@ const Button: VFC<ButtonProps> = styled<VFC<ButtonProps>>(
     )
   )
 )(({ theme, color = "primary" }) => {
-  const ringColor = theme.palette[color]?.main || "currentColor";
+  const ringColor = theme.palette[color]?.main || theme.palette.text.primary;
   const ringShadow = (size: number): string => `0 0 0 ${size}px ${ringColor}`;
   return {
     [`&:focus`]: {

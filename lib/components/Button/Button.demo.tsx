@@ -43,6 +43,11 @@ const ButtonDemo: VFC = () => (
           <Icon icon={menuAlt2} />
         </IconButton>
       </Grid>
+      <Grid item>
+        <Button variant={"outlined"} color={"inherit"}>
+          Outlined inherit
+        </Button>
+      </Grid>
     </Grid>
   </DemoTemplate>
 );
