@@ -7,8 +7,8 @@ import MuiButton, {
 import Fade from "@mui/material/Fade";
 import LinearProgress from "@mui/material/LinearProgress";
 import { styled } from "@mui/material/styles";
-
 import { forwardRef, VFC } from "react";
+import { getLuminance } from "@mui/system/colorManipulator";
 
 export interface ButtonProps extends MuiButtonProps {
   /**
@@ -68,6 +68,12 @@ const Button: VFC<ButtonProps> = styled<VFC<ButtonProps>>(
         "&::after": {
           boxShadow: ringShadow(4),
         },
+      },
+    },
+    [`&:hover`]: {
+      [`&.${buttonClasses.outlined}`]: {
+        color: getLuminance(ringColor) > 0.5 ? "black" : "white",
+        backgroundColor: ringColor,
       },
     },
     [`&.${buttonClasses.outlined}`]: {

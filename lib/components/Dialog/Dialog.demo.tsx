@@ -25,7 +25,7 @@ const DialogDemo: VFC = () => {
               <DialogAction color={"gray"} onClick={() => setOpen(false)}>
                 Close
               </DialogAction>
-              {/*<DialogAction>Confirm</DialogAction>*/}
+              <DialogAction>Confirm</DialogAction>
             </DialogActions>
           </Dialog>
           <Button onClick={() => setOpen(true)}>Open dialog</Button>
