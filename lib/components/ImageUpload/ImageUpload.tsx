@@ -10,6 +10,7 @@ import FormLabel from "../FormLabel";
 import DragAndDropFiles from "./DragAndDropFiles";
 import Image from "./Image";
 import { useOnPasteFiles } from "./useOnPasteFiles";
+import isomorphicObjectId from "@italodeandra/next/database/isomorphicObjectId";
 
 export interface IImage {
   _id: ObjectId;
@@ -60,7 +61,7 @@ const ImageUpload: VFC<ImageUploadProps> = ({
     (files: File[]) => {
       for (const file of files) {
         push({
-          _id: new ObjectId(),
+          _id: isomorphicObjectId(),
           url: URL.createObjectURL(file),
           alt: file.name,
         });

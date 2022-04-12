@@ -6,6 +6,7 @@ import DemoTemplate from "../components/DemoTemplate/DemoTemplate";
 
 const demos = [
   ["/app-bar", "App bar"],
+  ["/breadcrumbs", "Breadcrumbs"],
   ["/button", "Button"],
   ["/checkbox", "Checkbox"],
   ["/date-distance-now", "Date distance now"],
@@ -15,6 +16,7 @@ const demos = [
   ["/icon", "Icon"],
   ["/image-upload", "Icon"],
   ["/json", "Json"],
+  ["/loading", "Loading"],
   ["/nprogress", "NProgress"],
   ["/shadows", "Shadows"],
   ["/snackbar", "Snackbar"],
