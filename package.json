@@ -1,6 +1,6 @@
 {
   "name": "@italodeandra/ui",
-  "version": "0.4.1",
+  "version": "0.4.1-canary.0",
   "description": "Next.js UI library",
   "sideEffects": false,
   "publishConfig": {
