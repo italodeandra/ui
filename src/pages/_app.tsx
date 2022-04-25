@@ -35,7 +35,10 @@ const App: VFC<AppProps> = ({
         description={packageJson.description}
       />
       <Head>
-        <meta content="initial-scale=1, width=device-width" name="viewport" />
+        <meta
+          content="initial-scale=1, width=device-width, maximum-scale=1"
+          name="viewport"
+        />
       </Head>
       <ThemeProvider theme={mode === "dark" ? darkTheme : lightTheme}>
         <CssBaseline />
