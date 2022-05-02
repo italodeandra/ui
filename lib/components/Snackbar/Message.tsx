@@ -51,6 +51,7 @@ const innerSnackbarStyles: SxProps<Theme> = {
   margin: (theme) => theme.spacing(0, 1, 2, 1),
   padding: (theme) => theme.spacing(1, 1, 1, 2),
   position: "relative",
+  pointerEvents: "auto",
 };
 
 const closeButtonStyles: SxProps<Theme> = {
