@@ -1,11 +1,24 @@
 /* istanbul ignore file */
 
 import { styled, Theme, TypographyStyle } from "@mui/material/styles";
-import MuiTypography, { TypographyProps } from "@mui/material/Typography";
-import { forwardRef, VFC } from "react";
+import MuiTypography, {
+  TypographyProps as MuiTypographyProps,
+} from "@mui/material/Typography";
+import * as React from "react";
+import { ElementType, forwardRef, VFC } from "react";
 import Gray from "../../styles/colors/Gray";
+import { OverridableStringUnion } from "@mui/types";
+// eslint-disable-next-line no-restricted-imports
+import { Variant } from "@mui/material/styles/createTypography";
+import { TypographyPropsVariantOverrides } from "@mui/material/Typography";
 
-export type { TypographyProps };
+export interface TypographyProps extends MuiTypographyProps {
+  component?: ElementType;
+  variant?: OverridableStringUnion<
+    Variant | "inherit",
+    TypographyPropsVariantOverrides
+  >;
+}
 
 const codeBlock = (theme: Theme): TypographyStyle => ({
   backgroundColor: theme.palette.mode === "light" ? Gray.N100 : Gray.N800,

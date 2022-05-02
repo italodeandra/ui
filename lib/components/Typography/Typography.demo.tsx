@@ -11,6 +11,7 @@ const TypographyDemo: VFC = () => (
         This is a <Typography variant={"code"}>code</Typography>
       </Typography>
       <Typography variant={"codeBlock"}>codeBlock</Typography>
+      <Typography component={"span"}>span</Typography>
     </Stack>
   </DemoTemplate>
 );
