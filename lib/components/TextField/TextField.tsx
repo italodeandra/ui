@@ -88,8 +88,15 @@ const TextField = styled<VFC<TextFieldProps>>(
       marginLeft: "6px",
     },
     [`& .${selectClasses.select}:not(.nothing)`]: {
-      height: 20,
+      height: 21,
+      paddingTop: 9,
     },
+    [`& .${selectClasses.select}:not(.nothing).${inputBaseClasses.inputSizeSmall}`]:
+      {
+        paddingTop: 4,
+        height: 22,
+        minHeight: 22,
+      },
   };
 });
 

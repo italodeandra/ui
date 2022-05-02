@@ -7,16 +7,22 @@ import FormLabel from "../FormLabel";
 import Icon from "../Icon";
 import TextField from "../TextField";
 import searchIcon from "@iconify/icons-heroicons-outline/search";
+import MenuItem from "@mui/material/MenuItem";
 
 const TextFieldDemo: VFC = () => (
   <DemoTemplate title header={"Text field"}>
     <Stack spacing={1}>
       <Box>
-        <TextField label={"With label"} /> <TextField label={"Select"} select />
+        <TextField label={"With label"} value={"Test"} />{" "}
+        <TextField label={"Select"} select value={"Test"}>
+          <MenuItem value={"Test"}>Test</MenuItem>
+        </TextField>
       </Box>
       <Box>
-        <TextField label={"Small"} size={"small"} />{" "}
-        <TextField label={"Select"} size={"small"} select />
+        <TextField label={"Small"} size={"small"} value={"Test"} />{" "}
+        <TextField label={"Select"} size={"small"} select value={"Test"}>
+          <MenuItem value={"Test"}>Test</MenuItem>
+        </TextField>
       </Box>
       <Box>
         <TextField placeholder={"Without label"} alwaysShowPlaceholder />
