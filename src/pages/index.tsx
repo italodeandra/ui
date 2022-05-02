@@ -15,7 +15,7 @@ const demos = [
   ["/dialog", "Dialog"],
   ["/drawer", "Drawer"],
   ["/icon", "Icon"],
-  ["/image-upload", "Icon"],
+  ["/image-upload", "Image upload"],
   ["/json", "Json"],
   ["/line-clamp", "Line clamp"],
   ["/loading", "Loading"],

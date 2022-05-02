@@ -94,7 +94,7 @@ const Image: VFC<ImageProps> = memo<ImageProps>(
                 p: 0,
                 borderRadius: 16,
               }}
-              color={"inherit"}
+              color={theme.palette.mode === "dark" ? "gray" : "inherit"}
               onClick={!isMobile ? handleDeleteClick : undefined}
             >
               <Icon
