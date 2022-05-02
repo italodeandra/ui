@@ -12,7 +12,11 @@ const TextFieldDemo: VFC = () => (
   <DemoTemplate title header={"Text field"}>
     <Stack spacing={1}>
       <Box>
-        <TextField label={"With label"} />
+        <TextField label={"With label"} /> <TextField label={"Select"} select />
+      </Box>
+      <Box>
+        <TextField label={"Small"} size={"small"} />{" "}
+        <TextField label={"Select"} size={"small"} select />
       </Box>
       <Box>
         <TextField placeholder={"Without label"} alwaysShowPlaceholder />

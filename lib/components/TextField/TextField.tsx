@@ -9,6 +9,7 @@ import { alpha, styled } from "@mui/material/styles";
 import MuiTextField, { OutlinedTextFieldProps } from "@mui/material/TextField";
 import { forwardRef, VFC } from "react";
 import { formLabelStyles } from "../FormLabel";
+import { selectClasses } from "@mui/material/Select";
 
 export interface TextFieldProps
   extends Omit<OutlinedTextFieldProps, "variant" | "hiddenLabel"> {
@@ -85,6 +86,9 @@ const TextField = styled<VFC<TextFieldProps>>(
     },
     [`& .${inputAdornmentClasses.positionStart}`]: {
       marginLeft: "6px",
+    },
+    [`& .${selectClasses.select}:not(.nothing)`]: {
+      height: 20,
     },
   };
 });
