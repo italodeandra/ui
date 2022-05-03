@@ -8,6 +8,7 @@ import Icon from "../Icon";
 import TextField from "../TextField";
 import searchIcon from "@iconify/icons-heroicons-outline/search";
 import MenuItem from "@mui/material/MenuItem";
+import TextFieldWithChangeIndicator from "./TextFieldWithChangeIndicator";
 
 const TextFieldDemo: VFC = () => (
   <DemoTemplate title header={"Text field"}>
@@ -42,6 +43,9 @@ const TextFieldDemo: VFC = () => (
             ),
           }}
         />
+      </Box>
+      <Box>
+        <TextFieldWithChangeIndicator label={"Change indicator"} changed />
       </Box>
     </Stack>
   </DemoTemplate>
