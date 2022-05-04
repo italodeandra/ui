@@ -7,7 +7,10 @@ export interface TextFieldWithChangeIndicatorProps extends TextFieldProps {
 }
 
 const TextFieldWithChangeIndicator = forwardRef(
-  ({ changed, ...props }: TextFieldWithChangeIndicatorProps, ref) => (
+  (
+    { changed, fullWidth, ...props }: TextFieldWithChangeIndicatorProps,
+    ref
+  ) => (
     <Badge
       color="secondary"
       variant="dot"
@@ -21,9 +24,10 @@ const TextFieldWithChangeIndicator = forwardRef(
           mr: "6px",
           mb: "6px",
         },
+        width: fullWidth && "100%",
       }}
     >
-      <TextField inputRef={ref} {...props} />
+      <TextField inputRef={ref} {...props} fullWidth={fullWidth} />
     </Badge>
   )
 );
