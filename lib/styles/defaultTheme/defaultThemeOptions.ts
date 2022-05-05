@@ -11,6 +11,7 @@ import Pink from "../colors/Pink";
 import Red from "../colors/Red";
 import shadows from "../shadows";
 import MuiDialogOverride from "../../components/Dialog/MuiDialogOverride";
+import MuiLinkOverride from "../../components/Link/MuiLinkOverride";
 
 const theme = createTheme();
 
@@ -22,6 +23,7 @@ const defaultThemeOptions = {
     MuiCard: MuiCardOverride,
     MuiPopover: MuiPopoverOverride,
     MuiDialog: MuiDialogOverride,
+    MuiLink: MuiLinkOverride,
   },
   palette: {
     error: {

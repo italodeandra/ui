@@ -18,6 +18,7 @@ const demos = [
   ["/image-upload", "Image upload"],
   ["/json", "Json"],
   ["/line-clamp", "Line clamp"],
+  ["/link", "Link"],
   ["/loading", "Loading"],
   ["/nprogress", "NProgress"],
   ["/shadows", "Shadows"],
