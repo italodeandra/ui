@@ -48,20 +48,21 @@ export interface JsonProps
  * <Json json='{ "number": 1 }' />
  */
 const Json: VFC<JsonProps> = ({ json, label, ...props }) => {
-  if (typeof json !== "undefined") {
-    return (
-      <NoSsr>
-        <Typography
-          dangerouslySetInnerHTML={{ __html: syntaxHighlight(json, label) }}
-          {...props}
-          sx={jsonStyles}
-          variant="codeBlock"
-        />
-      </NoSsr>
-    );
-  } else {
-    return <></>;
-  }
+  const content =
+    typeof json === "undefined"
+      ? `${label}: <span class="null">undefined</span>`
+      : syntaxHighlight(json, label);
+
+  return (
+    <NoSsr>
+      <Typography
+        dangerouslySetInnerHTML={{ __html: content }}
+        {...props}
+        sx={jsonStyles}
+        variant="codeBlock"
+      />
+    </NoSsr>
+  );
 };
 
 export default Json;
