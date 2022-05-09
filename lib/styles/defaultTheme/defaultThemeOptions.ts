@@ -39,10 +39,12 @@ const defaultThemeOptions = {
     },
     gray: {
       main: Gray.N500,
+      dark: Gray.N600,
       contrastText: Gray.N50,
     },
     lightGray: {
       main: Gray.N100,
+      dark: Gray.N300,
       contrastText: Gray.N900,
     },
     coolGray: {

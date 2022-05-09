@@ -27,7 +27,7 @@ const ButtonDemo: VFC = () => (
         <Button color={"gray"}>Custom color - Gray</Button>
       </Grid>
       <Grid item>
-        <Button color={"lightGray"}>Custom color - light Gray</Button>
+        <Button color={"lightGray"}>Custom color - Light Gray</Button>
       </Grid>
       <Grid item>
         <Button variant={"text"}>Text</Button>
