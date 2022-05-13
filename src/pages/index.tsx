@@ -21,6 +21,7 @@ const demos = [
   ["/link", "Link"],
   ["/loading", "Loading"],
   ["/nprogress", "NProgress"],
+  ["/radio", "Radio"],
   ["/shadows", "Shadows"],
   ["/snackbar", "Snackbar"],
   ["/switch", "Switch"],
