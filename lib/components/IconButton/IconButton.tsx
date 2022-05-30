@@ -6,7 +6,7 @@ import MuiIconButton, {
 import LinearProgress from "@mui/material/LinearProgress";
 import { styled } from "@mui/material/styles";
 import { alpha } from "@mui/system/colorManipulator";
-import { forwardRef, VFC } from "react";
+import { ElementType, forwardRef, VFC } from "react";
 import Gray from "../../styles/colors/Gray";
 
 export interface IconButtonProps extends MuiIconButtonProps {
@@ -18,6 +18,7 @@ export interface IconButtonProps extends MuiIconButtonProps {
    * If the button should show a loading state (indeterminate progress bar in the bottom).
    */
   loading?: boolean;
+  component?: ElementType;
 }
 
 // noinspection RequiredAttributes
