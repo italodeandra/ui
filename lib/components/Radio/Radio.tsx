@@ -1,5 +1,5 @@
 import MuiRadio, { RadioProps } from "@mui/material/Radio";
-import { styled } from "@mui/material/styles";
+import { darken, styled } from "@mui/material/styles";
 
 const BpIcon = styled("span")(({ theme }) => ({
   borderRadius: "50%",
@@ -30,8 +30,8 @@ const BpIcon = styled("span")(({ theme }) => ({
   },
 }));
 
-const BpCheckedIcon = styled(BpIcon)({
-  backgroundColor: "#137cbd",
+const BpCheckedIcon = styled(BpIcon)(({ theme }) => ({
+  backgroundColor: theme.palette.primary.main,
   backgroundImage:
     "linear-gradient(180deg,hsla(0,0%,100%,.1),hsla(0,0%,100%,0))",
   "&:before": {
@@ -42,26 +42,24 @@ const BpCheckedIcon = styled(BpIcon)({
     content: '""',
   },
   "input:hover ~ &": {
-    backgroundColor: "#106ba3",
+    backgroundColor: darken(theme.palette.primary.main, 0.15),
   },
-});
+}));
 
-// Inspired by blueprintjs
-export default function Radio(props: RadioProps) {
-  return (
-    <MuiRadio
-      sx={{
-        py: 1,
-        pl: 1.35,
-        "&:hover": {
-          bgcolor: "transparent",
-        },
-      }}
-      disableRipple
-      color="default"
-      checkedIcon={<BpCheckedIcon />}
-      icon={<BpIcon />}
-      {...props}
-    />
-  );
-}
+const Radio = (props: RadioProps) => (
+  <MuiRadio
+    sx={{
+      py: 1,
+      pl: 1.35,
+      "&:hover": {
+        bgcolor: "transparent",
+      },
+    }}
+    disableRipple
+    color="default"
+    checkedIcon={<BpCheckedIcon />}
+    icon={<BpIcon />}
+    {...props}
+  />
+);
+export default Radio;
