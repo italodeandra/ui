@@ -50,7 +50,7 @@ export interface JsonProps
 const Json: VFC<JsonProps> = ({ json, label, ...props }) => {
   const content =
     typeof json === "undefined"
-      ? `${label}: <span class="null">undefined</span>`
+      ? `${label ? `${label}: ` : ""}<span class="null">undefined</span>`
       : syntaxHighlight(json, label);
 
   return (
