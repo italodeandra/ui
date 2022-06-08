@@ -27,6 +27,8 @@
     "@italodeandra/next": "^0.5.5",
     "@mui/lab": "^5.0.0-alpha.57",
     "@mui/material": "^5.2.2",
+    "@mui/x-date-pickers": "^5.0.0-alpha.5",
+    "@date-io/date-fns": "^2.14.0",
     "lodash": "^4.17.21",
     "material-ui-popup-state": "^2.0.0",
     "react": "^17.0.2",
@@ -50,7 +52,9 @@
     "@iconify/react": ">=3.0.1",
     "@italodeandra/next": ">=0.5.5",
     "@mui/lab": ">=5.0.0-alpha.57",
-    "@mui/material": ">=0.5.2-canary.0",
+    "@mui/material": ">=5.2.2",
+    "@mui/x-date-pickers": ">=5.0.0-alpha.5",
+    "@date-io/date-fns": ">=2.14.0",
     "lodash": ">=4.17.21",
     "material-ui-popup-state": ">=2.0.0",
     "react-dnd": ">=14.0.4",
@@ -64,7 +68,7 @@
   "devDependencies": {
     "@italodeandra/dev": "^0.2.3-canary.0"
   },
-  "optionalDependencies": {
+  "_optionalDependencies": {
     "bson": "npm:bson",
     "prettier": "npm:prettier",
     "react": "npm:react",
