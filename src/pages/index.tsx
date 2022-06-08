@@ -12,6 +12,7 @@ const demos = [
   ["/confirmation-menu", "Confirmation menu"],
   ["/date-distance-now", "Date distance now"],
   ["/date-format", "Date format"],
+  ["/date-picker", "Date picker"],
   ["/dialog", "Dialog"],
   ["/drawer", "Drawer"],
   ["/icon", "Icon"],

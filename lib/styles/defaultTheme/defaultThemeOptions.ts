@@ -12,6 +12,7 @@ import Red from "../colors/Red";
 import shadows from "../shadows";
 import MuiDialogOverride from "../../components/Dialog/MuiDialogOverride";
 import MuiLinkOverride from "../../components/Link/MuiLinkOverride";
+import MuiDatePickerOverride from "../../components/DatePicker/MuiDatePickerOverride";
 
 const theme = createTheme();
 
@@ -24,6 +25,7 @@ const defaultThemeOptions = {
     MuiPopover: MuiPopoverOverride,
     MuiDialog: MuiDialogOverride,
     MuiLink: MuiLinkOverride,
+    MuiDatePicker: MuiDatePickerOverride,
   },
   palette: {
     error: {

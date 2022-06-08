@@ -11,7 +11,7 @@ const DialogDemo: VFC = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <DemoTemplate title header={"Card"}>
+    <DemoTemplate title header={"Dialog"}>
       <Grid container spacing={1} direction={"row"}>
         <Grid item>
           <Dialog open={open} onClose={() => setOpen(false)}>
