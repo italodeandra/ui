@@ -2,6 +2,8 @@ import Grid from "@mui/material/Grid";
 import { VFC } from "react";
 import DemoTemplate from "../../../src/components/DemoTemplate/DemoTemplate";
 import Checkbox from "./Checkbox";
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
 const ButtonDemo: VFC = () => (
   <DemoTemplate title header={"Checkbox"}>
@@ -17,6 +19,14 @@ const ButtonDemo: VFC = () => (
       </Grid>
       <Grid item>
         <Checkbox defaultChecked disabled />
+      </Grid>
+      <Grid item xs={12}>
+        <FormGroup>
+          <FormControlLabel
+            control={<Checkbox defaultChecked />}
+            label="Remove release from the list"
+          />
+        </FormGroup>
       </Grid>
     </Grid>
   </DemoTemplate>

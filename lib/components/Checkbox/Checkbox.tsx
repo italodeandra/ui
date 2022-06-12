@@ -5,6 +5,7 @@ import { styled } from "@mui/material/styles";
 import { alpha } from "@mui/system/colorManipulator";
 import { VFC } from "react";
 import Icon from "../Icon";
+import { formControlLabelClasses } from "@mui/material/FormControlLabel";
 
 const AnimatedCheckIcon: VFC<{ visible: boolean }> = ({ visible }) => (
   <Icon
@@ -35,6 +36,11 @@ const Checkbox = styled<typeof MuiCheckbox>((props) => (
     height: 20,
     borderRadius: 4,
     transition: theme.transitions.create(["box-shadow", "background-color"]),
+
+    [`.${formControlLabelClasses.root} &`]: {
+      marginLeft: 11,
+      marginRight: 8,
+    },
 
     "&::after": {
       borderRadius: "inherit",
