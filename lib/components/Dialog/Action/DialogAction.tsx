@@ -1,7 +1,9 @@
 import Button from "../../Button";
+import { forwardRef } from "react";
 
-const DialogAction: typeof Button = (props) => (
+const DialogAction: typeof Button = forwardRef((props, ref) => (
   <Button
+    ref={ref}
     {...props}
     variant={"outlined"}
     fullWidth
@@ -24,6 +26,6 @@ const DialogAction: typeof Button = (props) => (
       },
     }}
   />
-);
+));
 
 export default DialogAction;
