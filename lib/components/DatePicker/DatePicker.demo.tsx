@@ -5,6 +5,7 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import ptBRLocale from "date-fns/locale/pt-BR";
 import DatePicker from "./DatePicker";
+import { DateTimePicker } from "./index";
 
 const DatePickerDemo: VFC = () => {
   const [value, setValue] = useState<Date | null>(null);
@@ -21,6 +22,18 @@ const DatePickerDemo: VFC = () => {
               value={value}
               onChange={(value) => setValue(value)}
               views={["year", "month"]}
+            />
+          </LocalizationProvider>
+        </Grid>
+        <Grid item>
+          <LocalizationProvider
+            dateAdapter={AdapterDateFns}
+            adapterLocale={ptBRLocale}
+          >
+            <DateTimePicker
+              label="Date and time"
+              value={value}
+              onChange={(value) => setValue(value)}
             />
           </LocalizationProvider>
         </Grid>
