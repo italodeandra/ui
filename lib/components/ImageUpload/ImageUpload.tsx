@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { ObjectId } from "bson";
-import { useCallback, VFC } from "react";
+import { ReactNode, useCallback, VFC } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import useDeepCompareEffect from "react-use/lib/useDeepCompareEffect";
@@ -11,6 +11,7 @@ import DragAndDropFiles from "./DragAndDropFiles";
 import Image from "./Image";
 import { useOnPasteFiles } from "./useOnPasteFiles";
 import isomorphicObjectId from "@italodeandra/next/database/isomorphicObjectId";
+import FormHelperText from "@mui/material/FormHelperText";
 
 export interface IImage {
   _id: ObjectId;
@@ -33,6 +34,10 @@ export interface ImageUploadProps {
   labelClose?: string;
   labelEditDialogContent?: string;
   labelFieldIsRequired?: string;
+  required?: boolean;
+  error?: boolean;
+  helperText?: ReactNode;
+  limit?: number;
 }
 
 const ImageUpload: VFC<ImageUploadProps> = ({
@@ -50,6 +55,10 @@ const ImageUpload: VFC<ImageUploadProps> = ({
   labelClose = "Close",
   labelEditDialogContent = "This text will be used as an alternative for the image",
   labelFieldIsRequired = "This field is required",
+  required,
+  error,
+  helperText,
+  limit,
 }) => {
   const [acceptedImages, { push, remove, set, updateAt }] =
     useList<IImage>(value);
@@ -59,15 +68,19 @@ const ImageUpload: VFC<ImageUploadProps> = ({
 
   const handleAcceptedImages = useCallback(
     (files: File[]) => {
+      let count = 0;
       for (const file of files) {
-        push({
-          _id: isomorphicObjectId(),
-          url: URL.createObjectURL(file),
-          alt: file.name,
-        });
+        if (!limit || count < limit) {
+          count++;
+          push({
+            _id: isomorphicObjectId(),
+            url: URL.createObjectURL(file),
+            alt: file.name,
+          });
+        }
       }
     },
-    [push]
+    [limit, push]
   );
 
   useOnPasteFiles(allowedFileTypes, handleAcceptedImages);
@@ -81,7 +94,10 @@ const ImageUpload: VFC<ImageUploadProps> = ({
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <FormLabel>{labelInput}</FormLabel>
+      <FormLabel error={error}>
+        {labelInput}
+        {required && " *"}
+      </FormLabel>
       <Box sx={{ mt: 0.25 }}>
         <Grid container spacing={1}>
           {acceptedImages.map((image, index) => (
@@ -100,18 +116,24 @@ const ImageUpload: VFC<ImageUploadProps> = ({
               />
             </Grid>
           ))}
-          <Grid item xs={12} sm={"auto"}>
-            <DragAndDropFiles
-              allowedFileTypes={allowedFileTypes}
-              onAcceptFiles={handleAcceptedImages}
-              labelMyDevice={labelMyDevice}
-              labelDropFilesBrowseImport={labelDropFilesBrowseImport}
-              labelBrowse={labelBrowse}
-              labelDropFilesHere={labelDropFilesHere}
-            />
-          </Grid>
+          {(!limit || acceptedImages.length < limit) && (
+            <Grid item xs={12} sm={"auto"}>
+              <DragAndDropFiles
+                allowedFileTypes={allowedFileTypes}
+                onAcceptFiles={handleAcceptedImages}
+                labelMyDevice={labelMyDevice}
+                labelDropFilesBrowseImport={labelDropFilesBrowseImport}
+                labelBrowse={labelBrowse}
+                labelDropFilesHere={labelDropFilesHere}
+                limit={limit}
+              />
+            </Grid>
+          )}
         </Grid>
       </Box>
+      {helperText && (
+        <FormHelperText error={error}>{helperText}</FormHelperText>
+      )}
     </DndProvider>
   );
 };

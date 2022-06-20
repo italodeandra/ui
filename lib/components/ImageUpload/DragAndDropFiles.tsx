@@ -16,6 +16,7 @@ interface DragAndDropFilesProps {
   labelDropFilesBrowseImport: string;
   labelBrowse: string;
   labelDropFilesHere: string;
+  limit?: number;
 }
 
 const DragAndDropFiles: VFC<DragAndDropFilesProps> = ({
@@ -25,6 +26,7 @@ const DragAndDropFiles: VFC<DragAndDropFilesProps> = ({
   labelDropFilesBrowseImport,
   labelBrowse,
   labelDropFilesHere,
+  limit,
 }) => {
   const [{ canDrop, isOver }, drop] = useDrop(() => ({
     accept: [NativeTypes.FILE],
@@ -124,7 +126,7 @@ const DragAndDropFiles: VFC<DragAndDropFilesProps> = ({
         style={{ display: "none" }}
         onChange={handleFileBrowse}
         accept={allowedFileTypes.join(", ")}
-        multiple
+        multiple={limit !== 1}
       />
     </Box>
   );
