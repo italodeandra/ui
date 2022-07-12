@@ -1,7 +1,7 @@
 import InputAdornment from "@mui/material/InputAdornment";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import { VFC } from "react";
+import { useRef, VFC } from "react";
 import DemoTemplate from "../../../src/components/DemoTemplate/DemoTemplate";
 import FormLabel from "../FormLabel";
 import Icon from "../Icon";
@@ -9,6 +9,8 @@ import TextField from "../TextField";
 import searchIcon from "@iconify/icons-heroicons-outline/search";
 import MenuItem from "@mui/material/MenuItem";
 import TextFieldWithChangeIndicator from "./TextFieldWithChangeIndicator";
+import Masked from "./Masked/Masked";
+import { cpfMask } from "./Masked/masks/cpf";
 
 const TextFieldDemo: VFC = () => (
   <DemoTemplate title header={"Text field"}>
@@ -46,6 +48,15 @@ const TextFieldDemo: VFC = () => (
       </Box>
       <Box>
         <TextFieldWithChangeIndicator label={"Change indicator"} changed />
+      </Box>
+      <Box>
+        <Masked
+          component={TextField}
+          label={"Masked"}
+          onChange={(e) => console.info(e.target.value)}
+          {...cpfMask}
+          ref={useRef(null)}
+        />
       </Box>
     </Stack>
   </DemoTemplate>
