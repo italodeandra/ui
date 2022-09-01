@@ -6,10 +6,6 @@
  */
 export const isBrowser = typeof window !== "undefined";
 /**
- * Tells if the current scope is a server.
- */
-export const isServer = !isBrowser;
-/**
  * Tells if the current scope is a touch device.
  */
 export const isTouchDevice =
