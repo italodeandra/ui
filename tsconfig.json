@@ -20,10 +20,12 @@
     "jsx": "react-jsx",
     "declaration": true,
     "emitDeclarationOnly": false,
-    "outDir": "dist",
+    "outDir": "dist"
   },
   "include": [
-    "**/*.ts"
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.css"
   ],
   "exclude": [
     "node_modules",
