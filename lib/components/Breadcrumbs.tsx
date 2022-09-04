@@ -3,7 +3,7 @@ import { IconHome } from "@tabler/icons";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 
-interface IBreadcrumb {
+export interface IBreadcrumb {
   name: string;
   href?: string;
 }
