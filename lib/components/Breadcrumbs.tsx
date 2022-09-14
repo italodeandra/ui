@@ -2,13 +2,20 @@ import { Anchor, Box, Paper, Text, useMantineTheme } from "@mantine/core";
 import { IconHome } from "@tabler/icons";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
+import { ReactNode } from "react";
 
 export interface IBreadcrumb {
   name: string;
   href?: string;
 }
 
-export default function Breadcrumbs({ items }: { items: IBreadcrumb[] }) {
+export default function Breadcrumbs({
+  items,
+  action,
+}: {
+  items: IBreadcrumb[];
+  action?: ReactNode;
+}) {
   const { route } = useRouter();
   const theme = useMantineTheme();
 
@@ -20,6 +27,8 @@ export default function Breadcrumbs({ items }: { items: IBreadcrumb[] }) {
       sx={{
         background: "transparent",
         borderBottom: `1px solid ${theme.colors.dark[6]}`,
+        display: "flex",
+        alignItems: "center",
       }}
       shadow="sm"
       radius={0}
@@ -97,6 +106,9 @@ export default function Breadcrumbs({ items }: { items: IBreadcrumb[] }) {
           </Box>
         ))}
       </Box>
+      {action && (
+        <Box sx={{ marginLeft: "auto", marginRight: "1rem" }}>{action}</Box>
+      )}
     </Paper>
   );
 }
