@@ -26,7 +26,11 @@ export default function Breadcrumbs({
     <Paper
       sx={{
         background: "transparent",
-        borderBottom: `1px solid ${theme.colors.dark[6]}`,
+        borderBottom: `1px solid ${
+          theme.colorScheme === "dark"
+            ? theme.colors.dark[6]
+            : theme.colors.gray[3]
+        }`,
         display: "flex",
         alignItems: "center",
       }}
@@ -52,8 +56,15 @@ export default function Breadcrumbs({
               variant="text"
               sx={{
                 display: "flex",
+                color:
+                  theme.colorScheme === "dark"
+                    ? theme.colors.gray[5]
+                    : theme.colors.gray[6],
                 "body.hasHover &:hover": {
-                  color: theme.colors.gray[1],
+                  color:
+                    theme.colorScheme === "dark"
+                      ? theme.colors.gray[2]
+                      : theme.colors.gray[8],
                 },
               }}
             >
@@ -77,7 +88,10 @@ export default function Breadcrumbs({
               sx={{
                 height: "100%",
                 width: "1.5rem",
-                color: theme.colors.dark[5],
+                color:
+                  theme.colorScheme === "dark"
+                    ? theme.colors.dark[5]
+                    : theme.colors.gray[3],
                 marginRight: "1rem",
               }}
               className="flex-shrink-0 w-6 h-full text-slate-200 dark:text-slate-800"
@@ -94,12 +108,17 @@ export default function Breadcrumbs({
                 <Anchor
                   size="sm"
                   aria-current={route === item.href ? "page" : undefined}
+                  color={theme.colorScheme === "dark" ? "gray.5" : "gray.7"}
                 >
                   {item.name}
                 </Anchor>
               </NextLink>
             ) : (
-              <Text size="sm" weight={500}>
+              <Text
+                size="sm"
+                weight={500}
+                color={theme.colorScheme === "dark" ? "gray.5" : "gray.7"}
+              >
                 {item.name}
               </Text>
             )}
