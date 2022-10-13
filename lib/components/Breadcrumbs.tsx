@@ -34,7 +34,6 @@ export default function Breadcrumbs({
         display: "flex",
         alignItems: "center",
       }}
-      shadow="sm"
       radius={0}
     >
       <Box
