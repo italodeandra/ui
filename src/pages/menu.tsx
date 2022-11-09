@@ -13,7 +13,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   },
 });
 
-export default function MenuPage() {
+export default function MenuDemoPage() {
   return (
     <Stack className="p-2">
       <NextSeo title="Menu" />
@@ -38,4 +38,4 @@ export default function MenuPage() {
   );
 }
 
-MenuPage.getLayout = getPublicLayout;
+MenuDemoPage.getLayout = getPublicLayout;

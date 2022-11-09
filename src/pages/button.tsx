@@ -13,7 +13,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   },
 });
 
-export default function ButtonPage() {
+export default function ButtonDemoPage() {
   return (
     <Stack className="p-2">
       <NextSeo title="Button" />
@@ -71,4 +71,4 @@ export default function ButtonPage() {
   );
 }
 
-ButtonPage.getLayout = getPublicLayout;
+ButtonDemoPage.getLayout = getPublicLayout;

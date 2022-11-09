@@ -12,7 +12,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   },
 });
 
-export default function CheckboxPage() {
+export default function CheckboxDemoPage() {
   return (
     <Stack className="p-2">
       <NextSeo title="Button" />
@@ -33,4 +33,4 @@ export default function CheckboxPage() {
   );
 }
 
-CheckboxPage.getLayout = getPublicLayout;
+CheckboxDemoPage.getLayout = getPublicLayout;

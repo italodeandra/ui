@@ -23,7 +23,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   },
 });
 
-export default function TextPage() {
+export default function FormDemoPage() {
   const {
     register,
     handleSubmit,
@@ -31,7 +31,7 @@ export default function TextPage() {
     formState: { errors },
   } = useForm<FieldValues>();
 
-  const onSubmit = (data: FieldValues) => console.log(data);
+  const onSubmit = (data: FieldValues) => console.info(data);
 
   return (
     <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
@@ -93,4 +93,4 @@ export default function TextPage() {
   );
 }
 
-TextPage.getLayout = getPublicLayout;
+FormDemoPage.getLayout = getPublicLayout;

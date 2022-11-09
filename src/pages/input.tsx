@@ -11,7 +11,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   },
 });
 
-export default function InputPage() {
+export default function InputDemoPage() {
   return (
     <Stack className="p-2">
       <NextSeo title="Input" />
@@ -38,4 +38,4 @@ export default function InputPage() {
   );
 }
 
-InputPage.getLayout = getPublicLayout;
+InputDemoPage.getLayout = getPublicLayout;

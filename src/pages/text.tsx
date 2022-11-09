@@ -11,7 +11,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   },
 });
 
-export default function TextPage() {
+export default function TextDemoPage() {
   return (
     <Stack className="p-2">
       <NextSeo title="Text" />
@@ -25,4 +25,4 @@ export default function TextPage() {
   );
 }
 
-TextPage.getLayout = getPublicLayout;
+TextDemoPage.getLayout = getPublicLayout;

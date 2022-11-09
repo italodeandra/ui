@@ -12,7 +12,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   },
 });
 
-export default function LoadingPage() {
+export default function LoadingDemoPage() {
   return (
     <Stack className="p-2">
       <NextSeo title="Loading" />
@@ -25,4 +25,4 @@ export default function LoadingPage() {
   );
 }
 
-LoadingPage.getLayout = getPublicLayout;
+LoadingDemoPage.getLayout = getPublicLayout;

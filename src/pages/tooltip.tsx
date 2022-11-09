@@ -14,7 +14,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   },
 });
 
-export default function TooltipPage() {
+export default function TooltipDemoPage() {
   return (
     <Stack className="p-2">
       <NextSeo title="Tooltip" />
@@ -54,4 +54,4 @@ export default function TooltipPage() {
   );
 }
 
-TooltipPage.getLayout = getPublicLayout;
+TooltipDemoPage.getLayout = getPublicLayout;
