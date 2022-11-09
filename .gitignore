@@ -4,6 +4,8 @@
 /node_modules
 /.pnp
 .pnp.js
+.yalc
+yalc.lock
 
 # testing
 /coverage
@@ -14,6 +16,7 @@
 
 # production
 /build
+/dist
 
 # misc
 .DS_Store
@@ -34,3 +37,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+.vscode
