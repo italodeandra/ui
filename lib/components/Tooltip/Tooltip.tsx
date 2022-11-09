@@ -157,7 +157,7 @@ export const TooltipContent = forwardRef(function TooltipContent(
                 ? { duration: 0.08 }
                 : { type: "spring", damping: 20, stiffness: 300 }
             }
-            className="z-10 mx-2 rounded bg-gray-900/95 px-2 py-1 text-sm text-white"
+            className="z-10 rounded bg-gray-900/95 px-2 py-1 text-sm text-white"
             ref={ref}
             style={{
               position: state.strategy,
