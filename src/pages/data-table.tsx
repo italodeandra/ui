@@ -4,9 +4,11 @@ import { GetServerSideProps } from "next";
 import { getCookies } from "cookies-next";
 import { PencilIcon } from "@heroicons/react/24/outline";
 import { NextSeo } from "next-seo";
-import DataTable from "../../lib/components/Table/DataTable";
+import DataTable, {
+  DataTableProps,
+} from "../../lib/components/Table/DataTable";
 import Button from "../../lib/components/Button/Button";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useMount } from "react-use";
 import ms from "ms";
 
@@ -23,6 +25,7 @@ const data = [
     title: "King",
     email: "italodeandra@gmail.com",
     role: "Give orders",
+    url: "https://italodeandra.de",
   },
   {
     _id: "2",
@@ -30,6 +33,7 @@ const data = [
     title: "Front-end Developer",
     email: "lindsay.walton@example.com",
     role: "Member",
+    url: "https://italodeandra.de",
   },
 ];
 
@@ -79,6 +83,10 @@ export default function DataTableDemoPage() {
         isLoading={isLoading}
         actions={actions}
         headerContent={<Button variant="filled">Add user</Button>}
+        onRowClick={useCallback(
+          (item: typeof data[0]) => window.open(item.url, "_blank"),
+          []
+        )}
       />
     </Stack>
   );

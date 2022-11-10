@@ -1,4 +1,4 @@
-import { ReactElement, ReactNode } from "react";
+import { ReactElement, ReactNode, useCallback } from "react";
 import Loading from "../Loading/Loading";
 import Stack from "../Stack/Stack";
 import Text from "../Text/Text";
@@ -21,6 +21,7 @@ export type DataTableProps<RowData> = {
   }[];
   isLoading?: boolean;
   noRecordsText?: string;
+  onRowClick?: (item: RowData) => void;
 };
 
 export default function DataTable<RowData>({
@@ -33,7 +34,13 @@ export default function DataTable<RowData>({
   columns,
   isLoading,
   noRecordsText = "No records",
+  onRowClick,
 }: DataTableProps<RowData>) {
+  const handleRowClick = useCallback(
+    (item: RowData) => () => onRowClick?.(item),
+    [onRowClick]
+  );
+
   return (
     <Stack>
       {(title || subtitle || headerContent) && (
@@ -59,7 +66,10 @@ export default function DataTable<RowData>({
         </Table.Head>
         <Table.Body>
           {data?.map((item) => (
-            <Table.Row key={item[idAccessor] as string}>
+            <Table.Row
+              key={item[idAccessor] as string}
+              onClick={handleRowClick(item)}
+            >
               {columns.map((column) => (
                 <Table.Cell key={column.title}>
                   {column.accessor && (item[column.accessor] as string)}
