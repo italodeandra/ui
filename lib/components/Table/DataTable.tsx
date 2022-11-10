@@ -13,7 +13,7 @@ export type DataTableProps<RowData> = {
   columns: {
     title: string;
     accessor?: keyof RowData;
-    getValue?: (item: RowData) => ReactNode;
+    render?: (item: RowData) => ReactNode;
   }[];
   actions?: {
     title: string;
@@ -63,7 +63,7 @@ export default function DataTable<RowData>({
               {columns.map((column) => (
                 <Table.Cell key={column.title}>
                   {column.accessor && (item[column.accessor] as string)}
-                  {!column.accessor && column.getValue && column.getValue(item)}
+                  {!column.accessor && column.render && column.render(item)}
                 </Table.Cell>
               ))}
               {actions && (
