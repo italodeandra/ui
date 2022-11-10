@@ -8,9 +8,9 @@ export default class _Document extends Document {
     return (
       <Html lang="pt" className="h-full antialiased">
         <Head />
-        <body className="flex h-full flex-col">
-        <Main />
-        <NextScript />
+        <body className="flex h-full flex-col bg-gray-100">
+          <Main />
+          <NextScript />
         </body>
       </Html>
     );

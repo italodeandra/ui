@@ -1,30 +1,33 @@
 import { useEffect, useRef, useState } from "react";
 import { isBrowser } from "../utils/isBrowser";
 
-export function useIsScrolled() {
-  return useScrollY() > 0;
+export function useIsScrolled(disabled?: boolean) {
+  return useScrollY(disabled) > 0;
 }
 
-export function useScrollY() {
+export function useScrollY(disabled?: boolean) {
   let [scrollY, setScrollY] = useState(isBrowser ? window.scrollY : 0);
 
   useEffect(() => {
     function onScroll() {
       setScrollY(window.scrollY);
     }
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-    };
-  }, []);
+    if (!disabled) {
+      onScroll();
+      window.addEventListener("scroll", onScroll, { passive: true });
+      return () => {
+        window.removeEventListener("scroll", onScroll);
+      };
+    }
+  }, [disabled]);
 
   return scrollY;
 }
 
 export function useScrollYMovement(
   max = Infinity,
-  callback: (scrollYMovement: number) => void
+  callback: (scrollYMovement: number) => void,
+  disabled?: boolean
 ) {
   const scrollYMovement = useRef(0);
   const previousScrollYMovement = useRef(0);
@@ -42,10 +45,13 @@ export function useScrollYMovement(
       callback(scrollYMovement.current);
       previousScrollYMovement.current = window.scrollY;
     }
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-    };
-  }, [callback, max]);
+
+    if (!disabled) {
+      onScroll();
+      window.addEventListener("scroll", onScroll, { passive: true });
+      return () => {
+        window.removeEventListener("scroll", onScroll);
+      };
+    }
+  }, [callback, max, disabled]);
 }

@@ -50,4 +50,12 @@ export const components = [
     title: "Loading demo",
     href: "/loading",
   },
+  {
+    title: "Table demo",
+    href: "/table",
+  },
+  {
+    title: "DataTable demo",
+    href: "/data-table",
+  },
 ];
