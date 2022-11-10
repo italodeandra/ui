@@ -10,6 +10,10 @@ pre[class*="language-"] {
   color: theme("colors.slate.50");
 }
 
+#__next {
+  height: 100%;
+}
+
 .token.tag,
 .token.class-name,
 .token.selector,
