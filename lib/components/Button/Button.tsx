@@ -83,7 +83,7 @@ const Button = <Href extends string | undefined>(
   return (
     <UnstyledButton
       ref={ref}
-      {...(props as any)}
+      {...props}
       className={clsx(
         styles.root,
         styles.variant[variant],

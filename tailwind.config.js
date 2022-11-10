@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+
 const colors = require("tailwindcss/colors");
 const defaultTheme = require("tailwindcss/defaultTheme");
 
@@ -10,6 +12,8 @@ module.exports = {
         primary: colors.sky,
         onPrimary: colors.white,
         success: colors.green,
+        error: colors.red,
+        warn: colors.yellow,
       },
       fontFamily: {
         sans: ["InterVariable", ...defaultTheme.fontFamily.sans],

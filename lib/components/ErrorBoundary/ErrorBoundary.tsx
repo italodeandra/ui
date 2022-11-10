@@ -3,7 +3,6 @@
 import { Component, ErrorInfo, ReactNode } from "react";
 import Alert from "../Alert/Alert";
 import Button from "../Button/Button";
-import Stack from "../Stack/Stack";
 
 export default class ErrorBoundary extends Component<
   {
@@ -21,6 +20,7 @@ export default class ErrorBoundary extends Component<
     this.state = { hasError: false };
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   static getDerivedStateFromError(_error: Error) {
     // Update state so the next render will show the fallback UI
 
@@ -39,23 +39,19 @@ export default class ErrorBoundary extends Component<
         <Alert
           variant="error"
           title={this.props.title || "Oops, there was an unexpected error"}
+          actions={
+            this.props.tryAgain && (
+              <Button
+                variant="text"
+                color="error"
+                onClick={() => this.setState({ hasError: false })}
+              >
+                {this.props.tryAgain}
+              </Button>
+            )
+          }
         >
-          {(this.props.content || this.props.tryAgain) && (
-            <Stack>
-              {this.props.content && <div>{this.props.content}</div>}
-              {this.props.tryAgain && (
-                <div className="-mx-3 -mb-3">
-                  <Button
-                    variant="text"
-                    color="error"
-                    onClick={() => this.setState({ hasError: false })}
-                  >
-                    {this.props.tryAgain}
-                  </Button>
-                </div>
-              )}
-            </Stack>
-          )}
+          {this.props.content}
         </Alert>
       );
     }

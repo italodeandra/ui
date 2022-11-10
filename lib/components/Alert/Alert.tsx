@@ -5,26 +5,27 @@ import {
 } from "@heroicons/react/20/solid";
 import clsx from "clsx";
 import { DetailedHTMLProps, HTMLAttributes, ReactNode } from "react";
+import Group from "../Group/Group";
 
 const styles = {
   variants: {
     default: {
-      root: "bg-yellow-50",
-      icon: "text-yellow-400",
-      title: "text-yellow-800",
-      content: "text-yellow-700",
+      root: "bg-warn-50",
+      icon: "text-warn-400",
+      title: "text-warn-800",
+      content: "text-warn-700",
     },
     error: {
-      root: "bg-red-50",
-      icon: "text-red-400",
-      title: "text-red-800",
-      content: "text-red-700",
+      root: "bg-error-50",
+      icon: "text-error-400",
+      title: "text-error-800",
+      content: "text-error-700",
     },
     success: {
-      root: "bg-green-50",
-      icon: "text-green-400",
-      title: "text-green-800",
-      content: "text-green-700",
+      root: "bg-success-50",
+      icon: "text-success-400",
+      title: "text-success-800",
+      content: "text-success-700",
     },
   },
 };
@@ -39,6 +40,7 @@ export type AlertProps = {
   title: ReactNode;
   variant?: keyof typeof styles["variants"];
   children?: ReactNode;
+  actions?: ReactNode;
 } & Omit<
   DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
   "title"
@@ -49,6 +51,7 @@ export default function Alert({
   title,
   children,
   className,
+  actions,
   ...props
 }: AlertProps) {
   const Icon = icons[variant];
@@ -85,6 +88,7 @@ export default function Alert({
               {children}
             </div>
           )}
+          {actions && <Group className="-mx-3 -mb-3">{actions}</Group>}
         </div>
       </div>
     </div>

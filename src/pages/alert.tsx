@@ -25,15 +25,16 @@ export default function AlertDemoPage() {
       <Alert title="Success alert" variant="success">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit.
       </Alert>
-      <Alert title="With actions" variant="success">
-        <Stack>
-          <div>There was an unknown error</div>
-          <div className="-mx-3 -mb-3">
-            <Button variant="text" color="success">
-              Try again
-            </Button>
-          </div>
-        </Stack>
+      <Alert
+        title="With actions"
+        variant="error"
+        actions={
+          <Button variant="text" color="error">
+            Try again
+          </Button>
+        }
+      >
+        There was an unknown error
       </Alert>
     </Stack>
   );
