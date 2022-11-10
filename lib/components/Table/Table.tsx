@@ -14,8 +14,8 @@ export type TableProps = {
 
 export default function Table({ children, className }: TableProps) {
   return (
-    <div className="overflow-x-auto">
-      <div className="inline-block min-w-full py-2 align-middle md:px-5">
+    <div className="overflow-x-auto md:-mx-1 md:px-1">
+      <div className="inline-block min-w-full py-2 align-middle ">
         <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
           <table
             className={clsx("min-w-full divide-y divide-gray-300", className)}

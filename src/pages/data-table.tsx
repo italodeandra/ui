@@ -9,6 +9,7 @@ import Button from "../../lib/components/Button/Button";
 import { useCallback, useState } from "react";
 import { useMount } from "react-use";
 import ms from "ms";
+import Breadcrumbs from "../../lib/components/Breadcrumbs/Breadcrumbs";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   props: {
@@ -61,6 +62,8 @@ const actions = [
   },
 ];
 
+const pages = [{ title: "DataTable" }];
+
 export default function DataTableDemoPage() {
   let [isLoading, setLoading] = useState(true);
 
@@ -73,6 +76,7 @@ export default function DataTableDemoPage() {
   return (
     <Stack className="md:p-2">
       <NextSeo title="DataTable" />
+      <Breadcrumbs pages={pages} className="mb-4" />
       <DataTable
         title="Users"
         subtitle="A list of all the users in your account including their name, title, email and role."

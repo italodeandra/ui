@@ -6,6 +6,7 @@ import Button from "../../lib/components/Button/Button";
 import { NextSeo } from "next-seo";
 import { GetServerSideProps } from "next";
 import { getCookies } from "cookies-next";
+import Breadcrumbs from "../../lib/components/Breadcrumbs/Breadcrumbs";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   props: {
@@ -13,10 +14,13 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   },
 });
 
+const pages = [{ title: "Menu" }];
+
 export default function MenuDemoPage() {
   return (
     <Stack className="p-2">
       <NextSeo title="Menu" />
+      <Breadcrumbs pages={pages} className="mb-4" />
       <Menu label="Options" className="mr-auto" position="left">
         <Menu.Item>Account settings</Menu.Item>
         <Menu.Item>Support</Menu.Item>

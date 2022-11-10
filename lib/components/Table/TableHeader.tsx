@@ -12,7 +12,7 @@ export default function TableHeader({
   children,
 }: TableHeaderProps) {
   return (
-    <div className="px-4 sm:px-5">
+    <div className="px-4 md:px-0">
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
           {title && (

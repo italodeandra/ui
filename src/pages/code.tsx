@@ -5,6 +5,7 @@ import { NextSeo } from "next-seo";
 import Json from "../../lib/components/Code/Json";
 import { GetServerSideProps } from "next";
 import { getCookies } from "cookies-next";
+import Breadcrumbs from "../../lib/components/Breadcrumbs/Breadcrumbs";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   props: {
@@ -12,10 +13,13 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   },
 });
 
+const pages = [{ title: "Code" }];
+
 export default function CodeDemoPage() {
   return (
     <Stack className="p-2">
       <NextSeo title="Code" />
+      <Breadcrumbs pages={pages} className="mb-4" />
       <Json
         json={{
           string: "string",

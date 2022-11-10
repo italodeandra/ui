@@ -7,6 +7,7 @@ import Group from "../../lib/components/Group/Group";
 import { NextSeo } from "next-seo";
 import { GetServerSideProps } from "next";
 import { getCookies } from "cookies-next";
+import Breadcrumbs from "../../lib/components/Breadcrumbs/Breadcrumbs";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   props: {
@@ -14,10 +15,13 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   },
 });
 
+const pages = [{ title: "Tooltip" }];
+
 export default function TooltipDemoPage() {
   return (
     <Stack className="p-2">
       <NextSeo title="Tooltip" />
+      <Breadcrumbs pages={pages} className="mb-4" />
       <Text variant="label">Only tooltip</Text>
       <div>
         <Group>

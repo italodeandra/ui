@@ -7,55 +7,59 @@ export const components = [
     icon: <HomeIcon />,
   },
   {
-    title: "Button demo",
+    title: "Button",
     href: "/button",
   },
   {
-    title: "Input demo",
+    title: "Input",
     href: "/input",
   },
   {
-    title: "Text demo",
+    title: "Text",
     href: "/text",
   },
   {
-    title: "Alert demo",
+    title: "Alert",
     href: "/alert",
   },
   {
-    title: "Error boundary demo",
+    title: "Error boundary",
     href: "/error-boundary",
   },
   {
-    title: "Menu demo",
+    title: "Menu",
     href: "/menu",
   },
   {
-    title: "Tooltip demo",
+    title: "Tooltip",
     href: "/tooltip",
   },
   {
-    title: "Checkbox demo",
+    title: "Checkbox",
     href: "/checkbox",
   },
   {
-    title: "Code demo",
+    title: "Code",
     href: "/code",
   },
   {
-    title: "Form demo",
+    title: "Form",
     href: "/form",
   },
   {
-    title: "Loading demo",
+    title: "Loading",
     href: "/loading",
   },
   {
-    title: "Table demo",
+    title: "Table",
     href: "/table",
   },
   {
-    title: "DataTable demo",
+    title: "DataTable",
     href: "/data-table",
+  },
+  {
+    title: "Breadcrumbs",
+    href: "/breadcrumbs",
   },
 ];

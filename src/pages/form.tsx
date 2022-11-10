@@ -10,6 +10,7 @@ import Button from "../../lib/components/Button/Button";
 import Json from "../../lib/components/Code/Json";
 import { GetServerSideProps } from "next";
 import { getCookies } from "cookies-next";
+import Breadcrumbs from "../../lib/components/Breadcrumbs/Breadcrumbs";
 
 type FieldValues = {
   email: string;
@@ -22,6 +23,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
     cookies: getCookies({ req, res }),
   },
 });
+
+const pages = [{ title: "Form" }];
 
 export default function FormDemoPage() {
   const {
@@ -36,6 +39,7 @@ export default function FormDemoPage() {
   return (
     <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
       <NextSeo title="Form" />
+      <Breadcrumbs pages={pages} className="mb-4" />
       <Stack className="max-w-xl p-2">
         <div>
           <div className="mt-1">

@@ -8,6 +8,7 @@ import { useCallback } from "react";
 import Button from "../../lib/components/Button/Button";
 import fakeArray from "../../lib/utils/fakeArray";
 import { NextSeo } from "next-seo";
+import Breadcrumbs from "../../lib/components/Breadcrumbs/Breadcrumbs";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   props: {
@@ -15,10 +16,13 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   },
 });
 
+const pages = [{ title: "Table" }];
+
 export default function TableDemoPage() {
   return (
     <Stack className="md:p-2">
       <NextSeo title="Table" />
+      <Breadcrumbs pages={pages} className="mb-4" />
       <Table.Header
         title="Users"
         subtitle="A list of all the users in your account including their name, title, email and role."
