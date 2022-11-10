@@ -20,7 +20,7 @@ export type DataTableProps<RowData> = {
     icon: ReactElement;
   }[];
   isLoading?: boolean;
-  noRecordsText?: string;
+  noRecords?: ReactNode;
   onRowClick?: (item: RowData) => void;
 };
 
@@ -33,7 +33,7 @@ export default function DataTable<RowData>({
   actions,
   columns,
   isLoading,
-  noRecordsText = "No records",
+  noRecords: noRecordsText = "No records",
   onRowClick,
 }: DataTableProps<RowData>) {
   const handleRowClick = useCallback(
