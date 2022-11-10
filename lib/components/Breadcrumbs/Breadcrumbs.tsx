@@ -55,9 +55,9 @@ export default function Breadcrumbs({
                 </svg>
                 <Text
                   href={!isLast ? page.href : undefined}
-                  className={clsx("ml-4 text-sm font-medium text-gray-500", {
+                  className={clsx("ml-4 text-sm font-medium !text-gray-500", {
                     "cursor-default": isLast,
-                    "hover:text-gray-700": !isLast,
+                    "hover:!text-gray-700": !isLast,
                   })}
                   aria-current={isLast ? "page" : undefined}
                 >
