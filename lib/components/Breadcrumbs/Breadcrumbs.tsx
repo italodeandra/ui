@@ -2,20 +2,24 @@ import { HomeIcon } from "@heroicons/react/20/solid";
 import clsx from "clsx";
 import Text from "../Text/Text";
 import NextLink from "next/link";
+import Loading from "../Loading/Loading";
 
 export type BreadcrumbsProps = {
   pages?: {
     title: string;
     href?: string;
+    loading?: boolean;
   }[];
   homeHref?: string;
   className?: string;
+  loading?: boolean;
 };
 
 export default function Breadcrumbs({
   pages,
   homeHref = "/",
   className,
+  loading,
 }: BreadcrumbsProps) {
   if (!pages?.length) {
     return null;
@@ -61,12 +65,21 @@ export default function Breadcrumbs({
                   })}
                   aria-current={isLast ? "page" : undefined}
                 >
-                  {page.title}
+                  {page.loading ? (
+                    <div className="h-3 w-10 animate-pulse rounded bg-slate-300"></div>
+                  ) : (
+                    page.title
+                  )}
                 </Text>
               </div>
             </li>
           );
         })}
+        {loading && (
+          <li className="!ml-auto mt-3">
+            <Loading className="ml-4 -mr-3" />
+          </li>
+        )}
       </ol>
     </nav>
   );

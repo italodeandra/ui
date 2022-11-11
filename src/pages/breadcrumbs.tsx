@@ -14,13 +14,14 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
 const pages = [
   { title: "Projects", href: "#" },
   { title: "Project Nero", href: "#" },
+  { title: "Loading", loading: true },
 ];
 
 export default function BreadcrumbsDemoPage() {
   return (
     <Stack>
       <NextSeo title="Breadcrumbs" />
-      <Breadcrumbs pages={pages} className="mb-4" />
+      <Breadcrumbs pages={pages} className="mb-4" loading />
       <div>
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reprehenderit
         mollitia, quaerat, nostrum animi nisi nemo molestiae quae aspernatur nam
