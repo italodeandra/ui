@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import Button from "../Button/Button";
+import { NextSeo } from "next-seo";
 
 export type ErrorProps = {
   error: number;
@@ -35,6 +36,7 @@ export default function ErrorPage({
         backgroundImage: `url("${background}")`,
       }}
     >
+      <NextSeo title={error.toString()} />
       <div className="mx-auto max-w-7xl px-4 py-16 text-center sm:px-6 sm:py-24 lg:px-8 lg:py-48">
         <p className="text-base font-semibold text-black text-opacity-50">
           {error}
