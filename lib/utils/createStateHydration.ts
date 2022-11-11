@@ -11,11 +11,8 @@ export default function createStateHydration(options: { [key: string]: any }) {
     setCookie(firstKey, snapshot(state));
   });
 
-  return function hydrate(cookies: { state?: string }) {
-    if (!cookies) {
-      throw Error("This page is missing the cookies for hydration");
-    }
-    if (cookies[firstKey as keyof typeof cookies]) {
+  return function hydrate(cookies?: { state?: string }) {
+    if (cookies?.[firstKey as keyof typeof cookies]) {
       Object.assign(
         state,
         JSON.parse(cookies[firstKey as keyof typeof cookies] as string)
