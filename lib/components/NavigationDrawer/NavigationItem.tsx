@@ -10,13 +10,21 @@ export default function NavigationItem({
   icon,
   children,
   href,
+  exact,
+  alternativeActiveHrefs,
 }: {
   icon?: ReactElement;
   children: ReactNode;
   href: string;
+  exact?: boolean;
+  alternativeActiveHrefs?: string[];
 }) {
   let router = useRouter();
-  let active = router.pathname === href;
+  let active = exact
+    ? router.pathname === href ||
+      alternativeActiveHrefs?.some((href) => router.pathname === href)
+    : router.pathname.includes(href) ||
+      alternativeActiveHrefs?.some((href) => router.pathname.includes(href));
 
   let isMobile = useMedia(`(max-width: ${defaultTheme.screens.lg})`, false);
 

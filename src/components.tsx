@@ -5,6 +5,7 @@ export const components = [
     title: "Home",
     href: "/",
     icon: <HomeIcon />,
+    exact: true,
   },
   {
     title: "Button",

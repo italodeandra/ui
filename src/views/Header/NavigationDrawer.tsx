@@ -17,6 +17,7 @@ export default function NavigationDrawer({
               key={route.href}
               icon={route.icon}
               href={route.href}
+              exact={route.exact}
             >
               {route.title}
             </NavigationItem>
