@@ -12,6 +12,7 @@
     "lib:publish:yalc": "npm run lib:pre-publish && cd dist && yalc publish"
   },
   "devDependencies": {
+    "@badrap/bar-of-progress": "^0.2.2",
     "@floating-ui/react-dom-interactions": "^0.10.3",
     "@fontsource/inter": "^4.5.14",
     "@headlessui/react": "1.7.3",

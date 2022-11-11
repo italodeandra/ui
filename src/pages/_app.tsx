@@ -7,11 +7,14 @@ import AppProps from "../../lib/bootstrap/AppProps";
 import colors from "tailwindcss/colors";
 import { hydrateNavigationDrawerState } from "../../lib/components/NavigationDrawer/navigationDrawer.state";
 import Notifications from "../../lib/components/Notifications/Notifications";
+import setupNProgress from "../../lib/bootstrap/nprogress";
 
 const appName = "@italodeandra/ui";
 const appDescription = "Demo of @italodeandra/ui";
 const appKeywords = "ui";
 const appThemeColor = colors.sky["500"];
+
+setupNProgress(appThemeColor);
 
 function MyApp({ Component, pageProps }: AppProps) {
   hydrateNavigationDrawerState(pageProps.cookies);
