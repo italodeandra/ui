@@ -38,6 +38,7 @@ export default function InputDemoPage() {
         trailing="USD"
         leadingInputClassName="pl-7"
       />
+      <Input label="Loading input" loading />
     </Stack>
   );
 }

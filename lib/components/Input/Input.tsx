@@ -3,9 +3,11 @@ import { defaultTextStyles } from "../Text/Text";
 import { ExclamationCircleIcon } from "@heroicons/react/20/solid";
 import InputIcon from "./InputIcon";
 import { ForwardedRef, forwardRef } from "react";
+import clsx from "clsx";
 
 export type InputProps<Select extends boolean | undefined> = {
   error?: boolean;
+  loading?: boolean;
 } & UnstyledInputProps<Select>;
 
 const defaultLabelClassName = `block ${defaultTextStyles.variant.label}`;
@@ -32,6 +34,7 @@ function Input<Select extends boolean | undefined>(
     trailingInputClassName,
     required,
     label,
+    loading,
     ...props
   }: InputProps<Select>,
   ref: ForwardedRef<Select extends true ? HTMLSelectElement : HTMLInputElement>
@@ -43,27 +46,21 @@ function Input<Select extends boolean | undefined>(
       </InputIcon>
     ) : undefined;
 
-  labelClassName = labelClassName
-    ? `${defaultLabelClassName} ${labelClassName}`
-    : defaultLabelClassName;
-  inputClassName = inputClassName
-    ? `${defaultInputClassName} ${inputClassName}`
-    : defaultInputClassName;
-  helpTextClassName = helpTextClassName
-    ? `${defaultHelpTextClassName} ${helpTextClassName}`
-    : defaultHelpTextClassName;
-  trailingClassName = trailingClassName
-    ? `${defaultTrailingClassName} ${trailingClassName}`
-    : defaultTrailingClassName;
-  leadingClassName = leadingClassName
-    ? `${defaultLeadingClassName} ${leadingClassName}`
-    : defaultLeadingClassName;
-  leadingInputClassName = leadingInputClassName
-    ? `${defaultLeadingInputClassName} ${leadingInputClassName}`
-    : defaultLeadingInputClassName;
-  trailingInputClassName = trailingInputClassName
-    ? `${defaultTrailingInputClassName} ${trailingInputClassName}`
-    : defaultTrailingInputClassName;
+  labelClassName = clsx(defaultLabelClassName, labelClassName);
+  inputClassName = clsx(defaultInputClassName, inputClassName, {
+    "animate-pulse": loading,
+  });
+  helpTextClassName = clsx(defaultHelpTextClassName, helpTextClassName);
+  trailingClassName = clsx(defaultTrailingClassName, trailingClassName);
+  leadingClassName = clsx(defaultLeadingClassName, leadingClassName);
+  leadingInputClassName = clsx(
+    defaultLeadingInputClassName,
+    leadingInputClassName
+  );
+  trailingInputClassName = clsx(
+    defaultTrailingInputClassName,
+    trailingInputClassName
+  );
   if (error) {
     inputClassName = `${inputClassName} border-red-300 text-red-900 placeholder-red-300 focus:border-red-500 focus:ring-red-500`;
     helpTextClassName = `${helpTextClassName} text-red-600`;
@@ -79,6 +76,7 @@ function Input<Select extends boolean | undefined>(
 
   return (
     <UnstyledInput
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       {...(props as any)}
       trailing={trailing}
       labelClassName={labelClassName}
