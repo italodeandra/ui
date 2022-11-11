@@ -6,6 +6,7 @@ import "../globals.css";
 import AppProps from "../../lib/bootstrap/AppProps";
 import colors from "tailwindcss/colors";
 import { hydrateNavigationDrawerState } from "../../lib/components/NavigationDrawer/navigationDrawer.state";
+import Notifications from "../../lib/components/Notifications/Notifications";
 
 const appName = "@italodeandra/ui";
 const appDescription = "Demo of @italodeandra/ui";
@@ -76,6 +77,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           },
         ]}
       />
+      <Notifications />
       {getLayout(<Component {...pageProps} />)}
     </>
   );

@@ -63,4 +63,8 @@ export const components = [
     title: "Breadcrumbs",
     href: "/breadcrumbs",
   },
+  {
+    title: "Notifications",
+    href: "/notifications",
+  },
 ];
