@@ -8,6 +8,7 @@ export default function getPublicLayout(children: ReactNode) {
   return (
     <>
       <Header />
+      <div className="h-16" />
       <NavigationDrawer>
         <TopBlurryPoint />
         <BottomBlurryPoint />
