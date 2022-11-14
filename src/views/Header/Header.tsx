@@ -16,14 +16,8 @@ export default function Header() {
       >
         <Bars3BottomLeftIcon />
       </Button>
-      <NextLink href="">
-        <Image
-          src="/favicon.ico"
-          width={34}
-          height={34}
-          alt="Logo"
-          className="ml-3"
-        />
+      <NextLink href="/" className="ml-3">
+        <Image src="/favicon.ico" width={34} height={34} alt="Logo" />
       </NextLink>
       <span className="ml-2 text-xl font-medium">@italodeandra/ui</span>
     </UiHeader>
