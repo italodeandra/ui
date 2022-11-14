@@ -40,7 +40,7 @@ export default function NavigationDrawer({
         {navigationChildren}
       </Transition>
       <div
-        className={clsx("transition-all duration-300", {
+        className={clsx("ring-offset-gray-100 transition-all duration-300", {
           "pl-80 duration-150": isOpen && !isMobile,
         })}
       >

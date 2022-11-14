@@ -35,7 +35,7 @@ export default function Header({
       ref={ref}
       {...props}
       className={clsx(
-        "fixed top-0 z-10 flex h-16 items-center bg-white px-2.5 shadow-md shadow-slate-900/5 transition-colors duration-500 dark:shadow-none sm:px-4 md:px-6",
+        "fixed top-0 z-10 flex h-16 items-center bg-white px-2.5 shadow-md shadow-slate-900/5 ring-offset-gray-100 transition-colors duration-500 dark:shadow-none sm:px-4 md:px-6",
         isScrolled
           ? "dark:bg-white/95 dark:backdrop-blur dark:[@supports(backdrop-filter:blur(0))]:bg-white/75"
           : "dark:bg-transparent",
