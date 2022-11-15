@@ -31,7 +31,7 @@ export default function NavigationItem({
   return (
     <Button
       variant="text"
-      className={clsx("w-full !justify-start", {
+      className={clsx("w-full !justify-start hover:bg-gray-500/5", {
         "bg-primary-300/20": active,
         "text-primary-600": active,
       })}
