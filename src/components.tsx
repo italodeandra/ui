@@ -67,4 +67,8 @@ export const components = [
     title: "Notifications",
     href: "/notifications",
   },
+  {
+    title: "Markdown",
+    href: "/markdown",
+  },
 ];
