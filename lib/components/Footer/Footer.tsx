@@ -26,7 +26,7 @@ export default function Footer({
 }: FooterProps) {
   return (
     <>
-      <div className="h-screen">{children}</div>
+      <div className="min-h-screen">{children}</div>
       <footer className="bg-white">
         <div className="mx-auto max-w-7xl overflow-hidden py-12 px-4 sm:px-6 lg:px-8">
           {main && (
