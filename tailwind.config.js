@@ -1,4 +1,4 @@
-const tailwindConfig = require("@italodeandra/ui/tailwind.config");
+const tailwindConfig = require("./lib/tailwind.config");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {

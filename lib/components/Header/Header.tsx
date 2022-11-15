@@ -2,7 +2,7 @@
 
 import clsx from "clsx";
 import { useScrollYMovement } from "../../hooks/useScroll";
-import type { DetailedHTMLProps, HTMLAttributes } from "react";
+import { DetailedHTMLProps, HTMLAttributes, useEffect } from "react";
 import { useRef } from "react";
 import { useMedia } from "react-use";
 import defaultTheme from "tailwindcss/defaultTheme";
@@ -28,6 +28,11 @@ export default function Header({
     },
     !hideOnScroll && !isMobile
   );
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.style.transform = "";
+    }
+  }, [isMobile]);
 
   return (
     <header
