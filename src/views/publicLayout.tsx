@@ -3,10 +3,11 @@ import BottomBlurryPoint from "../../lib/components/BackgroundEffects/BottomBlur
 import TopBlurryPoint from "../../lib/components/BackgroundEffects/TopBlurryPoint";
 import Header from "./Header/Header";
 import NavigationDrawer from "./Header/NavigationDrawer";
+import Footer from "../../lib/components/Footer/Footer";
 
 export default function getPublicLayout(children: ReactNode) {
   return (
-    <>
+    <Footer companyName="Majapi">
       <Header />
       <div className="h-16" />
       <NavigationDrawer>
@@ -14,6 +15,6 @@ export default function getPublicLayout(children: ReactNode) {
         <BottomBlurryPoint />
         {children}
       </NavigationDrawer>
-    </>
+    </Footer>
   );
 }

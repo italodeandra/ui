@@ -10,9 +10,9 @@ export type InputProps<Select extends boolean | undefined> = {
   loading?: boolean;
 } & UnstyledInputProps<Select>;
 
-const defaultLabelClassName = `block ${defaultTextStyles.variant.label}`;
+const defaultLabelClassName = `block ${defaultTextStyles.variant.label} mb-1`;
 const defaultInputClassName =
-  "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm disabled:cursor-not-allowed disabled:border-gray-200 disabled:bg-gray-50 disabled:text-gray-500";
+  "block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm disabled:cursor-not-allowed disabled:border-gray-200 disabled:bg-gray-50 disabled:text-gray-500";
 const defaultHelpTextClassName = `mt-2 ${defaultTextStyles.variant.secondary}`;
 const defaultTrailingClassName =
   "pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 text-sm";

@@ -28,7 +28,7 @@ export default function NavigationDrawer({
         {navigationChildren}
       </Drawer>
       <Transition
-        className="fixed left-0 top-16 hidden h-full w-full max-w-xs flex-1 px-4 pt-1 lg:block"
+        className="fixed left-0 top-16 hidden h-full w-full max-w-xs flex-1 px-4 py-4 lg:block"
         show={isOpen}
         enter="transition-transform duration-150"
         enterFrom="-translate-x-full"
