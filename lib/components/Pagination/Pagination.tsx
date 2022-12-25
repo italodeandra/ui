@@ -57,7 +57,7 @@ export default function Pagination({
 
   return (
     <nav
-      className="isolate inline-flex -space-x-px rounded-md shadow-sm"
+      className="isolate mr-auto inline-flex -space-x-px rounded-md shadow-sm"
       aria-label="Pagination"
     >
       <Button
