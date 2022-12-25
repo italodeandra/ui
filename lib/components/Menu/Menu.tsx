@@ -4,10 +4,11 @@ import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import clsx from "clsx";
 import Button from "../Button/Button";
 import UnstyledButton, { UnstyledButtonProps } from "../Button/UnstyledButton";
+import Text, { TextProps } from "../Text/Text";
 
 export type MenuProps = {
   className?: string;
-  position?: "left" | "right";
+  position?: "left" | "right" | "bottom-right" | "bottom-left";
   iconClassName?: string;
   label?: ReactNode;
   children?: ReactNode;
@@ -17,22 +18,49 @@ export type MenuProps = {
 export type MenuItemProps<Href extends string | undefined> =
   UnstyledButtonProps<Href>;
 
-Menu.Item = function MenuItem<Href extends string | undefined>(
-  props: MenuItemProps<Href>
-) {
+Menu.Item = function MenuItem<Href extends string | undefined>({
+  className,
+  ...props
+}: MenuItemProps<Href>) {
   return (
     <HuiMenu.Item>
       {({ active }) => (
         <UnstyledButton
           {...props}
+          type="button"
           className={clsx(
             "w-full text-left",
-            active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-            "block px-4 py-2 text-sm"
+            active
+              ? "bg-zinc-100 text-zinc-900 dark:bg-zinc-800 dark:text-zinc-100"
+              : "text-zinc-700 dark:text-zinc-200",
+            "block px-4 py-2 text-sm",
+            className
           )}
         />
       )}
     </HuiMenu.Item>
+  );
+};
+
+export type MenuLabelProps<
+  Inline extends boolean | undefined,
+  Href extends string | undefined
+> = TextProps<Inline, Href>;
+
+Menu.Label = function MenuItem<
+  Inline extends boolean | undefined,
+  Href extends string | undefined
+>(props: MenuLabelProps<Inline, Href>) {
+  return (
+    <Text
+      {...props}
+      variant="label"
+      className={clsx(
+        "w-full text-left",
+        "block px-4 py-2 text-sm",
+        props.className
+      )}
+    />
   );
 };
 
@@ -74,10 +102,19 @@ export default function Menu({
       >
         <HuiMenu.Items
           className={clsx(
-            "absolute z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none",
+            "absolute z-10 mt-2 w-56 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-zinc-900",
             {
-              "right-0": position === "right",
-              "left-0": position === "left",
+              "right-0": position.includes("right"),
+              "origin-top-right":
+                position.includes("right") && !position.includes("bottom"),
+              "origin-top-left":
+                position.includes("left") && !position.includes("bottom"),
+              "origin-bottom-right":
+                position.includes("right") && position.includes("bottom"),
+              "origin-bottom-left":
+                position.includes("left") && position.includes("bottom"),
+              "left-0": position.includes("left"),
+              "bottom-0": position.includes("bottom"),
             }
           )}
         >

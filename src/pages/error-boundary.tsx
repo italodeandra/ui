@@ -16,11 +16,13 @@ const pages = [{ title: "Error boundary" }];
 
 export default function ErrorBoundaryDemoPage() {
   return (
-    <Stack className="p-2">
+    <>
       <NextSeo title="Error boundary" />
-      <Breadcrumbs pages={pages} className="mb-4" />
-      <ClientComponentWithErrorBoundary />
-    </Stack>
+      <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
+      <Stack className="p-2">
+        <ClientComponentWithErrorBoundary />
+      </Stack>
+    </>
   );
 }
 

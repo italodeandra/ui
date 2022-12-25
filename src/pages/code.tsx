@@ -17,20 +17,21 @@ const pages = [{ title: "Code" }];
 
 export default function CodeDemoPage() {
   return (
-    <Stack className="p-2">
+    <>
       <NextSeo title="Code" />
-      <Breadcrumbs pages={pages} className="mb-4" />
-      <Json
-        json={{
-          string: "string",
-          number: 1,
-          array: [{ object: {} }],
-          boolean: false,
-          null: null,
-        }}
-      />
-      <Code language="jsx">
-        {`// Code component
+      <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
+      <Stack className="p-2">
+        <Json
+          json={{
+            string: "string",
+            number: 1,
+            array: [{ object: {} }],
+            boolean: false,
+            null: null,
+          }}
+        />
+        <Code language="jsx">
+          {`// Code component
 <Code language="json">
   {JSON.stringify(
     {
@@ -55,8 +56,9 @@ export default function CodeDemoPage() {
     null: null,
   }}
 />`}
-      </Code>
-    </Stack>
+        </Code>
+      </Stack>
+    </>
   );
 }
 

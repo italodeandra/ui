@@ -20,7 +20,7 @@ export type CheckboxProps = {
 const defaultLabelClassName = defaultTextStyles.variant.label;
 const defaultDescriptionClassName = defaultTextStyles.variant.secondary;
 const defaultInputClassName =
-  "h-4 w-4 rounded border-gray-300 text-primary-600 ring-0 transition-colors hover:bg-gray-100 focus:outline-none focus:ring-primary-500 focus-visible:ring-2";
+  "h-4 w-4 rounded border-zinc-300 dark:checked:bg-primary-500 dark:checked:border-primary-500 dark:border-zinc-600 text-primary-600 ring-0 transition-colors dark:bg-zinc-900 hover:bg-zinc-100 focus:outline-none focus:ring-primary-500 focus-visible:ring-2 ring-offset-gray-100 dark:ring-offset-zinc-900";
 
 function Checkbox(
   {

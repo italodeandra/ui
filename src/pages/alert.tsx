@@ -17,30 +17,32 @@ const pages = [{ title: "Alert" }];
 
 export default function AlertDemoPage() {
   return (
-    <Stack className="p-2">
+    <>
       <NextSeo title="Alert" />
-      <Breadcrumbs pages={pages} className="mb-4" />
-      <Alert title="Default alert">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-      </Alert>
-      <Alert title="Error alert" variant="error">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-      </Alert>
-      <Alert title="Success alert" variant="success">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-      </Alert>
-      <Alert
-        title="With actions"
-        variant="error"
-        actions={
-          <Button variant="text" color="error">
-            Try again
-          </Button>
-        }
-      >
-        There was an unknown error
-      </Alert>
-    </Stack>
+      <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
+      <Stack className="p-2">
+        <Alert title="Default alert">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        </Alert>
+        <Alert title="Error alert" variant="error">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        </Alert>
+        <Alert title="Success alert" variant="success">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        </Alert>
+        <Alert
+          title="With actions"
+          variant="error"
+          actions={
+            <Button variant="text" color="error">
+              Try again
+            </Button>
+          }
+        >
+          There was an unknown error
+        </Alert>
+      </Stack>
+    </>
   );
 }
 

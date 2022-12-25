@@ -8,32 +8,20 @@ export const components = [
     exact: true,
   },
   {
-    title: "Button",
-    href: "/button",
-  },
-  {
-    title: "Input",
-    href: "/input",
-  },
-  {
-    title: "Text",
-    href: "/text",
-  },
-  {
     title: "Alert",
     href: "/alert",
   },
   {
-    title: "Error boundary",
-    href: "/error-boundary",
+    title: "Big scroll (test)",
+    href: "/big-scroll",
   },
   {
-    title: "Menu",
-    href: "/menu",
+    title: "Breadcrumbs",
+    href: "/breadcrumbs",
   },
   {
-    title: "Tooltip",
-    href: "/tooltip",
+    title: "Button",
+    href: "/button",
   },
   {
     title: "Checkbox",
@@ -44,31 +32,47 @@ export const components = [
     href: "/code",
   },
   {
-    title: "Form",
+    title: "Data table",
+    href: "/data-table",
+  },
+  {
+    title: "Error boundary",
+    href: "/error-boundary",
+  },
+  {
+    title: "Form (example)",
     href: "/form",
+  },
+  {
+    title: "Input",
+    href: "/input",
   },
   {
     title: "Loading",
     href: "/loading",
   },
   {
-    title: "Table",
-    href: "/table",
+    title: "Markdown",
+    href: "/markdown",
   },
   {
-    title: "DataTable",
-    href: "/data-table",
-  },
-  {
-    title: "Breadcrumbs",
-    href: "/breadcrumbs",
+    title: "Menu",
+    href: "/menu",
   },
   {
     title: "Notifications",
     href: "/notifications",
   },
   {
-    title: "Markdown",
-    href: "/markdown",
+    title: "Table",
+    href: "/table",
+  },
+  {
+    title: "Text",
+    href: "/text",
+  },
+  {
+    title: "Tooltip",
+    href: "/tooltip",
   },
 ];

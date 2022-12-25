@@ -74,23 +74,25 @@ export default function DataTableDemoPage() {
   });
 
   return (
-    <Stack className="md:p-2">
+    <>
       <NextSeo title="DataTable" />
-      <Breadcrumbs pages={pages} className="mb-4" />
-      <DataTable
-        title="Users"
-        subtitle="A list of all the users in your account including their name, title, email and role."
-        columns={columns}
-        data={!isLoading ? data : undefined}
-        isLoading={isLoading}
-        actions={actions}
-        headerContent={<Button variant="filled">Add user</Button>}
-        onRowClick={useCallback(
-          (item: typeof data[0]) => window.open(item.url, "_blank"),
-          []
-        )}
-      />
-    </Stack>
+      <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
+      <Stack className="md:px-2">
+        <DataTable
+          title="Users"
+          subtitle="A list of all the users in your account including their name, title, email and role."
+          columns={columns}
+          data={!isLoading ? data : undefined}
+          isLoading={isLoading}
+          actions={actions}
+          headerContent={<Button variant="filled">Add user</Button>}
+          onRowClick={useCallback(
+            (item: typeof data[0]) => window.open(item.url, "_blank"),
+            []
+          )}
+        />
+      </Stack>
+    </>
   );
 }
 

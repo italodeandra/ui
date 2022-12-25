@@ -1,9 +1,9 @@
 const scrolledScript = `
   window.addEventListener("scroll", () => {
     if (window.scrollY) {
-      window.document.body.classList.add("scrolled")
+      document.documentElement.classList.add("scrolled")
     } else {
-      window.document.body.classList.remove("scrolled")
+      document.documentElement.classList.remove("scrolled")
     }
   })
 `;

@@ -18,27 +18,29 @@ const pages = [{ title: "Menu" }];
 
 export default function MenuDemoPage() {
   return (
-    <Stack className="p-2">
+    <>
       <NextSeo title="Menu" />
-      <Breadcrumbs pages={pages} className="mb-4" />
-      <Menu label="Options" className="mr-auto" position="left">
-        <Menu.Item>Account settings</Menu.Item>
-        <Menu.Item>Support</Menu.Item>
-        <Menu.Item>License</Menu.Item>
-        <Menu.Item>Sign out</Menu.Item>
-      </Menu>
-      <Menu
-        button={
-          <Button icon className="rounded-full">
-            <UserIcon />
-          </Button>
-        }
-        className="mr-auto"
-        position="left"
-      >
-        <Menu.Item>Sign out</Menu.Item>
-      </Menu>
-    </Stack>
+      <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
+      <Stack className="p-2">
+        <Menu label="Options" className="mr-auto" position="left">
+          <Menu.Item>Account settings</Menu.Item>
+          <Menu.Item>Support</Menu.Item>
+          <Menu.Item>License</Menu.Item>
+          <Menu.Item>Sign out</Menu.Item>
+        </Menu>
+        <Menu
+          button={
+            <Button icon className="rounded-full">
+              <UserIcon />
+            </Button>
+          }
+          className="mr-auto"
+          position="left"
+        >
+          <Menu.Item>Sign out</Menu.Item>
+        </Menu>
+      </Stack>
+    </>
   );
 }
 

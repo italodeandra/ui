@@ -8,11 +8,13 @@ const pages = [{ title: "Big scroll" }];
 // noinspection JSUnusedGlobalSymbols
 export default function BigScrollPage() {
   return (
-    <Stack className="p-2">
+    <>
       <NextSeo title="Big scroll" />
-      <Breadcrumbs pages={pages} className="mb-4" />
-      <div className="h-[2000px]"></div>
-    </Stack>
+      <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
+      <Stack className="p-2">
+        <div className="h-[2000px]"></div>
+      </Stack>
+    </>
   );
 }
 

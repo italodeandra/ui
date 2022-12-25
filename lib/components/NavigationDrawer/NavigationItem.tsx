@@ -31,10 +31,13 @@ export default function NavigationItem({
   return (
     <Button
       variant="text"
-      className={clsx("w-full !justify-start hover:bg-gray-500/5", {
-        "bg-primary-300/20": active,
-        "text-primary-600": active,
-      })}
+      className={clsx(
+        "w-full !justify-start hover:bg-black/5 dark:hover:bg-white/5",
+        {
+          "bg-primary-300/20": active,
+          "text-primary-600": active,
+        }
+      )}
       leadingIcon={icon}
       href={href}
       onClick={isMobile ? navigationDrawerState.close : undefined}

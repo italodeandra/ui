@@ -16,30 +16,32 @@ const pages = [{ title: "Input" }];
 
 export default function InputDemoPage() {
   return (
-    <Stack className="p-2">
+    <>
       <NextSeo title="Input" />
-      <Breadcrumbs pages={pages} className="mb-4" />
-      <Input label="Username" helpText="Fill with your username" />
-      <Input
-        label="Username with error"
-        error
-        helpText="This field is required"
-      />
-      <Input label="Disabled field" disabled />
-      <Input select>
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-      </Input>
-      <Input label="Leading" leading="Qty" />
-      <Input
-        label="Leading and trailing"
-        leading="$"
-        trailing="USD"
-        leadingInputClassName="pl-7"
-      />
-      <Input label="Loading input" loading />
-    </Stack>
+      <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
+      <Stack className="p-2">
+        <Input label="Username" helpText="Fill with your username" />
+        <Input
+          label="Username with error"
+          error
+          helpText="This field is required"
+        />
+        <Input label="Disabled field" disabled />
+        <Input select>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+        </Input>
+        <Input label="Leading" leading="Qty" />
+        <Input
+          label="Leading and trailing"
+          leading="$"
+          trailing="USD"
+          leadingInputClassName="pl-7"
+        />
+        <Input label="Loading input" loading />
+      </Stack>
+    </>
   );
 }
 

@@ -17,15 +17,17 @@ const pages = [{ title: "Loading" }];
 
 export default function LoadingDemoPage() {
   return (
-    <Stack className="p-2">
+    <>
       <NextSeo title="Loading" />
-      <Breadcrumbs pages={pages} className="mb-4" />
-      <Loading />
-      <Button loading>Button loading</Button>
-      <Button variant="filled" loading>
-        Button loading
-      </Button>
-    </Stack>
+      <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
+      <Stack className="p-2">
+        <Loading />
+        <Button loading>Button loading</Button>
+        <Button variant="filled" loading>
+          Button loading
+        </Button>
+      </Stack>
+    </>
   );
 }
 

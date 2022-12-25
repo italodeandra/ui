@@ -20,58 +20,60 @@ const pages = [{ title: "Table" }];
 
 export default function TableDemoPage() {
   return (
-    <Stack className="md:p-2">
+    <>
       <NextSeo title="Table" />
-      <Breadcrumbs pages={pages} className="mb-4" />
-      <Table.Header
-        title="Users"
-        subtitle="A list of all the users in your account including their name, title, email and role."
-      >
-        <Button variant="filled">Add user</Button>
-      </Table.Header>
-      <Table>
-        <Table.Head>
-          <Table.Row>
-            <Table.Cell>Name</Table.Cell>
-            <Table.Cell>Title</Table.Cell>
-            <Table.Cell>Email</Table.Cell>
-            <Table.Cell>Role</Table.Cell>
-            <Table.Cell />
-          </Table.Row>
-        </Table.Head>
-        <Table.Body>
-          <Table.Row
-            onClick={useCallback(
-              () => window.open("https://italodeandra.de", "_blank"),
-              []
-            )}
-          >
-            <Table.Cell>Ítalo Andrade</Table.Cell>
-            <Table.Cell>King</Table.Cell>
-            <Table.Cell>italodeandra@gmail.com</Table.Cell>
-            <Table.Cell>Give orders</Table.Cell>
-            <Table.Cell actions>
-              <Table.ActionButton title="Edit">
-                <PencilIcon />
-              </Table.ActionButton>
-            </Table.Cell>
-          </Table.Row>
-          {fakeArray(30).map((n) => (
-            <Table.Row key={n}>
-              <Table.Cell>Lindsay Walton ({n})</Table.Cell>
-              <Table.Cell>Front-end Developer</Table.Cell>
-              <Table.Cell>lindsay.walton@example.com</Table.Cell>
-              <Table.Cell>Member</Table.Cell>
+      <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
+      <Stack className="md:px-2">
+        <Table.Header
+          title="Users"
+          subtitle="A list of all the users in your account including their name, title, email and role."
+        >
+          <Button variant="filled">Add user</Button>
+        </Table.Header>
+        <Table>
+          <Table.Head>
+            <Table.Row>
+              <Table.Cell>Name</Table.Cell>
+              <Table.Cell>Title</Table.Cell>
+              <Table.Cell>Email</Table.Cell>
+              <Table.Cell>Role</Table.Cell>
+              <Table.Cell />
+            </Table.Row>
+          </Table.Head>
+          <Table.Body>
+            <Table.Row
+              onClick={useCallback(
+                () => window.open("https://italodeandra.de", "_blank"),
+                []
+              )}
+            >
+              <Table.Cell>Ítalo Andrade</Table.Cell>
+              <Table.Cell>King</Table.Cell>
+              <Table.Cell>italodeandra@gmail.com</Table.Cell>
+              <Table.Cell>Give orders</Table.Cell>
               <Table.Cell actions>
                 <Table.ActionButton title="Edit">
                   <PencilIcon />
                 </Table.ActionButton>
               </Table.Cell>
             </Table.Row>
-          ))}
-        </Table.Body>
-      </Table>
-    </Stack>
+            {fakeArray(30).map((n) => (
+              <Table.Row key={n}>
+                <Table.Cell>Lindsay Walton ({n})</Table.Cell>
+                <Table.Cell>Front-end Developer</Table.Cell>
+                <Table.Cell>lindsay.walton@example.com</Table.Cell>
+                <Table.Cell>Member</Table.Cell>
+                <Table.Cell actions>
+                  <Table.ActionButton title="Edit">
+                    <PencilIcon />
+                  </Table.ActionButton>
+                </Table.Cell>
+              </Table.Row>
+            ))}
+          </Table.Body>
+        </Table>
+      </Stack>
+    </>
   );
 }
 

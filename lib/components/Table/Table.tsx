@@ -16,9 +16,12 @@ export default function Table({ children, className }: TableProps) {
   return (
     <div className="overflow-x-auto md:-mx-1 md:px-1">
       <div className="inline-block min-w-full py-2 align-middle ">
-        <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+        <div className="overflow-hidden shadow ring-1 ring-black/5 dark:ring-white/10 md:rounded-lg">
           <table
-            className={clsx("min-w-full divide-y divide-gray-300", className)}
+            className={clsx(
+              "min-w-full divide-y divide-zinc-300 dark:divide-zinc-600",
+              className
+            )}
           >
             {children}
           </table>

@@ -4,6 +4,7 @@ import { Bars3BottomLeftIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import navigationDrawerState from "../../../lib/components/NavigationDrawer/navigationDrawer.state";
 import NextLink from "next/link";
+import { ModeToggle } from "../../../lib/components/ModeToggle/ModeToggle";
 
 export default function Header() {
   return (
@@ -20,6 +21,8 @@ export default function Header() {
         <Image src="/favicon.ico" width={34} height={34} alt="Logo" />
       </NextLink>
       <span className="ml-2 text-xl font-medium">@italodeandra/ui</span>
+      <div className="flex-grow" />
+      <ModeToggle />
     </UiHeader>
   );
 }

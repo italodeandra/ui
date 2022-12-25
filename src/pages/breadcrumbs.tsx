@@ -19,16 +19,18 @@ const pages = [
 
 export default function BreadcrumbsDemoPage() {
   return (
-    <Stack>
+    <>
       <NextSeo title="Breadcrumbs" />
-      <Breadcrumbs pages={pages} className="mb-4" loading />
-      <div>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reprehenderit
-        mollitia, quaerat, nostrum animi nisi nemo molestiae quae aspernatur nam
-        assumenda et, autem rem. Incidunt molestias doloremque iusto voluptatum
-        nulla. Consequatur.
-      </div>
-    </Stack>
+      <Breadcrumbs pages={pages} className="mb-2 md:mx-2" loading />
+      <Stack className="p-2">
+        <div>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+          Reprehenderit mollitia, quaerat, nostrum animi nisi nemo molestiae
+          quae aspernatur nam assumenda et, autem rem. Incidunt molestias
+          doloremque iusto voluptatum nulla. Consequatur.
+        </div>
+      </Stack>
+    </>
   );
 }
 

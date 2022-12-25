@@ -10,7 +10,7 @@ export type MarkdownProps = {
 
 export default function Markdown({ children, className }: MarkdownProps) {
   return (
-    <div className={clsx("prose max-w-none", className)}>
+    <div className={clsx("prose max-w-none dark:prose-invert", className)}>
       <ReactMarkdown remarkPlugins={[remarkGfm]}>{children}</ReactMarkdown>
     </div>
   );

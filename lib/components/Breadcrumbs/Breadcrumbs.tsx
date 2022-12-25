@@ -3,6 +3,7 @@ import clsx from "clsx";
 import Text from "../Text/Text";
 import NextLink from "next/link";
 import Loading from "../Loading/Loading";
+import { Skeleton } from "../Skeleton/Skeleton";
 
 export type BreadcrumbsProps = {
   pages?: {
@@ -29,13 +30,13 @@ export default function Breadcrumbs({
     <nav className={clsx("flex", className)} aria-label="Breadcrumb">
       <ol
         role="list"
-        className="flex w-full space-x-4 bg-white px-6 shadow md:w-auto md:rounded-md"
+        className="flex w-full space-x-4 bg-white px-6 shadow dark:border-y dark:border-zinc-800 dark:bg-zinc-900 md:w-auto md:rounded-md md:dark:border-x"
       >
         <li className="flex">
           <div className="flex items-center">
             <NextLink
               href={homeHref}
-              className="text-gray-400 hover:text-gray-500"
+              className="text-gray-400 hover:text-gray-500 dark:hover:text-gray-200"
             >
               <HomeIcon className="h-5 w-5 flex-shrink-0" aria-hidden="true" />
               <span className="sr-only">Home</span>
@@ -48,7 +49,7 @@ export default function Breadcrumbs({
             <li key={page.title} className="flex">
               <div className="flex items-center">
                 <svg
-                  className="h-full w-6 flex-shrink-0 text-gray-200"
+                  className="h-full w-6 flex-shrink-0 text-gray-200 dark:text-zinc-800"
                   viewBox="0 0 24 44"
                   preserveAspectRatio="none"
                   fill="currentColor"
@@ -59,14 +60,17 @@ export default function Breadcrumbs({
                 </svg>
                 <Text
                   href={!isLast ? page.href : undefined}
-                  className={clsx("ml-4 text-sm font-medium !text-gray-500", {
-                    "cursor-default": isLast,
-                    "hover:!text-gray-700": !isLast,
-                  })}
+                  className={clsx(
+                    "ml-4 text-sm font-medium !text-gray-500 dark:!text-gray-400",
+                    {
+                      "cursor-default": isLast,
+                      "hover:!text-gray-700 dark:hover:!text-gray-200": !isLast,
+                    }
+                  )}
                   aria-current={isLast ? "page" : undefined}
                 >
                   {page.loading ? (
-                    <div className="h-3 w-10 animate-pulse rounded bg-slate-300"></div>
+                    <Skeleton className="h-3 w-10" />
                   ) : (
                     page.title
                   )}

@@ -10,22 +10,22 @@ import Group from "../Group/Group";
 const styles = {
   variants: {
     default: {
-      root: "bg-warn-50",
+      root: "bg-warn-50 dark:bg-warn-900",
       icon: "text-warn-400",
-      title: "text-warn-800",
-      content: "text-warn-700",
+      title: "text-warn-800 dark:text-warn-400",
+      content: "text-warn-700 dark:text-warn-200",
     },
     error: {
-      root: "bg-error-50",
+      root: "bg-error-50 dark:bg-error-900",
       icon: "text-error-400",
-      title: "text-error-800",
-      content: "text-error-700",
+      title: "text-error-800 dark:text-error-400",
+      content: "text-error-700 dark:text-error-200",
     },
     success: {
-      root: "bg-success-50",
+      root: "bg-success-50 dark:bg-success-900",
       icon: "text-success-400",
-      title: "text-success-800",
-      content: "text-success-700",
+      title: "text-success-800 dark:text-success-400",
+      content: "text-success-700 dark:text-success-200",
     },
   },
 };

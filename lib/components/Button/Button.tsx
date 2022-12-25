@@ -4,49 +4,64 @@ import { cloneElement, ForwardedRef, forwardRef, ReactElement } from "react";
 import Loading from "../Loading/Loading";
 
 const styles = {
-  root: "select-none border transition-colors inline-flex items-center justify-center rounded-md px-4 py-3 sm:px-3 sm:py-2 sm:text-sm font-medium leading-4 focus:outline-none focus-visible:ring-2 focus:ring-primary-500 focus:ring-offset-2 ring-offset-inherit",
+  root: "select-none border border-transparent transition-colors inline-flex items-center justify-center rounded-md px-4 py-3 sm:px-3 sm:py-2 sm:text-sm font-medium leading-4 focus:outline-none focus-visible:ring-2 focus:ring-primary-500 focus:ring-offset-2 ring-offset-gray-100 dark:ring-offset-zinc-900",
   variant: {
-    filled: "shadow-sm border-transparent",
-    light: "shadow-sm border-transparent",
+    filled: "shadow-sm",
+    light: "shadow-sm",
     outlined: "shadow-sm",
-    text: "border-transparent",
+    text: "",
   },
   color: {
-    primary:
-      "border-primary-500 active:border-primary-600 text-primary-700 hover:bg-primary-50",
-    success:
-      "border-success-500 active:border-success-600 text-success-700 hover:bg-success-50",
-    error:
-      "border-error-500 active:border-error-600 text-error-700 hover:bg-error-50",
-    gray: "border-gray-300 active:border-gray-400 text-gray-700 hover:bg-gray-100",
+    primary: "",
+    success: "",
+    error: "",
+    gray: "",
+    white: "",
   },
   variantColor: {
     "filled-primary":
-      "bg-primary-500 text-onPrimary hover:bg-primary-500/80 active:bg-primary-500",
+      "bg-primary-500 hover:bg-primary-500/80 text-white active:border-primary-700 dark:active:border-primary-300",
     "filled-success":
-      "bg-success-500 text-onPrimary hover:bg-success-500/80 active:bg-success-500",
+      "bg-success-500 hover:bg-success-500/80 text-white active:border-success-700 dark:active:border-success-300",
     "filled-error":
-      "bg-error-500 text-onPrimary hover:bg-error-500/80 active:bg-error-500",
+      "bg-red-500 hover:bg-red-500/80 text-white active:border-red-700 dark:active:border-red-300",
     "filled-gray":
-      "bg-gray-300 text-gray-900 hover:bg-gray-300/75 active:bg-gray-300",
+      "bg-zinc-300 hover:bg-zinc-200 text-zinc-900 active:border-zinc-400 dark:active:border-zinc-600",
+    "filled-white":
+      "bg-white hover:bg-zinc-100 text-zinc-900 active:border-zinc-300 dark:active:border-zinc-700",
 
     "light-primary":
-      "active:border-primary-300 bg-primary-500/30 hover:bg-primary-500/20",
+      "border-primary-500 text-primary-900 bg-primary-500/30 hover:bg-primary-500/40 active:border-primary-700",
     "light-success":
-      "active:border-success-300 bg-success-500/30 hover:bg-success-500/20",
+      "border-success-500 text-success-900 bg-success-500/30 hover:bg-success-500/40 active:border-success-700",
     "light-error":
-      "active:border-error-300 bg-error-500/30 hover:bg-error-500/20",
-    "light-gray": "bg-gray-300/30 hover:bg-gray-300/20",
+      "border-error-400 text-error-900 bg-error-500/30 hover:bg-error-500/40 active:border-error-700",
+    "light-gray":
+      "border-zinc-400 bg-zinc-500/30 hover:bg-zinc-500/40 dark:hover:bg-zinc-500/10 active:border-zinc-700",
+    "light-white":
+      "border-white dark:text-white bg-white/30 dark:bg-white/20 hover:bg-white/70 dark:hover:bg-white/30 active:border-zinc-500",
 
-    "text-primary": "!border-transparent active:!border-primary-300",
-    "text-success": "!border-transparent active:!border-success-300",
-    "text-error": "!border-transparent active:!border-error-300",
-    "text-gray": "!border-transparent active:!border-gray-300",
+    "outlined-primary":
+      "border-primary-500 text-primary-700 hover:bg-primary-500/10 active:border-primary-700",
+    "outlined-success":
+      "border-success-500 text-success-700 hover:bg-success-500/10 active:border-success-700",
+    "outlined-error":
+      "border-error-500 text-error-700 hover:bg-error-500/10 active:border-error-700",
+    "outlined-gray":
+      "border-zinc-400 text-zinc-700 dark:text-zinc-400 hover:bg-zinc-500/10 active:border-zinc-700",
+    "outlined-white":
+      "dark:text-white border-zinc-300 dark:border-white/50 dark:hover:bg-white/5 hover:bg-zinc-500/5 active:border-zinc-500 dark:active:border-white",
 
-    "outlined-primary": "",
-    "outlined-success": "",
-    "outlined-error": "",
-    "outlined-gray": "",
+    "text-primary":
+      "text-primary-500 hover:bg-primary-500/10 active:border-primary-500",
+    "text-success":
+      "text-success-500 hover:bg-success-500/10 active:border-success-500",
+    "text-error":
+      "text-error-500 hover:bg-error-500/10 active:border-error-500",
+    "text-gray":
+      "text-zinc-500 dark:text-zinc-400 hover:bg-zinc-500/10 active:border-zinc-500",
+    "text-white":
+      "dark:text-white hover:bg-zinc-500/5 dark:hover:bg-white/5 active:border-zinc-500/50 dark:active:border-white/50",
   },
   icon: "px-3 sm:px-2",
 };
@@ -64,7 +79,7 @@ export type ButtonProps<Href extends string | undefined> =
 const Button = <Href extends string | undefined>(
   {
     variant = "outlined",
-    color = ["outlined", "text"].includes(variant) ? "gray" : "primary",
+    color = ["outlined", "text"].includes(variant) ? "white" : "primary",
     className,
     icon,
     type = "button",
@@ -102,6 +117,13 @@ const Button = <Href extends string | undefined>(
         })}
       {!icon
         ? children
+        : Array.isArray(children)
+        ? children.map((child, key) =>
+            cloneElement(child as ReactElement, {
+              key,
+              className: clsx("w-6", (child as ReactElement)?.props?.className),
+            })
+          )
         : cloneElement(children as ReactElement, {
             className: clsx(
               "w-6",

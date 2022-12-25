@@ -10,7 +10,7 @@ export default function TableRow({ children, onClick }: TableRowProps) {
     <tr
       onClick={onClick}
       className={clsx({
-        "cursor-pointer hover:bg-gray-50": !!onClick,
+        "cursor-pointer hover:bg-black/5 dark:hover:bg-white/5": !!onClick,
       })}
     >
       {children}

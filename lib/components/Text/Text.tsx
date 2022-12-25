@@ -5,9 +5,9 @@ import NextLink from "next/link";
 
 export const defaultTextStyles = {
   variant: {
-    default: "text-gray-700",
-    label: "text-gray-700 text-sm font-medium",
-    secondary: "text-sm text-gray-500",
+    default: "text-gray-700 dark:text-zinc-200",
+    label: "text-gray-800 text-sm font-medium dark:text-zinc-100",
+    secondary: "text-sm text-gray-500 dark:text-zinc-400",
     link: "font-medium text-primary-600 hover:text-primary-500",
   },
 };
@@ -43,10 +43,12 @@ export default function Text<
     className
   );
   if (href) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return <NextLink href={href} {...(props as any)} className={className} />;
   }
   if (inline) {
     return <span {...props} className={className} />;
   }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return <div {...(props as any)} className={className} />;
 }

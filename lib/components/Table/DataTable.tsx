@@ -1,5 +1,6 @@
 import { ReactElement, ReactNode, useCallback } from "react";
 import Loading from "../Loading/Loading";
+import { Skeleton } from "../Skeleton/Skeleton";
 import Stack from "../Stack/Stack";
 import Text from "../Text/Text";
 import Table from "./Table";
@@ -91,12 +92,12 @@ export default function DataTable<RowData>({
             <Table.Row>
               {columns.map((column) => (
                 <Table.Cell key={column.title}>
-                  <div className="h-2 animate-pulse rounded bg-slate-300"></div>
+                  <Skeleton className="h-2" />
                 </Table.Cell>
               ))}
               {actions && (
                 <Table.Cell actions>
-                  <div className="inline-block h-2 w-6 animate-pulse rounded bg-slate-300"></div>
+                  <Skeleton className="inline-block h-2 w-6" />
                 </Table.Cell>
               )}
             </Table.Row>

@@ -17,7 +17,7 @@ export default function TableCell({
   const { isHead } = useContext(TableHeadContext);
 
   const commonClassName = clsx(
-    "text-sm first:pl-4 first:sm:pl-6 first:font-medium first:text-gray-900 px-3",
+    "text-sm first:pl-4 first:sm:pl-6 first:font-medium first:text-zinc-900 dark:first:text-zinc-100 px-3",
     className,
     {
       "py-3.5 last:pr-4 last:sm:pr-6": !actions,
@@ -30,7 +30,7 @@ export default function TableCell({
       <th
         className={clsx(
           commonClassName,
-          "py-3.5 text-left font-semibold text-gray-900"
+          "py-3.5 text-left font-semibold text-zinc-900 dark:text-zinc-50"
         )}
         colSpan={colSpan}
       >
@@ -41,7 +41,10 @@ export default function TableCell({
 
   return (
     <td
-      className={clsx(commonClassName, "whitespace-nowrap py-4 text-gray-500")}
+      className={clsx(
+        commonClassName,
+        "whitespace-nowrap py-4 text-zinc-500 dark:text-zinc-300"
+      )}
       colSpan={colSpan}
     >
       {children}

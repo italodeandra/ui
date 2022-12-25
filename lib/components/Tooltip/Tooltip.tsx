@@ -54,10 +54,13 @@ export function useTooltipState({
 }: {
   initialOpen?: boolean;
   placement?: Placement;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   id?: any;
   delayGroupContext?: {
     delay: Delay;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     currentId: any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     setCurrentId: (id: any) => void;
   };
   delay?: Delay;
@@ -96,6 +99,7 @@ export function useTooltipState({
       open,
       setOpen,
       ...interactions,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       ...(data as any),
     }),
     [open, setOpen, interactions, data]
@@ -112,6 +116,7 @@ export const TooltipAnchor = forwardRef(function TooltipAnchor(
   propRef
 ) {
   const ref = useMemo(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     () => mergeRefs([state.reference, propRef, (children as any).ref]),
     [state.reference, propRef, children]
   );
@@ -157,7 +162,7 @@ export const TooltipContent = forwardRef(function TooltipContent(
                 ? { duration: 0.08 }
                 : { type: "spring", damping: 20, stiffness: 300 }
             }
-            className="z-10 rounded bg-gray-900/95 px-2 py-1 text-sm text-white"
+            className="z-10 rounded bg-zinc-900/95 px-2 py-1 text-sm text-white"
             ref={ref}
             style={{
               position: state.strategy,

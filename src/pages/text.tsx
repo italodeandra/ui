@@ -16,16 +16,18 @@ const pages = [{ title: "Text" }];
 
 export default function TextDemoPage() {
   return (
-    <Stack className="p-2">
+    <>
       <NextSeo title="Text" />
-      <Breadcrumbs pages={pages} className="mb-4" />
-      <Text variant="label">Label</Text>
-      <Text variant="secondary">Secondary</Text>
-      <Text variant="link" href="/">
-        Link
-      </Text>
-      <Text>Default</Text>
-    </Stack>
+      <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
+      <Stack className="p-2">
+        <Text variant="label">Label</Text>
+        <Text variant="secondary">Secondary</Text>
+        <Text variant="link" href="/">
+          Link
+        </Text>
+        <Text>Default</Text>
+      </Stack>
+    </>
   );
 }
 

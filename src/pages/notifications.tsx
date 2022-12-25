@@ -22,10 +22,10 @@ const pages = [{ title: "Notifications" }];
 
 export default function ButtonDemoPage() {
   return (
-    <div className="p-2">
+    <>
       <NextSeo title="Notifications" />
-      <Breadcrumbs pages={pages} className="mb-4" />
-      <Stack>
+      <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
+      <Stack className="p-2">
         <div>
           <Button
             onClick={() => {
@@ -128,7 +128,7 @@ export default function ButtonDemoPage() {
           </Button>
         </div>
       </Stack>
-    </div>
+    </>
   );
 }
 

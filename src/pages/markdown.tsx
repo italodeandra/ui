@@ -17,12 +17,14 @@ const pages = [{ title: "Markdown" }];
 // noinspection JSUnusedGlobalSymbols
 export default function ButtonDemoPage() {
   return (
-    <Stack className="p-2">
+    <>
       <NextSeo title="Markdown" />
-      <Breadcrumbs pages={pages} className="mb-4" />
-      <Markdown>{`# Hello, *world*!
+      <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
+      <Stack className="p-2">
+        <Markdown>{`# Hello, *world*!
 Just a link: https://reactjs.com.`}</Markdown>
-    </Stack>
+      </Stack>
+    </>
   );
 }
 

@@ -37,28 +37,26 @@ export default function FormDemoPage() {
   const onSubmit = (data: FieldValues) => console.info(data);
 
   return (
-    <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <NextSeo title="Form" />
-      <Breadcrumbs pages={pages} className="mb-4" />
+      <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
       <Stack className="max-w-xl p-2">
         <div>
-          <div className="mt-1">
-            <Input
-              label="Email"
-              type="email"
-              autoComplete="email"
-              required
-              {...register("email", {
-                required: "Please fill with your email",
-                pattern: {
-                  value: emailRegExp,
-                  message: "Please fill with a valid email",
-                },
-              })}
-              error={!!errors.email}
-              helpText={errors.email?.message}
-            />
-          </div>
+          <Input
+            label="Email"
+            type="email"
+            autoComplete="email"
+            required
+            {...register("email", {
+              required: "Please fill with your email",
+              pattern: {
+                value: emailRegExp,
+                message: "Please fill with a valid email",
+              },
+            })}
+            error={!!errors.email}
+            helpText={errors.email?.message}
+          />
         </div>
 
         <div className="space-y-1">

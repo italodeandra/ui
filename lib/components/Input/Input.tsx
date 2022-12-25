@@ -12,12 +12,12 @@ export type InputProps<Select extends boolean | undefined> = {
 
 const defaultLabelClassName = `block ${defaultTextStyles.variant.label} mb-1`;
 const defaultInputClassName =
-  "block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm disabled:cursor-not-allowed disabled:border-gray-200 disabled:bg-gray-50 disabled:text-gray-500";
+  "block w-full dark:bg-zinc-900 rounded-md border-gray-300 dark:border-zinc-700 shadow-sm focus:border-primary-500 dark:focus:border-primary-500 focus:ring-primary-500 sm:text-sm disabled:cursor-not-allowed disabled:border-gray-200 dark:disabled:border-zinc-800 disabled:bg-gray-50 dark:disabled:bg-zinc-900/90 disabled:text-gray-500";
 const defaultHelpTextClassName = `mt-2 ${defaultTextStyles.variant.secondary}`;
 const defaultTrailingClassName =
-  "pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 text-sm";
+  "pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-zinc-500 text-sm";
 const defaultLeadingClassName =
-  "pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500 text-sm";
+  "pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-zinc-500 text-sm";
 const defaultLeadingInputClassName = "pl-10";
 const defaultTrailingInputClassName = "pr-10";
 
@@ -41,7 +41,7 @@ function Input<Select extends boolean | undefined>(
 ) {
   trailing =
     trailing || error ? (
-      <InputIcon className="text-red-500">
+      <InputIcon className="text-error-500">
         <ExclamationCircleIcon aria-hidden="true" />
       </InputIcon>
     ) : undefined;
@@ -62,8 +62,8 @@ function Input<Select extends boolean | undefined>(
     trailingInputClassName
   );
   if (error) {
-    inputClassName = `${inputClassName} border-red-300 text-red-900 placeholder-red-300 focus:border-red-500 focus:ring-red-500`;
-    helpTextClassName = `${helpTextClassName} text-red-600`;
+    inputClassName = `${inputClassName} border-error-300 dark:border-error-500 text-error-900 dark:text-error-500 placeholder-error-300 focus:border-error-500 dark:focus:border-error-500 focus:ring-error-500`;
+    helpTextClassName = `${helpTextClassName} text-error-600 dark:text-error-500`;
   }
 
   if (label && required) {

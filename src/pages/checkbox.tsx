@@ -17,23 +17,25 @@ const pages = [{ title: "Checkbox" }];
 
 export default function CheckboxDemoPage() {
   return (
-    <Stack className="p-2">
+    <>
       <NextSeo title="Button" />
-      <Breadcrumbs pages={pages} className="mb-4" />
-      <Text variant="label">Checkbox with label and description</Text>
-      <Checkbox
-        label="Comments"
-        description="Get notified when someones posts a comment on a posting."
-      />
-      <Checkbox
-        label="Candidates"
-        description="Get notified when a candidate applies for a job."
-      />
-      <Text variant="label">Checkbox with label</Text>
-      <Checkbox label="Comments" />
-      <Text variant="label">Checkbox without label</Text>
-      <Checkbox />
-    </Stack>
+      <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
+      <Stack className="p-2">
+        <Text variant="label">Checkbox with label and description</Text>
+        <Checkbox
+          label="Comments"
+          description="Get notified when someones posts a comment on a posting."
+        />
+        <Checkbox
+          label="Candidates"
+          description="Get notified when a candidate applies for a job."
+        />
+        <Text variant="label">Checkbox with label</Text>
+        <Checkbox label="Comments" />
+        <Text variant="label">Checkbox without label</Text>
+        <Checkbox />
+      </Stack>
+    </>
   );
 }
 
