@@ -5,9 +5,7 @@ export interface ModeToggleProps {
   ariaLabel?: string;
 }
 
-export function ModeToggle({
-  ariaLabel = "Toggle dark mode",
-}: ModeToggleProps) {
+export function useModeToggle() {
   function disableTransitionsTemporarily() {
     document.documentElement.classList.add("[&_*]:!transition-none");
     window.setTimeout(() => {
@@ -28,6 +26,14 @@ export function ModeToggle({
       window.localStorage.isDarkMode = isDarkMode;
     }
   }
+
+  return toggleMode;
+}
+
+export function ModeToggle({
+  ariaLabel = "Toggle dark mode",
+}: ModeToggleProps) {
+  let toggleMode = useModeToggle();
 
   return (
     <Button icon variant="text" aria-label={ariaLabel} onClick={toggleMode}>
