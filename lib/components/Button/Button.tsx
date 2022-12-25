@@ -31,24 +31,24 @@ const styles = {
       "bg-white hover:bg-zinc-100 text-zinc-900 active:border-zinc-300 dark:active:border-zinc-700",
 
     "light-primary":
-      "border-primary-500 text-primary-900 bg-primary-500/30 hover:bg-primary-500/40 active:border-primary-700",
+      "border-primary-500 text-primary-500 bg-primary-500/30 hover:bg-primary-500/40 active:border-primary-700",
     "light-success":
-      "border-success-500 text-success-900 bg-success-500/30 hover:bg-success-500/40 active:border-success-700",
+      "border-success-500 text-success-500 bg-success-500/30 hover:bg-success-500/40 active:border-success-700",
     "light-error":
-      "border-error-400 text-error-900 bg-error-500/30 hover:bg-error-500/40 active:border-error-700",
+      "border-error-400 text-error-500 bg-error-500/30 hover:bg-error-500/40 active:border-error-700",
     "light-gray":
       "border-zinc-400 bg-zinc-500/30 hover:bg-zinc-500/40 dark:hover:bg-zinc-500/10 active:border-zinc-700",
     "light-white":
       "border-white dark:text-white bg-white/30 dark:bg-white/20 hover:bg-white/70 dark:hover:bg-white/30 active:border-zinc-500",
 
     "outlined-primary":
-      "border-primary-500 text-primary-700 hover:bg-primary-500/10 active:border-primary-700",
+      "border-primary-500 text-primary-500 hover:bg-primary-500/10 active:border-primary-700",
     "outlined-success":
-      "border-success-500 text-success-700 hover:bg-success-500/10 active:border-success-700",
+      "border-success-500 text-success-500 hover:bg-success-500/10 active:border-success-700",
     "outlined-error":
-      "border-error-500 text-error-700 hover:bg-error-500/10 active:border-error-700",
+      "border-error-500 text-error-500 hover:bg-error-500/10 active:border-error-700",
     "outlined-gray":
-      "border-zinc-400 text-zinc-700 dark:text-zinc-400 hover:bg-zinc-500/10 active:border-zinc-700",
+      "border-zinc-400 text-zinc-500 dark:text-zinc-400 hover:bg-zinc-500/10 active:border-zinc-700",
     "outlined-white":
       "dark:text-white border-zinc-300 dark:border-white/50 dark:hover:bg-white/5 hover:bg-zinc-500/5 active:border-zinc-500 dark:active:border-white",
 
@@ -64,6 +64,7 @@ const styles = {
       "dark:text-white hover:bg-zinc-500/5 dark:hover:bg-white/5 active:border-zinc-500/50 dark:active:border-white/50",
   },
   icon: "px-3 sm:px-2",
+  disabled: "opacity-50 pointer-events-none",
 };
 
 export type ButtonProps<Href extends string | undefined> =
@@ -74,6 +75,7 @@ export type ButtonProps<Href extends string | undefined> =
     leadingIcon?: ReactElement;
     trailingIcon?: ReactElement;
     loading?: boolean;
+    disabled?: boolean;
   };
 
 const Button = <Href extends string | undefined>(
@@ -87,6 +89,7 @@ const Button = <Href extends string | undefined>(
     trailingIcon,
     children,
     loading,
+    disabled,
     ...props
   }: ButtonProps<Href>,
   ref: ForwardedRef<Href extends string ? HTMLAnchorElement : HTMLButtonElement>
@@ -106,10 +109,12 @@ const Button = <Href extends string | undefined>(
         styles.variantColor[`${variant}-${color}`],
         {
           [styles.icon]: icon,
+          [styles.disabled]: disabled,
         },
         className
       )}
       type={type}
+      disabled={disabled}
     >
       {leadingIcon &&
         cloneElement(leadingIcon, {

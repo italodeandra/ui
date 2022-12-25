@@ -90,6 +90,9 @@ export default function DataTableDemoPage() {
             (item: typeof data[0]) => window.open(item.url, "_blank"),
             []
           )}
+          pagination
+          totalItems={2}
+          currentPage={1}
         />
       </Stack>
     </>

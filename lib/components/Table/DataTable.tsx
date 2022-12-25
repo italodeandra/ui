@@ -1,4 +1,10 @@
-import { ReactElement, ReactNode, useCallback } from "react";
+import {
+  ReactElement,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import Loading from "../Loading/Loading";
 import { Skeleton } from "../Skeleton/Skeleton";
 import Stack from "../Stack/Stack";
@@ -23,6 +29,11 @@ export type DataTableProps<RowData> = {
   isLoading?: boolean;
   noRecords?: ReactNode;
   onRowClick?: (item: RowData) => void;
+  pagination?: boolean;
+  currentPage?: number;
+  onChangePage?: (page: number) => void;
+  totalItems?: number;
+  itemsPerPage?: number;
 };
 
 export default function DataTable<RowData>({
@@ -36,7 +47,24 @@ export default function DataTable<RowData>({
   isLoading,
   noRecords: noRecordsText = "No records",
   onRowClick,
+  pagination,
+  currentPage = 0,
+  onChangePage,
+  totalItems = 0,
+  itemsPerPage = 15,
 }: DataTableProps<RowData>) {
+  let [page, setPage] = useState(currentPage);
+  useEffect(() => {
+    if (page !== currentPage) {
+      setPage(currentPage);
+    }
+  }, [currentPage, page]);
+  useEffect(() => {
+    if (onChangePage) {
+      onChangePage(page);
+    }
+  }, [onChangePage, page]);
+
   const handleRowClick = useCallback(
     (item: RowData) => () => onRowClick?.(item),
     [onRowClick]
@@ -58,7 +86,7 @@ export default function DataTable<RowData>({
             {actions && <Table.Cell />}
           </Table.Row>
           {isLoading && (
-            <tr className="absolute top-3.5 right-3 rounded-full bg-gray-50/50">
+            <tr className="absolute top-3.5 right-3 rounded-full bg-gray-50/50 dark:bg-zinc-800/50">
               <td>
                 <Loading />
               </td>
@@ -111,6 +139,14 @@ export default function DataTable<RowData>({
           )}
         </Table.Body>
       </Table>
+      {pagination ? (
+        <Table.FooterWithPagination
+          totalItems={totalItems}
+          itemsPerPage={itemsPerPage}
+          currentPage={currentPage}
+          onChangePage={onChangePage}
+        />
+      ) : undefined}
     </Stack>
   );
 }

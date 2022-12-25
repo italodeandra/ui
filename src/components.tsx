@@ -64,6 +64,10 @@ export const components = [
     href: "/notifications",
   },
   {
+    title: "Pagination",
+    href: "/pagination",
+  },
+  {
     title: "Table",
     href: "/table",
   },
