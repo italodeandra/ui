@@ -31,7 +31,7 @@ Menu.Item = function MenuItem<Href extends string | undefined>({
           className={clsx(
             "w-full text-left",
             active
-              ? "bg-zinc-100 text-zinc-900 dark:bg-zinc-800 dark:text-zinc-100"
+              ? "bg-zinc-100 text-zinc-900 dark:bg-zinc-700/50 dark:text-zinc-100"
               : "text-zinc-700 dark:text-zinc-200",
             "block px-4 py-2 text-sm",
             className
@@ -102,7 +102,7 @@ export default function Menu({
       >
         <HuiMenu.Items
           className={clsx(
-            "absolute z-10 mt-2 w-56 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-zinc-900",
+            "absolute z-10 mt-2 w-56 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-zinc-800",
             {
               "right-0": position.includes("right"),
               "origin-top-right":
