@@ -5,7 +5,7 @@ import NextLink from "next/link";
 
 export const defaultTextStyles = {
   variant: {
-    default: "text-gray-700 dark:text-zinc-200",
+    default: "text-gray-700 hover:text-gray-700 dark:text-zinc-200",
     label: "text-gray-800 text-sm font-medium dark:text-zinc-100",
     secondary: "text-sm text-gray-500 dark:text-zinc-400",
     link: "font-medium text-primary-600 hover:text-primary-500",
