@@ -16,7 +16,8 @@ export default function NavigationDrawer({
 }) {
   let { isOpen, setOpen } = useSnapshot(navigationDrawerState);
 
-  let isMobile = useMedia(`(max-width: ${defaultTheme.screens.lg})`, false);
+  let isDesktop = useMedia(`(min-width: ${defaultTheme.screens.lg})`, false);
+  let isMobile = !isDesktop;
 
   return (
     <>
