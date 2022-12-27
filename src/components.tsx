@@ -24,6 +24,10 @@ export const components = [
     href: "/button",
   },
   {
+    title: "Carousel",
+    href: "/carousel",
+  },
+  {
     title: "Checkbox",
     href: "/checkbox",
   },
