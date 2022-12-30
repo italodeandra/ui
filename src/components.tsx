@@ -64,6 +64,10 @@ export const components = [
     href: "/menu",
   },
   {
+    title: "Modal",
+    href: "/modal",
+  },
+  {
     title: "Notifications",
     href: "/notifications",
   },
