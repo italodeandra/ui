@@ -76,6 +76,10 @@ export const components = [
     href: "/pagination",
   },
   {
+    title: "Spotlight",
+    href: "/spotlight",
+  },
+  {
     title: "Table",
     href: "/table",
   },
