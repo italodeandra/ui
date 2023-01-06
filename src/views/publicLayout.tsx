@@ -7,14 +7,14 @@ import Footer from "../../lib/components/Footer/Footer";
 
 export default function getPublicLayout(children: ReactNode) {
   return (
-    <Footer companyName="Majapi">
+    <>
       <Header />
       <div className="h-16" />
       <NavigationDrawer>
         <TopBlurryPoint />
         <BottomBlurryPoint />
-        {children}
+        <Footer companyName="Majapi">{children}</Footer>
       </NavigationDrawer>
-    </Footer>
+    </>
   );
 }
