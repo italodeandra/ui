@@ -29,7 +29,11 @@ export default function NavigationDrawer({
         {navigationChildren}
       </Drawer>
       <Transition
-        className="fixed left-0 top-16 hidden h-full w-full max-w-xs flex-1 px-4 py-4 lg:block"
+        className={clsx(
+          "fixed left-0 top-16 hidden h-full w-full max-w-xs flex-1 px-4 py-4 lg:block",
+          "bg-zinc-100/95 backdrop-blur [@supports(backdrop-filter:blur(0))]:bg-zinc-100/75",
+          "dark:bg-zinc-900/95 dark:[@supports(backdrop-filter:blur(0))]:bg-zinc-900/75"
+        )}
         show={isOpen}
         enter="transition-transform duration-150"
         enterFrom="-translate-x-full"
