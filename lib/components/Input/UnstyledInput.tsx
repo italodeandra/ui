@@ -7,6 +7,7 @@ import {
 } from "react";
 import { useId } from "react";
 import clsx from "clsx";
+import { Combobox } from "@headlessui/react";
 
 export type UnstyledInputProps<Select extends boolean | undefined> = {
   label?: ReactNode;
@@ -21,6 +22,8 @@ export type UnstyledInputProps<Select extends boolean | undefined> = {
   trailing?: ReactNode;
   leading?: ReactNode;
   select?: Select;
+  as?: typeof Combobox.Input;
+  innerClassName?: string;
 } & (Select extends string
   ? DetailedHTMLProps<InputHTMLAttributes<HTMLSelectElement>, HTMLSelectElement>
   : DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>);
@@ -43,6 +46,8 @@ function UnstyledInput<Select extends boolean | undefined>(
     trailing,
     select,
     children,
+    as,
+    innerClassName,
     ...props
   }: UnstyledInputProps<Select>,
   ref: ForwardedRef<Select extends true ? HTMLSelectElement : HTMLInputElement>
@@ -50,7 +55,7 @@ function UnstyledInput<Select extends boolean | undefined>(
   const innerId = useId();
   id = id || innerId;
 
-  const Component = select ? "select" : "input";
+  const Component = as || (select ? "select" : "input");
 
   return (
     <div className={className}>
@@ -59,9 +64,10 @@ function UnstyledInput<Select extends boolean | undefined>(
           {label}
         </label>
       )}
-      <div style={{ position: "relative" }}>
+      <div style={{ position: "relative" }} className={innerClassName}>
         {leading && <div className={leadingClassName}>{leading}</div>}
         <Component
+          /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
           {...(props as any)}
           className={clsx(
             inputClassName,

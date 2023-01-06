@@ -1,62 +1,27 @@
-/*
-  This example requires Tailwind CSS v3.0+
-  
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
-import {
-  Fragment,
-  ReactNode,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
-import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
-import { Combobox, Dialog, Transition } from "@headlessui/react";
+import { Fragment, useCallback, useEffect, useState } from "react";
+import { Dialog, Transition } from "@headlessui/react";
 import clsx from "clsx";
-import Loading from "../Loading/Loading";
+import UnstyledAutocomplete, {
+  UnstyledAutocompleteProps,
+} from "../Autocomplete/UnstyledAutocomplete";
+import { defaultLeadingClassName } from "../Input/Input";
+import InputIcon from "../Input/InputIcon";
+import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 
-export interface SpotlightProps<T extends { _id: string }> {
+export interface SpotlightProps<T extends { _id: string }>
+  extends UnstyledAutocompleteProps<T> {
   open?: boolean;
   onClose?: () => void;
-  placeholder?: string;
-  emptyText?: string;
-  items?: T[];
-  filterProperty?: keyof T;
-  filterFunction?: (item: T) => boolean;
-  onSelect?: (item: T) => void;
-  renderProperty?: keyof T;
-  renderFunction?: (item: T) => ReactNode;
-  query?: string;
-  onChangeQuery?: (query: string) => void;
-  loading?: boolean;
 }
 
 export default function Spotlight<T extends { _id: string }>({
   open,
   onClose,
   placeholder = "Search...",
-  emptyText = "No item found.",
-  items = [],
-  renderProperty = "title" as keyof T,
-  renderFunction,
-  filterProperty = "title" as keyof T,
-  filterFunction,
-  onSelect,
   query: defaultQuery = "",
   onChangeQuery,
-  loading,
+  emptyText = "No item found.",
+  ...props
 }: SpotlightProps<T>) {
   let [query, setQuery] = useState(defaultQuery);
 
@@ -73,29 +38,7 @@ export default function Spotlight<T extends { _id: string }>({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [onChangeQuery, query]);
 
-  let filteredItems = useMemo(
-    () =>
-      query === ""
-        ? []
-        : items.filter(
-            filterFunction ||
-              ((item) =>
-                (item[filterProperty] as string)
-                  .toLowerCase()
-                  .includes(query.toLowerCase()))
-          ),
-    [filterFunction, filterProperty, items, query]
-  );
-
   let handleOnClose = useCallback(() => onClose?.(), [onClose]);
-
-  let handleSelect = useCallback(
-    (item: T) => {
-      handleOnClose();
-      onSelect?.(item);
-    },
-    [handleOnClose, onSelect]
-  );
 
   return (
     <Transition.Root
@@ -134,7 +77,7 @@ export default function Spotlight<T extends { _id: string }>({
             leaveTo="opacity-0 scale-95"
           >
             <Dialog.Panel className="mx-auto max-w-xl transform divide-y divide-gray-100 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-10 transition-all dark:divide-zinc-800 dark:bg-zinc-900 dark:ring-1 dark:ring-white/5">
-              <Combobox onChange={handleSelect}>
+              {/*<Combobox onChange={handleSelect}>
                 <div className="relative flex">
                   <MagnifyingGlassIcon
                     className="pointer-events-none absolute top-3.5 left-4 h-5 w-5 text-gray-400"
@@ -175,7 +118,29 @@ export default function Spotlight<T extends { _id: string }>({
                 {query !== "" && filteredItems.length === 0 && (
                   <p className="p-4 text-sm text-gray-500">{emptyText}</p>
                 )}
-              </Combobox>
+              </Combobox>*/}
+              <UnstyledAutocomplete
+                {...props}
+                query={query}
+                onChangeQuery={setQuery}
+                placeholder={placeholder}
+                leadingClassName={defaultLeadingClassName}
+                inputElementClassName="h-12 border-0 focus:ring-0"
+                leading={
+                  <InputIcon>
+                    <MagnifyingGlassIcon aria-hidden="true" />
+                  </InputIcon>
+                }
+                emptyTextClassName="p-4 text-sm text-gray-500 dark:text-zinc-400"
+                optionsClassName="max-h-72 scroll-py-2 overflow-y-auto py-2 text-sm text-gray-800 dark:text-zinc-200"
+                optionClassName={(active) =>
+                  clsx(
+                    "cursor-default select-none px-4 py-2",
+                    active && "bg-primary-600 text-white"
+                  )
+                }
+                emptyText={emptyText}
+              />
             </Dialog.Panel>
           </Transition.Child>
         </div>

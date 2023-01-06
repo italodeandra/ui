@@ -11,15 +11,15 @@ export type InputProps<Select extends boolean | undefined> = {
 } & UnstyledInputProps<Select>;
 
 const defaultLabelClassName = `block ${defaultTextStyles.variant.label} mb-1`;
-const defaultInputClassName =
+export const defaultInputClassName =
   "block w-full dark:bg-zinc-900 rounded-md border-gray-300 dark:border-zinc-700 shadow-sm focus:border-primary-500 dark:focus:border-primary-500 focus:ring-primary-500 sm:text-sm disabled:cursor-not-allowed disabled:border-gray-200 dark:disabled:border-zinc-800 disabled:bg-gray-50 dark:disabled:bg-zinc-900/90 disabled:text-gray-500";
 const defaultHelpTextClassName = `mt-2 ${defaultTextStyles.variant.secondary}`;
-const defaultTrailingClassName =
+export const defaultTrailingClassName =
   "pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-zinc-500 text-sm";
-const defaultLeadingClassName =
+export const defaultLeadingClassName =
   "pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-zinc-500 text-sm";
-const defaultLeadingInputClassName = "pl-10";
-const defaultTrailingInputClassName = "pr-10";
+export const defaultLeadingInputClassName = "pl-10";
+export const defaultTrailingInputClassName = "pr-10";
 
 function Input<Select extends boolean | undefined>(
   {
@@ -40,11 +40,12 @@ function Input<Select extends boolean | undefined>(
   ref: ForwardedRef<Select extends true ? HTMLSelectElement : HTMLInputElement>
 ) {
   trailing =
-    trailing || error ? (
+    trailing ||
+    (error ? (
       <InputIcon className="text-error-500">
         <ExclamationCircleIcon aria-hidden="true" />
       </InputIcon>
-    ) : undefined;
+    ) : undefined);
 
   labelClassName = clsx(defaultLabelClassName, labelClassName);
   inputClassName = clsx(defaultInputClassName, inputClassName, {

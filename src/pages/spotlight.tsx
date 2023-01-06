@@ -38,6 +38,7 @@ export default function SpotlightDemoPage() {
         onSelect={console.info}
         filterProperty="name"
         renderProperty="name"
+        loading
       />
     </>
   );

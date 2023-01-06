@@ -12,6 +12,10 @@ export const components = [
     href: "/alert",
   },
   {
+    title: "Autocomplete",
+    href: "/autocomplete",
+  },
+  {
     title: "Big scroll (test)",
     href: "/big-scroll",
   },
