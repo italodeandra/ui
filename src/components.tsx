@@ -40,6 +40,10 @@ export const components = [
     href: "/code",
   },
   {
+    title: "Confirmation button",
+    href: "/confirmation-button",
+  },
+  {
     title: "Data table",
     href: "/data-table",
   },
