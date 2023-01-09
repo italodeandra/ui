@@ -113,7 +113,8 @@ export default function UnstyledAutocomplete<T extends { _id: string }>({
   );
 
   return (
-    <Combobox onChange={handleSelect} value={query}>
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    <Combobox onChange={handleSelect as any} value={query as any}>
       <ComponentInput
         /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
         {...(props as any)}
