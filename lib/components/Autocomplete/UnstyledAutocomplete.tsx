@@ -20,7 +20,7 @@ export interface UnstyledAutocompleteProps<T extends { _id: string }>
   items?: T[];
   filterProperty?: keyof T;
   filterFunction?: (item: T) => boolean;
-  onSelect?: (item: T) => void;
+  onSelect?: (item: T | null) => void;
   renderProperty?: keyof T;
   renderFunction?: (item: T) => ReactNode;
   query?: string;
@@ -29,12 +29,19 @@ export interface UnstyledAutocompleteProps<T extends { _id: string }>
   emptyTextClassName?: string;
   leadingClassName?: string;
   optionsClassName?: string;
-  optionClassName?: (active: boolean) => string;
+  optionClassName?: ({
+    active,
+    selected,
+  }: {
+    active: boolean;
+    selected: boolean;
+  }) => string;
   inputInnerClassName?: string;
   inputElementClassName?: string;
   leading?: ReactNode;
   as?: typeof Input;
   static?: boolean;
+  displayValue?: (item: T | null) => string;
 }
 
 export default function UnstyledAutocomplete<T extends { _id: string }>({
@@ -60,9 +67,12 @@ export default function UnstyledAutocomplete<T extends { _id: string }>({
   trailingInputClassName,
   leadingInputClassName,
   static: isStatic,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  displayValue = (item) => item?.[renderProperty] || ("" as any),
   ...props
 }: UnstyledAutocompleteProps<T>) {
   let [query, setQuery] = useState(defaultQuery);
+  let [selectedItem, setSelectedItem] = useState<T | null>(null);
 
   useEffect(() => {
     if (query !== defaultQuery) {
@@ -101,58 +111,62 @@ export default function UnstyledAutocomplete<T extends { _id: string }>({
     [renderFunction, renderProperty]
   );
 
-  let handleSelect = useCallback(
-    (item: T) => {
-      onSelect?.(item);
-      let child = doRender(item);
-      if (typeof child === "string") {
-        setQuery(child);
-      }
-    },
-    [doRender, onSelect]
-  );
+  useEffect(() => {
+    onSelect?.(selectedItem);
+  }, [onSelect, selectedItem]);
 
   return (
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    <Combobox onChange={handleSelect as any} value={query as any}>
-      <ComponentInput
-        /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-        {...(props as any)}
-        as={Combobox.Input}
-        placeholder={placeholder}
-        onChange={(event) => setQuery(event.target.value)}
-        trailing={trailing}
-        trailingClassName={clsx(defaultTrailingClassName, trailingClassName)}
-        inputClassName={clsx(defaultInputClassName, inputElementClassName)}
-        innerClassName={inputInnerClassName}
-        trailingInputClassName={clsx(
-          defaultTrailingInputClassName,
-          trailingInputClassName
-        )}
-        leadingInputClassName={clsx(
-          defaultLeadingInputClassName,
-          leadingInputClassName
-        )}
-      />
+    <Combobox onChange={setSelectedItem} value={selectedItem} nullable>
+      {({ open }) => (
+        <>
+          <ComponentInput
+            /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+            {...(props as any)}
+            as={Combobox.Input}
+            placeholder={placeholder}
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            trailing={trailing}
+            trailingClassName={clsx(
+              defaultTrailingClassName,
+              trailingClassName
+            )}
+            inputClassName={clsx(defaultInputClassName, inputElementClassName)}
+            innerClassName={inputInnerClassName}
+            trailingInputClassName={clsx(
+              defaultTrailingInputClassName,
+              trailingInputClassName
+            )}
+            leadingInputClassName={clsx(
+              defaultLeadingInputClassName,
+              leadingInputClassName
+            )}
+            displayValue={displayValue}
+          />
 
-      {filteredItems.length > 0 && (
-        <Combobox.Options static={isStatic} className={optionsClassName}>
-          {filteredItems.map((item) => (
-            <Combobox.Option
-              key={item._id}
-              value={item}
-              className={
-                optionClassName && (({ active }) => optionClassName(active))
-              }
-            >
-              {doRender(item)}
-            </Combobox.Option>
-          ))}
-        </Combobox.Options>
-      )}
+          {filteredItems.length > 0 && (
+            <Combobox.Options static={isStatic} className={optionsClassName}>
+              {filteredItems.map((item) => (
+                <Combobox.Option
+                  key={item._id}
+                  value={item}
+                  className={
+                    optionClassName &&
+                    (({ active, selected }) =>
+                      optionClassName({ active, selected }))
+                  }
+                >
+                  {doRender(item)}
+                </Combobox.Option>
+              ))}
+            </Combobox.Options>
+          )}
 
-      {emptyText && query !== "" && filteredItems.length === 0 && (
-        <p className={emptyTextClassName}>{emptyText}</p>
+          {open && emptyText && query !== "" && filteredItems.length === 0 && (
+            <p className={emptyTextClassName}>{emptyText}</p>
+          )}
+        </>
       )}
     </Combobox>
   );

@@ -14,7 +14,10 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
 
 const pages = [{ title: "Autocomplete" }];
 
-const people = [{ _id: "1", name: "Leslie Alexander", url: "#" }];
+const people = [
+  { _id: "1", name: "Leslie Alexander", url: "#" },
+  { _id: "2", name: "Michael Foster", url: "#" },
+];
 
 export default function InputDemoPage() {
   return (
@@ -30,6 +33,7 @@ export default function InputDemoPage() {
           renderProperty="name"
           loading
         />
+        <div>Test</div>
       </Stack>
     </>
   );
