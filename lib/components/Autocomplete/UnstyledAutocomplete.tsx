@@ -113,7 +113,8 @@ export default function UnstyledAutocomplete<T extends { _id: string }>({
 
   useEffect(() => {
     onSelect?.(selectedItem);
-  }, [onSelect, selectedItem]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedItem]);
 
   return (
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
