@@ -56,6 +56,10 @@ export const components = [
     href: "/form",
   },
   {
+    title: "Grid pattern",
+    href: "/grid-pattern",
+  },
+  {
     title: "Input",
     href: "/input",
   },
