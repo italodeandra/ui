@@ -33,7 +33,14 @@ export default function InputDemoPage() {
           renderProperty="name"
           loading
         />
-        <div>Test</div>
+        <Autocomplete
+          label="Default value"
+          items={people}
+          onSelect={console.info}
+          filterProperty="name"
+          renderProperty="name"
+          value={people[0]}
+        />
       </Stack>
     </>
   );

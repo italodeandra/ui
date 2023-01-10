@@ -13,7 +13,7 @@ import clsx from "clsx";
 export interface UnstyledAutocompleteProps<T extends { _id: string }>
   extends Omit<
     UnstyledInputProps<false>,
-    "as" | "onSelect" | "inputClassName" | "innerClassName"
+    "as" | "onSelect" | "inputClassName" | "innerClassName" | "value"
   > {
   placeholder?: string;
   emptyText?: string;
@@ -42,6 +42,7 @@ export interface UnstyledAutocompleteProps<T extends { _id: string }>
   as?: typeof Input;
   static?: boolean;
   displayValue?: (item: T | null) => string;
+  value?: T | null;
 }
 
 export default function UnstyledAutocomplete<T extends { _id: string }>({
@@ -69,6 +70,7 @@ export default function UnstyledAutocomplete<T extends { _id: string }>({
   static: isStatic,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   displayValue = (item) => item?.[renderProperty] || ("" as any),
+  value,
   ...props
 }: UnstyledAutocompleteProps<T>) {
   let [query, setQuery] = useState(defaultQuery);
@@ -115,6 +117,13 @@ export default function UnstyledAutocomplete<T extends { _id: string }>({
     onSelect?.(selectedItem);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedItem]);
+
+  useEffect(() => {
+    if (selectedItem !== value) {
+      setSelectedItem(value || null);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value]);
 
   return (
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
