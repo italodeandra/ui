@@ -16,6 +16,10 @@ export const components = [
     href: "/autocomplete",
   },
   {
+    title: "Badge",
+    href: "/badge",
+  },
+  {
     title: "Big scroll (test)",
     href: "/big-scroll",
   },
