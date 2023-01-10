@@ -3,9 +3,11 @@ import TextareaAutosize from "react-textarea-autosize";
 import { TextareaAutosizeProps } from "react-textarea-autosize/dist/declarations/src";
 
 export type TextareaProps = InputProps<false> &
-  Pick<
-    TextareaAutosizeProps,
-    "maxRows" | "minRows" | "onHeightChange" | "cacheMeasurements"
+  Partial<
+    Pick<
+      TextareaAutosizeProps,
+      "maxRows" | "minRows" | "onHeightChange" | "cacheMeasurements"
+    >
   >;
 
 export default function Textarea(props: TextareaProps) {
