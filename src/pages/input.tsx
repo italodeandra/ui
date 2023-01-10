@@ -39,7 +39,7 @@ export default function InputDemoPage() {
           trailing="USD"
           leadingInputClassName="pl-7"
         />
-        <Input label="Loading input" loading />
+        <Input label="Loading input" loading placeholder="He's pulsating" />
       </Stack>
     </>
   );
