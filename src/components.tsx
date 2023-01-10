@@ -94,6 +94,7 @@ export const components = [
   {
     title: "Text",
     href: "/text",
+    exact: true,
   },
   {
     title: "Textarea",
