@@ -96,6 +96,10 @@ export const components = [
     href: "/text",
   },
   {
+    title: "Textarea",
+    href: "/textarea",
+  },
+  {
     title: "Tooltip",
     href: "/tooltip",
   },

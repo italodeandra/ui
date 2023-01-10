@@ -52,6 +52,7 @@
     "react-hook-form": "7.39.1",
     "react-markdown": "8.0.3",
     "react-merge-refs": "1.1.0",
+    "react-textarea-autosize": "8.4.0",
     "react-use": "17.4.0",
     "remark-gfm": "3.0.1",
     "shx": "0.3.4",
