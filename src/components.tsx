@@ -48,6 +48,10 @@ export const components = [
     href: "/data-table",
   },
   {
+    title: "Date input",
+    href: "/date-input",
+  },
+  {
     title: "Error boundary",
     href: "/error-boundary",
   },
