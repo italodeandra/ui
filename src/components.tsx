@@ -60,12 +60,20 @@ export const components = [
     href: "/error-boundary",
   },
   {
+    title: "File select",
+    href: "/file-select",
+  },
+  {
     title: "Form (example)",
     href: "/form",
   },
   {
     title: "Grid pattern",
     href: "/grid-pattern",
+  },
+  {
+    title: "Image input",
+    href: "/image-input",
   },
   {
     title: "Input",
