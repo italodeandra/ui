@@ -88,6 +88,10 @@ export const components = [
     href: "/modal",
   },
   {
+    title: "Multi select",
+    href: "/multi-select",
+  },
+  {
     title: "Notifications",
     href: "/notifications",
   },

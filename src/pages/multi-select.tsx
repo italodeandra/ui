@@ -1,10 +1,10 @@
 import { getCookies } from "cookies-next";
 import { GetServerSideProps } from "next";
 import { NextSeo } from "next-seo";
-import Autocomplete from "../../lib/components/Autocomplete/Autocomplete";
 import Breadcrumbs from "../../lib/components/Breadcrumbs/Breadcrumbs";
 import Stack from "../../lib/components/Stack/Stack";
 import getPublicLayout from "../views/publicLayout";
+import MultiSelect from "../../lib/components/MultiSelect/MultiSelect";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   props: {
@@ -12,38 +12,30 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   },
 });
 
-const pages = [{ title: "Autocomplete" }];
+const pages = [{ title: "Multi select" }];
 
 const people = [
   { _id: "1", name: "Leslie Alexander", url: "#" },
   { _id: "2", name: "Michael Foster", url: "#" },
 ];
 
-export default function AutocompleteDemoPage() {
+export default function MultiSelectDemoPage() {
   return (
     <>
-      <NextSeo title="Autocomplete" />
+      <NextSeo title="Multi select" />
       <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
       <Stack className="p-2">
-        <Autocomplete
-          label="Username"
+        <MultiSelect
+          label="Friends"
           items={people}
-          onSelect={console.info}
+          onChange={console.info}
           filterProperty="name"
           renderProperty="name"
           loading
-        />
-        <Autocomplete
-          label="Default value"
-          items={people}
-          onSelect={console.info}
-          filterProperty="name"
-          renderProperty="name"
-          value={people[0]}
         />
       </Stack>
     </>
   );
 }
 
-AutocompleteDemoPage.getLayout = getPublicLayout;
+MultiSelectDemoPage.getLayout = getPublicLayout;

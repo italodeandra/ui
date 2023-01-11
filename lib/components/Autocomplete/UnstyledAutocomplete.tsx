@@ -126,7 +126,6 @@ export default function UnstyledAutocomplete<T extends { _id: string }>({
   }, [value]);
 
   return (
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     <Combobox onChange={setSelectedItem} value={selectedItem} nullable>
       {({ open }) => (
         <>
