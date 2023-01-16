@@ -51,6 +51,8 @@ export interface MultiSelectProps<T extends { _id: string } | string>
   static?: boolean;
   displayValue?: (item: T | null) => string;
   value?: T[];
+  creatable?: boolean;
+  getCreateLabel?: (query: string) => string;
 }
 
 function getValue<T extends { _id: string } | string>(item: T) {
@@ -121,6 +123,8 @@ export default function MultiSelect<T extends { _id: string } | string>({
   displayValue = (item) => item?.[renderProperty] || ("" as any),
   value,
   labelClassName,
+  creatable,
+  getCreateLabel = (query: string) => `+ create "${query}"`,
   ...props
 }: MultiSelectProps<T>) {
   let [query, setQuery] = useState(defaultQuery);
@@ -233,7 +237,7 @@ export default function MultiSelect<T extends { _id: string } | string>({
               removeItem={removeItem}
             />
 
-            {filteredItems.length > 0 && (
+            {((creatable && query) || filteredItems.length > 0) && (
               <Combobox.Options
                 static={isStatic}
                 className={clsx(
@@ -241,6 +245,23 @@ export default function MultiSelect<T extends { _id: string } | string>({
                   "absolute z-10 mt-1 max-h-72 w-full scroll-py-2 overflow-y-auto py-2 text-sm text-gray-800 dark:text-zinc-200"
                 )}
               >
+                {creatable && !filteredItems.length && !!query && (
+                  <Combobox.Option
+                    value={query}
+                    className={({ active }) =>
+                      clsx("cursor-default select-none px-4 py-2", {
+                        "bg-primary-600 text-white": active,
+                      })
+                    }
+                  >
+                    {({ selected }) => (
+                      <div className="flex">
+                        {selected && <CheckIcon className="mr-2 w-5" />}
+                        {selected ? query : getCreateLabel(query)}
+                      </div>
+                    )}
+                  </Combobox.Option>
+                )}
                 {filteredItems.map((item) => (
                   <Combobox.Option
                     key={getValue(item)}
@@ -262,7 +283,8 @@ export default function MultiSelect<T extends { _id: string } | string>({
               </Combobox.Options>
             )}
 
-            {open &&
+            {!creatable &&
+              open &&
               emptyText &&
               query !== "" &&
               filteredItems.length === 0 && (

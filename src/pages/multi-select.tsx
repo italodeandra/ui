@@ -41,6 +41,7 @@ export default function MultiSelectDemoPage() {
           items={names}
           onChange={console.info}
           placeholder="+ name"
+          creatable
         />
       </Stack>
     </>
