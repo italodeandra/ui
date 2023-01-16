@@ -190,7 +190,7 @@ export default function MultiSelect<T extends { _id: string } | string>({
   let removeItem = useCallback(
     (item: T) => () =>
       setSelectedItems((selectedItems) => [
-        ...selectedItems.filter((i) => getValue(i) === getValue(item)),
+        ...selectedItems.filter((i) => getValue(i) !== getValue(item)),
       ]),
     []
   );
