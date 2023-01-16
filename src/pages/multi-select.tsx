@@ -32,6 +32,7 @@ export default function MultiSelectDemoPage() {
           filterProperty="name"
           renderProperty="name"
           loading
+          placeholder="+ friend"
         />
       </Stack>
     </>

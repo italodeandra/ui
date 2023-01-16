@@ -1,9 +1,17 @@
 import { Combobox } from "@headlessui/react";
 import Loading from "../Loading/Loading";
-import { ReactNode, useCallback, useEffect, useMemo, useState } from "react";
+import {
+  ReactNode,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import UnstyledInput, { UnstyledInputProps } from "../Input/UnstyledInput";
 import Input, {
   defaultInputClassName,
+  defaultLabelClassName,
   defaultLeadingInputClassName,
   defaultTrailingClassName,
   defaultTrailingInputClassName,
@@ -12,6 +20,7 @@ import clsx from "clsx";
 import { defaultMenuItemsClassName } from "../Menu/Menu";
 import { isEqual } from "lodash";
 import { CheckIcon } from "@heroicons/react/20/solid";
+import Badge from "../Badge/Badge";
 
 export interface MultiSelectProps<T extends { _id: string }>
   extends Omit<
@@ -44,6 +53,46 @@ export interface MultiSelectProps<T extends { _id: string }>
   value?: T[];
 }
 
+function MultiSelectInput<T extends { _id: string }>({
+  className,
+  selectedItems,
+  doRender,
+  removeItem,
+  ...props
+}: {
+  className?: string;
+  selectedItems: T[];
+  doRender: (item: T) => ReactNode;
+  removeItem: (item: T) => () => void;
+}) {
+  let ref = useRef<HTMLInputElement>(null);
+  return (
+    <div
+      className={clsx(
+        "flex flex-wrap border focus-within:border-primary-500 focus-within:ring-1 focus-within:ring-primary-500 dark:focus-within:border-primary-500",
+        className
+      )}
+      onClick={() => ref.current?.focus()}
+    >
+      {!!selectedItems.length && (
+        <div className="flex items-center gap-1 py-1.5 pl-1.5">
+          {selectedItems.map((item) => (
+            <Badge key={item._id} onActionClick={removeItem(item)}>
+              {doRender(item)}
+            </Badge>
+          ))}
+        </div>
+      )}
+      <Combobox.Input
+        /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+        {...(props as any)}
+        ref={ref}
+        className="rounded-md border-none !ring-transparent disabled:cursor-not-allowed disabled:text-gray-500 dark:bg-zinc-800 dark:disabled:bg-zinc-900/90 sm:text-sm"
+      />
+    </div>
+  );
+}
+
 export default function MultiSelect<T extends { _id: string }>({
   placeholder,
   emptyText = "No item found.",
@@ -67,11 +116,13 @@ export default function MultiSelect<T extends { _id: string }>({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   displayValue = (item) => item?.[renderProperty] || ("" as any),
   value,
+  labelClassName,
   ...props
 }: MultiSelectProps<T>) {
   let [query, setQuery] = useState(defaultQuery);
   let [selectedItems, setSelectedItems] = useState<T[]>([]);
 
+  // noinspection DuplicatedCode
   useEffect(() => {
     if (query !== defaultQuery) {
       setQuery(defaultQuery);
@@ -121,6 +172,14 @@ export default function MultiSelect<T extends { _id: string }>({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
 
+  let removeItem = useCallback(
+    (item: T) => () =>
+      setSelectedItems((selectedItems) => [
+        ...selectedItems.filter((i) => i._id !== item._id),
+      ]),
+    []
+  );
+
   return (
     <div className="relative">
       <Combobox
@@ -134,7 +193,7 @@ export default function MultiSelect<T extends { _id: string }>({
             <ComponentInput
               /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
               {...(props as any)}
-              as={Combobox.Input}
+              as={MultiSelectInput}
               placeholder={placeholder}
               value={query}
               onChange={(event) => setQuery(event.target.value)}
@@ -157,6 +216,10 @@ export default function MultiSelect<T extends { _id: string }>({
                 leadingInputClassName
               )}
               displayValue={displayValue}
+              labelClassName={clsx(defaultLabelClassName, labelClassName)}
+              selectedItems={selectedItems}
+              doRender={doRender}
+              removeItem={removeItem}
             />
 
             {filteredItems.length > 0 && (
