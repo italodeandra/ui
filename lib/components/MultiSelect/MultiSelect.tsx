@@ -22,7 +22,7 @@ import { isEqual } from "lodash";
 import { CheckIcon } from "@heroicons/react/20/solid";
 import Badge from "../Badge/Badge";
 
-export interface MultiSelectProps<T extends { _id: string }>
+export interface MultiSelectProps<T extends { _id: string } | string>
   extends Omit<
     UnstyledInputProps<false>,
     | "as"
@@ -53,7 +53,11 @@ export interface MultiSelectProps<T extends { _id: string }>
   value?: T[];
 }
 
-function MultiSelectInput<T extends { _id: string }>({
+function getValue<T extends { _id: string } | string>(item: T) {
+  return typeof item === "string" ? item : item._id;
+}
+
+function MultiSelectInput<T extends { _id: string } | string>({
   className,
   selectedItems,
   doRender,
@@ -77,7 +81,7 @@ function MultiSelectInput<T extends { _id: string }>({
       {!!selectedItems.length && (
         <div className="flex items-center gap-1 py-1.5 pl-1.5">
           {selectedItems.map((item) => (
-            <Badge key={item._id} onActionClick={removeItem(item)}>
+            <Badge key={getValue(item)} onActionClick={removeItem(item)}>
               {doRender(item)}
             </Badge>
           ))}
@@ -93,7 +97,7 @@ function MultiSelectInput<T extends { _id: string }>({
   );
 }
 
-export default function MultiSelect<T extends { _id: string }>({
+export default function MultiSelect<T extends { _id: string } | string>({
   placeholder,
   emptyText = "No item found.",
   items = [],
@@ -120,7 +124,7 @@ export default function MultiSelect<T extends { _id: string }>({
   ...props
 }: MultiSelectProps<T>) {
   let [query, setQuery] = useState(defaultQuery);
-  let [selectedItems, setSelectedItems] = useState<T[]>([]);
+  let [selectedItems, setSelectedItems] = useState<T[]>(value || []);
 
   // noinspection DuplicatedCode
   useEffect(() => {
@@ -143,7 +147,10 @@ export default function MultiSelect<T extends { _id: string }>({
         : items.filter(
             filterFunction ||
               ((item) =>
-                (item[filterProperty] as string)
+                (typeof item === "string"
+                  ? item
+                  : (item[filterProperty] as string)
+                )
                   .toLowerCase()
                   .includes(query.toLowerCase()))
           ),
@@ -156,7 +163,11 @@ export default function MultiSelect<T extends { _id: string }>({
 
   let doRender = useCallback(
     (item: T) =>
-      renderFunction ? renderFunction(item) : (item[renderProperty] as string),
+      renderFunction
+        ? renderFunction(item)
+        : typeof item === "string"
+        ? item
+        : (item[renderProperty] as string),
     [renderFunction, renderProperty]
   );
 
@@ -175,7 +186,7 @@ export default function MultiSelect<T extends { _id: string }>({
   let removeItem = useCallback(
     (item: T) => () =>
       setSelectedItems((selectedItems) => [
-        ...selectedItems.filter((i) => i._id !== item._id),
+        ...selectedItems.filter((i) => getValue(i) === getValue(item)),
       ]),
     []
   );
@@ -232,7 +243,7 @@ export default function MultiSelect<T extends { _id: string }>({
               >
                 {filteredItems.map((item) => (
                   <Combobox.Option
-                    key={item._id}
+                    key={getValue(item)}
                     value={item}
                     className={({ active }) =>
                       clsx("cursor-default select-none px-4 py-2", {

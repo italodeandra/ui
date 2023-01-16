@@ -19,6 +19,8 @@ const people = [
   { _id: "2", name: "Michael Foster", url: "#" },
 ];
 
+const names = ["Leslie Alexander", "Michael Foster"];
+
 export default function MultiSelectDemoPage() {
   return (
     <>
@@ -33,6 +35,12 @@ export default function MultiSelectDemoPage() {
           renderProperty="name"
           loading
           placeholder="+ friend"
+        />
+        <MultiSelect
+          label="Names"
+          items={names}
+          onChange={console.info}
+          placeholder="+ name"
         />
       </Stack>
     </>
