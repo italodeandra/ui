@@ -9,7 +9,7 @@ import { useId } from "react";
 import clsx from "clsx";
 import { Combobox } from "@headlessui/react";
 
-export type UnstyledInputProps<Select extends boolean | undefined> = {
+export type UnstyledInputCommonProps = {
   label?: ReactNode;
   inputClassName?: string;
   labelClassName?: string;
@@ -21,12 +21,22 @@ export type UnstyledInputProps<Select extends boolean | undefined> = {
   helpText?: ReactNode;
   trailing?: ReactNode;
   leading?: ReactNode;
-  select?: Select;
   as?: typeof Combobox.Input;
   innerClassName?: string;
-} & (Select extends string
-  ? DetailedHTMLProps<InputHTMLAttributes<HTMLSelectElement>, HTMLSelectElement>
-  : DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>);
+};
+
+export type UnstyledInputProps<Select extends boolean | undefined> =
+  UnstyledInputCommonProps & {
+    select?: Select;
+  } & (Select extends string
+      ? DetailedHTMLProps<
+          InputHTMLAttributes<HTMLSelectElement>,
+          HTMLSelectElement
+        >
+      : DetailedHTMLProps<
+          InputHTMLAttributes<HTMLInputElement>,
+          HTMLInputElement
+        >);
 
 function UnstyledInput<Select extends boolean | undefined>(
   {

@@ -112,6 +112,10 @@ export const components = [
     href: "/spotlight",
   },
   {
+    title: "Switch",
+    href: "/switch",
+  },
+  {
     title: "Table",
     href: "/table",
   },
