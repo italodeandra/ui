@@ -147,7 +147,7 @@ export default function MultiSelect<T extends { _id: string } | string>({
   let filteredItems = useMemo(
     () =>
       query === ""
-        ? []
+        ? items
         : items.filter(
             filterFunction ||
               ((item) =>
