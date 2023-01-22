@@ -55,9 +55,13 @@ const notificationsState = proxy({
 });
 
 export function showNotification(
-  notification: Pick<Partial<Notification>, "_id"> & Omit<Notification, "_id">
+  notification:
+    | string
+    | (Pick<Partial<Notification>, "_id"> & Omit<Notification, "_id">)
 ) {
-  notificationsState.add(notification);
+  notificationsState.add(
+    typeof notification === "string" ? { message: notification } : notification
+  );
 }
 export function removeNotification(_id: string) {
   notificationsState.remove(_id);

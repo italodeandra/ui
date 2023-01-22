@@ -1,7 +1,12 @@
 import { ReactNode } from "react";
-import { components } from "../../components";
+import { menu } from "../../menu";
 import UiNavigationDrawer from "../../../lib/components/NavigationDrawer/NavigationDrawer";
 import NavigationItem from "../../../lib/components/NavigationDrawer/NavigationItem";
+import Text from "../../../lib/components/Text/Text";
+import { Disclosure } from "@headlessui/react";
+import Button from "../../../lib/components/Button/Button";
+import clsx from "clsx";
+import { ChevronUpIcon } from "@heroicons/react/20/solid";
 
 export default function NavigationDrawer({
   children,
@@ -12,16 +17,67 @@ export default function NavigationDrawer({
     <UiNavigationDrawer
       navigationChildren={
         <>
-          {components.map((route) => (
-            <NavigationItem
-              key={route.href}
-              icon={route.icon}
-              href={route.href}
-              exact={route.exact}
-            >
-              {route.title}
-            </NavigationItem>
-          ))}
+          {menu.map((route) =>
+            route.submenus ? (
+              <div key={route.title}>
+                <Disclosure>
+                  {({ open }) => (
+                    <>
+                      <Disclosure.Button
+                        as={Button}
+                        variant="text"
+                        className={clsx(
+                          "w-full !justify-start !border-transparent"
+                        )}
+                      >
+                        {route.title}
+                        <ChevronUpIcon
+                          className={`${
+                            open ? "rotate-180 transform" : ""
+                          } ml-auto h-5 w-5`}
+                        />
+                      </Disclosure.Button>
+                      <Disclosure.Panel
+                        className={clsx({
+                          "mb-5": open,
+                        })}
+                      >
+                        {route.submenus.map((submenu) =>
+                          submenu.href ? (
+                            <NavigationItem
+                              key={submenu.href}
+                              // icon={submenu.icon}
+                              href={submenu.href}
+                              exact={submenu.exact}
+                            >
+                              {submenu.title}
+                            </NavigationItem>
+                          ) : (
+                            <Text
+                              key={submenu.title}
+                              variant="secondary"
+                              className="mt-4 mb-1 px-3 text-xs first:mt-1"
+                            >
+                              {submenu.title}
+                            </Text>
+                          )
+                        )}
+                      </Disclosure.Panel>
+                    </>
+                  )}
+                </Disclosure>
+              </div>
+            ) : (
+              <NavigationItem
+                key={route.href}
+                icon={route.icon}
+                href={route.href}
+                exact={route.exact}
+              >
+                {route.title}
+              </NavigationItem>
+            )
+          )}
         </>
       }
     >

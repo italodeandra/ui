@@ -81,7 +81,7 @@ function MultiSelectInput<T extends { _id: string } | string>({
       onClick={() => ref.current?.focus()}
     >
       {!!selectedItems.length && (
-        <div className="flex items-center gap-1 py-1.5 pl-1.5">
+        <div className="flex flex-wrap items-center gap-1 p-1.5">
           {selectedItems.map((item) => (
             <Badge key={getValue(item)} onActionClick={removeItem(item)}>
               {doRender(item)}

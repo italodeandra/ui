@@ -27,7 +27,7 @@ export default function Footer({
   return (
     <>
       <div className="min-h-screen">{children}</div>
-      <footer className="bg-white dark:bg-zinc-800">
+      <footer className="border-t border-slate-900/5 bg-white dark:border-slate-50/5 dark:bg-zinc-900">
         <div className="mx-auto max-w-7xl overflow-hidden py-12 px-4 sm:px-6 lg:px-8">
           {main && (
             <nav

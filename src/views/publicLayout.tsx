@@ -9,11 +9,13 @@ export default function getPublicLayout(children: ReactNode) {
   return (
     <>
       <Header />
-      <div className="h-16" />
       <NavigationDrawer>
         <TopBlurryPoint />
         <BottomBlurryPoint />
-        <Footer companyName="Majapi">{children}</Footer>
+        <Footer companyName="Majapi">
+          <div className="h-16" />
+          {children}
+        </Footer>
       </NavigationDrawer>
     </>
   );

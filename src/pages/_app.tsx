@@ -56,6 +56,10 @@ function MyApp({ Component, pageProps }: AppProps) {
             href: "/favicon-16x16.png",
           },
           {
+            rel: "manifest",
+            href: "/site.webmanifest",
+          },
+          {
             rel: "mask-icon",
             href: "/safari-pinned-tab.svg",
             color: appThemeColor,
@@ -63,8 +67,12 @@ function MyApp({ Component, pageProps }: AppProps) {
         ]}
         additionalMetaTags={[
           {
-            name: "keywords",
-            content: appKeywords,
+            name: "apple-mobile-web-app-title",
+            content: appName,
+          },
+          {
+            name: "application-name",
+            content: appName,
           },
           {
             name: "msapplication-TileColor",
@@ -77,6 +85,10 @@ function MyApp({ Component, pageProps }: AppProps) {
           {
             name: "viewport",
             content: "initial-scale=1, width=device-width, maximum-scale=1",
+          },
+          {
+            name: "keywords",
+            content: appKeywords,
           },
         ]}
       />

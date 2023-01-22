@@ -41,6 +41,8 @@ function ImageInput(
     label,
     id,
     required,
+    onMouseOver,
+    onMouseOut,
     ...props
   }: Pick<
     InputProps<false>,
@@ -52,6 +54,8 @@ function ImageInput(
     | "label"
     | "id"
     | "required"
+    | "onMouseOver"
+    | "onMouseOut"
   > &
     Omit<FileSelectProps, "onAcceptFiles">,
   ref: ForwardedRef<HTMLInputElement>
@@ -124,6 +128,8 @@ function ImageInput(
       className={clsx("relative", className, {
         ["error"]: error,
       })}
+      onMouseOver={onMouseOver}
+      onMouseOut={onMouseOut}
     >
       {label && (
         <label htmlFor={id} className={defaultLabelClassName}>
@@ -131,7 +137,11 @@ function ImageInput(
           {required && " *"}
         </label>
       )}
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+      <div
+        className={clsx("grid grid-cols-1 gap-4", {
+          "md:grid-cols-2": !!value.length,
+        })}
+      >
         {value.map((image, i) => (
           <div
             key={i}
