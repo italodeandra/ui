@@ -20,7 +20,7 @@ const styles = {
   },
   variantColor: {
     "filled-primary":
-      "bg-primary-500 hover:bg-primary-500/80 text-white active:border-primary-700 dark:active:border-primary-300",
+      "bg-primary-500 hover:bg-primary-500/80 text-onPrimary active:border-primary-700 dark:active:border-primary-300",
     "filled-success":
       "bg-success-500 hover:bg-success-500/80 text-white active:border-success-700 dark:active:border-success-300",
     "filled-error":
