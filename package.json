@@ -14,7 +14,7 @@
     "lib:publish:github": "npm run lib:pre-publish && cd dist && npm publish",
     "lib:publish:yalc": "npm run lib:pre-publish && cd dist && yalc publish"
   },
-  "devDependencies": {
+  "dependencies": {
     "@badrap/bar-of-progress": "0.2.2",
     "@floating-ui/react-dom-interactions": "0.10.3",
     "@fontsource/inter": "4.5.14",
