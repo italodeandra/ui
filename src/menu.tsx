@@ -1,4 +1,4 @@
-import { HomeIcon, RocketLaunchIcon } from "@heroicons/react/20/solid";
+import { HomeIcon, RocketLaunchIcon } from "@heroicons/react/24/outline";
 
 export const menu = [
   {

@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { useRouter } from "next/dist/client/router";
-import { ReactElement, ReactNode } from "react";
+import { cloneElement, ReactElement, ReactNode } from "react";
 import { useMedia } from "react-use";
 import Button from "../Button/Button";
 import navigationDrawerState from "./navigationDrawer.state";
@@ -32,7 +32,12 @@ export default function NavigationItem({
     <Button
       variant={active ? "light" : "text"}
       className={clsx("w-full !justify-start !border-transparent")}
-      leadingIcon={icon}
+      leadingIcon={
+        icon &&
+        cloneElement(icon, {
+          className: clsx(icon.props?.className, "!w-5 mr-3"),
+        })
+      }
       href={href}
       onClick={isMobile ? navigationDrawerState.close : undefined}
     >
