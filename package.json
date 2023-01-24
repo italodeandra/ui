@@ -5,10 +5,10 @@
     "registry": "https://npm.pkg.github.com"
   },
   "scripts": {
-    "demo:dev": "next dev",
-    "demo:build": "next build",
-    "demo:start": "next start",
-    "demo:lint": "next lint",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
     "lib:build": "shx rm -rf dist && tsc --build lib/tsconfig.json && shx cp package.json lib/base.css dist",
     "lib:pre-publish": "npm run lib:build && cd dist && json -I -f package.json -e \"this.dependencies=undefined; this.devDependencies=undefined; this.scripts=undefined;\"",
     "lib:publish:github": "npm run lib:pre-publish && cd dist && npm publish",
