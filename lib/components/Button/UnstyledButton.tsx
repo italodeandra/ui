@@ -3,6 +3,7 @@ import type {
   ComponentProps,
   DetailedHTMLProps,
   ForwardedRef,
+  Ref,
 } from "react";
 import { forwardRef } from "react";
 import NextLink from "next/link";
@@ -24,10 +25,21 @@ const UnstyledButton = <Href extends string | undefined>(
   ref: ForwardedRef<Href extends string ? HTMLAnchorElement : HTMLButtonElement>
 ) => {
   if (href) {
-    return <NextLink href={href} {...(props as any)} ref={ref} />;
+    return (
+      <NextLink
+        {...(props as unknown as UnstyledButtonProps<string>)}
+        href={href}
+        ref={ref as Ref<HTMLAnchorElement>}
+      />
+    );
   }
 
-  return <button {...(props as any)} ref={ref} />;
+  return (
+    <button
+      {...(props as UnstyledButtonProps<undefined>)}
+      ref={ref as Ref<HTMLButtonElement>}
+    />
+  );
 };
 
 export default forwardRef(UnstyledButton);
