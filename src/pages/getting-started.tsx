@@ -291,11 +291,11 @@ export default MyApp;`}
           Don&apos;t forget to fix the included <strong>TODO</strong>s.
         </Text>
         <Text>
-          Install <Quote>prettier</Quote> on your <Quote>devDependencies</Quote>
-          :
+          For formatting, install <Quote>prettier</Quote> on your{" "}
+          <Quote>devDependencies</Quote>:
         </Text>
         <Code language="bash" copy>
-          npm i -D -E prettier
+          npm i -D -E prettier prettier-plugin-tailwindcss
         </Code>
         <Text>
           And create the file <Quote>./prettier.confing.js</Quote>:
