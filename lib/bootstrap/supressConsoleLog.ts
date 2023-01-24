@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { isBrowser } from "../utils/isBrowser";
 
 const consoleLog = console.log;
