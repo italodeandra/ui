@@ -1,6 +1,9 @@
 {
   "name": "@italodeandra/ui",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "scripts": {
     "demo:dev": "next dev",
     "demo:build": "next build",
@@ -17,7 +20,7 @@
     "@fontsource/inter": "4.5.14",
     "@headlessui/react": "1.7.3",
     "@heroicons/react": "2.0.12",
-    "@italodeandra/next": "file:.yalc/@italodeandra/next",
+    "@italodeandra/next": "2.0.0",
     "@tailwindcss/forms": "0.5.3",
     "@tailwindcss/typography": "0.5.7",
     "@types/lodash": "4.14.187",
