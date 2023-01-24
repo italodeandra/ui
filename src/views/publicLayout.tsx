@@ -4,6 +4,7 @@ import TopBlurryPoint from "../../lib/components/BackgroundEffects/TopBlurryPoin
 import Header from "./Header/Header";
 import NavigationDrawer from "./Header/NavigationDrawer";
 import Footer from "../../lib/components/Footer/Footer";
+import Link from "next/link";
 
 export default function getPublicLayout(children: ReactNode) {
   return (
@@ -12,7 +13,12 @@ export default function getPublicLayout(children: ReactNode) {
       <NavigationDrawer>
         <TopBlurryPoint />
         <BottomBlurryPoint />
-        <Footer companyName="Majapi">
+        {/* eslint-disable-next-line react/jsx-no-undef */}
+        <Footer
+          companyName={
+            <Link href="https://italodeandra.de">Ítalo de Andrade</Link>
+          }
+        >
           <div className="h-16" />
           {children}
         </Footer>

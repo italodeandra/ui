@@ -10,7 +10,7 @@ export type FooterProps = {
     href: string;
     icon: ReactElement;
   }[];
-  companyName: string;
+  companyName: ReactNode;
   allRightsReserved?: string;
   children: ReactNode;
 };
@@ -64,7 +64,7 @@ export default function Footer({
             </div>
           )}
           <p className=" text-center text-base text-gray-400">
-            &copy; {CURRENT_YEAR} {companyName}. {allRightsReserved}.
+            {companyName} &copy; {CURRENT_YEAR}. {allRightsReserved}.
           </p>
         </div>
       </footer>
