@@ -73,6 +73,10 @@ export function ButtonDoc() {
         Buttons allow users to take actions, and make choices, with a single
         tap.
       </Text>
+      <Text>
+        You might want to also take a look at the{" "}
+        <Text href="/unstyled-button">UnstyledButton</Text>.
+      </Text>
       <Text variant="label">Examples</Text>
       <Group wrap>
         <Button {...getExampleCodeMouseEvents(`<Button>Default</Button>`)}>

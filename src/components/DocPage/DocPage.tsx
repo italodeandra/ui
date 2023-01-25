@@ -50,21 +50,23 @@ export function DocPage({
   return (
     <>
       <NextSeo title={title} />
-      <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
-      <Stack className="gap-4 p-2">
-        {children}
-        {props && (
-          <>
-            <Text variant="label">Props</Text>
-            <DataTable
-              className="-my-2"
-              columns={columns}
-              data={props}
-              idAccessor="property"
-            />
-          </>
-        )}
-      </Stack>
+      <div className="mx-auto max-w-7xl">
+        <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
+        <Stack className="gap-4 p-2">
+          {children}
+          {props && (
+            <>
+              <Text variant="label">Props</Text>
+              <DataTable
+                className="-my-2"
+                columns={columns}
+                data={props}
+                idAccessor="property"
+              />
+            </>
+          )}
+        </Stack>
+      </div>
     </>
   );
 }

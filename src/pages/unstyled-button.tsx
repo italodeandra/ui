@@ -2,7 +2,7 @@ import getPublicLayout from "../views/publicLayout";
 import { GetServerSideProps } from "next";
 import { getCookies } from "cookies-next";
 import React from "react";
-import { ButtonDoc } from "../../lib/components/Button/Button.doc";
+import { UnstyledButtonDoc } from "../../lib/components/Button/UnstyledButton.doc";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   props: {
@@ -10,8 +10,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   },
 });
 
-export default function ButtonPage() {
-  return <ButtonDoc />;
+export default function UnstyledButtonPage() {
+  return <UnstyledButtonDoc />;
 }
 
-ButtonPage.getLayout = getPublicLayout;
+UnstyledButtonPage.getLayout = getPublicLayout;
