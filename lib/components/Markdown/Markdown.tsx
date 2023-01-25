@@ -4,14 +4,18 @@ import remarkGfm from "remark-gfm";
 import clsx from "clsx";
 
 export type MarkdownProps = {
-  children: string;
+  children?: string;
   className?: string;
 };
 
 export default function Markdown({ children, className }: MarkdownProps) {
   return (
-    <div className={clsx("prose max-w-none dark:prose-invert", className)}>
-      <ReactMarkdown remarkPlugins={[remarkGfm]}>{children}</ReactMarkdown>
+    <div
+      className={clsx("markdown prose max-w-none dark:prose-invert", className)}
+    >
+      {children && (
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>{children}</ReactMarkdown>
+      )}
     </div>
   );
 }

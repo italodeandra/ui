@@ -34,6 +34,7 @@ export type DataTableProps<RowData> = {
   onChangePage?: (page: number) => void;
   totalItems?: number;
   itemsPerPage?: number;
+  className?: string;
 };
 
 export default function DataTable<RowData>({
@@ -52,6 +53,7 @@ export default function DataTable<RowData>({
   onChangePage,
   totalItems = 0,
   itemsPerPage = 15,
+  className,
 }: DataTableProps<RowData>) {
   let [page, setPage] = useState(currentPage);
   useEffect(() => {
@@ -66,12 +68,12 @@ export default function DataTable<RowData>({
   }, [onChangePage, page]);
 
   const handleRowClick = useCallback(
-    (item: RowData) => () => onRowClick?.(item),
+    (item: RowData) => (onRowClick ? () => onRowClick(item) : undefined),
     [onRowClick]
   );
 
   return (
-    <Stack>
+    <Stack className={className}>
       {(title || subtitle || headerContent) && (
         <Table.Header title={title} subtitle={subtitle}>
           {headerContent}

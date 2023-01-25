@@ -4,7 +4,9 @@ import { GetServerSideProps } from "next";
 import { getCookies } from "cookies-next";
 import { PencilIcon } from "@heroicons/react/24/outline";
 import { NextSeo } from "next-seo";
-import DataTable from "../../lib/components/Table/DataTable";
+import DataTable, {
+  DataTableProps,
+} from "../../lib/components/Table/DataTable";
 import Button from "../../lib/components/Button/Button";
 import { useCallback, useState } from "react";
 import { useMount } from "react-use";
@@ -36,7 +38,7 @@ const data = [
   },
 ];
 
-const columns: { title: string; accessor: keyof typeof data[0] }[] = [
+const columns: DataTableProps<typeof data[0]>["columns"] = [
   {
     title: "Name",
     accessor: "name",

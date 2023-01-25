@@ -7,15 +7,17 @@ import { ArrowLongRightIcon } from "@heroicons/react/20/solid";
 import Group from "../../lib/components/Group/Group";
 import Input from "../../lib/components/Input/Input";
 import { SwitchInput } from "../../lib/components/Switch/Switch";
-import React, { useCallback, useRef, useState } from "react";
-import Code from "../../lib/components/Code/Code";
-import ms from "ms";
+import React, { useState } from "react";
 import ImageInput from "../../lib/components/ImageInput/ImageInput";
 import { FileSelectProvider } from "../../lib/components/FileSelect/FileSelect";
 import MultiSelect from "../../lib/components/MultiSelect/MultiSelect";
 import Checkbox from "../../lib/components/Checkbox/Checkbox";
 import { showNotification } from "../../lib/components/Notifications/notifications.state";
 import Text from "../../lib/components/Text/Text";
+import {
+  ExampleCode,
+  useExampleCodeCallback,
+} from "../components/ExampleCode/ExampleCode";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   props: {
@@ -74,24 +76,7 @@ function MultiSelectExample(
 }
 
 export default function HomePage() {
-  let [hoveredCode, setHoveredCode] = useState("");
-  let mouseOutTimerRef = useRef<ReturnType<typeof setTimeout>>();
-
-  let handleExampleHover = useCallback(
-    (code: string) => ({
-      onMouseOver() {
-        clearTimeout(mouseOutTimerRef.current);
-        setHoveredCode(code);
-      },
-      onMouseOut() {
-        clearTimeout(mouseOutTimerRef.current);
-        mouseOutTimerRef.current = setTimeout(() => {
-          setHoveredCode("");
-        }, ms("10s"));
-      },
-    }),
-    []
-  );
+  let getExampleCodeMouseEvents = useExampleCodeCallback();
 
   return (
     <div className="mx-auto max-w-7xl py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
@@ -116,7 +101,7 @@ export default function HomePage() {
               color="primary"
               trailingIcon={<ArrowLongRightIcon />}
               className="!px-4 !text-lg"
-              {...handleExampleHover(`<Button
+              {...getExampleCodeMouseEvents(`<Button
   href="/getting-started"
   variant="outlined"
   color="primary"
@@ -124,7 +109,7 @@ export default function HomePage() {
   className="!px-4 !text-lg"
 >
   Get started
-</Button>`)}
+</Button>;`)}
             >
               Get started
             </Button>
@@ -134,14 +119,16 @@ export default function HomePage() {
           <Stack className="w-full gap-5 md:items-end">
             <Text
               variant="label"
-              {...handleExampleHover(`<Text variant="label">Examples</Text>`)}
+              {...getExampleCodeMouseEvents(
+                `<Text variant="label">Examples</Text>`
+              )}
             >
               Examples
             </Text>
             <Group>
               <Button
                 variant="filled"
-                {...handleExampleHover(
+                {...getExampleCodeMouseEvents(
                   `<Button variant="filled">Filled</Button>`
                 )}
               >
@@ -149,7 +136,7 @@ export default function HomePage() {
               </Button>
               <Button
                 variant="light"
-                {...handleExampleHover(
+                {...getExampleCodeMouseEvents(
                   `<Button variant="light">Light</Button>`
                 )}
               >
@@ -157,7 +144,7 @@ export default function HomePage() {
               </Button>
               <Button
                 variant="outlined"
-                {...handleExampleHover(
+                {...getExampleCodeMouseEvents(
                   `<Button variant="outlined">Outlined</Button>`
                 )}
               >
@@ -165,7 +152,9 @@ export default function HomePage() {
               </Button>
               <Button
                 variant="text"
-                {...handleExampleHover(`<Button variant="text">Text</Button>`)}
+                {...getExampleCodeMouseEvents(
+                  `<Button variant="text">Text</Button>`
+                )}
               >
                 Text
               </Button>
@@ -173,10 +162,10 @@ export default function HomePage() {
             <Group>
               <Input
                 label="Input"
-                {...handleExampleHover(`<Input label="Input" />`)}
+                {...getExampleCodeMouseEvents(`<Input label="Input" />`)}
               />
               <SwitchExample
-                {...handleExampleHover(`<SwitchInput
+                {...getExampleCodeMouseEvents(`<SwitchInput
   label="Switch"
   rightLabel={checked ? "Checked" : "Not checked"}
   checked={checked}
@@ -185,7 +174,7 @@ export default function HomePage() {
               />
             </Group>
             <div
-              {...handleExampleHover(`<Checkbox
+              {...getExampleCodeMouseEvents(`<Checkbox
   label="Checkbox"
   description="A better explanation of what will happen if you check this box"
   onChange={(event) => {
@@ -206,7 +195,7 @@ export default function HomePage() {
               />
             </div>
             <MultiSelectExample
-              {...handleExampleHover(`<MultiSelect
+              {...getExampleCodeMouseEvents(`<MultiSelect
   label="MCU Heroes"
   items={mcuHeroes}
   onChange={console.info}
@@ -217,16 +206,14 @@ export default function HomePage() {
             <FileSelectProvider>
               <ImageInput
                 label="Profile picture"
-                {...handleExampleHover(
+                {...getExampleCodeMouseEvents(
                   `<FileSelectProvider>
   <ImageInput label="Profile picture" />
 </FileSelectProvider>`
                 )}
               />
             </FileSelectProvider>
-            <Code language="tsx" className="max-w-full" copy>
-              {hoveredCode || `// hover a component to see it's source code`}
-            </Code>
+            <ExampleCode />
           </Stack>
         </div>
       </Group>
