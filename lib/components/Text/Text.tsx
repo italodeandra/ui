@@ -38,7 +38,7 @@ export default function Text<
   className = clsx(
     defaultTextStyles.variant[variant],
     {
-      [defaultTextStyles.variant.link]: !!href,
+      [defaultTextStyles.variant.link]: !!href && variant === "default",
     },
     className
   );
