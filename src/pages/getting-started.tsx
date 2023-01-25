@@ -28,61 +28,63 @@ export default function ButtonDemoPage() {
   return (
     <>
       <NextSeo title="Getting started" />
-      <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
-      <Stack className="gap-4 p-2">
-        <Text variant="label">First steps</Text>
-        <Text>
-          To use the library
-          <Quote>@italodeandra/ui</Quote>
-          you first need a Next.js project.
-          <br />
-          You start by creating a new project using the following command:
-        </Text>
-        <Code language="bash" className="max-w-xl" copy>
-          npx create-next-app@latest my-project --typescript --eslint
-        </Code>
-        <Text>Open the project folder:</Text>
-        <Code language="bash" className="max-w-xl" copy>
-          cd my-project
-        </Code>
-        <Text>Install the library with its dependencies:</Text>
-        <Code language="bash" copy>
-          {`npm i -E @italodeandra/ui @italodeandra/next
+      <div className="mx-auto max-w-7xl">
+        <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
+        <Stack className="gap-4 p-2">
+          <Text variant="label">First steps</Text>
+          <Text>
+            To use the library
+            <Quote>@italodeandra/ui</Quote>
+            you first need a Next.js project.
+            <br />
+            You start by creating a new project using the following command:
+          </Text>
+          <Code language="bash" className="max-w-xl" copy>
+            npx create-next-app@latest my-project --typescript --eslint
+          </Code>
+          <Text>Open the project folder:</Text>
+          <Code language="bash" className="max-w-xl" copy>
+            cd my-project
+          </Code>
+          <Text>Install the library with its dependencies:</Text>
+          <Code language="bash" copy>
+            {`npm i -E @italodeandra/ui @italodeandra/next
 npm i -E tailwindcss @tailwindcss/typography @tailwindcss/forms postcss autoprefixer focus-visible postcss-focus-visible
 npm i -E clsx valtio @fontsource/inter next-seo @badrap/bar-of-progress framer-motion @heroicons/react cookies-next bson-objectid bson`}
-        </Code>
-        <Text variant="secondary">
-          We install every dependency manually because we follow an on-demand
-          pattern.
-          <br />
-          The package don&apos;t install any dependencies by itself.
-          <br />
-          So every time you miss a dependency, you need to manually install it.
-        </Text>
-        <Text>
-          Run the init command to generate both{" "}
-          <Quote>tailwind.config.js</Quote> and <Quote>postcss.config.js</Quote>
-          .
-        </Text>
-        <Code language="bash" className="max-w-xl" copy>
-          npx tailwindcss init -p
-        </Code>
-        <Text>
-          Replace <Quote>tailwind.config.js</Quote> with the following:
-        </Text>
-        <Code language="javascript" className="max-w-xl" copy>
-          {`const tailwindConfig = require("@italodeandra/ui/tailwind.config");
+          </Code>
+          <Text variant="secondary">
+            We install every dependency manually because we follow an on-demand
+            pattern.
+            <br />
+            The package don&apos;t install any dependencies by itself.
+            <br />
+            So every time you miss a dependency, you need to manually install
+            it.
+          </Text>
+          <Text>
+            Run the init command to generate both{" "}
+            <Quote>tailwind.config.js</Quote> and{" "}
+            <Quote>postcss.config.js</Quote>.
+          </Text>
+          <Code language="bash" className="max-w-xl" copy>
+            npx tailwindcss init -p
+          </Code>
+          <Text>
+            Replace <Quote>tailwind.config.js</Quote> with the following:
+          </Text>
+          <Code language="javascript" className="max-w-xl" copy>
+            {`const tailwindConfig = require("@italodeandra/ui/tailwind.config");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   ...tailwindConfig,
 };`}
-        </Code>
-        <Text>
-          Replace <Quote>postcss.config.js</Quote> with the following:
-        </Text>
-        <Code language="javascript" className="max-w-xl" copy>
-          {`module.exports = {
+          </Code>
+          <Text>
+            Replace <Quote>postcss.config.js</Quote> with the following:
+          </Text>
+          <Code language="javascript" className="max-w-xl" copy>
+            {`module.exports = {
   plugins: {
     tailwindcss: {},
     "postcss-focus-visible": {
@@ -91,12 +93,12 @@ module.exports = {
     autoprefixer: {},
   },
 };`}
-        </Code>
-        <Text>
-          Replace <Quote>next.config.js</Quote> with the following:
-        </Text>
-        <Code language="javascript" className="max-w-xl" copy>
-          {`/** @type {import("next").NextConfig} */
+          </Code>
+          <Text>
+            Replace <Quote>next.config.js</Quote> with the following:
+          </Text>
+          <Code language="javascript" className="max-w-xl" copy>
+            {`/** @type {import("next").NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
@@ -112,27 +114,27 @@ const nextConfig = {
 };
 
 module.exports = nextConfig;`}
-        </Code>
-        <Text variant="secondary">
-          The <strong>webpack</strong> property takes care of removing server
-          side packages from the client side.
-        </Text>
-        <Text>
-          Create a new CSS file <Quote>./src/globals.css</Quote>:
-        </Text>
-        <Code language="css" className="max-w-xl" copy>
-          {`@import "@italodeandra/ui/base.css";`}
-        </Code>
-        <Text>
-          You can also delete what you will not use, like the{" "}
-          <Quote>./styles/</Quote> folder.
-        </Text>
-        <Text>
-          Move all your app files to the <Quote>./src/</Quote> folder. Your
-          project folder structure will be like this:
-        </Text>
-        <Code language="bash" className="max-w-xl" copy>
-          {`├── public
+          </Code>
+          <Text variant="secondary">
+            The <strong>webpack</strong> property takes care of removing server
+            side packages from the client side.
+          </Text>
+          <Text>
+            Create a new CSS file <Quote>./src/globals.css</Quote>:
+          </Text>
+          <Code language="css" className="max-w-xl" copy>
+            {`@import "@italodeandra/ui/base.css";`}
+          </Code>
+          <Text>
+            You can also delete what you will not use, like the{" "}
+            <Quote>./styles/</Quote> folder.
+          </Text>
+          <Text>
+            Move all your app files to the <Quote>./src/</Quote> folder. Your
+            project folder structure will be like this:
+          </Text>
+          <Code language="bash" className="max-w-xl" copy>
+            {`├── public
 │   └── favicon.ico
 ├── src
 │   ├── components
@@ -154,12 +156,12 @@ module.exports = nextConfig;`}
 ├── tailwind.config.js
 └── tsconfig.json
 `}
-        </Code>
-        <Text>
-          Replace the <Quote>./src/pages/_document.tsx</Quote> file with:
-        </Text>
-        <Code language="tsx" copy>
-          {`import Document, { Head, Html, Main, NextScript } from "next/document";
+          </Code>
+          <Text>
+            Replace the <Quote>./src/pages/_document.tsx</Quote> file with:
+          </Text>
+          <Code language="tsx" copy>
+            {`import Document, { Head, Html, Main, NextScript } from "next/document";
 import scrolledScript from "@italodeandra/ui/bootstrap/scrolledScript";
 import modeScript from "@italodeandra/ui/bootstrap/modeScript";
 
@@ -179,12 +181,12 @@ export default class _Document extends Document {
     );
   }
 }`}
-        </Code>
-        <Text>
-          Replace the <Quote>./src/pages/_app.tsx</Quote> file with:
-        </Text>
-        <Code language="tsx" copy>
-          {`import "@fontsource/inter/variable.css";
+          </Code>
+          <Text>
+            Replace the <Quote>./src/pages/_app.tsx</Quote> file with:
+          </Text>
+          <Code language="tsx" copy>
+            {`import "@fontsource/inter/variable.css";
 import "@italodeandra/ui/bootstrap/supressConsoleLog";
 import { DefaultSeo } from "next-seo";
 import "focus-visible";
@@ -286,30 +288,30 @@ function MyApp({ Component, pageProps }: AppProps) {
 }
 
 export default MyApp;`}
-        </Code>
-        <Text variant="secondary">
-          Don&apos;t forget to fix the included <strong>TODO</strong>s.
-        </Text>
-        <Text>
-          For formatting, install <Quote>prettier</Quote> on your{" "}
-          <Quote>devDependencies</Quote>:
-        </Text>
-        <Code language="bash" copy>
-          npm i -D -E prettier prettier-plugin-tailwindcss
-        </Code>
-        <Text>
-          And create the file <Quote>./prettier.confing.js</Quote>:
-        </Text>
-        <Code language="javascript" copy>{`module.exports = {
+          </Code>
+          <Text variant="secondary">
+            Don&apos;t forget to fix the included <strong>TODO</strong>s.
+          </Text>
+          <Text>
+            For formatting, install <Quote>prettier</Quote> on your{" "}
+            <Quote>devDependencies</Quote>:
+          </Text>
+          <Code language="bash" copy>
+            npm i -D -E prettier prettier-plugin-tailwindcss
+          </Code>
+          <Text>
+            And create the file <Quote>./prettier.confing.js</Quote>:
+          </Text>
+          <Code language="javascript" copy>{`module.exports = {
   ...require("@italodeandra/ui/prettier.config.js")
 };`}</Code>
-        <Text>
-          Replace the <Quote>./src/pages/index.tsx</Quote> file with:
-        </Text>
-        <Code
-          language="javascript"
-          copy
-        >{`import Text from "@italodeandra/ui/components/Text";
+          <Text>
+            Replace the <Quote>./src/pages/index.tsx</Quote> file with:
+          </Text>
+          <Code
+            language="javascript"
+            copy
+          >{`import Text from "@italodeandra/ui/components/Text";
 
 export default function Home() {
   return (
@@ -318,12 +320,13 @@ export default function Home() {
     </Text>
   )
 }`}</Code>
-        <Text>And you&apos;re go to go run the app:</Text>
-        <Code language="bash" copy>
-          npm run dev
-        </Code>
-        <div>🚀🚀🚀🚀</div>
-      </Stack>
+          <Text>And you&apos;re go to go run the app:</Text>
+          <Code language="bash" copy>
+            npm run dev
+          </Code>
+          <div>🚀🚀🚀🚀</div>
+        </Stack>
+      </div>
     </>
   );
 }
