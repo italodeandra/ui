@@ -8,5 +8,6 @@
     "jsx": "react-jsx",
     "module": "commonjs"
   },
-  "include": ["**/*.ts", "**/*.js", "**/*.tsx"]
+  "include": ["**/*.ts", "**/*.js", "**/*.tsx"],
+  "exclude": ["**/*.doc.tsx"]
 }
