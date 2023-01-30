@@ -4,7 +4,7 @@ import { cloneElement, ForwardedRef, forwardRef, ReactElement } from "react";
 import Loading from "../Loading/Loading";
 
 const styles = {
-  root: "select-none border border-transparent transition-colors inline-flex items-center justify-center rounded-md px-4 py-3 sm:px-3 sm:py-2 sm:text-sm font-medium leading-4 focus:outline-none focus-visible:ring-2 focus:ring-primary-500 focus:ring-offset-2 ring-offset-gray-100 dark:ring-offset-zinc-900",
+  root: "appearance-none select-none border border-transparent transition-colors inline-flex items-center justify-center rounded-md px-4 py-3 sm:px-3 sm:py-2 sm:text-sm font-medium leading-4 focus:outline-none focus-visible:ring-2 focus:ring-primary-500 focus:ring-offset-2 ring-offset-gray-100 dark:ring-offset-zinc-900",
   variant: {
     filled: "shadow-sm",
     light: "shadow-sm",
