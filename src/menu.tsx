@@ -99,6 +99,10 @@ export const menu = [
         title: "Data display",
       },
       {
+        title: "Accordion",
+        href: "/accordion",
+      },
+      {
         title: "Badge",
         href: "/badge",
       },
