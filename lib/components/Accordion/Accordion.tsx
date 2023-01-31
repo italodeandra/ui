@@ -28,7 +28,7 @@ function AccordionItem({
               className={`${open ? "rotate-180 transform" : ""} h-5 w-5`}
             />
           </Disclosure.Button>
-          <Disclosure.Panel className="px-4 pt-2 pb-2 text-sm text-gray-500">
+          <Disclosure.Panel className="px-4 pt-2 pb-2">
             {children}
           </Disclosure.Panel>
         </>
