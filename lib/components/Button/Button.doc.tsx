@@ -25,6 +25,12 @@ const props: DocPageProps[] = [
       "Color of the button.\r\n\r\nThe default value depends on the variant.",
   },
   {
+    property: "size",
+    type: `"sm" | "md"`,
+    defaultValue: `"md"`,
+    description: "Size of the button.",
+  },
+  {
     property: "icon",
     type: `boolean`,
     defaultValue: `false`,
@@ -294,6 +300,25 @@ export function ButtonDoc() {
           icon
           className="rounded-full"
           {...getExampleCodeMouseEvents(`<Button icon className="rounded-full">
+  <UserIcon />
+</Button>`)}
+        >
+          <UserIcon />
+        </Button>
+      </Group>
+      <Group wrap>
+        <Button
+          {...getExampleCodeMouseEvents(`<Button size="sm">
+  Small
+</Button>`)}
+          size="sm"
+        >
+          Small
+        </Button>
+        <Button
+          icon
+          size="sm"
+          {...getExampleCodeMouseEvents(`<Button icon size="sm">
   <UserIcon />
 </Button>`)}
         >

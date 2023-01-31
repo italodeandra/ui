@@ -4,7 +4,7 @@ import { cloneElement, ForwardedRef, forwardRef, ReactElement } from "react";
 import Loading from "../Loading/Loading";
 
 const styles = {
-  root: "appearance-none select-none border border-transparent transition-colors inline-flex items-center justify-center rounded-md px-4 py-3 sm:px-3 sm:py-2 sm:text-sm font-medium leading-4 focus:outline-none focus-visible:ring-2 focus:ring-primary-500 focus:ring-offset-2 ring-offset-gray-100 dark:ring-offset-zinc-900",
+  root: "appearance-none select-none border border-transparent transition-colors inline-flex items-center justify-center rounded-md font-medium leading-4 focus:outline-none focus-visible:ring-2 focus:ring-primary-500 focus:ring-offset-2 ring-offset-gray-100 dark:ring-offset-zinc-900",
   variant: {
     filled: "shadow-sm",
     light: "shadow-sm",
@@ -63,14 +63,34 @@ const styles = {
     "text-white":
       "dark:text-white hover:bg-zinc-500/5 dark:hover:bg-white/5 active:border-zinc-500/50 dark:active:border-white/50",
   },
-  icon: "px-3 sm:px-2",
   disabled: "opacity-50 pointer-events-none",
+  size: {
+    md: {
+      button: "px-4 py-3 sm:px-3 sm:py-2 sm:text-sm",
+      icon: "w-4",
+    },
+    sm: {
+      button: "px-3 py-2 sm:px-2 sm:py-1 sm:text-xs",
+      icon: "w-3",
+    },
+  },
+  icon: {
+    md: {
+      button: "px-3 py-3 sm:py-2 sm:px-2",
+      icon: "w-6",
+    },
+    sm: {
+      button: "px-2 py-2 sm:py-1 sm:px-1",
+      icon: "w-4",
+    },
+  },
 };
 
 export type ButtonProps<Href extends string | undefined> =
   UnstyledButtonProps<Href> & {
     variant?: keyof typeof styles["variant"];
     color?: keyof typeof styles["color"];
+    size?: keyof typeof styles["size"];
     icon?: boolean;
     leadingIcon?: ReactElement;
     trailingIcon?: ReactElement;
@@ -82,6 +102,7 @@ const Button = <Href extends string | undefined>(
   {
     variant = "outlined",
     color = ["outlined", "text"].includes(variant) ? "white" : "primary",
+    size = "md",
     className,
     icon,
     type = "button",
@@ -107,8 +128,8 @@ const Button = <Href extends string | undefined>(
         styles.variant[variant],
         styles.color[color],
         styles.variantColor[`${variant}-${color}`],
+        icon ? styles.icon[size].button : styles.size[size].button,
         {
-          [styles.icon]: icon,
           [styles.disabled]: disabled,
         },
         className
@@ -118,7 +139,11 @@ const Button = <Href extends string | undefined>(
     >
       {leadingIcon &&
         cloneElement(leadingIcon, {
-          className: clsx("w-4 mr-2 -ml-0.5", leadingIcon?.props?.className),
+          className: clsx(
+            "mr-2 -ml-0.5",
+            styles.size[size].icon,
+            leadingIcon?.props?.className
+          ),
         })}
       {!icon
         ? children
@@ -126,18 +151,25 @@ const Button = <Href extends string | undefined>(
         ? children.map((child, key) =>
             cloneElement(child as ReactElement, {
               key,
-              className: clsx("w-6", (child as ReactElement)?.props?.className),
+              className: clsx(
+                styles.icon[size].icon,
+                (child as ReactElement)?.props?.className
+              ),
             })
           )
         : cloneElement(children as ReactElement, {
             className: clsx(
-              "w-6",
+              styles.icon[size].icon,
               (children as ReactElement)?.props?.className
             ),
           })}
       {trailingIcon &&
         cloneElement(trailingIcon, {
-          className: clsx("w-4 ml-2 -mr-0.5", trailingIcon?.props?.className),
+          className: clsx(
+            "ml-2 -mr-0.5",
+            styles.size[size].icon,
+            trailingIcon?.props?.className
+          ),
         })}
     </UnstyledButton>
   );
