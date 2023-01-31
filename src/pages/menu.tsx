@@ -7,6 +7,7 @@ import { NextSeo } from "next-seo";
 import { GetServerSideProps } from "next";
 import { getCookies } from "cookies-next";
 import Breadcrumbs from "../../lib/components/Breadcrumbs/Breadcrumbs";
+import { ArrowLeftOnRectangleIcon } from "@heroicons/react/20/solid";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   props: {
@@ -37,7 +38,7 @@ export default function MenuDemoPage() {
           className="mr-auto"
           position="left"
         >
-          <Menu.Item>Sign out</Menu.Item>
+          <Menu.Item icon={<ArrowLeftOnRectangleIcon />}>Sign out</Menu.Item>
         </Menu>
       </Stack>
     </>

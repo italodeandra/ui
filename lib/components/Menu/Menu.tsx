@@ -1,4 +1,4 @@
-import { Fragment, ReactNode } from "react";
+import { cloneElement, Fragment, ReactElement, ReactNode } from "react";
 import { Menu as HuiMenu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import clsx from "clsx";
@@ -19,10 +19,14 @@ export type MenuProps = {
 };
 
 export type MenuItemProps<Href extends string | undefined> =
-  UnstyledButtonProps<Href>;
+  UnstyledButtonProps<Href> & {
+    icon?: ReactElement;
+  };
 
 Menu.Item = function MenuItem<Href extends string | undefined>({
   className,
+  icon,
+  children,
   ...props
 }: MenuItemProps<Href>) {
   return (
@@ -32,14 +36,20 @@ Menu.Item = function MenuItem<Href extends string | undefined>({
           {...props}
           type="button"
           className={clsx(
-            "w-full text-left",
+            "flex w-full items-center text-left",
             active
               ? "bg-zinc-100 text-zinc-900 dark:bg-zinc-700/50 dark:text-zinc-100"
               : "text-zinc-700 dark:text-zinc-200",
             "block px-4 py-2 text-sm",
             className
           )}
-        />
+        >
+          {icon &&
+            cloneElement(icon, {
+              className: clsx("w-5 mr-2", icon.props.className),
+            })}
+          {children}
+        </UnstyledButton>
       )}
     </HuiMenu.Item>
   );
@@ -50,7 +60,7 @@ export type MenuLabelProps<
   Href extends string | undefined
 > = TextProps<Inline, Href>;
 
-Menu.Label = function MenuItem<
+Menu.Label = function MenuLabel<
   Inline extends boolean | undefined,
   Href extends string | undefined
 >(props: MenuLabelProps<Inline, Href>) {
