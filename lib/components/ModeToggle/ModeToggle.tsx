@@ -1,6 +1,7 @@
 import { MoonIcon, SunIcon } from "@heroicons/react/24/outline";
 import Button from "../Button/Button";
 import clsx from "clsx";
+import { ForwardedRef, forwardRef } from "react";
 
 export interface ModeToggleProps {
   ariaLabel?: string;
@@ -33,15 +34,15 @@ export function useModeToggle() {
   return toggleMode;
 }
 
-export function ModeToggle({
-  ariaLabel = "Toggle dark mode",
-  className,
-  iconClassName,
-}: ModeToggleProps) {
+const ModeToggle = forwardRef(function ModeToggle(
+  { ariaLabel = "Toggle dark mode", className, iconClassName }: ModeToggleProps,
+  ref: ForwardedRef<HTMLButtonElement>
+) {
   let toggleMode = useModeToggle();
 
   return (
     <Button
+      ref={ref}
       icon
       variant="text"
       aria-label={ariaLabel}
@@ -52,4 +53,6 @@ export function ModeToggle({
       <MoonIcon className={clsx("hidden dark:block", iconClassName)} />
     </Button>
   );
-}
+});
+
+export { ModeToggle };
