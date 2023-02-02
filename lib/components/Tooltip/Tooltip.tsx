@@ -191,7 +191,6 @@ export default function Tooltip({
 }) {
   const delayGroupContext = useDelayGroupContext();
 
-  // We extended the hook to support these options.
   const state = useTooltipState({
     delayGroupContext,
     id: content,
@@ -200,6 +199,10 @@ export default function Tooltip({
   });
 
   useDelayGroup(state.context, { id: content });
+
+  if (!content) {
+    return children;
+  }
 
   return (
     <>
