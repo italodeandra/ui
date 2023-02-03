@@ -67,21 +67,21 @@ const styles = {
   size: {
     md: {
       button: "px-4 py-3 sm:px-3 sm:py-2 sm:text-sm",
-      icon: "w-4",
+      icon: "w-4 h-4",
     },
     sm: {
       button: "px-3 py-2 sm:px-2 sm:py-1 sm:text-xs",
-      icon: "w-3",
+      icon: "w-3 h-3",
     },
   },
   icon: {
     md: {
       button: "px-3 py-3 sm:py-2 sm:px-2",
-      icon: "w-6",
+      icon: "w-6 h-6",
     },
     sm: {
       button: "px-2 py-2 sm:py-1 sm:px-1",
-      icon: "w-4",
+      icon: "w-4 h-4",
     },
   },
 };
