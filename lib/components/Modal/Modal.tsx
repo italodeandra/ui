@@ -61,7 +61,7 @@ Modal.Container = ModalContainer;
 
 function ModalContainer({ children }: { children?: ReactNode }) {
   return (
-    <Stack className="gap-4 px-4 pt-5 pb-4 text-center sm:p-6">
+    <Stack className="!gap-4 px-4 pt-5 pb-4 text-center sm:p-6">
       {children}
     </Stack>
   );
