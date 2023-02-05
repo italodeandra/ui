@@ -8,21 +8,32 @@ import {
 import { Dialog, Transition } from "@headlessui/react";
 import Stack from "../Stack/Stack";
 import Group from "../Group/Group";
+import clsx from "clsx";
 
 export default function Modal({
   open,
   onClose,
   children,
+  overlayClassName,
+  panelClassName,
+  dialogClassName,
 }: {
   open?: boolean;
   onClose?: () => void;
   children?: ReactNode;
+  overlayClassName?: string;
+  panelClassName?: string;
+  dialogClassName?: string;
 }) {
   let handleOnClose = useCallback(() => onClose?.(), [onClose]);
 
   return (
     <Transition.Root show={open} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={handleOnClose}>
+      <Dialog
+        as="div"
+        className={clsx("relative z-10", dialogClassName)}
+        onClose={handleOnClose}
+      >
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -32,7 +43,12 @@ export default function Modal({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-zinc-500 !bg-opacity-75 transition-opacity dark:bg-zinc-800" />
+          <div
+            className={clsx(
+              "fixed inset-0 bg-zinc-500 !bg-opacity-75 transition-opacity dark:bg-zinc-800",
+              overlayClassName
+            )}
+          />
         </Transition.Child>
 
         <div className="fixed inset-0 z-10 overflow-y-auto">
@@ -46,7 +62,12 @@ export default function Modal({
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all dark:bg-zinc-900 dark:ring-1 dark:ring-white/5 sm:my-8 sm:w-full sm:max-w-sm">
+              <Dialog.Panel
+                className={clsx(
+                  "relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all dark:bg-zinc-900 dark:ring-1 dark:ring-white/5 sm:my-8 sm:w-full sm:max-w-sm",
+                  panelClassName
+                )}
+              >
                 {children}
               </Dialog.Panel>
             </Transition.Child>
