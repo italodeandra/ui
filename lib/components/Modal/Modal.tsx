@@ -17,6 +17,7 @@ export default function Modal({
   overlayClassName,
   panelClassName,
   dialogClassName,
+  dialogOuterPanelClassName,
 }: {
   open?: boolean;
   onClose?: () => void;
@@ -24,6 +25,7 @@ export default function Modal({
   overlayClassName?: string;
   panelClassName?: string;
   dialogClassName?: string;
+  dialogOuterPanelClassName?: string;
 }) {
   let handleOnClose = useCallback(() => onClose?.(), [onClose]);
 
@@ -52,7 +54,12 @@ export default function Modal({
         </Transition.Child>
 
         <div className="fixed inset-0 z-10 overflow-y-auto">
-          <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+          <div
+            className={clsx(
+              "flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0",
+              dialogOuterPanelClassName
+            )}
+          >
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
@@ -81,20 +88,25 @@ export default function Modal({
 Modal.Container = ModalContainer;
 
 function ModalContainer({ children }: { children?: ReactNode }) {
-  return (
-    <Stack className="!gap-4 px-4 pt-5 pb-4 text-center sm:p-6">
-      {children}
-    </Stack>
-  );
+  return <Stack className="!gap-4 px-4 pt-5 pb-4 sm:p-6">{children}</Stack>;
 }
 
 Modal.Title = ModalTitle;
 
-function ModalTitle({ children }: { children?: ReactNode }) {
+function ModalTitle({
+  children,
+  className,
+}: {
+  children?: ReactNode;
+  className?: string;
+}) {
   return (
     <Dialog.Title
       as="h3"
-      className="text-lg font-medium leading-6 text-zinc-900 dark:text-zinc-100"
+      className={clsx(
+        "text-lg font-medium leading-6 text-zinc-900 dark:text-zinc-100",
+        className
+      )}
     >
       {children}
     </Dialog.Title>
@@ -104,7 +116,11 @@ function ModalTitle({ children }: { children?: ReactNode }) {
 Modal.Content = ModalContent;
 
 function ModalContent({ children }: { children?: ReactNode }) {
-  return <p className="text-sm text-gray-500 dark:text-gray-400">{children}</p>;
+  return (
+    <p className="text-center text-sm text-gray-500 dark:text-gray-400">
+      {children}
+    </p>
+  );
 }
 
 Modal.Actions = ModalActions;
