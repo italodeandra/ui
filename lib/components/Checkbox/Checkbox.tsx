@@ -15,6 +15,7 @@ export type CheckboxProps = {
   labelClassName?: string;
   descriptionClassName?: string;
   inputClassName?: string;
+  labelOuterClassName?: string;
 } & DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 
 const defaultLabelClassName = defaultTextStyles.variant.label;
@@ -31,6 +32,7 @@ function Checkbox(
     labelClassName,
     descriptionClassName,
     inputClassName,
+    labelOuterClassName,
     ...props
   }: CheckboxProps,
   ref: ForwardedRef<HTMLInputElement>
@@ -62,7 +64,7 @@ function Checkbox(
         />
       </div>
       {(label || description) && (
-        <div className="ml-3 text-sm">
+        <div className={clsx("ml-3 text-sm", labelOuterClassName)}>
           {label && (
             <label htmlFor={id} className={labelClassName}>
               {label}
