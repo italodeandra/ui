@@ -18,6 +18,7 @@ export default function Modal({
   panelClassName,
   dialogClassName,
   dialogOuterPanelClassName,
+  dialogOverflowClassName,
 }: {
   open?: boolean;
   onClose?: () => void;
@@ -26,6 +27,7 @@ export default function Modal({
   panelClassName?: string;
   dialogClassName?: string;
   dialogOuterPanelClassName?: string;
+  dialogOverflowClassName?: string;
 }) {
   let handleOnClose = useCallback(() => onClose?.(), [onClose]);
 
@@ -53,7 +55,12 @@ export default function Modal({
           />
         </Transition.Child>
 
-        <div className="fixed inset-0 z-10 overflow-y-auto">
+        <div
+          className={clsx(
+            "fixed inset-0 z-10 overflow-y-auto",
+            dialogOverflowClassName
+          )}
+        >
           <div
             className={clsx(
               "flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0",
@@ -125,8 +132,14 @@ function ModalContent({ children }: { children?: ReactNode }) {
 
 Modal.Actions = ModalActions;
 
-function ModalActions({ children }: { children?: ReactNode }) {
-  return <Group>{children}</Group>;
+function ModalActions({
+  children,
+  className,
+}: {
+  children?: ReactNode;
+  className?: string;
+}) {
+  return <Group className={className}>{children}</Group>;
 }
 
 Modal.Icon = ModalIcon;
