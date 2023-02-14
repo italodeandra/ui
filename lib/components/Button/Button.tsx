@@ -4,7 +4,7 @@ import { cloneElement, ForwardedRef, forwardRef, ReactElement } from "react";
 import Loading from "../Loading/Loading";
 
 const styles = {
-  root: "appearance-none select-none border border-transparent transition-colors inline-flex items-center justify-center rounded-md font-medium leading-4 focus:outline-none focus-visible:ring-2 focus:ring-primary-500 focus:ring-offset-2 ring-offset-gray-100 dark:ring-offset-zinc-900",
+  root: "appearance-none select-none border transition-colors inline-flex items-center justify-center rounded-md font-medium leading-4 focus:outline-none focus-visible:ring-2 focus:ring-primary-500 focus:ring-offset-2 ring-offset-gray-100 dark:ring-offset-zinc-900",
   variant: {
     filled: "shadow-sm",
     light: "shadow-sm",
@@ -20,15 +20,15 @@ const styles = {
   },
   variantColor: {
     "filled-primary":
-      "bg-primary-500 hover:bg-primary-500/80 text-onPrimary active:border-primary-700 dark:active:border-primary-300",
+      "bg-primary-500 hover:bg-primary-500/80 text-onPrimary border-transparent active:border-primary-700 dark:active:border-primary-300",
     "filled-success":
-      "bg-success-500 hover:bg-success-500/80 text-white active:border-success-700 dark:active:border-success-300",
+      "bg-success-500 hover:bg-success-500/80 text-white border-transparent active:border-success-700 dark:active:border-success-300",
     "filled-error":
-      "bg-red-500 hover:bg-red-500/80 text-white active:border-red-700 dark:active:border-red-300",
+      "bg-red-500 hover:bg-red-500/80 text-white border-transparent active:border-red-700 dark:active:border-red-300",
     "filled-gray":
-      "bg-zinc-300 hover:bg-zinc-200 text-zinc-900 active:border-zinc-400 dark:active:border-zinc-600",
+      "bg-zinc-300 hover:bg-zinc-200 text-zinc-900 border-transparent active:border-zinc-400 dark:active:border-zinc-600",
     "filled-white":
-      "bg-white hover:bg-zinc-100 text-zinc-900 active:border-zinc-300 dark:active:border-zinc-700",
+      "bg-white hover:bg-zinc-100 text-zinc-900 border-transparent active:border-zinc-300 dark:active:border-zinc-700",
 
     "light-primary":
       "border-primary-500 text-primary-500 bg-primary-500/30 hover:bg-primary-500/40 active:border-primary-700",
@@ -53,15 +53,15 @@ const styles = {
       "dark:text-white border-zinc-300 dark:border-white/50 dark:hover:bg-white/5 hover:bg-zinc-500/5 active:border-zinc-500 dark:active:border-white",
 
     "text-primary":
-      "text-primary-500 hover:bg-primary-500/10 active:border-primary-500",
+      "text-primary-500 hover:bg-primary-500/10 border-transparent active:border-primary-500",
     "text-success":
-      "text-success-500 hover:bg-success-500/10 active:border-success-500",
+      "text-success-500 hover:bg-success-500/10 border-transparent active:border-success-500",
     "text-error":
-      "text-error-500 hover:bg-error-500/10 active:border-error-500",
+      "text-error-500 hover:bg-error-500/10 border-transparent active:border-error-500",
     "text-gray":
-      "text-zinc-500 dark:text-zinc-400 hover:bg-zinc-500/10 active:border-zinc-500",
+      "text-zinc-500 dark:text-zinc-400 hover:bg-zinc-500/10 border-transparent active:border-zinc-500",
     "text-white":
-      "dark:text-white hover:bg-zinc-500/5 dark:hover:bg-white/5 active:border-zinc-500/50 dark:active:border-white/50",
+      "dark:text-white hover:bg-zinc-500/5 dark:hover:bg-white/5 border-transparent active:border-zinc-500/50 dark:active:border-white/50",
   },
   disabled: "opacity-50 pointer-events-none",
   size: {
