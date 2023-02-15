@@ -122,9 +122,20 @@ function ModalTitle({
 
 Modal.Content = ModalContent;
 
-function ModalContent({ children }: { children?: ReactNode }) {
+function ModalContent({
+  children,
+  className,
+}: {
+  children?: ReactNode;
+  className?: string;
+}) {
   return (
-    <p className="text-center text-sm text-gray-500 dark:text-gray-400">
+    <p
+      className={clsx(
+        "text-center text-sm text-gray-500 dark:text-gray-400",
+        className
+      )}
+    >
       {children}
     </p>
   );
