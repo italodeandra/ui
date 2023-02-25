@@ -9,6 +9,7 @@ export interface PaginationProps {
   itemsPerPage: number;
   currentPage: number;
   onChangePage?: (page: number) => void;
+  className?: string;
 }
 
 export default function Pagination({
@@ -16,6 +17,7 @@ export default function Pagination({
   itemsPerPage,
   currentPage,
   onChangePage,
+  className,
 }: PaginationProps) {
   let [page, setPage] = useState(currentPage);
   useEffect(() => {
@@ -57,7 +59,10 @@ export default function Pagination({
 
   return (
     <nav
-      className="isolate mr-auto inline-flex -space-x-px rounded-md shadow-sm"
+      className={clsx(
+        "isolate inline-flex -space-x-px rounded-md shadow-sm",
+        className
+      )}
       aria-label="Pagination"
     >
       <Button
