@@ -19,6 +19,7 @@ export type TextProps<
   variant?: keyof typeof defaultTextStyles["variant"];
   inline?: Inline;
   href?: Href;
+  target?: string;
 } & (Href extends true
   ? ComponentProps<typeof NextLink>
   : Inline extends true
@@ -33,6 +34,7 @@ export default function Text<
   variant = "default",
   className,
   href,
+  target,
   ...props
 }: TextProps<Inline, Href>) {
   className = clsx(
@@ -44,7 +46,14 @@ export default function Text<
   );
   if (href) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return <NextLink href={href} {...(props as any)} className={className} />;
+    return (
+      <NextLink
+        href={href}
+        target={target}
+        {...(props as any)}
+        className={className}
+      />
+    );
   }
   if (inline) {
     return <span {...props} className={className} />;
