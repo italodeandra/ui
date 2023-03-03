@@ -11,6 +11,7 @@ type Notification = {
   icon?: "success" | "error" | ReactElement;
   dismissable?: boolean;
   actions?: ReactNode;
+  supress?: boolean;
 };
 
 const notificationsState = proxy({
@@ -59,10 +60,21 @@ export function showNotification(
     | string
     | (Pick<Partial<Notification>, "_id"> & Omit<Notification, "_id">)
 ) {
-  notificationsState.add(
-    typeof notification === "string" ? { message: notification } : notification
-  );
+  let notificationObject =
+    typeof notification === "string" ? { message: notification } : notification;
+  if (
+    notificationObject.supress &&
+    notificationsState.notifications.find(
+      (n) =>
+        n.message === notificationObject.message &&
+        n.title === notificationObject.title
+    )
+  ) {
+    return;
+  }
+  notificationsState.add(notificationObject);
 }
+
 export function removeNotification(_id: string) {
   notificationsState.remove(_id);
 }
