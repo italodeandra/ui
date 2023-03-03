@@ -18,7 +18,8 @@ export type DataTableProps<RowData> = {
   data?: RowData[];
   idAccessor?: keyof RowData;
   columns: {
-    title: string;
+    id?: string;
+    title: ReactNode;
     accessor?: keyof RowData;
     render?: (item: RowData) => ReactNode;
   }[];
@@ -82,8 +83,15 @@ export default function DataTable<RowData>({
       <Table className="relative">
         <Table.Head>
           <Table.Row>
-            {columns.map((column) => (
-              <Table.Cell key={column.title}>{column.title}</Table.Cell>
+            {columns.map((column, i) => (
+              <Table.Cell
+                key={
+                  column.id ||
+                  (typeof column.title === "string" ? column.title : i)
+                }
+              >
+                {column.title}
+              </Table.Cell>
             ))}
             {actions && <Table.Cell />}
           </Table.Row>
@@ -101,8 +109,13 @@ export default function DataTable<RowData>({
               key={item[idAccessor] as string}
               onClick={handleRowClick(item)}
             >
-              {columns.map((column) => (
-                <Table.Cell key={column.title}>
+              {columns.map((column, i) => (
+                <Table.Cell
+                  key={
+                    column.id ||
+                    (typeof column.title === "string" ? column.title : i)
+                  }
+                >
                   {column.accessor && (item[column.accessor] as string)}
                   {!column.accessor && column.render && column.render(item)}
                 </Table.Cell>
@@ -120,8 +133,13 @@ export default function DataTable<RowData>({
           ))}
           {isLoading && !data?.length && (
             <Table.Row>
-              {columns.map((column) => (
-                <Table.Cell key={column.title}>
+              {columns.map((column, i) => (
+                <Table.Cell
+                  key={
+                    column.id ||
+                    (typeof column.title === "string" ? column.title : i)
+                  }
+                >
                   <Skeleton className="h-2" />
                 </Table.Cell>
               ))}
