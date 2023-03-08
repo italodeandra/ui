@@ -10,7 +10,10 @@ export default function Group({ wrap, className, ...props }: GroupProps) {
     <div
       {...props}
       className={clsx(
-        "flex gap-2",
+        "flex",
+        {
+          "gap-2": !className?.includes("gap-"),
+        },
         {
           "flex-wrap": wrap,
         },

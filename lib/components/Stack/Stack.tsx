@@ -7,5 +7,16 @@ export type StackProps = DetailedHTMLProps<
 >;
 
 export default function Stack({ className, ...props }: StackProps) {
-  return <div {...props} className={clsx("flex flex-col gap-2", className)} />;
+  return (
+    <div
+      {...props}
+      className={clsx(
+        "flex flex-col",
+        {
+          "gap-2": !className?.includes("gap-"),
+        },
+        className
+      )}
+    />
+  );
 }
