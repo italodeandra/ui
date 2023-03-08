@@ -37,7 +37,7 @@ export function ExampleCode() {
 
   return (
     <Code language="tsx" className="max-w-full" copy>
-      {hoveredCode || `// hover a component to see it's source code`}
+      {hoveredCode || `// hover a component to see its source code`}
     </Code>
   );
 }
