@@ -11,8 +11,9 @@ export type InputProps<Select extends boolean | undefined> = {
 } & UnstyledInputProps<Select>;
 
 export const defaultLabelClassName = `block ${defaultTextStyles.variant.label} mb-1`;
-export const defaultInputClassName =
-  "block w-full dark:bg-zinc-800 rounded-md border-gray-300 dark:border-zinc-700 shadow-sm focus:border-primary-500 dark:focus:border-primary-500 focus:ring-primary-500 sm:text-sm disabled:cursor-not-allowed disabled:border-gray-200 dark:disabled:border-zinc-800 disabled:bg-gray-50 dark:disabled:bg-zinc-900/90 disabled:text-gray-500";
+export const defaultInputClassNameUncolored =
+  "block w-full rounded-md shadow-sm sm:text-sm disabled:cursor-not-allowed dark:bg-zinc-800";
+export const defaultInputClassName = `${defaultInputClassNameUncolored} border-gray-300 dark:border-zinc-700 focus:border-primary-500 dark:focus:border-primary-500 focus:ring-primary-500 disabled:border-gray-200 dark:disabled:border-zinc-800 disabled:bg-gray-50 dark:disabled:bg-zinc-900/90 disabled:text-gray-500`;
 export const defaultHelpTextClassName = `mt-2 ${defaultTextStyles.variant.secondary}`;
 export const defaultTrailingClassName =
   "pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-zinc-500 text-sm";
@@ -48,9 +49,13 @@ function Input<Select extends boolean | undefined>(
     ) : undefined);
 
   labelClassName = clsx(defaultLabelClassName, labelClassName);
-  inputClassName = clsx(defaultInputClassName, inputClassName, {
-    "animate-pulse": loading,
-  });
+  inputClassName = clsx(
+    error ? defaultInputClassNameUncolored : defaultInputClassName,
+    inputClassName,
+    {
+      "animate-pulse": loading,
+    }
+  );
   helpTextClassName = clsx(defaultHelpTextClassName, helpTextClassName);
   trailingClassName = clsx(defaultTrailingClassName, trailingClassName);
   leadingClassName = clsx(defaultLeadingClassName, leadingClassName);
@@ -64,7 +69,7 @@ function Input<Select extends boolean | undefined>(
   );
   if (error) {
     inputClassName = `${inputClassName} border-error-300 dark:border-error-500 text-error-900 dark:text-error-500 placeholder-error-300 focus:border-error-500 dark:focus:border-error-500 focus:ring-error-500`;
-    helpTextClassName = `${helpTextClassName} text-error-600 dark:text-error-500`;
+    helpTextClassName = `${helpTextClassName} !text-error-600 dark:!text-error-500`;
   }
 
   if (label && required) {
