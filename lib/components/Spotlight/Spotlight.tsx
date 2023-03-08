@@ -133,7 +133,7 @@ export default function Spotlight<T extends { _id: string }>({
                 }
                 emptyTextClassName="p-4 text-sm text-gray-500 dark:text-zinc-400"
                 optionsClassName="max-h-72 scroll-py-2 overflow-y-auto py-2 text-sm text-gray-800 dark:text-zinc-200"
-                optionClassName={(active) =>
+                optionClassName={({ active }) =>
                   clsx(
                     "cursor-default select-none px-4 py-2",
                     active && "bg-primary-600 text-white"

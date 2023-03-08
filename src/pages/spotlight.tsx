@@ -16,7 +16,11 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
 
 const pages = [{ title: "Spotlight" }];
 
-const people = [{ _id: "1", name: "Leslie Alexander", url: "#" }];
+const people = [
+  { _id: "1", name: "Leslie Alexander", url: "#" },
+  { _id: "3", name: "Leslie 2", url: "#" },
+  { _id: "2", name: "Leslie 3", url: "#" },
+];
 
 export default function SpotlightDemoPage() {
   const [open, { openModal, closeModal }] = useModalState();
