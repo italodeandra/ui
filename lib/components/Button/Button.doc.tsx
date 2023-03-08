@@ -13,7 +13,7 @@ import { DocPage } from "../../../src/components/DocPage/DocPage";
 const props: DocPageProps[] = [
   {
     property: "variant",
-    type: `"filled" | "light" | "outlined" | "text"`,
+    type: `"filled" | "light" | "outlined" | "text" | "custom"`,
     defaultValue: `"outlined"`,
     description: "Design variant of the button.",
   },
@@ -34,7 +34,7 @@ const props: DocPageProps[] = [
     property: "icon",
     type: `boolean`,
     defaultValue: `false`,
-    description: `If the button content in just an icon.\r\n\r\nThe icon will receive the class \`w-6\` automatically.`,
+    description: `If the button content in just an icon.\r\n\r\nThe icon will receive the classes \`w-? h-?\` automatically.`,
   },
   {
     property: "type",
@@ -45,12 +45,12 @@ const props: DocPageProps[] = [
   {
     property: "leadingIcon",
     type: `ReactNode`,
-    description: `The icon shown before the button content.\r\n\r\nThe icon will receive the class \`w-6\` automatically.`,
+    description: `The icon shown before the button content.\r\n\r\nThe icon will receive the classes \`w-? h-?\` automatically.`,
   },
   {
     property: "trailingIcon",
     type: `ReactNode`,
-    description: `The icon shown after the button content.\r\n\r\nThe icon will receive the class \`w-6\` automatically.`,
+    description: `The icon shown after the button content.\r\n\r\nThe icon will receive the classes \`w-? h-?\` automatically.`,
   },
   {
     property: "loading",
@@ -62,6 +62,12 @@ const props: DocPageProps[] = [
     property: "href",
     type: `string`,
     description: `Turn the button into a link.`,
+  },
+  {
+    property: "rounded",
+    type: `boolean`,
+    defaultValue: `false`,
+    description: `If button should be fully rounded.`,
   },
   {
     property: "...",
@@ -298,8 +304,8 @@ export function ButtonDoc() {
         </Button>
         <Button
           icon
-          className="rounded-full"
-          {...getExampleCodeMouseEvents(`<Button icon className="rounded-full">
+          rounded
+          {...getExampleCodeMouseEvents(`<Button icon rounded>
   <UserIcon />
 </Button>`)}
         >
@@ -323,6 +329,20 @@ export function ButtonDoc() {
 </Button>`)}
         >
           <UserIcon />
+        </Button>
+      </Group>
+      <Group>
+        <Button
+          variant="custom"
+          className="border-transparent bg-purple-500 text-onPrimary hover:bg-purple-500/80 active:border-purple-700 dark:active:border-purple-300"
+          {...getExampleCodeMouseEvents(`<Button
+  variant="custom"
+  className="border-transparent bg-purple-500 text-onPrimary hover:bg-purple-500/80 active:border-purple-700 dark:active:border-purple-300"
+>
+  Custom color
+</Button>`)}
+        >
+          Custom color
         </Button>
       </Group>
       <ExampleCode />

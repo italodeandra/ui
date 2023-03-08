@@ -29,32 +29,30 @@ export default function CopyButton({
   return (
     <Button
       type="button"
-      className={clsx(
-        "group/button absolute top-2.5 right-2.5 overflow-hidden rounded-full !py-1 !px-2 !text-xs opacity-0 backdrop-blur transition focus:opacity-100 group-hover:opacity-100",
-        copied
-          ? "bg-primary-400/10 ring-primary-400/20"
-          : "hover:bg-white/7.5 dark:bg-white/2.5 bg-white/5 dark:hover:bg-white/5"
-      )}
+      color={copied ? "success" : undefined}
+      size="sm"
+      className="absolute top-2.5 right-2.5 opacity-0 backdrop-blur focus:opacity-100 group-hover:opacity-100"
       onClick={() => {
         window.navigator.clipboard.writeText(text).then(() => {
           setCopyCount((count) => count + 1);
         });
       }}
+      rounded
     >
       <span
         aria-hidden={copied}
         className={clsx(
-          "pointer-events-none flex items-center gap-0.5 text-zinc-400 transition duration-300",
+          "pointer-events-none flex items-center gap-0.5 transition-[transform,opacity]",
           copied && "-translate-y-1.5 opacity-0"
         )}
       >
-        <ClipboardIcon className="mr-1 h-5 w-5 fill-zinc-500/20 stroke-zinc-500 transition-colors group-hover/button:stroke-zinc-400" />
+        <ClipboardIcon className="mr-2 h-4 w-4" />
         {copyText}
       </span>
       <span
         aria-hidden={!copied}
         className={clsx(
-          "pointer-events-none absolute inset-0 flex items-center justify-center text-primary-500 transition duration-300",
+          "pointer-events-none absolute inset-0 flex items-center justify-center transition-[transform,opacity]",
           !copied && "translate-y-1.5 opacity-0"
         )}
       >

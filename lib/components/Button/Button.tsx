@@ -10,6 +10,7 @@ const styles = {
     light: "shadow-sm",
     outlined: "shadow-sm",
     text: "",
+    custom: "",
   },
   color: {
     primary: "",
@@ -96,6 +97,7 @@ export type ButtonProps<Href extends string | undefined> =
     trailingIcon?: ReactElement;
     loading?: boolean;
     disabled?: boolean;
+    rounded?: boolean;
   };
 
 const Button = <Href extends string | undefined>(
@@ -111,6 +113,7 @@ const Button = <Href extends string | undefined>(
     children,
     loading,
     disabled,
+    rounded,
     ...props
   }: ButtonProps<Href>,
   ref: ForwardedRef<Href extends string ? HTMLAnchorElement : HTMLButtonElement>
@@ -126,11 +129,12 @@ const Button = <Href extends string | undefined>(
       className={clsx(
         styles.root,
         styles.variant[variant],
-        styles.color[color],
-        styles.variantColor[`${variant}-${color}`],
+        variant !== "custom" && styles.color[color],
+        variant !== "custom" && styles.variantColor[`${variant}-${color}`],
         icon ? styles.icon[size].button : styles.size[size].button,
         {
           [styles.disabled]: disabled,
+          "rounded-full": rounded,
         },
         className
       )}
