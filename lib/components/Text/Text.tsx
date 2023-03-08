@@ -10,6 +10,14 @@ export const defaultTextStyles = {
     secondary: "text-sm text-gray-500 dark:text-zinc-400",
     link: "font-medium text-primary-600 hover:text-primary-500",
   },
+  size: {
+    xs: "text-xs",
+    sm: "text-sm",
+    base: "text-base",
+    lg: "text-lg",
+    xl: "text-xl",
+    "2xl": "text-2xl",
+  },
 };
 
 export type TextProps<
@@ -17,6 +25,7 @@ export type TextProps<
   Href extends string | undefined
 > = {
   variant?: keyof typeof defaultTextStyles["variant"];
+  size?: keyof typeof defaultTextStyles["size"];
   inline?: Inline;
   href?: Href;
   target?: string;
@@ -35,10 +44,12 @@ export default function Text<
   className,
   href,
   target,
+  size = "base",
   ...props
 }: TextProps<Inline, Href>) {
   className = clsx(
     defaultTextStyles.variant[variant],
+    defaultTextStyles.size[size],
     {
       [defaultTextStyles.variant.link]: !!href && variant === "default",
     },

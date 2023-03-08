@@ -56,7 +56,8 @@ export default function NavigationDrawer({
                             <Text
                               key={submenu.title}
                               variant="secondary"
-                              className="mt-4 mb-1 px-3 text-xs first:mt-1"
+                              size="xs"
+                              className="mt-4 mb-1 px-3 first:mt-1"
                             >
                               {submenu.title}
                             </Text>

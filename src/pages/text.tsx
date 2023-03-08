@@ -20,12 +20,17 @@ export default function TextDemoPage() {
       <NextSeo title="Text" />
       <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
       <Stack className="p-2">
-        <Text variant="label">Label</Text>
-        <Text variant="secondary">Secondary</Text>
+        <Text variant="label">Variant label</Text>
+        <Text variant="secondary">Variant secondary</Text>
         <Text variant="link" href="/">
           Link
         </Text>
+        <Text size="xs">Size xs</Text>
+        <Text size="sm">Size sm</Text>
         <Text>Default</Text>
+        <Text size="lg">Size lg</Text>
+        <Text size="xl">Size xl</Text>
+        <Text size="2xl">Size 2xl</Text>
       </Stack>
     </>
   );
