@@ -1,4 +1,10 @@
-import { cloneElement, Fragment, ReactElement, ReactNode } from "react";
+import {
+  cloneElement,
+  ComponentPropsWithoutRef,
+  Fragment,
+  ReactElement,
+  ReactNode,
+} from "react";
 import { Menu as HuiMenu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import clsx from "clsx";
@@ -13,9 +19,11 @@ export type MenuProps = {
   className?: string;
   position?: "left" | "right" | "bottom-right" | "bottom-left";
   iconClassName?: string;
+  buttonProps?: ComponentPropsWithoutRef<typeof Button>;
   label?: ReactNode;
   children?: ReactNode;
   button?: ReactNode;
+  unmount?: boolean;
 };
 
 export type MenuItemProps<Href extends string | undefined> =
@@ -84,6 +92,8 @@ export default function Menu({
   children,
   label,
   button,
+  buttonProps,
+  unmount,
 }: MenuProps) {
   return (
     <HuiMenu
@@ -96,8 +106,9 @@ export default function Menu({
         ) : (
           <HuiMenu.Button
             as={Button}
-            className="flex w-full"
+            className={clsx("flex w-full", buttonProps?.className)}
             trailingIcon={<ChevronDownIcon className={iconClassName} />}
+            {...buttonProps}
           >
             {label}
           </HuiMenu.Button>
@@ -114,6 +125,7 @@ export default function Menu({
         leaveTo="transform opacity-0 scale-95"
       >
         <HuiMenu.Items
+          unmount={unmount}
           className={clsx(
             defaultMenuItemsClassName,
             "absolute mt-2 min-w-[14rem]",

@@ -1,5 +1,6 @@
 import {
   cloneElement,
+  ComponentPropsWithoutRef,
   Fragment,
   ReactElement,
   ReactNode,
@@ -9,6 +10,8 @@ import { Dialog, Transition } from "@headlessui/react";
 import Stack from "../Stack/Stack";
 import Group from "../Group/Group";
 import clsx from "clsx";
+import Button from "../Button/Button";
+import { XMarkIcon } from "@heroicons/react/24/solid";
 
 export default function Modal({
   open,
@@ -111,7 +114,7 @@ function ModalTitle({
     <Dialog.Title
       as="h3"
       className={clsx(
-        "text-lg font-medium leading-6 text-zinc-900 dark:text-zinc-100",
+        "text-center text-lg font-medium leading-6 text-zinc-900 dark:text-zinc-100",
         className
       )}
     >
@@ -164,5 +167,23 @@ function ModalIcon({ children }: { children?: ReactElement }) {
           "aria-hidden": "true",
         })}
     </div>
+  );
+}
+
+Modal.CloseButton = ModalCloseButton;
+
+function ModalCloseButton({
+  className,
+  ...props
+}: ComponentPropsWithoutRef<typeof Button>) {
+  return (
+    <Button
+      icon
+      className={clsx("absolute right-2 top-2", className)}
+      variant="text"
+      {...props}
+    >
+      <XMarkIcon />
+    </Button>
   );
 }

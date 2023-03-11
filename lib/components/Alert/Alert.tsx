@@ -17,8 +17,8 @@ const styles = {
     },
     error: {
       root: "bg-error-50 dark:bg-error-900",
-      icon: "text-error-400",
-      title: "text-error-800 dark:text-error-400",
+      icon: "text-error-400 dark:text-error-300",
+      title: "text-error-800 dark:text-error-300",
       content: "text-error-700 dark:text-error-200",
     },
     success: {
@@ -72,23 +72,37 @@ export default function Alert({
             aria-hidden="true"
           />
         </div>
-        <div className="ml-3">
-          <h3
-            className={clsx(
-              "text-sm font-medium",
-              styles.variants[variant].title
-            )}
-          >
-            {title}
-          </h3>
-          {children && (
-            <div
-              className={clsx("mt-2 text-sm", styles.variants[variant].content)}
+        <div className="ml-3 flex w-full flex-col items-start justify-between sm:flex-row">
+          <div>
+            <h3
+              className={clsx(
+                "text-sm font-medium",
+                styles.variants[variant].title
+              )}
             >
-              {children}
-            </div>
+              {title}
+            </h3>
+            {children && (
+              <div
+                className={clsx(
+                  "mt-2 text-sm",
+                  styles.variants[variant].content
+                )}
+              >
+                {children}
+              </div>
+            )}
+          </div>
+          {actions && (
+            <Group
+              className={clsx(
+                "-mx-4 mt-1 -mb-2 sm:-mx-2 sm:-my-2",
+                styles.variants[variant].content
+              )}
+            >
+              {actions}
+            </Group>
           )}
-          {actions && <Group className="-mx-3 -mb-3">{actions}</Group>}
         </div>
       </div>
     </div>

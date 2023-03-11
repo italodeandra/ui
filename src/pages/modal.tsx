@@ -28,6 +28,7 @@ export default function ModalDemoPage() {
       </div>
       <Modal open={modalOpen} onClose={closeModal}>
         <Modal.Container>
+          <Modal.CloseButton onClick={closeModal} />
           <Modal.Icon>
             <CheckIcon />
           </Modal.Icon>

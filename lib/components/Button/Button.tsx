@@ -4,7 +4,7 @@ import { cloneElement, ForwardedRef, forwardRef, ReactElement } from "react";
 import Loading from "../Loading/Loading";
 
 const styles = {
-  root: "appearance-none select-none border transition-colors inline-flex items-center justify-center rounded-md font-medium leading-4 focus:outline-none focus-visible:ring-2 focus:ring-primary-500 focus:ring-offset-2 ring-offset-gray-100 dark:ring-offset-zinc-900",
+  root: "appearance-none select-none border transition-colors inline-flex items-center justify-center font-medium leading-4 focus:outline-none focus-visible:ring-2 focus:ring-primary-500 focus:ring-offset-2 ring-offset-gray-100 dark:ring-offset-zinc-900",
   variant: {
     filled: "shadow-sm",
     light: "shadow-sm",
@@ -62,7 +62,7 @@ const styles = {
     "text-gray":
       "text-zinc-500 dark:text-zinc-400 hover:bg-zinc-500/10 border-transparent active:border-zinc-500",
     "text-white":
-      "dark:text-white hover:bg-zinc-500/5 dark:hover:bg-white/5 border-transparent active:border-zinc-500/50 dark:active:border-white/50",
+      "hover:bg-zinc-500/5 dark:hover:bg-white/5 border-transparent active:border-zinc-500/50 dark:active:border-white/50",
   },
   disabled: "opacity-50 pointer-events-none",
   size: {
@@ -132,9 +132,9 @@ const Button = <Href extends string | undefined>(
         variant !== "custom" && styles.color[color],
         variant !== "custom" && styles.variantColor[`${variant}-${color}`],
         icon ? styles.icon[size].button : styles.size[size].button,
+        rounded ? "rounded-full" : "rounded-md",
         {
           [styles.disabled]: disabled,
-          "rounded-full": rounded,
         },
         className
       )}

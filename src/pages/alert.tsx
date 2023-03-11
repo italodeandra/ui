@@ -33,14 +33,15 @@ export default function AlertDemoPage() {
         <Alert
           title="With actions"
           variant="error"
-          actions={
-            <Button variant="text" color="error">
-              Try again
-            </Button>
-          }
+          actions={<Button variant="text">Try again</Button>}
         >
           There was an unknown error
         </Alert>
+        <Alert
+          title="One liner with button"
+          variant="success"
+          actions={<Button variant="text">Try again</Button>}
+        />
       </Stack>
     </>
   );
