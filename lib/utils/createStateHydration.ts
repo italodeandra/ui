@@ -9,10 +9,17 @@ export default function createStateHydration(cookieName: string, state: any) {
 
   return function hydrate(cookies?: { state?: string }) {
     if (cookies?.[cookieName as keyof typeof cookies]) {
-      Object.assign(
-        state,
-        JSON.parse(cookies[cookieName as keyof typeof cookies] as string)
-      );
+      try {
+        let cookieValueString = cookies[
+          cookieName as keyof typeof cookies
+        ] as string;
+        let cookieValue = JSON.parse(cookieValueString);
+        if (typeof cookieValue === "object") {
+          Object.assign(state, cookieValue);
+        }
+      } catch (e) {
+        // do nothing
+      }
     }
   };
 }
