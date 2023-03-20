@@ -56,11 +56,11 @@ export default function Text<
     className
   );
   if (href) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return (
       <NextLink
         href={href}
         target={target}
+        /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
         {...(props as any)}
         className={className}
       />
