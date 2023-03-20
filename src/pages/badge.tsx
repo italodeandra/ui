@@ -22,6 +22,9 @@ export default function BadgeDemoPage() {
       <Stack className="p-2">
         <div>
           <Badge>Default</Badge>
+          <Badge color="primary">Primary</Badge>
+          <Badge color="success">Success</Badge>
+          <Badge color="error">Error</Badge>
         </div>
         <div>
           <Badge onActionClick={() => console.info("Clicked")}>

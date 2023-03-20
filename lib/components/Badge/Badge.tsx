@@ -3,11 +3,27 @@ import Link from "next/link";
 import { ElementType, MouseEventHandler, ReactNode, useCallback } from "react";
 
 const colorMap = {
+  default: {
+    badge: "bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-100",
+    button:
+      "text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-500 dark:hover:text-zinc-300 focus:bg-zinc-500",
+  },
   primary: {
     badge:
       "bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-100",
     button:
       "text-primary-400 hover:bg-primary-200 dark:hover:bg-primary-800 hover:text-primary-500 dark:hover:text-primary-300 focus:bg-primary-500",
+  },
+  success: {
+    badge:
+      "bg-success-100 dark:bg-success-900 text-success-700 dark:text-success-100",
+    button:
+      "text-success-400 hover:bg-success-200 dark:hover:bg-success-800 hover:text-success-500 dark:hover:text-success-300 focus:bg-success-500",
+  },
+  error: {
+    badge: "bg-error-100 dark:bg-error-900 text-error-700 dark:text-error-100",
+    button:
+      "text-error-400 hover:bg-error-200 dark:hover:bg-error-800 hover:text-error-500 dark:hover:text-error-300 focus:bg-error-500",
   },
 };
 
@@ -25,7 +41,7 @@ const sizeMap = {
 };
 
 export default function Badge({
-  color = "primary",
+  color = "default",
   size = "md",
   className,
   children,
