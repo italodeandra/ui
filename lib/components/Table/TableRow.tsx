@@ -1,19 +1,26 @@
 import clsx from "clsx";
-import { MouseEventHandler, ReactNode } from "react";
+import { ForwardedRef, forwardRef, MouseEventHandler, ReactNode } from "react";
 
 export type TableRowProps = {
   children?: ReactNode;
   onClick?: MouseEventHandler<HTMLTableRowElement>;
 };
-export default function TableRow({ children, onClick }: TableRowProps) {
+function TableRow(
+  { children, onClick, ...props }: TableRowProps,
+  ref: ForwardedRef<HTMLTableRowElement>
+) {
   return (
     <tr
+      ref={ref}
       onClick={onClick}
       className={clsx({
         "cursor-pointer hover:bg-black/5 dark:hover:bg-white/5": !!onClick,
       })}
+      {...props}
     >
       {children}
     </tr>
   );
 }
+
+export default forwardRef(TableRow);

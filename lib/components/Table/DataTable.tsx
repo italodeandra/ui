@@ -1,4 +1,6 @@
 import {
+  ComponentType,
+  Fragment,
   ReactElement,
   ReactNode,
   useCallback,
@@ -19,17 +21,21 @@ export type DataTableProps<RowData> = {
   idAccessor?: keyof RowData;
   columns: {
     id?: string;
-    title: ReactNode;
+    title?: ReactNode;
     accessor?: keyof RowData;
     render?: (item: RowData) => ReactNode;
   }[];
   actions?: {
     title: string;
     icon: ReactElement;
+    href?: string | ((item: RowData) => string);
+    onClick?: (item: RowData) => void;
+    wrapper?: ComponentType<{ item: RowData; children: ReactNode }>;
   }[];
   isLoading?: boolean;
   noRecords?: ReactNode;
   onRowClick?: (item: RowData) => void;
+  rowWrapper?: ComponentType<{ item: RowData; children: ReactNode }>;
   pagination?: boolean;
   currentPage?: number;
   onChangePage?: (page: number) => void;
@@ -49,6 +55,7 @@ export default function DataTable<RowData>({
   isLoading,
   noRecords: noRecordsText = "No records",
   onRowClick,
+  rowWrapper,
   pagination,
   currentPage = 0,
   onChangePage,
@@ -104,33 +111,48 @@ export default function DataTable<RowData>({
           )}
         </Table.Head>
         <Table.Body>
-          {data?.map((item) => (
-            <Table.Row
-              key={item[idAccessor] as string}
-              onClick={handleRowClick(item)}
-            >
-              {columns.map((column, i) => (
-                <Table.Cell
-                  key={
-                    column.id ||
-                    (typeof column.title === "string" ? column.title : i)
-                  }
-                >
-                  {column.accessor && (item[column.accessor] as string)}
-                  {!column.accessor && column.render && column.render(item)}
-                </Table.Cell>
-              ))}
-              {actions && (
-                <Table.Cell actions>
-                  {actions.map((action, i) => (
-                    <Table.ActionButton key={i} title={action.title}>
-                      {action.icon}
-                    </Table.ActionButton>
+          {data?.map((item) => {
+            let RowComponent = rowWrapper || Fragment;
+            return (
+              <RowComponent key={item[idAccessor] as string} item={item}>
+                <Table.Row onClick={handleRowClick(item)}>
+                  {columns.map((column, i) => (
+                    <Table.Cell
+                      key={
+                        column.id ||
+                        (typeof column.title === "string" ? column.title : i)
+                      }
+                    >
+                      {column.accessor && (item[column.accessor] as string)}
+                      {!column.accessor && column.render && column.render(item)}
+                    </Table.Cell>
                   ))}
-                </Table.Cell>
-              )}
-            </Table.Row>
-          ))}
+                  {actions && (
+                    <Table.Cell actions>
+                      {actions.map((action, i) => {
+                        let ActionComponent = action.wrapper || Fragment;
+                        return (
+                          <ActionComponent key={i} item={item}>
+                            <Table.ActionButton
+                              title={action.title}
+                              onClick={() => action.onClick?.(item)}
+                              href={
+                                typeof action.href === "function"
+                                  ? action.href?.(item)
+                                  : action.href
+                              }
+                            >
+                              {action.icon}
+                            </Table.ActionButton>
+                          </ActionComponent>
+                        );
+                      })}
+                    </Table.Cell>
+                  )}
+                </Table.Row>
+              </RowComponent>
+            );
+          })}
           {isLoading && !data?.length && (
             <Table.Row>
               {columns.map((column, i) => (
