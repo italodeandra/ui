@@ -1,6 +1,6 @@
 import Menu, { MenuProps } from "../Menu/Menu";
 import { ReactNode } from "react";
-import Button from "../Button/Button";
+import Button, { ButtonProps } from "../Button/Button";
 
 export type ConfirmationButtonProps = {
   confirmation: string;
@@ -10,6 +10,8 @@ export type ConfirmationButtonProps = {
   className?: string;
   cancel?: string;
   position?: MenuProps["position"];
+  buttonClassName?: string;
+  buttonProps?: ButtonProps<undefined>;
 };
 
 export default function ConfirmationButton({
@@ -20,15 +22,23 @@ export default function ConfirmationButton({
   className,
   cancel = "Cancel",
   position,
+  buttonClassName,
+  buttonProps,
 }: ConfirmationButtonProps) {
   return (
     <Menu
       position={position}
       button={
-        <Button color="error" loading={loading} className={className}>
+        <Button
+          color="error"
+          loading={loading}
+          className={buttonClassName}
+          {...buttonProps}
+        >
           {label}
         </Button>
       }
+      className={className}
     >
       <Menu.Label>{confirmation}</Menu.Label>
       <Menu.Item className="!text-red-500" onClick={onConfirm}>

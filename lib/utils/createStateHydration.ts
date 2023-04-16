@@ -1,10 +1,14 @@
 import { setCookie } from "cookies-next";
+import ms from "ms";
 import { snapshot, subscribe } from "valtio";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function createStateHydration(cookieName: string, state: any) {
   subscribe(state, () => {
-    setCookie(cookieName, snapshot(state));
+    setCookie(cookieName, snapshot(state), {
+      maxAge: ms("30d"),
+      path: "/",
+    });
   });
 
   return function hydrate(cookies?: { state?: string }) {

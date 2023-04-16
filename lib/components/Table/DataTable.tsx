@@ -114,7 +114,13 @@ export default function DataTable<RowData>({
           {data?.map((item) => {
             let RowComponent = rowWrapper || Fragment;
             return (
-              <RowComponent key={item[idAccessor] as string} item={item}>
+              <RowComponent
+                key={item[idAccessor] as string}
+                {...(RowComponent !== Fragment
+                  ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    ({ item: item } as any)
+                  : {})}
+              >
                 <Table.Row onClick={handleRowClick(item)}>
                   {columns.map((column, i) => (
                     <Table.Cell

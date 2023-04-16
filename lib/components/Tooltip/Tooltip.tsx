@@ -30,6 +30,7 @@ import {
   useRole,
 } from "@floating-ui/react-dom-interactions";
 import { AnimatePresence, motion } from "framer-motion";
+import clsx from "clsx";
 
 interface TooltipState
   extends UseFloatingReturn,
@@ -137,7 +138,11 @@ export const TooltipAnchor = forwardRef(function TooltipAnchor(
 });
 
 export const TooltipContent = forwardRef(function TooltipContent(
-  { state, ...props }: { state: TooltipState } & HTMLProps<HTMLDivElement>,
+  {
+    state,
+    className,
+    ...props
+  }: { state: TooltipState; className?: string } & HTMLProps<HTMLDivElement>,
   propRef
 ) {
   const { delay } = useDelayGroupContext();
@@ -162,7 +167,10 @@ export const TooltipContent = forwardRef(function TooltipContent(
                 ? { duration: 0.08 }
                 : { type: "spring", damping: 20, stiffness: 300 }
             }
-            className="z-20 rounded bg-zinc-900/95 px-2 py-1 text-sm text-white"
+            className={clsx(
+              "z-20 rounded bg-zinc-900/95 px-2 py-1 text-sm text-white",
+              className
+            )}
             ref={ref}
             style={{
               position: state.strategy,
@@ -183,11 +191,13 @@ export default function Tooltip({
   content,
   placement,
   delay,
+  className,
 }: {
   children: JSX.Element;
   content: ReactNode;
   placement?: Placement;
   delay?: Delay;
+  className?: string;
 }) {
   const delayGroupContext = useDelayGroupContext();
 
@@ -209,7 +219,9 @@ export default function Tooltip({
       <TooltipAnchor state={state} asChild>
         {children}
       </TooltipAnchor>
-      <TooltipContent state={state}>{content}</TooltipContent>
+      <TooltipContent state={state} className={className}>
+        {content}
+      </TooltipContent>
     </>
   );
 }

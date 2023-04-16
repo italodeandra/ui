@@ -19,6 +19,7 @@ export type MenuProps = {
   className?: string;
   position?: "left" | "right" | "bottom-right" | "bottom-left";
   iconClassName?: string;
+  menuItemsClassName?: string;
   buttonProps?: ComponentPropsWithoutRef<typeof Button>;
   label?: ReactNode;
   children?: ReactNode;
@@ -94,6 +95,7 @@ export default function Menu({
   button,
   buttonProps,
   unmount,
+  menuItemsClassName,
 }: MenuProps) {
   return (
     <HuiMenu
@@ -141,7 +143,8 @@ export default function Menu({
                 position.includes("left") && position.includes("bottom"),
               "left-0": position.includes("left"),
               "bottom-0": position.includes("bottom"),
-            }
+            },
+            menuItemsClassName
           )}
         >
           <div className="py-1">{children}</div>
