@@ -1,0 +1,15 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "next/core-web-vitals"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "root": true,
+  "rules": {
+    "react/jsx-curly-brace-presence": ["error"],
+    "prefer-const": 0,
+    "no-console": ["error", { "allow": ["warn", "error", "info"] }]
+  }
+}
