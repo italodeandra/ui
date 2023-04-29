@@ -138,7 +138,13 @@ export default function DataTable<RowData>({
                       {actions.map((action, i) => {
                         let ActionComponent = action.wrapper || Fragment;
                         return (
-                          <ActionComponent key={i} item={item}>
+                          <ActionComponent
+                            key={i}
+                            {...(ActionComponent !== Fragment
+                              ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                                ({ item: item } as any)
+                              : {})}
+                          >
                             <Table.ActionButton
                               title={action.title}
                               onClick={() => action.onClick?.(item)}
