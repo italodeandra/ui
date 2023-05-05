@@ -12,39 +12,38 @@ import TableFooterWithPagination from "./TableFooterWithPagination";
 export type TableProps = {
   children?: ReactNode;
   className?: string;
-  dense?: boolean;
   hideBorder?: boolean;
+  autoHeight?: boolean;
 };
 
 export default function Table({
   children,
   className,
-  dense,
   hideBorder,
+  autoHeight,
 }: TableProps) {
   return (
     <div
-      className={clsx("overflow-x-auto", {
-        "dense group": dense,
-        "md:-mx-1 md:px-1": !hideBorder,
-      })}
+      className={clsx(
+        autoHeight ? "relative flex-1 overflow-hidden" : className,
+        {
+          "shadow ring-1 ring-black/5 dark:ring-white/10 md:rounded-lg":
+            !hideBorder,
+        }
+      )}
     >
-      <div className="inline-block min-w-full py-2 align-middle ">
-        <div
-          className={clsx("overflow-hidden", {
-            "shadow ring-1 ring-black/5 dark:ring-white/10 md:rounded-lg":
-              !hideBorder,
-          })}
+      <div
+        className={clsx("overflow-auto", {
+          "absolute inset-0": autoHeight,
+        })}
+      >
+        <table
+          className={clsx(
+            "w-full max-w-full divide-y divide-zinc-300 dark:divide-zinc-600"
+          )}
         >
-          <table
-            className={clsx(
-              "min-w-full divide-y divide-zinc-300 dark:divide-zinc-600",
-              className
-            )}
-          >
-            {children}
-          </table>
-        </div>
+          {children}
+        </table>
       </div>
     </div>
   );

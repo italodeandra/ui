@@ -20,17 +20,17 @@ const pages = [{ title: "Table" }];
 
 export default function TableDemoPage() {
   return (
-    <>
+    <div className="flex flex-1 flex-col">
       <NextSeo title="Table" />
       <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
-      <Stack className="md:px-2">
+      <Stack className="flex flex-1 flex-col overflow-auto md:px-2">
         <Table.Header
           title="Users"
           subtitle="A list of all the users in your account including their name, title, email and role."
         >
           <Button variant="filled">Add user</Button>
         </Table.Header>
-        <Table>
+        <Table autoHeight>
           <Table.Head>
             <Table.Row>
               <Table.Cell>Name</Table.Cell>
@@ -47,7 +47,12 @@ export default function TableDemoPage() {
                 []
               )}
             >
-              <Table.Cell>Ítalo Andrade</Table.Cell>
+              <Table.Cell>
+                Ítalo Andrade Lorem ipsum dolor sit amet, consectetur
+                adipisicing elit. A aliquam earum eos eveniet libero nobis odit
+                officiis. Blanditiis dolore dolorem eligendi excepturi harum
+                impedit iste nam necessitatibus quam, repellat, tempora!
+              </Table.Cell>
               <Table.Cell>King</Table.Cell>
               <Table.Cell>italodeandra@gmail.com</Table.Cell>
               <Table.Cell>Give orders</Table.Cell>
@@ -73,7 +78,7 @@ export default function TableDemoPage() {
           </Table.Body>
         </Table>
       </Stack>
-    </>
+    </div>
   );
 }
 

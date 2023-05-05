@@ -26,7 +26,7 @@ export default function Footer({
 }: FooterProps) {
   return (
     <>
-      <div className="min-h-screen">{children}</div>
+      <div className="flex min-h-screen flex-col">{children}</div>
       <footer className="border-t border-slate-900/5 bg-white dark:border-slate-50/5 dark:bg-zinc-900">
         <div className="mx-auto max-w-7xl overflow-hidden py-12 px-4 sm:px-6 lg:px-8">
           {main && (
@@ -63,7 +63,7 @@ export default function Footer({
               ))}
             </div>
           )}
-          <p className=" text-center text-base text-gray-400">
+          <p className="text-center text-base text-gray-400">
             {companyName} &copy; {CURRENT_YEAR}. {allRightsReserved}.
           </p>
         </div>
