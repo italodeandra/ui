@@ -87,7 +87,7 @@ export default function DataTable<RowData>({
           {headerContent}
         </Table.Header>
       )}
-      <Table className="relative">
+      <Table>
         <Table.Head>
           <Table.Row>
             {columns.map((column, i) => (

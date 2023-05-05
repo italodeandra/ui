@@ -25,7 +25,8 @@ export default function Table({
   return (
     <div
       className={clsx(
-        autoHeight ? "relative flex-1 overflow-hidden" : className,
+        "overflow-hidden",
+        autoHeight ? "relative flex-1" : className,
         {
           "shadow ring-1 ring-black/5 dark:ring-white/10 md:rounded-lg":
             !hideBorder,

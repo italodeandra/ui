@@ -30,7 +30,7 @@ export default function TableCell({
       <th
         className={clsx(
           commonClassName,
-          "sticky left-0 py-3.5 text-left font-semibold text-zinc-900 dark:text-zinc-50"
+          "sticky left-0 bg-zinc-50 py-3.5 text-left font-semibold text-zinc-900 dark:bg-zinc-900 dark:text-zinc-50"
         )}
         colSpan={colSpan}
       >
