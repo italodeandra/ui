@@ -47,12 +47,7 @@ export default function TableDemoPage() {
                 []
               )}
             >
-              <Table.Cell>
-                Ítalo Andrade Lorem ipsum dolor sit amet, consectetur
-                adipisicing elit. A aliquam earum eos eveniet libero nobis odit
-                officiis. Blanditiis dolore dolorem eligendi excepturi harum
-                impedit iste nam necessitatibus quam, repellat, tempora!
-              </Table.Cell>
+              <Table.Cell>Ítalo Andrade</Table.Cell>
               <Table.Cell>King</Table.Cell>
               <Table.Cell>italodeandra@gmail.com</Table.Cell>
               <Table.Cell>Give orders</Table.Cell>
