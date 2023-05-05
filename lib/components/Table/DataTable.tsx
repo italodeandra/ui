@@ -42,6 +42,7 @@ export type DataTableProps<RowData> = {
   totalItems?: number;
   itemsPerPage?: number;
   className?: string;
+  autoHeight?: boolean;
 };
 
 export default function DataTable<RowData>({
@@ -62,6 +63,7 @@ export default function DataTable<RowData>({
   totalItems = 0,
   itemsPerPage = 15,
   className,
+  autoHeight,
 }: DataTableProps<RowData>) {
   let [page, setPage] = useState(currentPage);
   useEffect(() => {
@@ -87,7 +89,7 @@ export default function DataTable<RowData>({
           {headerContent}
         </Table.Header>
       )}
-      <Table>
+      <Table autoHeight={autoHeight}>
         <Table.Head>
           <Table.Row>
             {columns.map((column, i) => (

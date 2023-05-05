@@ -45,9 +45,12 @@ export default function NavigationDrawer({
         {navigationChildren}
       </Transition>
       <div
-        className={clsx("ring-offset-gray-100 transition-all duration-300", {
-          "pl-80 duration-150": isOpen && !isMobile,
-        })}
+        className={clsx(
+          "flex min-h-screen flex-col ring-offset-gray-100 transition-all duration-300",
+          {
+            "pl-80 duration-150": isOpen && !isMobile,
+          }
+        )}
       >
         {children}
       </div>
