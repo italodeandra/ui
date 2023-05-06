@@ -23,7 +23,7 @@ export default function TableDemoPage() {
     <div className="flex flex-1 flex-col">
       <NextSeo title="Table" />
       <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
-      <Stack className="flex flex-1 flex-col overflow-auto md:px-2">
+      <Stack className="flex flex-1 flex-col md:px-2 md:pb-2">
         <Table.Header
           title="Users"
           subtitle="A list of all the users in your account including their name, title, email and role."

@@ -12,6 +12,7 @@ import { Skeleton } from "../Skeleton/Skeleton";
 import Stack from "../Stack/Stack";
 import Text from "../Text/Text";
 import Table from "./Table";
+import clsx from "clsx";
 
 export type DataTableProps<RowData> = {
   title?: ReactNode;
@@ -83,7 +84,14 @@ export default function DataTable<RowData>({
   );
 
   return (
-    <Stack className={className}>
+    <Stack
+      className={clsx(
+        {
+          "flex flex-1 flex-col": autoHeight,
+        },
+        className
+      )}
+    >
       {(title || subtitle || headerContent) && (
         <Table.Header title={title} subtitle={subtitle}>
           {headerContent}

@@ -78,11 +78,12 @@ export default function DataTableDemoPage() {
   // isLoading = true;
 
   return (
-    <>
+    <div className="flex flex-1 flex-col">
       <NextSeo title="DataTable" />
       <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
-      <Stack className="md:px-2">
+      <Stack className="flex flex-1 flex-col overflow-auto md:px-2 md:pb-2">
         <DataTable
+          autoHeight
           title="Users"
           subtitle="A list of all the users in your account including their name, title, email and role."
           columns={columns}
@@ -99,7 +100,7 @@ export default function DataTableDemoPage() {
           currentPage={1}
         />
       </Stack>
-    </>
+    </div>
   );
 }
 
