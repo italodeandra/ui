@@ -105,7 +105,7 @@ export default function DataTable<RowData>({
             {actions && <Table.Cell />}
           </Table.Row>
           {isLoading && (
-            <tr className="absolute top-3.5 right-3 rounded-full bg-gray-50/50 dark:bg-zinc-800/50">
+            <tr className="absolute top-2 right-3 rounded-full bg-gray-50/50 dark:bg-zinc-800/50">
               <td>
                 <Loading />
               </td>
