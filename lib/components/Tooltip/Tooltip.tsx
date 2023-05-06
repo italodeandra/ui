@@ -168,7 +168,7 @@ export const TooltipContent = forwardRef(function TooltipContent(
                 : { type: "spring", damping: 20, stiffness: 300 }
             }
             className={clsx(
-              "z-20 rounded bg-zinc-900/95 px-2 py-1 text-sm text-white",
+              "z-20 rounded bg-zinc-900/95 px-2 py-1 text-center text-sm text-white",
               className
             )}
             ref={ref}

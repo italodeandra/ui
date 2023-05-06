@@ -176,12 +176,12 @@ export default function DataTable<RowData>({
                     (typeof column.title === "string" ? column.title : i)
                   }
                 >
-                  <Skeleton className="h-2" />
+                  <Skeleton className="h-3" />
                 </Table.Cell>
               ))}
               {actions && (
                 <Table.Cell actions>
-                  <Skeleton className="inline-block h-2 w-6" />
+                  <Skeleton className="inline-block h-3 w-6" />
                 </Table.Cell>
               )}
             </Table.Row>

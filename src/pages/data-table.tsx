@@ -38,7 +38,7 @@ const data = [
   },
 ];
 
-const columns: DataTableProps<typeof data[0]>["columns"] = [
+const columns: DataTableProps<(typeof data)[0]>["columns"] = [
   {
     title: "Name",
     accessor: "name",
@@ -75,6 +75,8 @@ export default function DataTableDemoPage() {
     }, ms("5s"));
   });
 
+  // isLoading = true;
+
   return (
     <>
       <NextSeo title="DataTable" />
@@ -89,7 +91,7 @@ export default function DataTableDemoPage() {
           actions={actions}
           headerContent={<Button variant="filled">Add user</Button>}
           onRowClick={useCallback(
-            (item: typeof data[0]) => window.open(item.url, "_blank"),
+            (item: (typeof data)[0]) => window.open(item.url, "_blank"),
             []
           )}
           pagination
