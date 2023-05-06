@@ -5,7 +5,7 @@ import Button from "../Button/Button";
 
 export interface TableFooterWithPaginationProps {
   itemsPerPage: number;
-  totalItems: number;
+  totalItems?: number;
   currentPage: number;
   onChangePage?: (page: number) => void;
 }
@@ -16,7 +16,10 @@ export default function TableFooterWithPagination({
   currentPage,
   onChangePage,
 }: TableFooterWithPaginationProps) {
-  let pageCount = Math.floor(totalItems / itemsPerPage);
+  let pageCount =
+    totalItems !== undefined && itemsPerPage !== undefined
+      ? Math.floor(totalItems / itemsPerPage)
+      : 0;
   let [page, setPage] = useState(currentPage);
   useEffect(() => {
     if (page !== currentPage) {
@@ -34,7 +37,9 @@ export default function TableFooterWithPagination({
 
   let start = (page - 1) * itemsPerPage + 1;
   let end = page * itemsPerPage;
-  end = end > totalItems ? totalItems : end;
+  if (totalItems !== undefined) {
+    end = end > totalItems ? totalItems : end;
+  }
 
   return (
     <TableFooter>
@@ -53,8 +58,13 @@ export default function TableFooterWithPagination({
         <div>
           <p className="text-sm text-gray-700 dark:text-zinc-100">
             Showing <span className="font-medium">{start}</span> to{" "}
-            <span className="font-medium">{end}</span> of{" "}
-            <span className="font-medium">{totalItems}</span> results
+            <span className="font-medium">{end}</span>
+            {totalItems !== undefined && itemsPerPage !== undefined && (
+              <>
+                {" "}
+                of <span className="font-medium">{totalItems}</span> results
+              </>
+            )}
           </p>
         </div>
         <div>

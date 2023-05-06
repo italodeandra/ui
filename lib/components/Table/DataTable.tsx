@@ -61,8 +61,8 @@ export default function DataTable<RowData>({
   pagination,
   currentPage = 0,
   onChangePage,
-  totalItems = 0,
-  itemsPerPage = 15,
+  totalItems,
+  itemsPerPage = 0,
   className,
   autoHeight,
 }: DataTableProps<RowData>) {

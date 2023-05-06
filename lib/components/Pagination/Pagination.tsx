@@ -5,8 +5,8 @@ import { range } from "lodash";
 import Button from "../Button/Button";
 
 export interface PaginationProps {
-  totalItems: number;
-  itemsPerPage: number;
+  totalItems?: number;
+  itemsPerPage?: number;
   currentPage: number;
   onChangePage?: (page: number) => void;
   className?: string;
@@ -32,7 +32,10 @@ export default function Pagination({
     }
   }, [onChangePage, page]);
 
-  let pageCount = Math.floor(totalItems / itemsPerPage) || 1;
+  let pageCount =
+    totalItems !== undefined && itemsPerPage !== undefined
+      ? Math.floor(totalItems / itemsPerPage) || 1
+      : 0;
 
   let pages = useMemo(() => {
     if (pageCount < 7) {

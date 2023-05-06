@@ -68,6 +68,7 @@ const pages = [{ title: "DataTable" }];
 
 export default function DataTableDemoPage() {
   let [isLoading, setLoading] = useState(true);
+  let [page, setPage] = useState(1);
 
   useMount(() => {
     setTimeout(() => {
@@ -96,8 +97,10 @@ export default function DataTableDemoPage() {
             []
           )}
           pagination
-          totalItems={2}
-          currentPage={1}
+          itemsPerPage={2}
+          // totalItems={2}
+          currentPage={page}
+          onChangePage={setPage}
         />
       </Stack>
     </div>
