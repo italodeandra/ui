@@ -11,7 +11,7 @@ type Notification = {
   icon?: "success" | "error" | ReactElement;
   dismissable?: boolean;
   actions?: ReactNode;
-  supress?: boolean;
+  suppress?: boolean;
 };
 
 const notificationsState = proxy({
@@ -63,7 +63,7 @@ export function showNotification(
   let notificationObject =
     typeof notification === "string" ? { message: notification } : notification;
   if (
-    notificationObject.supress &&
+    notificationObject.suppress &&
     notificationsState.notifications.find(
       (n) =>
         n.message === notificationObject.message &&

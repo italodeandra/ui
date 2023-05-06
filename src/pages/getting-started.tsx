@@ -177,7 +177,7 @@ export default class _Document extends Document {
       </Text>
       <Code language="tsx" copy>
         {`import "@fontsource/inter/variable.css";
-import "@italodeandra/ui/bootstrap/supressConsoleLog";
+import "@italodeandra/ui/bootstrap/suppressConsoleLog";
 import { DefaultSeo } from "next-seo";
 import "focus-visible";
 import "../globals.css";

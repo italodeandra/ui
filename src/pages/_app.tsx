@@ -1,5 +1,5 @@
 import "@fontsource/inter/variable.css";
-import "../../lib/bootstrap/supressConsoleLog";
+import "../../lib/bootstrap/suppressConsoleLog";
 import { DefaultSeo } from "next-seo";
 import "focus-visible";
 import "../globals.css";
