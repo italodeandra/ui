@@ -76,8 +76,6 @@ export default function DataTableDemoPage() {
     }, ms("5s"));
   });
 
-  // isLoading = true;
-
   return (
     <div className="flex flex-1 flex-col">
       <NextSeo title="DataTable" />
