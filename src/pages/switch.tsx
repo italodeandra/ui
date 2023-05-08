@@ -35,6 +35,12 @@ export default function SwitchDemoPage() {
           label="Input label"
           rightLabel="With right label"
         />
+        <SwitchInput
+          checked={checked}
+          onChange={setChecked}
+          label="Read only"
+          readOnly
+        />
       </Stack>
     </>
   );

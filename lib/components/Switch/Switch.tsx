@@ -11,6 +11,7 @@ export interface SwitchProps {
   rightLabel?: ReactNode;
 
   onChange?(checked: boolean): void;
+  readOnly?: boolean;
 }
 
 export default function Switch({
@@ -19,6 +20,7 @@ export default function Switch({
   onChange,
   className,
   rightLabel,
+  readOnly,
 }: SwitchProps) {
   return (
     <HuiSwitch.Group as="div" className={clsx("flex items-center", className)}>
@@ -29,9 +31,11 @@ export default function Switch({
           {
             "bg-primary-600": checked,
             "bg-zinc-300 dark:bg-zinc-600": !checked,
+            "cursor-pointer": !readOnly,
           },
-          "relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:ring-offset-zinc-900"
+          "relative inline-flex h-6 w-11 flex-shrink-0 rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:ring-offset-zinc-900"
         )}
+        disabled={readOnly}
       >
         {srLabel && <span className="sr-only">{srLabel}</span>}
         <span
@@ -64,7 +68,7 @@ export function SwitchInput({ inputClassName, ...props }: SwitchInputProps) {
       /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
       {...(props as any)}
       as={Switch}
-      inputClassName={clsx("p-1.5 border", inputClassName)}
+      inputClassName={clsx("p-1.5 border bg-white", inputClassName)}
     />
   );
 }
