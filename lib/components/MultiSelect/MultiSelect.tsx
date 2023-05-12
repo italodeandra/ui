@@ -219,6 +219,7 @@ export default function MultiSelect<T extends { _id: string } | string>({
               )}
               inputClassName={clsx(
                 defaultInputClassName,
+                "bg-white dark:bg-zinc-800",
                 inputElementClassName
               )}
               innerClassName={inputInnerClassName}
