@@ -7,7 +7,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { useUpdateEffect } from "react-use";
+import { useDeepCompareEffect, useUpdateEffect } from "react-use";
 import {
   defaultHelpTextClassName,
   defaultLabelClassName,
@@ -17,6 +17,8 @@ import Button from "../Button/Button";
 import FileSelect, { FileSelectProps } from "../FileSelect/FileSelect";
 import isomorphicObjectId from "@italodeandra/next/utils/isomorphicObjectId";
 import { TrashIcon } from "@heroicons/react/20/solid";
+import { isEqual } from "lodash";
+import Text from "../Text/Text";
 
 export type ImageFile = {
   file: File;
@@ -43,13 +45,15 @@ function ImageInput(
     required,
     onMouseOver,
     onMouseOut,
+    readOnly,
+    defaultValue,
+    emptyText = "No images",
     ...props
   }: Pick<
     InputProps<false>,
     | "error"
     | "className"
     | "helpText"
-    | "onChange"
     | "name"
     | "label"
     | "id"
@@ -57,10 +61,21 @@ function ImageInput(
     | "onMouseOver"
     | "onMouseOut"
   > &
-    Omit<FileSelectProps, "onAcceptFiles">,
+    Omit<FileSelectProps, "onAcceptFiles"> & {
+      readOnly?: boolean;
+      defaultValue?: Image[];
+      onChange?: (event: { target: { value: Image[] } }) => void;
+      emptyText?: string;
+    },
   ref: ForwardedRef<HTMLInputElement>
 ) {
-  const [value, setValue] = useState<Image[]>([]);
+  const [value, setValue] = useState<Image[]>(defaultValue || []);
+
+  useDeepCompareEffect(() => {
+    if (defaultValue && !isEqual(defaultValue, value)) {
+      setValue(defaultValue);
+    }
+  }, [defaultValue]);
 
   const innerRef = useRef<HTMLInputElement>({
     get value() {
@@ -157,18 +172,23 @@ function ImageInput(
               alt={image.description}
               className="max-h-96 rounded-md"
             />
-            <Button
-              icon
-              variant="light"
-              color="white"
-              className="absolute right-2 top-2"
-              onClick={handleDeleteClick(image)}
-            >
-              <TrashIcon />
-            </Button>
+            {!readOnly && (
+              <Button
+                icon
+                variant="light"
+                color="white"
+                className="absolute right-2 top-2"
+                onClick={handleDeleteClick(image)}
+              >
+                <TrashIcon />
+              </Button>
+            )}
           </div>
         ))}
-        {(!limit || value.length < limit) && (
+        {readOnly && !value.length && (
+          <Text variant="secondary">{emptyText}</Text>
+        )}
+        {!readOnly && (!limit || value.length < limit) && (
           <FileSelect
             {...props}
             id={id}
