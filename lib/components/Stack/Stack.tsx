@@ -1,12 +1,16 @@
-import type { DetailedHTMLProps, HTMLAttributes } from "react";
+import type { DetailedHTMLProps, ForwardedRef, HTMLAttributes } from "react";
 import clsx from "clsx";
+import { forwardRef } from "react";
 
 export type StackProps = DetailedHTMLProps<
   HTMLAttributes<HTMLDivElement>,
   HTMLDivElement
 >;
 
-export default function Stack({ className, ...props }: StackProps) {
+function Stack(
+  { className, ...props }: StackProps,
+  ref: ForwardedRef<HTMLDivElement>
+) {
   return (
     <div
       {...props}
@@ -17,6 +21,9 @@ export default function Stack({ className, ...props }: StackProps) {
         },
         className
       )}
+      ref={ref}
     />
   );
 }
+
+export default forwardRef(Stack);
