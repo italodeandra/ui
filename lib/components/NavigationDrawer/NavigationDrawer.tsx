@@ -10,9 +10,13 @@ import defaultTheme from "tailwindcss/defaultTheme";
 export default function NavigationDrawer({
   children,
   navigationChildren,
+  position,
+  title,
 }: {
   children: ReactNode;
   navigationChildren: ReactNode;
+  position?: "left" | "right";
+  title?: ReactNode;
 }) {
   let { isOpen, setOpen } = useSnapshot(navigationDrawerState);
 
@@ -25,6 +29,8 @@ export default function NavigationDrawer({
         open={isMobile && isOpen}
         onClose={isMobile ? setOpen : undefined}
         className="lg:hidden"
+        position={position}
+        title={title}
       >
         {navigationChildren}
       </Drawer>
