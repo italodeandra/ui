@@ -1,16 +1,22 @@
 import { useCallback } from "react";
 import { get } from "lodash";
 
-type Intl<T> = { [key: string]: Intl<T> | T };
+export type Intl<T> = { [key: string]: Intl<T> | T };
 
-export default function useTranslation(intl?: Intl<string>) {
+export default function useTranslation(intl?: Intl<string>, prePath?: string) {
   return useCallback(
     (sentence: string, path?: string) => {
       return (
-        (get(intl, [path, sentence].filter(Boolean).join(".")) as string) ||
-        sentence
+        (get(
+          intl,
+          [
+            ...(prePath?.split(".") || []),
+            ...(path?.split(".") || []),
+            sentence,
+          ].filter(Boolean)
+        ) as string) || sentence
       );
     },
-    [intl]
+    [intl, prePath]
   );
 }
