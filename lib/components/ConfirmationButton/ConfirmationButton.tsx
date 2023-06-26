@@ -5,17 +5,20 @@ import Button, { ButtonProps } from "../Button/Button";
 export type ConfirmationButtonProps = {
   confirmation: string;
   label: ReactNode;
+  confirm?: string;
   onConfirm: () => void;
   loading?: boolean;
   className?: string;
   cancel?: string;
   position?: MenuProps["position"];
   buttonClassName?: string;
-  buttonProps?: ButtonProps<undefined>;
+  buttonProps?: Partial<ButtonProps<undefined>>;
+  menuProps?: Partial<MenuProps>;
 };
 
 export default function ConfirmationButton({
   label,
+  confirm,
   confirmation,
   onConfirm,
   loading,
@@ -24,6 +27,7 @@ export default function ConfirmationButton({
   position,
   buttonClassName,
   buttonProps,
+  menuProps,
 }: ConfirmationButtonProps) {
   return (
     <Menu
@@ -39,10 +43,11 @@ export default function ConfirmationButton({
         </Button>
       }
       className={className}
+      {...menuProps}
     >
       <Menu.Label>{confirmation}</Menu.Label>
       <Menu.Item className="!text-red-500" onClick={onConfirm}>
-        {label}
+        {confirm || label}
       </Menu.Item>
       <Menu.Item>{cancel}</Menu.Item>
     </Menu>
