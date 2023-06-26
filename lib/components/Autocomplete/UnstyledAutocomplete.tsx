@@ -92,7 +92,7 @@ export default function UnstyledAutocomplete<T extends { _id: string }>({
   let filteredItems = useMemo(
     () =>
       query === ""
-        ? []
+        ? items
         : items.filter(
             filterFunction ||
               ((item) =>
