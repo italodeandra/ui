@@ -25,6 +25,8 @@ export type DataTableProps<RowData> = {
     title?: ReactNode;
     accessor?: keyof RowData;
     render?: (item: RowData) => ReactNode;
+    headerClassName?: string;
+    cellClassName?: string;
   }[];
   actions?: {
     title: string;
@@ -106,6 +108,7 @@ export default function DataTable<RowData>({
                   column.id ||
                   (typeof column.title === "string" ? column.title : i)
                 }
+                className={column.headerClassName}
               >
                 {column.title}
               </Table.Cell>
@@ -132,17 +135,28 @@ export default function DataTable<RowData>({
                   : {})}
               >
                 <Table.Row onClick={handleRowClick(item)}>
-                  {columns.map((column, i) => (
-                    <Table.Cell
-                      key={
-                        column.id ||
-                        (typeof column.title === "string" ? column.title : i)
-                      }
-                    >
-                      {column.accessor && (item[column.accessor] as string)}
-                      {!column.accessor && column.render && column.render(item)}
-                    </Table.Cell>
-                  ))}
+                  {columns.map((column, i) => {
+                    let value = column.accessor
+                      ? (item[column.accessor] as string)
+                      : column.render && column.render(item);
+                    return (
+                      <Table.Cell
+                        key={
+                          column.id ||
+                          (typeof column.title === "string" ? column.title : i)
+                        }
+                        className={column.cellClassName}
+                        title={
+                          column.cellClassName?.includes("max-w") &&
+                          typeof value === "string"
+                            ? value
+                            : undefined
+                        }
+                      >
+                        {value}
+                      </Table.Cell>
+                    );
+                  })}
                   {actions && (
                     <Table.Cell actions>
                       {actions.map((action, i) => {

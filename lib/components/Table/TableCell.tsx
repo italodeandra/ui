@@ -7,12 +7,14 @@ export type TableCellProps = {
   className?: string;
   actions?: boolean;
   colSpan?: number;
+  title?: string;
 };
 export default function TableCell({
   children,
   className,
   actions,
   colSpan,
+  title,
 }: TableCellProps) {
   const { isHead } = useContext(TableHeadContext);
 
@@ -33,6 +35,7 @@ export default function TableCell({
           "sticky left-0 bg-zinc-50 py-2 text-left font-semibold text-zinc-900 dark:bg-zinc-900 dark:text-zinc-50"
         )}
         colSpan={colSpan}
+        title={title}
       >
         {children}
       </th>
@@ -46,6 +49,7 @@ export default function TableCell({
         "whitespace-nowrap text-zinc-500 dark:text-zinc-300"
       )}
       colSpan={colSpan}
+      title={title}
     >
       {children}
     </td>
