@@ -1,9 +1,12 @@
 import {
   cloneElement,
   ComponentPropsWithoutRef,
+  ForwardedRef,
+  forwardRef,
   Fragment,
   ReactElement,
   ReactNode,
+  Ref,
 } from "react";
 import { Menu as HuiMenu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
@@ -25,6 +28,7 @@ export type MenuProps = {
   children?: ReactNode;
   button?: ReactNode;
   unmount?: boolean;
+  ref?: Ref<HTMLDivElement>;
 };
 
 export type MenuItemProps<Href extends string | undefined> =
@@ -32,7 +36,7 @@ export type MenuItemProps<Href extends string | undefined> =
     icon?: ReactElement;
   };
 
-Menu.Item = function MenuItem<Href extends string | undefined>({
+const Item = function MenuItem<Href extends string | undefined>({
   className,
   icon,
   children,
@@ -69,7 +73,7 @@ export type MenuLabelProps<
   Href extends string | undefined
 > = TextProps<Inline, Href>;
 
-Menu.Label = function MenuLabel<
+const Label = function MenuLabel<
   Inline extends boolean | undefined,
   Href extends string | undefined
 >(props: MenuLabelProps<Inline, Href>) {
@@ -86,21 +90,27 @@ Menu.Label = function MenuLabel<
   );
 };
 
-export default function Menu({
-  className,
-  iconClassName,
-  position = "right",
-  children,
-  label,
-  button,
-  buttonProps,
-  unmount,
-  menuItemsClassName,
-}: MenuProps) {
+let Menu = forwardRef(function Menu(
+  {
+    className,
+    iconClassName,
+    position = "right",
+    children,
+    label,
+    button,
+    buttonProps,
+    unmount,
+    menuItemsClassName,
+    ...props
+  }: MenuProps,
+  ref: ForwardedRef<HTMLDivElement>
+) {
   return (
     <HuiMenu
       as="div"
       className={clsx("relative inline-block text-left", className)}
+      ref={ref}
+      {...props}
     >
       <div>
         {button ? (
@@ -152,4 +162,6 @@ export default function Menu({
       </Transition>
     </HuiMenu>
   );
-}
+});
+
+export default Object.assign(Menu, { Label, Item });
