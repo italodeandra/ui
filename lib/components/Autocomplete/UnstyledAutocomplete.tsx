@@ -9,6 +9,7 @@ import Input, {
   defaultTrailingInputClassName,
 } from "../Input/Input";
 import clsx from "clsx";
+import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 
 export interface UnstyledAutocompleteProps<T extends { _id: string }>
   extends Omit<
@@ -68,11 +69,13 @@ export default function UnstyledAutocomplete<T extends { _id: string }>({
   trailingInputClassName,
   leadingInputClassName,
   static: isStatic,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  displayValue = (item) => item?.[renderProperty] || ("" as any),
+  displayValue,
   value,
   ...props
 }: UnstyledAutocompleteProps<T>) {
+  displayValue =
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    displayValue || ((item: T | null) => item?.[renderProperty] || ("" as any));
   let [query, setQuery] = useState(defaultQuery);
   let [selectedItem, setSelectedItem] = useState<T | null>(null);
 
@@ -103,7 +106,18 @@ export default function UnstyledAutocomplete<T extends { _id: string }>({
     [filterFunction, filterProperty, items, query]
   );
 
-  trailing = loading ? <Loading /> : trailing;
+  trailing = loading ? (
+    <Loading />
+  ) : (
+    trailing || (
+      <Combobox.Button className="pointer-events-auto -mr-1 flex items-center">
+        <ChevronUpDownIcon
+          className="h-5 w-5 text-gray-400"
+          aria-hidden="true"
+        />
+      </Combobox.Button>
+    )
+  );
 
   let ComponentInput = as || UnstyledInput;
 
@@ -129,30 +143,34 @@ export default function UnstyledAutocomplete<T extends { _id: string }>({
     <Combobox onChange={setSelectedItem} value={selectedItem} nullable>
       {({ open }) => (
         <>
-          <ComponentInput
-            /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-            {...(props as any)}
-            as={Combobox.Input}
-            placeholder={placeholder}
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            trailing={trailing}
-            trailingClassName={clsx(
-              defaultTrailingClassName,
-              trailingClassName
-            )}
-            inputClassName={clsx(defaultInputClassName, inputElementClassName)}
-            innerClassName={inputInnerClassName}
-            trailingInputClassName={clsx(
-              defaultTrailingInputClassName,
-              trailingInputClassName
-            )}
-            leadingInputClassName={clsx(
-              defaultLeadingInputClassName,
-              leadingInputClassName
-            )}
-            displayValue={displayValue}
-          />
+          <div className="relative">
+            <ComponentInput
+              /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+              {...(props as any)}
+              as={Combobox.Input}
+              placeholder={placeholder}
+              onChange={(event) => setQuery(event.target.value)}
+              trailing={trailing}
+              trailingClassName={clsx(
+                defaultTrailingClassName,
+                trailingClassName
+              )}
+              inputClassName={clsx(
+                defaultInputClassName,
+                inputElementClassName
+              )}
+              innerClassName={inputInnerClassName}
+              trailingInputClassName={clsx(
+                defaultTrailingInputClassName,
+                trailingInputClassName
+              )}
+              leadingInputClassName={clsx(
+                defaultLeadingInputClassName,
+                leadingInputClassName
+              )}
+              displayValue={displayValue}
+            />
+          </div>
 
           {filteredItems.length > 0 && (
             <Combobox.Options static={isStatic} className={optionsClassName}>
@@ -160,13 +178,28 @@ export default function UnstyledAutocomplete<T extends { _id: string }>({
                 <Combobox.Option
                   key={item._id}
                   value={item}
-                  className={
-                    optionClassName &&
-                    (({ active, selected }) =>
-                      optionClassName({ active, selected }))
+                  className={({ active, selected }) =>
+                    clsx(
+                      "flex gap-2",
+                      optionClassName && optionClassName({ active, selected })
+                    )
                   }
                 >
-                  {doRender(item)}
+                  {({ selected, active }) => (
+                    <>
+                      {selected ? (
+                        <span
+                          className={clsx(
+                            "flex items-center",
+                            active ? "text-white" : "text-primary-500"
+                          )}
+                        >
+                          <CheckIcon className="h-5 w-5" aria-hidden="true" />
+                        </span>
+                      ) : null}
+                      {doRender(item)}
+                    </>
+                  )}
                 </Combobox.Option>
               ))}
             </Combobox.Options>
