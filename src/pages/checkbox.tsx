@@ -34,6 +34,9 @@ export default function CheckboxDemoPage() {
         <Checkbox label="Comments" />
         <Text variant="label">Checkbox without label</Text>
         <Checkbox />
+        <Text variant="label">Radio group</Text>
+        <Checkbox label="Male" type="radio" name="sex" />
+        <Checkbox label="Female" type="radio" name="sex" />
       </Stack>
     </>
   );
