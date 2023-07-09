@@ -10,6 +10,7 @@ import Input, {
 } from "../Input/Input";
 import clsx from "clsx";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
+import { useUpdateEffect } from "react-use";
 
 export interface UnstyledAutocompleteProps<T extends { _id: string }>
   extends Omit<
@@ -127,7 +128,7 @@ export default function UnstyledAutocomplete<T extends { _id: string }>({
     [renderFunction, renderProperty]
   );
 
-  useEffect(() => {
+  useUpdateEffect(() => {
     onSelect?.(selectedItem);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedItem]);

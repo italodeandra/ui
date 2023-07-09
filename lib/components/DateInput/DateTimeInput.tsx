@@ -25,7 +25,7 @@ export function formatDate(value: string) {
 }
 
 function DateTimeInput(
-  props: InputProps<false>,
+  { readOnly, ...props }: InputProps<false>,
   ref: ForwardedRef<HTMLInputElement>
 ) {
   const realRef = useRef<HTMLInputElement>(null);
@@ -57,8 +57,9 @@ function DateTimeInput(
       ref={realRef}
       type="datetime-local"
       pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}"
-      trailing={<CalendarIcon className="w-5" />}
+      trailing={!readOnly ? <CalendarIcon className="w-5" /> : undefined}
       inputClassName="!pr-3"
+      readOnly={readOnly}
     />
   );
 }

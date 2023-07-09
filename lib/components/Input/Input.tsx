@@ -1,5 +1,5 @@
 import UnstyledInput, { UnstyledInputProps } from "../Input/UnstyledInput";
-import { defaultTextStyles } from "../Text/Text";
+import { defaultTextStyles } from "../Text";
 import { ExclamationCircleIcon } from "@heroicons/react/20/solid";
 import InputIcon from "./InputIcon";
 import { ForwardedRef, forwardRef } from "react";
@@ -36,6 +36,7 @@ function Input<Select extends boolean | undefined>(
     required,
     label,
     loading,
+    readOnly,
     ...props
   }: InputProps<Select>,
   ref: ForwardedRef<Select extends true ? HTMLSelectElement : HTMLInputElement>
@@ -71,6 +72,9 @@ function Input<Select extends boolean | undefined>(
     inputClassName = `${inputClassName} border-error-300 dark:border-error-500 text-error-900 dark:text-error-500 placeholder-error-300 focus:border-error-500 dark:focus:border-error-500 focus:ring-error-500`;
     helpTextClassName = `${helpTextClassName} !text-error-600 dark:!text-error-500`;
   }
+  if (readOnly) {
+    inputClassName = `${inputClassName} border-dashed`;
+  }
 
   if (label && required) {
     label = (
@@ -95,6 +99,7 @@ function Input<Select extends boolean | undefined>(
       ref={ref}
       required={required}
       label={label}
+      readOnly={readOnly}
     />
   );
 }
