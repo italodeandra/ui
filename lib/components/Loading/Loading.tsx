@@ -7,7 +7,15 @@ export type LoadingProps = {
 export default function Loading({ className }: LoadingProps) {
   return (
     <svg
-      className={clsx("h-5 w-5 animate-spin text-gray-400", className)}
+      className={clsx(
+        "animate-spin",
+        {
+          "h-5": !className?.includes("h-"),
+          "w-5": !className?.includes("w-"),
+          "text-gray-400": !className?.includes("text-"),
+        },
+        className
+      )}
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"

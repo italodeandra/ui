@@ -68,11 +68,9 @@ const styles = {
   size: {
     md: {
       button: "px-4 py-3 sm:px-3 sm:py-2 sm:text-sm",
-      icon: "w-4 h-4",
     },
     sm: {
       button: "px-3 py-2 sm:px-2 sm:py-1 sm:text-xs",
-      icon: "w-3 h-3",
     },
   },
   icon: {
@@ -89,9 +87,9 @@ const styles = {
 
 export type ButtonProps<Href extends string | undefined> =
   UnstyledButtonProps<Href> & {
-    variant?: keyof typeof styles["variant"];
-    color?: keyof typeof styles["color"];
-    size?: keyof typeof styles["size"];
+    variant?: keyof (typeof styles)["variant"];
+    color?: keyof (typeof styles)["color"];
+    size?: keyof (typeof styles)["size"];
     icon?: boolean;
     leadingIcon?: ReactElement;
     trailingIcon?: ReactElement;
@@ -119,7 +117,9 @@ const Button = <Href extends string | undefined>(
   ref: ForwardedRef<Href extends string ? HTMLAnchorElement : HTMLButtonElement>
 ) => {
   if (loading) {
-    trailingIcon = <Loading className="!text-inherit" />;
+    trailingIcon = (
+      <Loading className={clsx(styles.icon[size].icon, "!text-inherit")} />
+    );
   }
 
   return (
@@ -145,7 +145,7 @@ const Button = <Href extends string | undefined>(
         cloneElement(leadingIcon, {
           className: clsx(
             "mr-2 -ml-0.5",
-            styles.size[size].icon,
+            styles.icon[size].icon,
             leadingIcon?.props?.className
           ),
         })}
@@ -171,7 +171,7 @@ const Button = <Href extends string | undefined>(
         cloneElement(trailingIcon, {
           className: clsx(
             "ml-2 -mr-0.5",
-            styles.size[size].icon,
+            styles.icon[size].icon,
             trailingIcon?.props?.className
           ),
         })}
