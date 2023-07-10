@@ -24,11 +24,12 @@ export type TextProps<
   Inline extends boolean | undefined,
   Href extends string | undefined
 > = {
-  variant?: keyof typeof defaultTextStyles["variant"];
-  size?: keyof typeof defaultTextStyles["size"];
+  variant?: keyof (typeof defaultTextStyles)["variant"];
+  size?: keyof (typeof defaultTextStyles)["size"];
   inline?: Inline;
   href?: Href;
   target?: string;
+  rel?: string;
 } & (Href extends true
   ? ComponentProps<typeof NextLink>
   : Inline extends true

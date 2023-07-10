@@ -11,6 +11,7 @@ import NextLink from "next/link";
 export type UnstyledButtonProps<Href extends string | undefined> = {
   href?: Href;
   target?: string;
+  rel?: string;
 } & Omit<
   Href extends string
     ? ComponentProps<typeof NextLink>
