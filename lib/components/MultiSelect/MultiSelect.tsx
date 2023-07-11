@@ -18,8 +18,8 @@ import Input, {
 } from "../Input/Input";
 import clsx from "clsx";
 import { defaultMenuItemsClassName } from "../Menu/Menu";
-import { isEqual } from "lodash";
-import { CheckIcon } from "@heroicons/react/20/solid";
+import { isEqual, take } from "lodash";
+import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import Badge from "../Badge/Badge";
 
 export interface MultiSelectProps<T extends { _id: string } | string>
@@ -53,6 +53,7 @@ export interface MultiSelectProps<T extends { _id: string } | string>
   value?: T[];
   creatable?: boolean;
   getCreateLabel?: (query: string) => string;
+  itemsRenderLimit?: number;
 }
 
 function getValue<T extends { _id: string } | string>(item: T) {
@@ -125,6 +126,7 @@ export default function MultiSelect<T extends { _id: string } | string>({
   labelClassName,
   creatable,
   getCreateLabel = (query: string) => `+ create "${query}"`,
+  itemsRenderLimit,
   ...props
 }: MultiSelectProps<T>) {
   let [query, setQuery] = useState(defaultQuery);
@@ -161,7 +163,18 @@ export default function MultiSelect<T extends { _id: string } | string>({
     [filterFunction, filterProperty, items, query]
   );
 
-  trailing = loading ? <Loading /> : trailing;
+  trailing = loading ? (
+    <Loading />
+  ) : (
+    trailing || (
+      <Combobox.Button className="pointer-events-auto -mr-1 flex items-center">
+        <ChevronUpDownIcon
+          className="h-5 w-5 text-gray-400"
+          aria-hidden="true"
+        />
+      </Combobox.Button>
+    )
+  );
 
   let ComponentInput = as || UnstyledInput;
 
@@ -263,7 +276,10 @@ export default function MultiSelect<T extends { _id: string } | string>({
                     )}
                   </Combobox.Option>
                 )}
-                {filteredItems.map((item) => (
+                {(itemsRenderLimit
+                  ? take(filteredItems, itemsRenderLimit)
+                  : filteredItems
+                ).map((item) => (
                   <Combobox.Option
                     key={getValue(item)}
                     value={item}
