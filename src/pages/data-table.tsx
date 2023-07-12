@@ -114,7 +114,6 @@ export default function DataTableDemoPage() {
           // totalItems={2}
           currentPage={page}
           onChangePage={setPage}
-          sortable
           sort={sort}
           onChangeSort={setSort}
         />

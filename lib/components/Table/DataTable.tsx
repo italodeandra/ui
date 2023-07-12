@@ -48,7 +48,6 @@ export type DataTableProps<RowData> = {
   itemsPerPage?: number;
   className?: string;
   autoHeight?: boolean;
-  sortable?: boolean;
   onChangeSort?: (sort: [string, "asc" | "desc"][]) => void;
   sort?: [string, "asc" | "desc"][];
 };
