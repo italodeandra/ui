@@ -13,6 +13,7 @@ export default function Autocomplete<T extends { _id: string }>({
   query: defaultQuery = "",
   onChangeQuery,
   emptyText = "No item found.",
+  className,
   ...props
 }: AutocompleteProps<T>) {
   let [query, setQuery] = useState(defaultQuery);
@@ -31,7 +32,7 @@ export default function Autocomplete<T extends { _id: string }>({
   }, [onChangeQuery, query]);
 
   return (
-    <div className="relative">
+    <div className={clsx("relative", className)}>
       <UnstyledAutocomplete
         {...props}
         as={Input}

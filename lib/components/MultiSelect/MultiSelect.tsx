@@ -127,6 +127,7 @@ export default function MultiSelect<T extends { _id: string } | string>({
   creatable,
   getCreateLabel = (query: string) => `+ create "${query}"`,
   itemsRenderLimit,
+  className,
   ...props
 }: MultiSelectProps<T>) {
   let [query, setQuery] = useState(defaultQuery);
@@ -209,7 +210,7 @@ export default function MultiSelect<T extends { _id: string } | string>({
   );
 
   return (
-    <div className="relative">
+    <div className={clsx("relative", className)}>
       <Combobox
         /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
         onChange={setSelectedItems as any}
