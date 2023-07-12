@@ -8,10 +8,11 @@ import DataTable, {
   DataTableProps,
 } from "../../lib/components/Table/DataTable";
 import Button from "../../lib/components/Button/Button";
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useMount } from "react-use";
 import ms from "ms";
 import Breadcrumbs from "../../lib/components/Breadcrumbs/Breadcrumbs";
+import { map, orderBy } from "lodash";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   props: {
@@ -40,20 +41,28 @@ const data = [
 
 const columns: DataTableProps<(typeof data)[0]>["columns"] = [
   {
+    id: "name",
     title: "Name",
     accessor: "name",
+    sortable: true,
   },
   {
+    id: "title",
     title: "Title",
     accessor: "title",
+    sortable: true,
   },
   {
+    id: "email",
     title: "Email",
     accessor: "email",
+    sortable: true,
   },
   {
+    id: "role",
     title: "Role",
     accessor: "role",
+    sortable: true,
   },
 ];
 
@@ -69,12 +78,18 @@ const pages = [{ title: "DataTable" }];
 export default function DataTableDemoPage() {
   let [isLoading, setLoading] = useState(true);
   let [page, setPage] = useState(1);
+  let [sort, setSort] = useState<[string, "asc" | "desc"][]>([]);
 
   useMount(() => {
     setTimeout(() => {
       setLoading(false);
     }, ms("5s"));
   });
+
+  let sortedData = useMemo(
+    () => orderBy(data, map(sort, 0), map(sort, 1)),
+    [sort]
+  );
 
   return (
     <div className="flex flex-1 flex-col">
@@ -86,7 +101,7 @@ export default function DataTableDemoPage() {
           title="Users"
           subtitle="A list of all the users in your account including their name, title, email and role."
           columns={columns}
-          data={!isLoading ? data : undefined}
+          data={!isLoading ? sortedData : undefined}
           isLoading={isLoading}
           actions={actions}
           headerContent={<Button variant="filled">Add user</Button>}
@@ -99,6 +114,9 @@ export default function DataTableDemoPage() {
           // totalItems={2}
           currentPage={page}
           onChangePage={setPage}
+          sortable
+          sort={sort}
+          onChangeSort={setSort}
         />
       </Stack>
     </div>

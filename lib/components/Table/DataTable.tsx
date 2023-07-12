@@ -13,6 +13,7 @@ import Stack from "../Stack/Stack";
 import Text from "../Text/Text";
 import Table from "./Table";
 import clsx from "clsx";
+import { ChevronUpIcon } from "@heroicons/react/20/solid";
 
 export type DataTableProps<RowData> = {
   title?: ReactNode;
@@ -27,6 +28,7 @@ export type DataTableProps<RowData> = {
     render?: (item: RowData) => ReactNode;
     headerClassName?: string;
     cellClassName?: string;
+    sortable?: boolean;
   }[];
   actions?: {
     title: string;
@@ -46,6 +48,9 @@ export type DataTableProps<RowData> = {
   itemsPerPage?: number;
   className?: string;
   autoHeight?: boolean;
+  sortable?: boolean;
+  onChangeSort?: (sort: [string, "asc" | "desc"][]) => void;
+  sort?: [string, "asc" | "desc"][];
 };
 
 export default function DataTable<RowData>({
@@ -67,7 +72,10 @@ export default function DataTable<RowData>({
   itemsPerPage = 0,
   className,
   autoHeight,
+  onChangeSort,
+  sort: defaultSort = [],
 }: DataTableProps<RowData>) {
+  let [sort, setSort] = useState(defaultSort);
   let [page, setPage] = useState(currentPage);
   useEffect(() => {
     if (page !== currentPage) {
@@ -84,6 +92,51 @@ export default function DataTable<RowData>({
     (item: RowData) => (onRowClick ? () => onRowClick(item) : undefined),
     [onRowClick]
   );
+
+  let getColumnSort = useCallback(
+    (id: string) => sort.find((column) => id === column[0]),
+    [sort]
+  );
+  let handleColumnClick = useCallback(
+    (id: string) => () => {
+      let sort: [string, "asc" | "desc" | null] = getColumnSort(id) || [
+        id,
+        null,
+      ];
+      switch (sort[1]) {
+        case "asc":
+          sort[1] = "desc";
+          break;
+        case "desc":
+          sort[1] = null;
+          break;
+        case null:
+          sort[1] = "asc";
+          break;
+      }
+      setSort((oldSort) => {
+        let newSort = [...oldSort];
+        if (sort[1]) {
+          let column = newSort.find((column) => column[0] === id);
+          if (column) {
+            column[1] = sort[1];
+          } else {
+            newSort.push([sort[0], sort[1]]);
+          }
+          return newSort;
+        }
+        return newSort.filter((column) => !!column[1]);
+      });
+    },
+    [getColumnSort]
+  );
+
+  useEffect(() => {
+    if (onChangeSort) {
+      onChangeSort?.(sort);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sort]);
 
   return (
     <Stack
@@ -102,17 +155,46 @@ export default function DataTable<RowData>({
       <Table autoHeight={autoHeight}>
         <Table.Head>
           <Table.Row>
-            {columns.map((column, i) => (
-              <Table.Cell
-                key={
-                  column.id ||
-                  (typeof column.title === "string" ? column.title : i)
-                }
-                className={column.headerClassName}
-              >
-                {column.title}
-              </Table.Cell>
-            ))}
+            {columns.map((column, i) => {
+              let id =
+                column.id ||
+                (typeof column.title === "string"
+                  ? column.title
+                  : i.toString());
+              let columnSort = getColumnSort(id);
+              return (
+                <Table.Cell key={id} className={column.headerClassName}>
+                  {column.sortable ? (
+                    <span
+                      className="group inline-flex cursor-pointer"
+                      onClick={handleColumnClick(id)}
+                    >
+                      {column.title}
+                      <span
+                        className={clsx(
+                          "ml-2 flex-none rounded text-gray-400",
+                          {
+                            "bg-gray-200 text-gray-900 group-hover:bg-gray-300":
+                              columnSort?.[1],
+                            "invisible group-hover:visible group-focus:visible":
+                              !columnSort?.[1],
+                          }
+                        )}
+                      >
+                        <ChevronUpIcon
+                          className={clsx("h-5 w-5", {
+                            "scale-y-flip": columnSort?.[1] === "desc",
+                          })}
+                          aria-hidden="true"
+                        />
+                      </span>
+                    </span>
+                  ) : (
+                    column.title
+                  )}
+                </Table.Cell>
+              );
+            })}
             {actions && <Table.Cell />}
           </Table.Row>
           {isLoading && (
