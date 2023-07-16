@@ -82,6 +82,10 @@ export const menu = [
         title: "Notifications",
         href: "/notifications",
       },
+      {
+        title: "Dialogs",
+        href: "/dialogs",
+      },
       //
       {
         title: "Navigation",

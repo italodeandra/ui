@@ -52,7 +52,7 @@ export default function Modal({
         >
           <div
             className={clsx(
-              "fixed inset-0 bg-zinc-500 !bg-opacity-75 transition-opacity dark:bg-zinc-800",
+              "fixed inset-0 bg-white/75 transition-opacity dark:bg-black/75",
               overlayClassName
             )}
           />
