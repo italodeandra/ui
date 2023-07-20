@@ -4,10 +4,12 @@ import {
   forwardRef,
   InputHTMLAttributes,
   ReactNode,
+  useId,
 } from "react";
-import { useId } from "react";
 import clsx from "clsx";
 import { Combobox } from "@headlessui/react";
+import type Cleave from "cleave.js/react";
+import type { CleaveOptions } from "cleave.js/options";
 
 export type UnstyledInputCommonProps = {
   label?: ReactNode;
@@ -21,8 +23,9 @@ export type UnstyledInputCommonProps = {
   helpText?: ReactNode;
   trailing?: ReactNode;
   leading?: ReactNode;
-  as?: typeof Combobox.Input;
+  as?: typeof Combobox.Input | typeof Cleave;
   innerClassName?: string;
+  options?: CleaveOptions;
 };
 
 export type UnstyledInputProps<Select extends boolean | undefined> =
