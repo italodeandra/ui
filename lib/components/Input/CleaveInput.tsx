@@ -26,7 +26,7 @@ function CleaveInput(
       return value;
     },
     set value(value) {
-      setValue(value || []);
+      setValue(value || "");
     },
   } as unknown as HTMLInputElement);
 
@@ -58,17 +58,7 @@ function CleaveInput(
   }, [value]);
 
   const handleOnChange: ChangeEventHandler<HTMLInputElement> = (event) => {
-    setValue(
-      event.target.rawValue.replace(
-        options.prefix
-          ? new RegExp(
-              `^${options.prefix.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`,
-              "g"
-            )
-          : "",
-        ""
-      )
-    );
+    setValue(event.target.rawValue);
   };
 
   return (

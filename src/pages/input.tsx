@@ -48,7 +48,10 @@ export default function InputDemoPage() {
             numeral: true,
             numeralDecimalMark: ",",
             delimiter: ".",
+            noImmediatePrefix: true,
+            rawValueTrimPrefix: true,
           }}
+          onChange={(event) => console.info("value", event.target.value)}
         />
       </Stack>
     </>
