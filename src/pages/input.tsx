@@ -5,7 +5,7 @@ import Breadcrumbs from "../../lib/components/Breadcrumbs/Breadcrumbs";
 import Input from "../../lib/components/Input/Input";
 import Stack from "../../lib/components/Stack/Stack";
 import getPublicLayout from "../views/publicLayout";
-import Cleave from "cleave.js/react";
+import CleaveInput from "../../lib/components/Input/CleaveInput";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   props: {
@@ -41,9 +41,8 @@ export default function InputDemoPage() {
           leadingInputClassName="pl-7"
         />
         <Input label="Loading input" loading placeholder="He's pulsating" />
-        <Input
+        <CleaveInput
           label="Currency input"
-          as={Cleave}
           options={{
             prefix: "R$",
             numeral: true,
