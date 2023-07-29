@@ -11,11 +11,14 @@ import Json from "../../lib/components/Code/Json";
 import { GetServerSideProps } from "next";
 import { getCookies } from "cookies-next";
 import Breadcrumbs from "../../lib/components/Breadcrumbs/Breadcrumbs";
+import CleaveInput from "../../lib/components/Input/CleaveInput";
+import { useEffect } from "react";
 
 type FieldValues = {
   email: string;
   password: string;
   remember: boolean;
+  price: number;
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
@@ -32,9 +35,16 @@ export default function FormDemoPage() {
     handleSubmit,
     watch,
     formState: { errors },
+    setValue,
   } = useForm<FieldValues>();
 
   const onSubmit = (data: FieldValues) => console.info(data);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setValue("price", 10.5);
+    }, 1000);
+  }, [setValue]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -69,6 +79,26 @@ export default function FormDemoPage() {
               {...register("password", {
                 required: "Please fill with your password",
               })}
+            />
+          </div>
+        </div>
+
+        <div className="space-y-1">
+          <div className="mt-1">
+            <CleaveInput
+              label="Price"
+              required
+              {...register("price", {
+                required: "Please fill with the price",
+              })}
+              options={{
+                prefix: "R$",
+                numeral: true,
+                numeralDecimalMark: ",",
+                delimiter: ".",
+                noImmediatePrefix: true,
+                rawValueTrimPrefix: true,
+              }}
             />
           </div>
         </div>

@@ -50,6 +50,12 @@ export type DataTableProps<RowData> = {
   autoHeight?: boolean;
   onChangeSort?: (sort: [string, "asc" | "desc"][]) => void;
   sort?: [string, "asc" | "desc"][];
+  previousText?: string;
+  nextText?: string;
+  showingText?: string;
+  toText?: string;
+  ofText?: string;
+  resultsText?: string;
 };
 
 export default function DataTable<RowData>({
@@ -73,6 +79,12 @@ export default function DataTable<RowData>({
   autoHeight,
   onChangeSort,
   sort: defaultSort = [],
+  previousText,
+  nextText,
+  showingText,
+  toText,
+  ofText,
+  resultsText,
 }: DataTableProps<RowData>) {
   let [sort, setSort] = useState(defaultSort);
   let [page, setPage] = useState(currentPage);
@@ -304,6 +316,12 @@ export default function DataTable<RowData>({
           itemsPerPage={itemsPerPage}
           currentPage={currentPage}
           onChangePage={onChangePage}
+          previousText={previousText}
+          nextText={nextText}
+          showingText={showingText}
+          toText={toText}
+          ofText={ofText}
+          resultsText={resultsText}
         />
       ) : undefined}
     </Stack>

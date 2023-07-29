@@ -32,9 +32,16 @@ export default function Pagination({
     }
   }, [onChangePage, page]);
 
+  let [previousTotalItems, setPreviousTotalItems] = useState(totalItems || 0);
+  useEffect(() => {
+    if (totalItems) {
+      setPreviousTotalItems(totalItems);
+    }
+  }, [totalItems]);
+
   let pageCount =
-    totalItems !== undefined && itemsPerPage !== undefined
-      ? Math.floor(totalItems / itemsPerPage) || 1
+    itemsPerPage !== undefined
+      ? Math.ceil(previousTotalItems / itemsPerPage) || 1
       : 0;
 
   let pages = useMemo(() => {

@@ -8,6 +8,12 @@ export interface TableFooterWithPaginationProps {
   totalItems?: number;
   currentPage: number;
   onChangePage?: (page: number) => void;
+  previousText?: string;
+  nextText?: string;
+  showingText?: string;
+  toText?: string;
+  ofText?: string;
+  resultsText?: string;
 }
 
 export default function TableFooterWithPagination({
@@ -15,6 +21,12 @@ export default function TableFooterWithPagination({
   totalItems,
   currentPage,
   onChangePage,
+  previousText = "Previous",
+  nextText = "Next",
+  showingText = "Showing",
+  toText = "to",
+  ofText = "of",
+  resultsText = "results",
 }: TableFooterWithPaginationProps) {
   let pageCount =
     totalItems !== undefined && itemsPerPage !== undefined
@@ -45,24 +57,25 @@ export default function TableFooterWithPagination({
     <TableFooter>
       <div className="flex flex-1 justify-between sm:hidden">
         <Button disabled={page === 1} onClick={handlePageClick(page - 1)}>
-          Previous
+          {previousText}
         </Button>
         <Button
           disabled={page === pageCount}
           onClick={handlePageClick(page + 1)}
         >
-          Next
+          {nextText}
         </Button>
       </div>
       <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
         <div>
           <p className="text-sm text-gray-700 dark:text-zinc-100">
-            Showing <span className="font-medium">{start}</span> to{" "}
+            {showingText} <span className="font-medium">{start}</span> {toText}{" "}
             <span className="font-medium">{end}</span>
             {totalItems !== undefined && itemsPerPage !== undefined && (
               <>
                 {" "}
-                of <span className="font-medium">{totalItems}</span> results
+                {ofText} <span className="font-medium">{totalItems}</span>{" "}
+                {resultsText}
               </>
             )}
           </p>

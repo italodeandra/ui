@@ -2,7 +2,6 @@ import { ForwardedRef, forwardRef, useEffect, useRef, useState } from "react";
 import Cleave from "cleave.js/react";
 import Input, { InputProps } from "./Input";
 import { CleaveOptions } from "cleave.js/options";
-import { useUpdateEffect } from "react-use";
 import { ChangeEventHandler } from "cleave.js/react/props";
 
 export type CleaveInputProps = {
@@ -20,13 +19,14 @@ function CleaveInput(
   ref: ForwardedRef<HTMLInputElement>
 ) {
   const [value, setValue] = useState<typeof defaultValue>(defaultValue);
+  let valueRef = useRef(defaultValue);
 
   const innerRef = useRef<HTMLInputElement>({
     get value() {
-      return value;
+      return valueRef.current;
     },
     set value(value) {
-      setValue(value || "");
+      setValue(value.toString().replace(".", ","));
     },
   } as unknown as HTMLInputElement);
 
@@ -44,21 +44,17 @@ function CleaveInput(
     }
   }, [ref]);
 
-  useUpdateEffect(() => {
+  const handleOnChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     if (onChange) {
+      valueRef.current = +event.target.rawValue;
       onChange({
         target: {
           name,
-          value,
+          value: +event.target.rawValue,
         },
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } as any);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [value]);
-
-  const handleOnChange: ChangeEventHandler<HTMLInputElement> = (event) => {
-    setValue(event.target.rawValue);
   };
 
   return (
@@ -66,10 +62,10 @@ function CleaveInput(
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       {...(props as any)}
       as={Cleave}
-      htmlRef={ref}
       name={name}
       onChange={handleOnChange}
       options={options}
+      value={value}
     />
   );
 }
