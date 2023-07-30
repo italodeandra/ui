@@ -76,7 +76,7 @@ const styles = {
   icon: {
     md: {
       button: "px-3 py-3 sm:py-2 sm:px-2",
-      icon: "w-6 h-6",
+      icon: "w-5 h-5",
     },
     sm: {
       button: "px-2 py-2 sm:py-1 sm:px-1",
