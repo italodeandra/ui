@@ -183,7 +183,7 @@ export default function DataTable<RowData>({
                       {column.title}
                       <span
                         className={clsx(
-                          "ml-2 flex-none rounded text-gray-400",
+                          "ml-2 mb-auto flex-none rounded text-gray-400",
                           {
                             "bg-gray-200 text-gray-900 group-hover:bg-gray-300":
                               columnSort?.[1],
