@@ -40,6 +40,7 @@ export default function AutocompleteDemoPage() {
           filterProperty="name"
           renderProperty="name"
           value={people[0]}
+          readOnly
         />
       </Stack>
     </>

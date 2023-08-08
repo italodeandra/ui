@@ -72,6 +72,7 @@ export default function UnstyledAutocomplete<T extends { _id: string }>({
   static: isStatic,
   displayValue,
   value,
+  readOnly,
   ...props
 }: UnstyledAutocompleteProps<T>) {
   displayValue =
@@ -109,16 +110,11 @@ export default function UnstyledAutocomplete<T extends { _id: string }>({
 
   trailing = loading ? (
     <Loading />
-  ) : (
-    trailing || (
-      <Combobox.Button className="pointer-events-auto -mr-1 flex items-center">
-        <ChevronUpDownIcon
-          className="h-5 w-5 text-gray-400"
-          aria-hidden="true"
-        />
-      </Combobox.Button>
-    )
-  );
+  ) : trailing || !readOnly ? (
+    <Combobox.Button className="pointer-events-auto -mr-1 flex items-center">
+      <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+    </Combobox.Button>
+  ) : undefined;
 
   let ComponentInput = as || UnstyledInput;
 
@@ -170,10 +166,11 @@ export default function UnstyledAutocomplete<T extends { _id: string }>({
                 leadingInputClassName
               )}
               displayValue={displayValue}
+              readOnly={readOnly}
             />
           </div>
 
-          {filteredItems.length > 0 && (
+          {filteredItems.length > 0 && !readOnly && (
             <Combobox.Options static={isStatic} className={optionsClassName}>
               {filteredItems.map((item) => (
                 <Combobox.Option
