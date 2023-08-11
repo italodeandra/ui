@@ -31,7 +31,7 @@ export default function CodeDemoPage() {
             null: null,
           }}
         />
-        <Code language="jsx" theme={vsLight}>
+        <Code copy language="jsx" theme={vsLight}>
           {`// Code component
 <Code language="json">
   {JSON.stringify(

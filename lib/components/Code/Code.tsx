@@ -27,7 +27,11 @@ export default function Code({
   theme,
 }: CodeProps) {
   return (
-    <div className={clsx("dark group relative", className)}>
+    <div
+      className={clsx("group relative", className, {
+        dark: !theme,
+      })}
+    >
       <div className="prose max-w-none">
         <Highlight
           {...defaultProps}
