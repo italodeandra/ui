@@ -6,6 +6,7 @@ import Json from "../../lib/components/Code/Json";
 import { GetServerSideProps } from "next";
 import { getCookies } from "cookies-next";
 import Breadcrumbs from "../../lib/components/Breadcrumbs/Breadcrumbs";
+import vsLight from "prism-react-renderer/themes/vsLight";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   props: {
@@ -30,7 +31,7 @@ export default function CodeDemoPage() {
             null: null,
           }}
         />
-        <Code language="jsx">
+        <Code language="jsx" theme={vsLight}>
           {`// Code component
 <Code language="json">
   {JSON.stringify(

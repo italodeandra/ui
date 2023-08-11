@@ -1,5 +1,9 @@
 import { Fragment } from "react";
-import Highlight, { defaultProps, Language } from "prism-react-renderer";
+import Highlight, {
+  defaultProps,
+  Language,
+  PrismTheme,
+} from "prism-react-renderer";
 import clsx from "clsx";
 import CopyButton from "../CopyButton/CopyButton";
 
@@ -10,6 +14,7 @@ export type CodeProps = {
   copy?: boolean;
   copyText?: string;
   copiedText?: string;
+  theme?: PrismTheme;
 };
 
 export default function Code({
@@ -19,6 +24,7 @@ export default function Code({
   copy,
   copyText,
   copiedText,
+  theme,
 }: CodeProps) {
   return (
     <div className={clsx("dark group relative", className)}>
@@ -27,7 +33,7 @@ export default function Code({
           {...defaultProps}
           code={children.trimEnd()}
           language={language}
-          theme={undefined}
+          theme={theme}
         >
           {({ className, style, tokens, getTokenProps }) => (
             <pre className={className} style={style}>
