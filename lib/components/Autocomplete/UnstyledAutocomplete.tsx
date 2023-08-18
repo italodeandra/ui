@@ -11,6 +11,7 @@ import Input, {
 import clsx from "clsx";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { useUpdateEffect } from "react-use";
+import { take } from "lodash";
 
 export interface UnstyledAutocompleteProps<T extends { _id: string }>
   extends Omit<
@@ -45,6 +46,7 @@ export interface UnstyledAutocompleteProps<T extends { _id: string }>
   static?: boolean;
   displayValue?: (item: T | null) => string;
   value?: T | null;
+  itemsRenderLimit?: number;
 }
 
 export default function UnstyledAutocomplete<T extends { _id: string }>({
@@ -73,6 +75,7 @@ export default function UnstyledAutocomplete<T extends { _id: string }>({
   displayValue,
   value,
   readOnly,
+  itemsRenderLimit,
   ...props
 }: UnstyledAutocompleteProps<T>) {
   displayValue =
@@ -172,7 +175,10 @@ export default function UnstyledAutocomplete<T extends { _id: string }>({
 
           {filteredItems.length > 0 && !readOnly && (
             <Combobox.Options static={isStatic} className={optionsClassName}>
-              {filteredItems.map((item) => (
+              {(itemsRenderLimit
+                ? take(filteredItems, itemsRenderLimit)
+                : filteredItems
+              ).map((item) => (
                 <Combobox.Option
                   key={item._id}
                   value={item}
