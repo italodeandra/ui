@@ -194,7 +194,7 @@ export default function Tooltip({
   className,
 }: {
   children: JSX.Element;
-  content: ReactNode;
+  content?: ReactNode;
   placement?: Placement;
   delay?: Delay;
   className?: string;
