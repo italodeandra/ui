@@ -32,7 +32,7 @@ export default function NavigationItem({
     <Button
       variant={active ? "light" : "text"}
       className={clsx("w-full !justify-start !border-transparent")}
-      leadingIcon={
+      leading={
         icon &&
         cloneElement(icon, {
           className: clsx(icon.props?.className, "!w-5 mr-3"),

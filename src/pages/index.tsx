@@ -99,13 +99,13 @@ export default function HomePage() {
               href="/getting-started"
               variant="light"
               color="primary"
-              trailingIcon={<ArrowLongRightIcon />}
+              trailing={<ArrowLongRightIcon />}
               className="!px-4 !text-lg"
               {...getExampleCodeMouseEvents(`<Button
   href="/getting-started"
   variant="outlined"
   color="primary"
-  trailingIcon={<ArrowLongRightIcon />}
+  trailing={<ArrowLongRightIcon />}
   className="!px-4 !text-lg"
 >
   Get started

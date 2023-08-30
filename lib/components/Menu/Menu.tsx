@@ -119,7 +119,7 @@ let Menu = forwardRef(function Menu(
           <HuiMenu.Button
             as={Button}
             className={clsx("flex w-full", buttonProps?.className)}
-            trailingIcon={<ChevronDownIcon className={iconClassName} />}
+            trailing={<ChevronDownIcon className={iconClassName} />}
             {...buttonProps}
           >
             {label}
