@@ -48,25 +48,23 @@ export function DocPage({
   const pages = useMemo(() => [{ title }], [title]);
 
   return (
-    <>
+    <div className="flex flex-1 flex-col">
       <NextSeo title={title} />
-      <div className="mx-auto max-w-7xl">
-        <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
-        <Stack className="gap-4 p-2">
-          {children}
-          {props && (
-            <>
-              <Text variant="label">Props</Text>
-              <DataTable
-                className="-my-2"
-                columns={columns}
-                data={props}
-                idAccessor="property"
-              />
-            </>
-          )}
-        </Stack>
-      </div>
-    </>
+      <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
+      <Stack className="gap-4 p-2">
+        {children}
+        {props && (
+          <>
+            <Text variant="label">Props</Text>
+            <DataTable
+              className="-m-2 md:mx-0"
+              columns={columns}
+              data={props}
+              idAccessor="property"
+            />
+          </>
+        )}
+      </Stack>
+    </div>
   );
 }

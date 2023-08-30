@@ -56,6 +56,7 @@ export type DataTableProps<RowData> = {
   toText?: string;
   ofText?: string;
   resultsText?: string;
+  tableClassName?: string;
 };
 
 export default function DataTable<RowData>({
@@ -85,6 +86,7 @@ export default function DataTable<RowData>({
   toText,
   ofText,
   resultsText,
+  tableClassName,
 }: DataTableProps<RowData>) {
   let [sort, setSort] = useState(defaultSort);
   let [page, setPage] = useState(currentPage);
@@ -163,7 +165,7 @@ export default function DataTable<RowData>({
           {headerContent}
         </Table.Header>
       )}
-      <Table autoHeight={autoHeight}>
+      <Table autoHeight={autoHeight} className={tableClassName}>
         <Table.Head>
           <Table.Row>
             {columns.map((column, i) => {

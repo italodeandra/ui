@@ -4,7 +4,11 @@ import { cloneElement, ForwardedRef, forwardRef, ReactElement } from "react";
 import Loading from "../Loading/Loading";
 
 const styles = {
-  root: "appearance-none select-none border transition-colors inline-flex items-center justify-center font-medium leading-4 focus:outline-none focus-visible:ring-2 focus:ring-primary-500 focus:ring-offset-2 ring-offset-gray-100 dark:ring-offset-zinc-900",
+  root: clsx(
+    "appearance-none select-none border transition-colors inline-flex items-center justify-center font-medium leading-4 focus:outline-none",
+    "ring-offset-zinc-100 focus-visible:ring-2 focus:ring-primary-500 focus:ring-offset-2",
+    "dark:ring-offset-zinc-900"
+  ),
   variant: {
     filled: "shadow-sm",
     light: "shadow-sm",
@@ -17,7 +21,7 @@ const styles = {
     success: "",
     error: "",
     gray: "",
-    white: "",
+    default: "",
   },
   variantColor: {
     "filled-primary":
@@ -27,20 +31,20 @@ const styles = {
     "filled-error":
       "bg-red-500 hover:bg-red-500/80 text-white border-transparent active:border-red-700 dark:active:border-red-300",
     "filled-gray":
-      "bg-zinc-300 hover:bg-zinc-200 text-zinc-900 border-transparent active:border-zinc-400 dark:active:border-zinc-600",
-    "filled-white":
-      "bg-white hover:bg-zinc-100 text-zinc-900 border-transparent active:border-zinc-300 dark:active:border-zinc-700",
+      "bg-zinc-500 hover:bg-zinc-500/80 text-white border-transparent active:border-zinc-500 dark:active:border-zinc-400",
+    "filled-default":
+      "bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-300 dark:hover:bg-zinc-400 text-zinc-900 border-transparent active:border-zinc-400 dark:active:border-zinc-300",
 
     "light-primary":
-      "border-primary-500 text-primary-500 bg-primary-500/30 hover:bg-primary-500/40 active:border-primary-700",
+      "border-transparent text-primary-500 bg-primary-500/20 hover:bg-primary-500/30 active:border-primary-700",
     "light-success":
-      "border-success-500 text-success-500 bg-success-500/30 hover:bg-success-500/40 active:border-success-700",
+      "border-transparent text-success-500 bg-success-500/20 hover:bg-success-500/30 active:border-success-700",
     "light-error":
-      "border-error-400 text-error-500 bg-error-500/30 hover:bg-error-500/40 active:border-error-700",
+      "border-transparent text-error-500 bg-error-500/20 hover:bg-error-500/30 active:border-error-700",
     "light-gray":
-      "border-zinc-400 bg-zinc-500/30 hover:bg-zinc-500/40 dark:hover:bg-zinc-500/10 active:border-zinc-700",
-    "light-white":
-      "border-white dark:text-white bg-white/30 dark:bg-white/20 hover:bg-white/70 dark:hover:bg-white/30 active:border-zinc-500",
+      "border-transparent text-zinc-500 dark:text-zinc-300 bg-zinc-500/20 hover:bg-zinc-500/30 dark:hover:bg-zinc-400/30 active:border-zinc-700 dark:active:border-zinc-500",
+    "light-default":
+      "border-transparent dark:text-white bg-zinc-300/30 dark:bg-white/20 hover:bg-zinc-300/70 dark:hover:bg-white/30 active:border-zinc-400",
 
     "outlined-primary":
       "border-primary-500 text-primary-500 hover:bg-primary-500/10 active:border-primary-700",
@@ -50,49 +54,72 @@ const styles = {
       "border-error-500 text-error-500 hover:bg-error-500/10 active:border-error-700",
     "outlined-gray":
       "border-zinc-400 text-zinc-500 dark:text-zinc-400 hover:bg-zinc-500/10 active:border-zinc-700",
-    "outlined-white":
-      "dark:text-white border-zinc-300 dark:border-white/50 dark:hover:bg-white/5 hover:bg-zinc-500/5 active:border-zinc-500 dark:active:border-white",
+    "outlined-default":
+      "dark:text-white border-zinc-300 dark:border-zinc-600 dark:hover:bg-white/5 hover:bg-zinc-500/5 active:border-zinc-500 dark:active:border-white",
 
     "text-primary":
-      "text-primary-500 hover:bg-primary-500/10 border-transparent active:border-primary-500",
+      "text-primary-500 hover:bg-primary-500/5 border-transparent active:border-primary-500",
     "text-success":
-      "text-success-500 hover:bg-success-500/10 border-transparent active:border-success-500",
+      "text-success-500 hover:bg-success-500/5 border-transparent active:border-success-500",
     "text-error":
-      "text-error-500 hover:bg-error-500/10 border-transparent active:border-error-500",
+      "text-error-500 hover:bg-error-500/5 border-transparent active:border-error-500",
     "text-gray":
-      "text-zinc-500 dark:text-zinc-400 hover:bg-zinc-500/10 border-transparent active:border-zinc-500",
-    "text-white":
+      "text-zinc-500 dark:text-zinc-400 hover:bg-zinc-500/5 border-transparent active:border-zinc-500",
+    "text-default":
       "hover:bg-zinc-500/5 dark:hover:bg-white/5 border-transparent active:border-zinc-500/50 dark:active:border-white/50",
   },
   disabled: "opacity-50 pointer-events-none",
   size: {
-    md: {
-      button: "px-4 py-3 sm:px-3 sm:py-2 sm:text-sm",
+    xs: {
+      button: "px-2 py-1 text-xs",
     },
     sm: {
-      button: "px-3 py-2 sm:px-2 sm:py-1 sm:text-xs",
+      button: "px-2 py-1.5 text-sm",
+    },
+    md: {
+      button: "px-3 py-2 text-sm",
+    },
+    lg: {
+      button: "px-5 py-3 text-md",
+    },
+    xl: {
+      button: "px-6 py-4 text-lg",
     },
   },
   icon: {
-    md: {
-      button: "px-3 py-3 sm:py-2 sm:px-2",
-      icon: "w-5 h-5",
+    xs: {
+      button: "p-1.5",
+      icon: "w-3 h-3",
     },
     sm: {
-      button: "px-2 py-2 sm:py-1 sm:px-1",
+      button: "p-1.5",
       icon: "w-4 h-4",
+    },
+    md: {
+      button: "p-1.5",
+      icon: "w-5 h-5",
+    },
+    lg: {
+      button: "p-2",
+      icon: "w-6 h-6",
+    },
+    xl: {
+      button: "p-2.5",
+      icon: "w-7 h-7",
     },
   },
 };
 
-export type ButtonProps<Href extends string | undefined> =
+export type ButtonProps<Href extends string | undefined = undefined> =
   UnstyledButtonProps<Href> & {
     variant?: keyof (typeof styles)["variant"];
-    color?: keyof (typeof styles)["color"];
+    color?: keyof (typeof styles)["color"] | "white";
     size?: keyof (typeof styles)["size"];
     icon?: boolean;
     leadingIcon?: ReactElement;
+    leading?: ReactElement;
     trailingIcon?: ReactElement;
+    trailing?: ReactElement;
     loading?: boolean;
     disabled?: boolean;
     rounded?: boolean;
@@ -101,13 +128,15 @@ export type ButtonProps<Href extends string | undefined> =
 const Button = <Href extends string | undefined>(
   {
     variant = "outlined",
-    color = ["outlined", "text"].includes(variant) ? "white" : "primary",
+    color = "default",
     size = "md",
     className,
     icon,
     type = "button",
     leadingIcon,
+    leading,
     trailingIcon,
+    trailing,
     children,
     loading,
     disabled,
@@ -116,10 +145,37 @@ const Button = <Href extends string | undefined>(
   }: ButtonProps<Href>,
   ref: ForwardedRef<Href extends string ? HTMLAnchorElement : HTMLButtonElement>
 ) => {
-  if (loading) {
-    trailingIcon = (
-      <Loading className={clsx(styles.icon[size].icon, "!text-inherit")} />
+  if (color === "white") {
+    color = "default";
+    console.error(
+      `[Button] Color "white" was deprecated. Change to "default".`
     );
+  }
+  if (trailingIcon) {
+    trailing = trailingIcon;
+    console.error(
+      `[Button] Property "trailingIcon" was deprecated. Change to "trailing".`
+    );
+  }
+  if (leadingIcon) {
+    leading = leadingIcon;
+    console.error(
+      `[Button] Property "leadingIcon" was deprecated. Change to "leading".`
+    );
+  }
+
+  if (loading) {
+    if (icon) {
+      children = (
+        <Loading
+          className={clsx(styles.icon[size].icon, "mx-0.5 text-inherit")}
+        />
+      );
+    } else {
+      trailing = (
+        <Loading className={clsx(styles.icon[size].icon, "text-inherit")} />
+      );
+    }
   }
 
   return (
@@ -132,7 +188,7 @@ const Button = <Href extends string | undefined>(
         variant !== "custom" && styles.color[color],
         variant !== "custom" && styles.variantColor[`${variant}-${color}`],
         icon ? styles.icon[size].button : styles.size[size].button,
-        rounded ? "rounded-full" : "rounded-md",
+        rounded ? "rounded-full" : "rounded",
         {
           [styles.disabled]: disabled,
         },
@@ -141,12 +197,12 @@ const Button = <Href extends string | undefined>(
       type={type}
       disabled={disabled}
     >
-      {leadingIcon &&
-        cloneElement(leadingIcon, {
+      {leading &&
+        cloneElement(leading, {
           className: clsx(
             "mr-2 -ml-0.5",
             styles.icon[size].icon,
-            leadingIcon?.props?.className
+            leading?.props?.className
           ),
         })}
       {!icon
@@ -167,12 +223,12 @@ const Button = <Href extends string | undefined>(
               (children as ReactElement)?.props?.className
             ),
           })}
-      {trailingIcon &&
-        cloneElement(trailingIcon, {
+      {trailing &&
+        cloneElement(trailing, {
           className: clsx(
             "ml-2 -mr-0.5",
             styles.icon[size].icon,
-            trailingIcon?.props?.className
+            trailing?.props?.className
           ),
         })}
     </UnstyledButton>

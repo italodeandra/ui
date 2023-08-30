@@ -1,8 +1,14 @@
 import Text from "../Text/Text";
 import Group from "../Group/Group";
-import Button from "./Button";
+import Button, { ButtonProps } from "./Button";
 import { UserIcon } from "@heroicons/react/24/outline";
-import React from "react";
+import React, {
+  cloneElement,
+  ComponentProps,
+  ComponentType,
+  ReactElement,
+  ReactNode,
+} from "react";
 import {
   ExampleCode,
   useExampleCodeCallback,
@@ -26,7 +32,7 @@ const props: DocPageProps[] = [
   },
   {
     property: "size",
-    type: `"sm" | "md"`,
+    type: `"xs" | "sm" | "md" | "lg" | "xl`,
     defaultValue: `"md"`,
     description: "Size of the button.",
   },
@@ -43,14 +49,24 @@ const props: DocPageProps[] = [
     description: `The HTML native property \`type\`.\r\n\r\nThe default value is changed to \`button\`.`,
   },
   {
-    property: "leadingIcon",
+    property: "leading",
     type: `ReactNode`,
     description: `The icon shown before the button content.\r\n\r\nThe icon will receive the classes \`w-? h-?\` automatically.`,
   },
   {
-    property: "trailingIcon",
+    property: "trailing",
     type: `ReactNode`,
     description: `The icon shown after the button content.\r\n\r\nThe icon will receive the classes \`w-? h-?\` automatically.`,
+  },
+  {
+    property: "leadingIcon",
+    type: `ReactNode`,
+    description: `Deprecated. Use \`leading\` instead.`,
+  },
+  {
+    property: "trailingIcon",
+    type: `ReactNode`,
+    description: `Deprecated. Use \`trailing\` instead.`,
   },
   {
     property: "loading",
@@ -76,6 +92,155 @@ const props: DocPageProps[] = [
   },
 ];
 
+function createExample(render: ReactElement, code: string) {
+  return {
+    render,
+    code,
+  };
+}
+
+function createColorExamples(color: ButtonProps["color"]) {
+  return [
+    createExample(
+      <Button variant="filled" color={color}>
+        Filled {color}
+      </Button>,
+      `<Button variant="filled" color="${color}">
+  Filled ${color}
+</Button>`
+    ),
+    createExample(
+      <Button variant="light" color={color}>
+        Light {color}
+      </Button>,
+      `<Button variant="light" color="${color}">
+  Light ${color}
+</Button>`
+    ),
+    createExample(
+      <Button variant="outlined" color={color}>
+        Outlined {color}
+      </Button>,
+      `<Button variant="outlined" color="${color}">
+  Outlined ${color}
+</Button>`
+    ),
+    createExample(
+      <Button variant="text" color={color}>
+        Text {color}
+      </Button>,
+      `<Button variant="text" color="${color}">
+  Text ${color}
+</Button>`
+    ),
+  ];
+}
+
+function createSizeExamples(size?: ButtonProps["size"]) {
+  return [
+    createExample(
+      <Button size={size} className="mb-auto">
+        Size {size || "md"}
+      </Button>,
+      `<Button${size ? ` size="${size}"` : ""}>
+  Size ${size || "md"}
+</Button>`
+    ),
+    createExample(
+      <Button icon size={size} className="mb-auto">
+        <UserIcon />
+      </Button>,
+      `<Button icon size="${size}">
+  <UserIcon />
+</Button>`
+    ),
+  ];
+}
+
+let exampleLineBreak = {
+  lineBreak: true,
+} as const;
+
+let examples: (
+  | {
+      render: ReactElement;
+      code: string;
+      lineBreak?: true;
+    }
+  | { lineBreak: true }
+)[] = [
+  createExample(<Button>Default</Button>, `<Button>Default</Button>`),
+  createExample(
+    <Button disabled>Disabled</Button>,
+    `<Button disabled>Default</Button>`
+  ),
+  exampleLineBreak,
+  ...createColorExamples("default"),
+  exampleLineBreak,
+  ...createColorExamples("primary"),
+  exampleLineBreak,
+  ...createColorExamples("success"),
+  exampleLineBreak,
+  ...createColorExamples("error"),
+  exampleLineBreak,
+  ...createColorExamples("gray"),
+  exampleLineBreak,
+  createExample(
+    <Button icon>
+      <UserIcon />
+    </Button>,
+    `<Button icon>
+  <UserIcon />
+</Button>`
+  ),
+  createExample(
+    <Button icon rounded>
+      <UserIcon />
+    </Button>,
+    `<Button icon rounded>
+  <UserIcon />
+</Button>`
+  ),
+  exampleLineBreak,
+  ...createSizeExamples("xs"),
+  exampleLineBreak,
+  ...createSizeExamples("sm"),
+  exampleLineBreak,
+  ...createSizeExamples(),
+  exampleLineBreak,
+  ...createSizeExamples("lg"),
+  exampleLineBreak,
+  ...createSizeExamples("xl"),
+  exampleLineBreak,
+  createExample(
+    <Button loading>Loading</Button>,
+    `<Button loading>Loading</Button>`
+  ),
+  createExample(
+    <Button icon loading>
+      <UserIcon />
+    </Button>,
+    `<Button icon loading>
+  <UserIcon />
+</Button>`
+  ),
+  exampleLineBreak,
+  createExample(
+    <Button
+      variant="custom"
+      className="border-transparent bg-purple-500 text-onPrimary hover:bg-purple-500/80 active:border-purple-700 dark:active:border-purple-300"
+    >
+      Custom color
+    </Button>,
+    `<Button
+  variant="custom"
+  className="border-transparent bg-purple-500 text-onPrimary hover:bg-purple-500/80 active:border-purple-700 dark:active:border-purple-300"
+>
+  Custom color
+</Button>`
+  ),
+];
+
 export function ButtonDoc() {
   let getExampleCodeMouseEvents = useExampleCodeCallback();
 
@@ -87,263 +252,23 @@ export function ButtonDoc() {
       </Text>
       <Text>
         You might want to also take a look at the{" "}
-        <Text href="/unstyled-button">UnstyledButton</Text>.
+        <Text variant="link" href="/unstyled-button">
+          UnstyledButton
+        </Text>
+        .
       </Text>
       <Text variant="label">Examples</Text>
       <Group wrap>
-        <Button {...getExampleCodeMouseEvents(`<Button>Default</Button>`)}>
-          Default
-        </Button>
-      </Group>
-      <Group wrap>
-        <Button
-          variant="filled"
-          color="primary"
-          {...getExampleCodeMouseEvents(`<Button variant="filled" color="primary">
-  Filled primary
-</Button>`)}
-        >
-          Filled primary
-        </Button>
-        <Button
-          variant="light"
-          color="primary"
-          {...getExampleCodeMouseEvents(`<Button variant="light" color="primary">
-  Light primary
-</Button>`)}
-        >
-          Light primary
-        </Button>
-        <Button
-          variant="outlined"
-          color="primary"
-          {...getExampleCodeMouseEvents(`<Button variant="outlined" color="primary">
-  Outlined primary
-</Button>`)}
-        >
-          Outlined primary
-        </Button>
-        <Button
-          variant="text"
-          color="primary"
-          {...getExampleCodeMouseEvents(`<Button variant="text" color="primary">
-  Text primary
-</Button>`)}
-        >
-          Text primary
-        </Button>
-      </Group>
-      <Group wrap>
-        <Button
-          variant="filled"
-          color="success"
-          {...getExampleCodeMouseEvents(`<Button variant="filled" color="success">
-  Filled success
-</Button>`)}
-        >
-          Filled success
-        </Button>
-        <Button
-          variant="light"
-          color="success"
-          {...getExampleCodeMouseEvents(`<Button variant="light" color="success">
-  Light success
-</Button>`)}
-        >
-          Light success
-        </Button>
-        <Button
-          variant="outlined"
-          color="success"
-          {...getExampleCodeMouseEvents(`<Button variant="outlined" color="success">
-  Outlined success
-</Button>`)}
-        >
-          Outlined success
-        </Button>
-        <Button
-          variant="text"
-          color="success"
-          {...getExampleCodeMouseEvents(`<Button variant="text" color="success">
-  Text success
-</Button>`)}
-        >
-          Text success
-        </Button>
-      </Group>
-      <Group wrap>
-        <Button
-          variant="filled"
-          color="error"
-          {...getExampleCodeMouseEvents(`<Button variant="filled" color="error">
-  Filled error
-</Button>`)}
-        >
-          Filled error
-        </Button>
-        <Button
-          variant="light"
-          color="error"
-          {...getExampleCodeMouseEvents(`<Button variant="light" color="error">
-  Light error
-</Button>`)}
-        >
-          Light error
-        </Button>
-        <Button
-          variant="outlined"
-          color="error"
-          {...getExampleCodeMouseEvents(`<Button variant="outlined" color="error">
-  Outlined error
-</Button>`)}
-        >
-          Outlined error
-        </Button>
-        <Button
-          variant="text"
-          color="error"
-          {...getExampleCodeMouseEvents(`<Button variant="text" color="error">
-  Text error
-</Button>`)}
-        >
-          Text error
-        </Button>
-      </Group>
-      <Group wrap>
-        <Button
-          variant="filled"
-          color="gray"
-          {...getExampleCodeMouseEvents(`<Button variant="filled" color="gray">
-  Filled gray
-</Button>`)}
-        >
-          Filled gray
-        </Button>
-        <Button
-          variant="light"
-          color="gray"
-          {...getExampleCodeMouseEvents(`<Button variant="light" color="gray">
-  Light gray
-</Button>`)}
-        >
-          Light gray
-        </Button>
-        <Button
-          variant="outlined"
-          color="gray"
-          {...getExampleCodeMouseEvents(`<Button variant="outlined" color="gray">
-  Outlined gray
-</Button>`)}
-        >
-          Outlined gray
-        </Button>
-        <Button
-          variant="text"
-          color="gray"
-          {...getExampleCodeMouseEvents(`<Button variant="text" color="gray">
-  Text gray
-</Button>`)}
-        >
-          Text gray
-        </Button>
-      </Group>
-      <Group wrap>
-        <Button
-          variant="filled"
-          color="white"
-          {...getExampleCodeMouseEvents(`<Button variant="filled" color="white">
-  Filled white
-</Button>`)}
-        >
-          Filled white
-        </Button>
-        <Button
-          variant="light"
-          color="white"
-          {...getExampleCodeMouseEvents(`<Button variant="light" color="white">
-  Light white
-</Button>`)}
-        >
-          Light white
-        </Button>
-        <Button
-          variant="outlined"
-          color="white"
-          {...getExampleCodeMouseEvents(`<Button variant="outlined" color="white">
-  Outlined white
-</Button>`)}
-        >
-          Outlined white
-        </Button>
-        <Button
-          variant="text"
-          color="white"
-          {...getExampleCodeMouseEvents(`<Button variant="text" color="white">
-  Text white
-</Button>`)}
-        >
-          Text white
-        </Button>
-      </Group>
-      <Group wrap>
-        <Button
-          loading
-          {...getExampleCodeMouseEvents(`<Button loading>Loading</Button>`)}
-        >
-          Loading
-        </Button>
-      </Group>
-      <Group wrap>
-        <Button
-          icon
-          {...getExampleCodeMouseEvents(`<Button icon>
-  <UserIcon />
-</Button>`)}
-        >
-          <UserIcon />
-        </Button>
-        <Button
-          icon
-          rounded
-          {...getExampleCodeMouseEvents(`<Button icon rounded>
-  <UserIcon />
-</Button>`)}
-        >
-          <UserIcon />
-        </Button>
-      </Group>
-      <Group wrap>
-        <Button
-          {...getExampleCodeMouseEvents(`<Button size="sm">
-  Small
-</Button>`)}
-          size="sm"
-        >
-          Small
-        </Button>
-        <Button
-          icon
-          size="sm"
-          {...getExampleCodeMouseEvents(`<Button icon size="sm">
-  <UserIcon />
-</Button>`)}
-        >
-          <UserIcon />
-        </Button>
-      </Group>
-      <Group>
-        <Button
-          variant="custom"
-          className="border-transparent bg-purple-500 text-onPrimary hover:bg-purple-500/80 active:border-purple-700 dark:active:border-purple-300"
-          {...getExampleCodeMouseEvents(`<Button
-  variant="custom"
-  className="border-transparent bg-purple-500 text-onPrimary hover:bg-purple-500/80 active:border-purple-700 dark:active:border-purple-300"
->
-  Custom color
-</Button>`)}
-        >
-          Custom color
-        </Button>
+        {examples.map((example) =>
+          example.lineBreak ? (
+            <div className="basis-full" />
+          ) : (
+            cloneElement(
+              example.render,
+              getExampleCodeMouseEvents(example.code)
+            )
+          )
+        )}
       </Group>
       <ExampleCode />
     </DocPage>

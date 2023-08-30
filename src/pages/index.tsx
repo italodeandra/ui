@@ -97,7 +97,7 @@ export default function HomePage() {
           <p>
             <Button
               href="/getting-started"
-              variant="outlined"
+              variant="light"
               color="primary"
               trailingIcon={<ArrowLongRightIcon />}
               className="!px-4 !text-lg"
