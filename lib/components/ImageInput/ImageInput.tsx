@@ -160,7 +160,7 @@ function ImageInput(
         {value.map((image, i) => (
           <div
             key={i}
-            className="relative flex items-center justify-center rounded-md bg-gray-200 dark:bg-zinc-800"
+            className="group relative flex items-center justify-center rounded-md bg-gray-200 dark:bg-zinc-800"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -175,9 +175,9 @@ function ImageInput(
             {!readOnly && (
               <Button
                 icon
-                variant="light"
-                color="white"
-                className="absolute right-2 top-2"
+                variant="filled"
+                color="default"
+                className="absolute right-2 top-2 group-hover:opacity-100 sm:opacity-0"
                 onClick={handleDeleteClick(image)}
               >
                 <TrashIcon />
