@@ -90,22 +90,32 @@ const styles = {
     xs: {
       button: "p-1.5",
       icon: "w-3 h-3",
+      leading: "mr-1.5 -ml-0.5",
+      trailing: "ml-1.5 -mr-0.5",
     },
     sm: {
       button: "p-1.5",
       icon: "w-4 h-4",
+      leading: "mr-1.5 -ml-0.5",
+      trailing: "ml-1.5 -mr-0.5",
     },
     md: {
       button: "p-1.5",
       icon: "w-5 h-5",
+      leading: "-my-0.5 mr-2 -ml-1.5",
+      trailing: "-my-0.5 ml-2 -mr-1.5",
     },
     lg: {
       button: "p-2",
       icon: "w-6 h-6",
+      leading: "-my-1 mr-3 -ml-3",
+      trailing: "-my-1 ml-3 -mr-3",
     },
     xl: {
       button: "p-2.5",
       icon: "w-7 h-7",
+      leading: "-my-2 mr-4 -ml-3.5",
+      trailing: "-my-2 ml-4 -mr-3.5",
     },
   },
 };
@@ -167,9 +177,7 @@ const Button = <Href extends string | undefined>(
   if (loading) {
     if (icon) {
       children = (
-        <Loading
-          className={clsx(styles.icon[size].icon, "mx-0.5 text-inherit")}
-        />
+        <Loading className={clsx(styles.icon[size].icon, "text-inherit")} />
       );
     } else {
       trailing = (
@@ -200,8 +208,9 @@ const Button = <Href extends string | undefined>(
       {leading &&
         cloneElement(leading, {
           className: clsx(
-            "mr-2 -ml-0.5",
+            "",
             styles.icon[size].icon,
+            styles.icon[size].leading,
             leading?.props?.className
           ),
         })}
@@ -226,8 +235,9 @@ const Button = <Href extends string | undefined>(
       {trailing &&
         cloneElement(trailing, {
           className: clsx(
-            "ml-2 -mr-0.5",
+            "",
             styles.icon[size].icon,
+            styles.icon[size].trailing,
             trailing?.props?.className
           ),
         })}

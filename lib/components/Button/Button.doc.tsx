@@ -6,6 +6,7 @@ import React, {
   cloneElement,
   ComponentProps,
   ComponentType,
+  Fragment,
   ReactElement,
   ReactNode,
 } from "react";
@@ -15,6 +16,7 @@ import {
 } from "../../../src/components/ExampleCode/ExampleCode";
 import { DocPageProps } from "../../../src/components/DocPage/DocPageProps";
 import { DocPage } from "../../../src/components/DocPage/DocPage";
+import { HomeIcon } from "@heroicons/react/20/solid";
 
 const props: DocPageProps[] = [
   {
@@ -147,6 +149,14 @@ function createSizeExamples(size?: ButtonProps["size"]) {
 </Button>`
     ),
     createExample(
+      <Button size={size} leading={<HomeIcon />} className="mb-auto">
+        Size {size || "md"}
+      </Button>,
+      `<Button${size ? ` size="${size}"` : ""} leading={<HomeIcon />}>
+  Size ${size || "md"}
+</Button>`
+    ),
+    createExample(
       <Button icon size={size} className="mb-auto">
         <UserIcon />
       </Button>,
@@ -259,16 +269,18 @@ export function ButtonDoc() {
       </Text>
       <Text variant="label">Examples</Text>
       <Group wrap>
-        {examples.map((example) =>
-          example.lineBreak ? (
-            <div className="basis-full" />
-          ) : (
-            cloneElement(
-              example.render,
-              getExampleCodeMouseEvents(example.code)
-            )
-          )
-        )}
+        {examples.map((example, i) => (
+          <Fragment key={i}>
+            {example.lineBreak ? (
+              <div className="basis-full" />
+            ) : (
+              cloneElement(
+                example.render,
+                getExampleCodeMouseEvents(example.code)
+              )
+            )}
+          </Fragment>
+        ))}
       </Group>
       <ExampleCode />
     </DocPage>
