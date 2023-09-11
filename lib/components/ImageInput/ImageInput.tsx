@@ -7,7 +7,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { useDeepCompareEffect, useUpdateEffect } from "react-use";
+import { useAsync, useDeepCompareEffect, useUpdateEffect } from "react-use";
 import {
   defaultHelpTextClassName,
   defaultLabelClassName,
@@ -19,6 +19,7 @@ import isomorphicObjectId from "@italodeandra/next/utils/isomorphicObjectId";
 import { TrashIcon } from "@heroicons/react/20/solid";
 import { isEqual } from "lodash";
 import Text from "../Text/Text";
+import { blobUrlToObject } from "@italodeandra/next/fileStorage/converters";
 
 export type ImageFile = {
   file: File;
@@ -31,6 +32,57 @@ export type ImageUrl = {
 };
 
 export type Image = ImageFile | ImageUrl;
+
+function PreviewFile({
+  image,
+  readOnly,
+  handleDeleteClick,
+}: {
+  image: Image;
+  readOnly?: boolean;
+  handleDeleteClick: () => void;
+}) {
+  let url = (image as ImageFile).file
+    ? URL.createObjectURL((image as ImageFile).file)
+    : (image as ImageUrl).url;
+  let { value: isVideo, loading } = useAsync(async () => {
+    return (image as ImageFile).file
+      ? (image as ImageFile).file.type === "video/mp4"
+      : url.startsWith("blob")
+      ? (await blobUrlToObject(url)).type === "video/mp4"
+      : url.endsWith("mp4");
+  });
+
+  if (loading) {
+    return null;
+  }
+
+  return (
+    <div className="group relative flex items-center justify-center rounded-md bg-gray-200 dark:bg-zinc-800">
+      {isVideo ? (
+        <video className="max-h-96 rounded-md" src={url} controls />
+      ) : (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={url}
+          alt={image.description}
+          className="max-h-96 rounded-md"
+        />
+      )}
+      {!readOnly && (
+        <Button
+          icon
+          variant="filled"
+          color="default"
+          className="absolute right-2 top-2 group-hover:opacity-100 sm:opacity-0"
+          onClick={handleDeleteClick}
+        >
+          <TrashIcon />
+        </Button>
+      )}
+    </div>
+  );
+}
 
 function ImageInput(
   {
@@ -104,7 +156,7 @@ function ImageInput(
     setValue((value) => [
       ...value,
       ...files
-        .filter((file, index) => !limit || index <= limit - value.length - 1)
+        .filter((_file, index) => !limit || index <= limit - value.length - 1)
         .map((file) => ({
           _id: isomorphicObjectId(),
           name: file.name,
@@ -158,32 +210,12 @@ function ImageInput(
         })}
       >
         {value.map((image, i) => (
-          <div
+          <PreviewFile
             key={i}
-            className="group relative flex items-center justify-center rounded-md bg-gray-200 dark:bg-zinc-800"
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={
-                (image as ImageFile).file
-                  ? URL.createObjectURL((image as ImageFile).file)
-                  : (image as ImageUrl).url
-              }
-              alt={image.description}
-              className="max-h-96 rounded-md"
-            />
-            {!readOnly && (
-              <Button
-                icon
-                variant="filled"
-                color="default"
-                className="absolute right-2 top-2 group-hover:opacity-100 sm:opacity-0"
-                onClick={handleDeleteClick(image)}
-              >
-                <TrashIcon />
-              </Button>
-            )}
-          </div>
+            image={image}
+            readOnly={readOnly}
+            handleDeleteClick={handleDeleteClick(image)}
+          />
         ))}
         {readOnly && !value.length && (
           <Text variant="secondary">{emptyText}</Text>

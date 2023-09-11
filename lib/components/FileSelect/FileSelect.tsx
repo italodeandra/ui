@@ -23,7 +23,10 @@ const translateAllowedType = (type: string) =>
     ".jpeg": "JPG",
     ".gif": "GIF",
     "image/gif": "GIF",
-    image: "GIF",
+    image: "Image",
+    video: "Video",
+    "video/mp4": "MP4",
+    ".mp4": "MP4",
   }[type]);
 
 export interface FileSelectProps {
