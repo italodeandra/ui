@@ -29,6 +29,7 @@ export type ImageFile = {
 export type ImageUrl = {
   url: string;
   description?: string;
+  name: string;
 };
 
 export type Image = ImageFile | ImageUrl;
@@ -175,6 +176,7 @@ function ImageInput(
               ? URL.createObjectURL((image as ImageFile).file)
               : (image as ImageUrl).url,
             description: image.description,
+            name: (image as ImageUrl).name,
           })),
         },
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
