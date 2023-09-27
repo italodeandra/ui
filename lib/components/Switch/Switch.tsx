@@ -9,6 +9,8 @@ export interface SwitchProps {
   checked?: boolean;
   className?: string;
   rightLabel?: ReactNode;
+  switchClassName?: string;
+  pointerClassName?: string;
 
   onChange?(checked: boolean): void;
   readOnly?: boolean;
@@ -21,6 +23,8 @@ export default function Switch({
   className,
   rightLabel,
   readOnly,
+  switchClassName,
+  pointerClassName,
 }: SwitchProps) {
   return (
     <HuiSwitch.Group as="div" className={clsx("flex items-center", className)}>
@@ -33,7 +37,8 @@ export default function Switch({
             "bg-zinc-300 dark:bg-zinc-600": !checked,
             "cursor-pointer": !readOnly,
           },
-          "relative inline-flex h-6 w-11 flex-shrink-0 rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:ring-offset-zinc-900"
+          "relative inline-flex h-6 w-11 flex-shrink-0 rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:ring-offset-zinc-900",
+          switchClassName
         )}
         disabled={readOnly}
       >
@@ -45,7 +50,8 @@ export default function Switch({
               "translate-x-5": checked,
               "translate-x-0": !checked,
             },
-            "pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"
+            "pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out",
+            pointerClassName
           )}
         />
       </HuiSwitch>
