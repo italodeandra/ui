@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, MotionStyle } from "framer-motion";
 import { useSnapshot } from "valtio";
 import notificationsState from "./notifications.state";
 import {
@@ -24,7 +24,7 @@ export default function Notifications() {
     <ul className="pointer-events-none fixed inset-0 z-30 flex flex-col items-center justify-end gap-3 px-4 py-6 sm:items-end sm:justify-start sm:p-6">
       <AnimatePresence initial={false}>
         {notifications.map(
-          ({ _id, dismissable, title, message, icon, actions }) => {
+          ({ _id, dismissable, title, message, icon, actions, style }) => {
             // noinspection SuspiciousTypeOfGuard
             if (typeof icon === "string") {
               icon = {
@@ -42,6 +42,7 @@ export default function Notifications() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.5, transition: { duration: 0.2 } }}
                 className="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black/5 dark:bg-zinc-800 dark:ring-white/10"
+                style={style as MotionStyle}
               >
                 <div className="p-4">
                   <div className="flex items-start">

@@ -1,7 +1,7 @@
 import { proxy, ref } from "valtio";
 import isomorphicObjectId from "@italodeandra/next/utils/isomorphicObjectId";
 import ms from "ms";
-import { ReactElement, ReactNode } from "react";
+import { CSSProperties, ReactElement, ReactNode } from "react";
 
 type Notification = {
   _id: string;
@@ -12,6 +12,7 @@ type Notification = {
   dismissable?: boolean;
   actions?: ReactNode;
   suppress?: boolean;
+  style?: CSSProperties;
 };
 
 const notificationsState = proxy({
