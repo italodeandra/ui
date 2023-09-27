@@ -5,6 +5,7 @@ import {
   forwardRef,
   ReactElement,
   ReactNode,
+  useCallback,
   useEffect,
   useId,
 } from "react";
@@ -27,6 +28,7 @@ const translateAllowedType = (type: string) =>
     video: "Video",
     "video/mp4": "MP4",
     ".mp4": "MP4",
+    ".csv": "CSV",
   }[type]);
 
 export interface FileSelectProps {
@@ -82,14 +84,20 @@ function FileSelect(
       : maxFileSize;
   maxFileSize = maxFileSize || numeral("10MB").value() || undefined;
 
+  let checkAllowedFileTypes = useCallback(
+    (file: File) =>
+      !allowedFileTypes ||
+      allowedFileTypes.includes(file.type) ||
+      allowedFileTypes.some((t) => file.name.endsWith(t)),
+    [allowedFileTypes]
+  );
+
   const handleFileBrowse: ChangeEventHandler<HTMLInputElement> = (event) => {
     if (!event.target.files) {
       throw Error("Files is falsy");
     }
     let files = Array.from(event.target.files);
-    files = files.filter(
-      (file) => !allowedFileTypes || allowedFileTypes.includes(file.type)
-    );
+    files = files.filter(checkAllowedFileTypes);
     onAcceptFiles(files);
     event.target.value = "";
   };
@@ -100,9 +108,7 @@ function FileSelect(
     accept: [NativeTypes.FILE],
     drop(item: { files: File[] }) {
       let files = item.files;
-      files = files.filter(
-        (file) => !allowedFileTypes || allowedFileTypes.includes(file.type)
-      );
+      files = files.filter(checkAllowedFileTypes);
       onAcceptFiles(files);
     },
     collect: (monitor) => ({
