@@ -97,8 +97,18 @@ export default function Modal({
 
 Modal.Container = ModalContainer;
 
-function ModalContainer({ children }: { children?: ReactNode }) {
-  return <Stack className="!gap-4 px-4 pt-5 pb-4 sm:p-6">{children}</Stack>;
+function ModalContainer({
+  children,
+  className,
+}: {
+  children?: ReactNode;
+  className?: string;
+}) {
+  return (
+    <Stack className={clsx("!gap-4 px-4 pt-5 pb-4 sm:p-6", className)}>
+      {children}
+    </Stack>
+  );
 }
 
 Modal.Title = ModalTitle;
