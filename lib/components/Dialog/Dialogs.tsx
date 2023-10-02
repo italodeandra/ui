@@ -4,7 +4,17 @@ import { ComponentProps, ReactElement, ReactNode, useEffect } from "react";
 import Modal from "../Modal/Modal";
 import useModalState from "../Modal/useModalState";
 
-function Dialog({ icon, open, title, content, actions, _id }: IDialog) {
+function Dialog({
+  icon,
+  open,
+  title,
+  content,
+  actions,
+  _id,
+  hideCloseButton,
+  containerClassName,
+  panelClassName,
+}: IDialog & { containerClassName?: string; panelClassName?: string }) {
   let [modalOpen, { openModal, closeModal }] = useModalState();
 
   useEffect(() => {
@@ -16,9 +26,13 @@ function Dialog({ icon, open, title, content, actions, _id }: IDialog) {
   }, [closeModal, open, openModal]);
 
   return (
-    <Modal open={modalOpen} onClose={closeModal}>
-      <Modal.Container>
-        <Modal.CloseButton onClick={closeModal} />
+    <Modal
+      open={modalOpen}
+      onClose={closeModal}
+      panelClassName={panelClassName}
+    >
+      <Modal.Container className={containerClassName}>
+        {!hideCloseButton && <Modal.CloseButton onClick={closeModal} />}
         {icon && <Modal.Icon>{icon as ReactElement}</Modal.Icon>}
         {title && <Modal.Title>{title as ReactNode}</Modal.Title>}
         {content && (
@@ -40,7 +54,13 @@ function Dialog({ icon, open, title, content, actions, _id }: IDialog) {
   );
 }
 
-export default function Dialogs() {
+export default function Dialogs({
+  containerClassName,
+  panelClassName,
+}: {
+  containerClassName?: string;
+  panelClassName?: string;
+}) {
   let { dialogs, setRendered } = useSnapshot(dialogsState);
 
   useEffect(() => {
@@ -56,6 +76,8 @@ export default function Dialogs() {
         <Dialog
           key={dialog._id}
           {...(dialog as ComponentProps<typeof Dialog>)}
+          containerClassName={containerClassName}
+          panelClassName={panelClassName}
         />
       ))}
     </>

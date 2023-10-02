@@ -10,6 +10,7 @@ export type IDialog = {
   content: ReactNode | ((_id: string) => ReactNode);
   icon?: ReactElement;
   open?: boolean;
+  hideCloseButton?: boolean;
 };
 
 const dialogsState = proxy({
