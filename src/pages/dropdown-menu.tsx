@@ -19,7 +19,7 @@ const pages = [{ title: "Dropdown Menu" }];
 export default function MenuDemoPage() {
   return (
     <>
-      <NextSeo title="Menu" />
+      <NextSeo title={pages[0].title} />
       <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
       <Stack className="p-2">
         <DropdownMenu.Root>
