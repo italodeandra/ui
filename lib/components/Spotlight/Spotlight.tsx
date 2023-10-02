@@ -1,11 +1,11 @@
 import { Fragment, useCallback, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import clsx from "clsx";
-import UnstyledAutocomplete, {
+import {
+  UnstyledAutocomplete,
   UnstyledAutocompleteProps,
-} from "../Autocomplete/UnstyledAutocomplete";
-import { defaultLeadingClassName } from "../Input/Input";
-import InputIcon from "../Input/InputIcon";
+} from "../Autocomplete";
+import { defaultLeadingClassName, InputIcon } from "../Input";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 
 export interface SpotlightProps<T extends { _id: string }>

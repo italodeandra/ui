@@ -1,5 +1,5 @@
-import Text from "../Text/Text";
-import Group from "../Group/Group";
+import Text from "../Text";
+import Group from "../Group";
 import React from "react";
 import {
   ExampleCode,

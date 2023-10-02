@@ -1,8 +1,8 @@
-import Stack from "../../lib/components/Stack/Stack";
+import Stack from "../../lib/components/Stack";
 import getPublicLayout from "../views/publicLayout";
 import { GetServerSideProps } from "next";
 import { getCookies } from "cookies-next";
-import Breadcrumbs from "../../lib/components/Breadcrumbs/Breadcrumbs";
+import Breadcrumbs from "../../lib/components/Breadcrumbs";
 import { NextSeo } from "next-seo";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({

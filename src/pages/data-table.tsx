@@ -1,4 +1,4 @@
-import Stack from "../../lib/components/Stack/Stack";
+import Stack from "../../lib/components/Stack";
 import getPublicLayout from "../views/publicLayout";
 import { GetServerSideProps } from "next";
 import { getCookies } from "cookies-next";
@@ -7,11 +7,11 @@ import { NextSeo } from "next-seo";
 import DataTable, {
   DataTableProps,
 } from "../../lib/components/Table/DataTable";
-import Button from "../../lib/components/Button/Button";
+import Button from "../../lib/components/Button";
 import { useCallback, useMemo, useState } from "react";
 import { useMount } from "react-use";
 import ms from "ms";
-import Breadcrumbs from "../../lib/components/Breadcrumbs/Breadcrumbs";
+import Breadcrumbs from "../../lib/components/Breadcrumbs";
 import { map, orderBy } from "lodash";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
@@ -93,7 +93,7 @@ export default function DataTableDemoPage() {
 
   return (
     <div className="flex flex-1 flex-col">
-      <NextSeo title="DataTable" />
+      <NextSeo title={pages[0].title} />
       <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
       <Stack className="flex flex-1 flex-col overflow-auto md:px-2 md:pb-2">
         <DataTable

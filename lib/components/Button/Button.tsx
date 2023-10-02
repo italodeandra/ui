@@ -1,7 +1,7 @@
 import UnstyledButton, { UnstyledButtonProps } from "./UnstyledButton";
 import clsx from "clsx";
 import { cloneElement, ForwardedRef, forwardRef, ReactElement } from "react";
-import Loading from "../Loading/Loading";
+import Loading from "../Loading";
 
 const styles = {
   root: clsx(

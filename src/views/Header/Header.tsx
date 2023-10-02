@@ -1,10 +1,10 @@
-import Button from "../../../lib/components/Button/Button";
-import UiHeader from "../../../lib/components/Header/Header";
+import Button from "../../../lib/components/Button";
+import UiHeader from "../../../lib/components/Header";
 import { Bars3BottomLeftIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
-import navigationDrawerState from "../../../lib/components/NavigationDrawer/navigationDrawer.state";
+import { navigationDrawerState } from "../../../lib/components/NavigationDrawer";
 import NextLink from "next/link";
-import { ModeToggle } from "../../../lib/components/ModeToggle/ModeToggle";
+import ModeToggle from "../../../lib/components/ModeToggle";
 
 export default function Header() {
   return (

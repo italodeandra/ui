@@ -1,8 +1,7 @@
 import { Switch as HuiSwitch } from "@headlessui/react";
 import clsx from "clsx";
 import { ReactNode } from "react";
-import Input from "../Input/Input";
-import { UnstyledInputCommonProps } from "../Input/UnstyledInput";
+import Input, { UnstyledInputCommonProps } from "../Input";
 
 export interface SwitchProps {
   srLabel?: string;
@@ -11,9 +10,9 @@ export interface SwitchProps {
   rightLabel?: ReactNode;
   switchClassName?: string;
   pointerClassName?: string;
+  readOnly?: boolean;
 
   onChange?(checked: boolean): void;
-  readOnly?: boolean;
 }
 
 export default function Switch({

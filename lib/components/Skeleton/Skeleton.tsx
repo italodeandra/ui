@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { ClassAttributes, HTMLAttributes } from "react";
 
-export function Skeleton({
+export default function Skeleton({
   className,
   ...props
 }: JSX.IntrinsicAttributes &

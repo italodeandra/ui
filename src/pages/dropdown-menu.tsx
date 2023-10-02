@@ -1,11 +1,11 @@
-import Stack from "../../lib/components/Stack/Stack";
+import Stack from "../../lib/components/Stack";
 import getPublicLayout from "../views/publicLayout";
 import { UserIcon } from "@heroicons/react/24/outline";
-import Button from "../../lib/components/Button/Button";
+import Button from "../../lib/components/Button";
 import { NextSeo } from "next-seo";
 import { GetServerSideProps } from "next";
 import { getCookies } from "cookies-next";
-import Breadcrumbs from "../../lib/components/Breadcrumbs/Breadcrumbs";
+import Breadcrumbs from "../../lib/components/Breadcrumbs";
 import DropdownMenu from "../../lib/components/DropdownMenu";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
@@ -14,7 +14,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   },
 });
 
-const pages = [{ title: "Dropdown Menu" }];
+const pages = [{ title: "Dropdown menu" }];
 
 export default function MenuDemoPage() {
   return (

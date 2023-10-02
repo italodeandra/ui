@@ -5,7 +5,7 @@ import Highlight, {
   PrismTheme,
 } from "prism-react-renderer";
 import clsx from "clsx";
-import CopyButton from "../CopyButton/CopyButton";
+import CopyButton from "../CopyButton";
 
 export type CodeProps = {
   children: string;

@@ -1,15 +1,8 @@
-import Text from "../Text/Text";
-import Group from "../Group/Group";
+import Text from "../Text";
+import Group from "../Group";
 import Button, { ButtonProps } from "./Button";
 import { UserIcon } from "@heroicons/react/24/outline";
-import React, {
-  cloneElement,
-  ComponentProps,
-  ComponentType,
-  Fragment,
-  ReactElement,
-  ReactNode,
-} from "react";
+import React, { cloneElement, Fragment, ReactElement } from "react";
 import {
   ExampleCode,
   useExampleCodeCallback,

@@ -1,9 +1,9 @@
 import { HomeIcon } from "@heroicons/react/20/solid";
 import clsx from "clsx";
-import Text from "../Text/Text";
+import Text from "../Text";
 import NextLink from "next/link";
-import Loading from "../Loading/Loading";
-import { Skeleton } from "../Skeleton/Skeleton";
+import Loading from "../Loading";
+import Skeleton from "../Skeleton";
 
 export type BreadcrumbsProps = {
   pages?: {

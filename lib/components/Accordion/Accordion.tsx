@@ -1,7 +1,7 @@
 import { ChevronUpIcon } from "@heroicons/react/20/solid";
 import { ReactNode } from "react";
 import { Disclosure } from "@headlessui/react";
-import Stack from "../Stack/Stack";
+import Stack from "../Stack";
 
 export default function Accordion({ children }: { children?: ReactNode }) {
   return <Stack>{children}</Stack>;

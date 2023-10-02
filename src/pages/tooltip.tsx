@@ -1,13 +1,13 @@
 import getPublicLayout from "../views/publicLayout";
-import Button from "../../lib/components/Button/Button";
-import Tooltip from "../../lib/components/Tooltip/Tooltip";
-import Stack from "../../lib/components/Stack/Stack";
-import Text from "../../lib/components/Text/Text";
-import Group from "../../lib/components/Group/Group";
+import Button from "../../lib/components/Button";
+import Tooltip from "../../lib/components/Tooltip";
+import Stack from "../../lib/components/Stack";
+import Text from "../../lib/components/Text";
+import Group from "../../lib/components/Group";
 import { NextSeo } from "next-seo";
 import { GetServerSideProps } from "next";
 import { getCookies } from "cookies-next";
-import Breadcrumbs from "../../lib/components/Breadcrumbs/Breadcrumbs";
+import Breadcrumbs from "../../lib/components/Breadcrumbs";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   props: {
@@ -20,7 +20,7 @@ const pages = [{ title: "Tooltip" }];
 export default function TooltipDemoPage() {
   return (
     <>
-      <NextSeo title="Tooltip" />
+      <NextSeo title={pages[0].title} />
       <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
       <Stack className="p-2">
         <Text variant="label">Only tooltip</Text>

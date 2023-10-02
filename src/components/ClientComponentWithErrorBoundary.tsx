@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import ErrorBoundary from "../../lib/components/ErrorBoundary/ErrorBoundary";
+import ErrorBoundary from "../../lib/components/ErrorBoundary";
 
 function AsyncComponentWithError() {
   throw Error("Test error");

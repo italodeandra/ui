@@ -1,19 +1,19 @@
 import { getCookies } from "cookies-next";
 import { GetServerSideProps } from "next";
 import getPublicLayout from "../views/publicLayout";
-import Button from "../../lib/components/Button/Button";
-import Stack from "../../lib/components/Stack/Stack";
+import Button from "../../lib/components/Button";
+import Stack from "../../lib/components/Stack";
 import { ArrowLongRightIcon } from "@heroicons/react/20/solid";
-import Group from "../../lib/components/Group/Group";
-import Input from "../../lib/components/Input/Input";
-import { SwitchInput } from "../../lib/components/Switch/Switch";
+import Group from "../../lib/components/Group";
+import Input from "../../lib/components/Input";
+import { SwitchInput } from "../../lib/components/Switch";
 import React, { useState } from "react";
-import ImageInput from "../../lib/components/ImageInput/ImageInput";
-import { FileSelectProvider } from "../../lib/components/FileSelect/FileSelect";
-import MultiSelect from "../../lib/components/MultiSelect/MultiSelect";
-import Checkbox from "../../lib/components/Checkbox/Checkbox";
-import { showNotification } from "../../lib/components/Notifications/notifications.state";
-import Text from "../../lib/components/Text/Text";
+import ImageInput from "../../lib/components/ImageInput";
+import { FileSelectProvider } from "../../lib/components/FileSelect";
+import MultiSelect from "../../lib/components/MultiSelect";
+import Checkbox from "../../lib/components/Checkbox";
+import { showNotification } from "../../lib/components/Notifications";
+import Text from "../../lib/components/Text";
 import {
   ExampleCode,
   useExampleCodeCallback,

@@ -2,7 +2,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import clsx from "clsx";
 import { range } from "lodash";
-import Button from "../Button/Button";
+import Button from "../Button";
 
 export interface PaginationProps {
   totalItems?: number;

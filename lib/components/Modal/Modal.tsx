@@ -7,10 +7,10 @@ import {
   useCallback,
 } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import Stack from "../Stack/Stack";
-import Group from "../Group/Group";
+import Stack from "../Stack";
+import Group from "../Group";
 import clsx from "clsx";
-import Button from "../Button/Button";
+import Button from "../Button";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 
 export default function Modal({

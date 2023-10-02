@@ -1,12 +1,12 @@
-import Button from "../../lib/components/Button/Button";
+import Button from "../../lib/components/Button";
 import getPublicLayout from "../views/publicLayout";
 import { NextSeo } from "next-seo";
 import { GetServerSideProps } from "next";
 import { getCookies } from "cookies-next";
-import Breadcrumbs from "../../lib/components/Breadcrumbs/Breadcrumbs";
+import Breadcrumbs from "../../lib/components/Breadcrumbs";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
-import Spotlight from "../../lib/components/Spotlight/Spotlight";
-import useModalState from "../../lib/components/Modal/useModalState";
+import Spotlight from "../../lib/components/Spotlight";
+import { useModalState } from "../../lib/components/Modal";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   props: {
@@ -27,7 +27,7 @@ export default function SpotlightDemoPage() {
 
   return (
     <>
-      <NextSeo title="Button" />
+      <NextSeo title={pages[0].title} />
       <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
       <div className="p-2">
         <Button onClick={openModal}>

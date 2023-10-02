@@ -1,4 +1,4 @@
-import Drawer from "../Drawer/Drawer";
+import Drawer from "../Drawer";
 import { ReactNode } from "react";
 import navigationDrawerState from "./navigationDrawer.state";
 import { useSnapshot } from "valtio";

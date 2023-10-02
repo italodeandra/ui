@@ -1,12 +1,12 @@
-import Stack from "../../lib/components/Stack/Stack";
+import Stack from "../../lib/components/Stack";
 import getPublicLayout from "../views/publicLayout";
 import { NextSeo } from "next-seo";
 import { GetServerSideProps } from "next";
 import { getCookies } from "cookies-next";
-import Breadcrumbs from "../../lib/components/Breadcrumbs/Breadcrumbs";
-import { Carousel } from "../../lib/components/Carousel/Carousel";
+import Breadcrumbs from "../../lib/components/Breadcrumbs";
+import Carousel from "../../lib/components/Carousel";
 import { range } from "lodash";
-import Text from "../../lib/components/Text/Text";
+import Text from "../../lib/components/Text";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   props: {
@@ -21,7 +21,7 @@ export default function CarouselDemoPage() {
 
   return (
     <>
-      <NextSeo title="Carousel" />
+      <NextSeo title={pages[0].title} />
       <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
       <Stack className="p-2">
         <Carousel

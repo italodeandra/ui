@@ -1,8 +1,8 @@
 import getPublicLayout from "../views/publicLayout";
 import { GetServerSideProps } from "next";
 import { getCookies } from "cookies-next";
-import Text from "../../lib/components/Text/Text";
-import Code from "../../lib/components/Code/Code";
+import Text from "../../lib/components/Text";
+import Code from "../../lib/components/Code";
 import { ReactNode } from "react";
 import { DocPage } from "../components/DocPage/DocPage";
 

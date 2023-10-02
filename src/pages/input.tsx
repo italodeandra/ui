@@ -1,9 +1,9 @@
 import { getCookies } from "cookies-next";
 import { GetServerSideProps } from "next";
 import { NextSeo } from "next-seo";
-import Breadcrumbs from "../../lib/components/Breadcrumbs/Breadcrumbs";
-import Input from "../../lib/components/Input/Input";
-import Stack from "../../lib/components/Stack/Stack";
+import Breadcrumbs from "../../lib/components/Breadcrumbs";
+import Input from "../../lib/components/Input";
+import Stack from "../../lib/components/Stack";
 import getPublicLayout from "../views/publicLayout";
 import CleaveInput from "../../lib/components/Input/CleaveInput";
 
@@ -18,7 +18,7 @@ const pages = [{ title: "Input" }];
 export default function InputDemoPage() {
   return (
     <>
-      <NextSeo title="Input" />
+      <NextSeo title={pages[0].title} />
       <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
       <Stack className="p-2">
         <Input label="Username" helpText="Fill with your username" />

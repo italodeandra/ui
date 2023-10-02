@@ -131,7 +131,7 @@ export const menu = [
         href: "/grid-pattern",
       },
       {
-        title: "Dropdown Menu",
+        title: "Dropdown menu",
         href: "/dropdown-menu",
       },
       {
@@ -166,6 +166,14 @@ export const menu = [
       {
         title: "Table",
         href: "/table",
+      },
+      //
+      {
+        title: "Miscellaneous",
+      },
+      {
+        title: "Copy button",
+        href: "/copy-button",
       },
     ],
   },

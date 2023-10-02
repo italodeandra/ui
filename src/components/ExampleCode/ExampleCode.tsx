@@ -1,4 +1,4 @@
-import Code from "../../../lib/components/Code/Code";
+import Code from "../../../lib/components/Code";
 import React, { useCallback } from "react";
 import { proxy, useSnapshot } from "valtio";
 import ms from "ms";

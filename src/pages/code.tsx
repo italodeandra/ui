@@ -1,11 +1,10 @@
-import Stack from "../../lib/components/Stack/Stack";
+import Stack from "../../lib/components/Stack";
 import getPublicLayout from "../views/publicLayout";
-import Code from "../../lib/components/Code/Code";
+import Code, { Json } from "../../lib/components/Code";
 import { NextSeo } from "next-seo";
-import Json from "../../lib/components/Code/Json";
 import { GetServerSideProps } from "next";
 import { getCookies } from "cookies-next";
-import Breadcrumbs from "../../lib/components/Breadcrumbs/Breadcrumbs";
+import Breadcrumbs from "../../lib/components/Breadcrumbs";
 import vsLight from "prism-react-renderer/themes/vsLight";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
@@ -19,7 +18,7 @@ const pages = [{ title: "Code" }];
 export default function CodeDemoPage() {
   return (
     <>
-      <NextSeo title="Code" />
+      <NextSeo title={pages[0].title} />
       <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
       <Stack className="p-2">
         <Json

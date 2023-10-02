@@ -1,11 +1,10 @@
-import Button from "../../lib/components/Button/Button";
+import Button from "../../lib/components/Button";
 import getPublicLayout from "../views/publicLayout";
 import { NextSeo } from "next-seo";
 import { GetServerSideProps } from "next";
 import { getCookies } from "cookies-next";
-import Breadcrumbs from "../../lib/components/Breadcrumbs/Breadcrumbs";
-import Modal from "../../lib/components/Modal/Modal";
-import useModalState from "../../lib/components/Modal/useModalState";
+import Breadcrumbs from "../../lib/components/Breadcrumbs";
+import Modal, { useModalState } from "../../lib/components/Modal";
 import { CheckIcon } from "@heroicons/react/24/outline";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
@@ -21,7 +20,7 @@ export default function ModalDemoPage() {
 
   return (
     <>
-      <NextSeo title="Button" />
+      <NextSeo title={pages[0].title} />
       <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
       <div className="p-2">
         <Button onClick={openModal}>Open modal</Button>

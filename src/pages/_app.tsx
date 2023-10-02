@@ -5,10 +5,10 @@ import "focus-visible";
 import "../globals.css";
 import AppProps from "../../lib/bootstrap/AppProps";
 import colors from "tailwindcss/colors";
-import { hydrateNavigationDrawerState } from "../../lib/components/NavigationDrawer/navigationDrawer.state";
-import Notifications from "../../lib/components/Notifications/Notifications";
+import { hydrateNavigationDrawerState } from "../../lib/components/NavigationDrawer";
+import Notifications from "../../lib/components/Notifications";
 import setupNProgress from "../../lib/bootstrap/nprogress";
-import Dialogs from "../../lib/components/Dialog/Dialogs";
+import Dialogs from "../../lib/components/Dialog";
 
 const appName = "@italodeandra/ui";
 const appDescription = "Demo of @italodeandra/ui";

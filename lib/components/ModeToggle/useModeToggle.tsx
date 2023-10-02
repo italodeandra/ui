@@ -1,4 +1,4 @@
-export function useModeToggle() {
+export default function useModeToggle() {
   function disableTransitionsTemporarily() {
     document.documentElement.classList.add("[&_*]:!transition-none");
     window.setTimeout(() => {

@@ -1,14 +1,14 @@
-import Stack from "../../lib/components/Stack/Stack";
+import Stack from "../../lib/components/Stack";
 import getPublicLayout from "../views/publicLayout";
 import { GetServerSideProps } from "next";
 import { getCookies } from "cookies-next";
-import Table from "../../lib/components/Table/Table";
+import Table from "../../lib/components/Table";
 import { PencilIcon } from "@heroicons/react/24/outline";
 import { useCallback } from "react";
-import Button from "../../lib/components/Button/Button";
+import Button from "../../lib/components/Button";
 import fakeArray from "../../lib/utils/fakeArray";
 import { NextSeo } from "next-seo";
-import Breadcrumbs from "../../lib/components/Breadcrumbs/Breadcrumbs";
+import Breadcrumbs from "../../lib/components/Breadcrumbs";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   props: {
@@ -21,7 +21,7 @@ const pages = [{ title: "Table" }];
 export default function TableDemoPage() {
   return (
     <div className="flex flex-1 flex-col">
-      <NextSeo title="Table" />
+      <NextSeo title={pages[0].title} />
       <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
       <Stack className="flex flex-1 flex-col md:px-2 md:pb-2">
         <Table.Header

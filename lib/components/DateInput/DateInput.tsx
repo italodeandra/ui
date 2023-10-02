@@ -1,7 +1,7 @@
 import { ForwardedRef, forwardRef, useEffect, useRef } from "react";
 import { format, parse } from "date-fns";
 import ptBrLocale from "date-fns/locale/pt-BR";
-import Input, { InputProps } from "../Input/Input";
+import Input, { InputProps } from "../Input";
 import { CalendarIcon } from "@heroicons/react/20/solid";
 
 export function parseDate(value: string) {

@@ -3,8 +3,10 @@ import clsx from "clsx";
 import UnstyledAutocomplete, {
   UnstyledAutocompleteProps,
 } from "../Autocomplete/UnstyledAutocomplete";
-import Input from "../Input/Input";
-import { defaultMenuItemsClassName } from "../Menu/Menu";
+import Input from "../Input";
+
+const defaultMenuItemsClassName =
+  "z-10 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-zinc-800";
 
 export type AutocompleteProps<T extends { _id: string }> =
   UnstyledAutocompleteProps<T>;

@@ -1,8 +1,7 @@
 import { useSnapshot } from "valtio";
 import dialogsState, { IDialog } from "./dialogs.state";
 import { ComponentProps, ReactElement, ReactNode, useEffect } from "react";
-import Modal from "../Modal/Modal";
-import useModalState from "../Modal/useModalState";
+import Modal, { useModalState } from "../Modal";
 
 function Dialog({
   icon,

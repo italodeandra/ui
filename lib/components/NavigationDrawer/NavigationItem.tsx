@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { useRouter } from "next/dist/client/router";
 import { cloneElement, ReactElement, ReactNode } from "react";
 import { useMedia } from "react-use";
-import Button from "../Button/Button";
+import Button from "../Button";
 import navigationDrawerState from "./navigationDrawer.state";
 import defaultTheme from "tailwindcss/defaultTheme";
 

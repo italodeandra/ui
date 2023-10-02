@@ -1,5 +1,5 @@
 import { Combobox } from "@headlessui/react";
-import Loading from "../Loading/Loading";
+import Loading from "../Loading";
 import {
   ReactNode,
   useCallback,
@@ -8,19 +8,22 @@ import {
   useRef,
   useState,
 } from "react";
-import UnstyledInput, { UnstyledInputProps } from "../Input/UnstyledInput";
 import Input, {
   defaultInputClassName,
   defaultLabelClassName,
   defaultLeadingInputClassName,
   defaultTrailingClassName,
   defaultTrailingInputClassName,
-} from "../Input/Input";
+  UnstyledInput,
+  UnstyledInputProps,
+} from "../Input";
 import clsx from "clsx";
-import { defaultMenuItemsClassName } from "../Menu/Menu";
 import { isEqual, take } from "lodash";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
-import Badge from "../Badge/Badge";
+import Badge from "../Badge";
+
+const defaultMenuItemsClassName =
+  "z-10 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-zinc-800";
 
 export interface MultiSelectProps<T extends { _id: string } | string>
   extends Omit<

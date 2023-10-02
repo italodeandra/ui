@@ -2,10 +2,10 @@ import getPublicLayout from "../views/publicLayout";
 import { NextSeo } from "next-seo";
 import { GetServerSideProps } from "next";
 import { getCookies } from "cookies-next";
-import Breadcrumbs from "../../lib/components/Breadcrumbs/Breadcrumbs";
+import Breadcrumbs from "../../lib/components/Breadcrumbs";
 import FileSelect, {
   FileSelectProvider,
-} from "../../lib/components/FileSelect/FileSelect";
+} from "../../lib/components/FileSelect";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   props: {
@@ -18,7 +18,7 @@ const pages = [{ title: "File select" }];
 export default function FileSelectDemoPage() {
   return (
     <FileSelectProvider>
-      <NextSeo title="File select" />
+      <NextSeo title={pages[0].title} />
       <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
       <div className="p-2">
         <FileSelect onAcceptFiles={console.info} />

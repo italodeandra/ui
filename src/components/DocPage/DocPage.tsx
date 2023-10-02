@@ -1,13 +1,13 @@
 import { NextSeo } from "next-seo";
-import Breadcrumbs from "../../../lib/components/Breadcrumbs/Breadcrumbs";
+import Breadcrumbs from "../../../lib/components/Breadcrumbs";
 import React, { ReactNode, useMemo } from "react";
-import Stack from "../../../lib/components/Stack/Stack";
+import Stack from "../../../lib/components/Stack";
 import DataTable, {
   DataTableProps,
 } from "../../../lib/components/Table/DataTable";
-import Text from "../../../lib/components/Text/Text";
+import Text from "../../../lib/components/Text";
 import { DocPageProps } from "./DocPageProps";
-import Markdown from "../../../lib/components/Markdown/Markdown";
+import Markdown from "../../../lib/components/Markdown";
 
 const columns: DataTableProps<DocPageProps>["columns"] = [
   {

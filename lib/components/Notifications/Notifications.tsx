@@ -6,7 +6,7 @@ import {
   ExclamationCircleIcon,
 } from "@heroicons/react/24/outline";
 import { XMarkIcon } from "@heroicons/react/20/solid";
-import Button from "../Button/Button";
+import Button from "../Button";
 import { cloneElement, ReactElement, ReactNode, useEffect } from "react";
 import clsx from "clsx";
 

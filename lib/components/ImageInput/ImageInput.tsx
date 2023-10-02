@@ -12,9 +12,9 @@ import {
   defaultHelpTextClassName,
   defaultLabelClassName,
   InputProps,
-} from "../Input/Input";
-import Button from "../Button/Button";
-import FileSelect, { FileSelectProps } from "../FileSelect/FileSelect";
+} from "../Input";
+import Button from "../Button";
+import FileSelect, { FileSelectProps } from "../FileSelect";
 import isomorphicObjectId from "@italodeandra/next/utils/isomorphicObjectId";
 import { TrashIcon } from "@heroicons/react/20/solid";
 import { isEqual } from "lodash";

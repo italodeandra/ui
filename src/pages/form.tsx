@@ -1,16 +1,16 @@
-import Text from "../../lib/components/Text/Text";
-import Stack from "../../lib/components/Stack/Stack";
+import Text from "../../lib/components/Text";
+import Stack from "../../lib/components/Stack";
 import getPublicLayout from "../views/publicLayout";
 import { NextSeo } from "next-seo";
 import { useForm } from "react-hook-form";
-import Input from "../../lib/components/Input/Input";
+import Input from "../../lib/components/Input";
 import emailRegExp from "../../lib/utils/emailRegExp";
-import Checkbox from "../../lib/components/Checkbox/Checkbox";
-import Button from "../../lib/components/Button/Button";
-import Json from "../../lib/components/Code/Json";
+import Checkbox from "../../lib/components/Checkbox";
+import Button from "../../lib/components/Button";
+import { Json } from "../../lib/components/Code";
 import { GetServerSideProps } from "next";
 import { getCookies } from "cookies-next";
-import Breadcrumbs from "../../lib/components/Breadcrumbs/Breadcrumbs";
+import Breadcrumbs from "../../lib/components/Breadcrumbs";
 import CleaveInput from "../../lib/components/Input/CleaveInput";
 import { useEffect } from "react";
 
@@ -48,7 +48,7 @@ export default function FormDemoPage() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <NextSeo title="Form" />
+      <NextSeo title={pages[0].title} />
       <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
       <Stack className="max-w-xl p-2">
         <div>

@@ -3,7 +3,7 @@ import BottomBlurryPoint from "../../lib/components/BackgroundEffects/BottomBlur
 import TopBlurryPoint from "../../lib/components/BackgroundEffects/TopBlurryPoint";
 import Header from "./Header/Header";
 import NavigationDrawer from "./Header/NavigationDrawer";
-import Footer from "../../lib/components/Footer/Footer";
+import Footer from "../../lib/components/Footer";
 import Link from "next/link";
 
 export default function getPublicLayout(children: ReactNode) {

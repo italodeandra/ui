@@ -1,10 +1,10 @@
-import Stack from "../../lib/components/Stack/Stack";
+import Stack from "../../lib/components/Stack";
 import getPublicLayout from "../views/publicLayout";
 import { NextSeo } from "next-seo";
 import { GetServerSideProps } from "next";
 import { getCookies } from "cookies-next";
-import Breadcrumbs from "../../lib/components/Breadcrumbs/Breadcrumbs";
-import Switch, { SwitchInput } from "../../lib/components/Switch/Switch";
+import Breadcrumbs from "../../lib/components/Breadcrumbs";
+import Switch, { SwitchInput } from "../../lib/components/Switch";
 import { useState } from "react";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
@@ -20,7 +20,7 @@ export default function SwitchDemoPage() {
 
   return (
     <>
-      <NextSeo title="Switch" />
+      <NextSeo title={pages[0].title} />
       <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
       <Stack className="p-2">
         <Switch checked={checked} onChange={setChecked} />

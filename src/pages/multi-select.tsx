@@ -1,10 +1,10 @@
 import { getCookies } from "cookies-next";
 import { GetServerSideProps } from "next";
 import { NextSeo } from "next-seo";
-import Breadcrumbs from "../../lib/components/Breadcrumbs/Breadcrumbs";
-import Stack from "../../lib/components/Stack/Stack";
+import Breadcrumbs from "../../lib/components/Breadcrumbs";
+import Stack from "../../lib/components/Stack";
 import getPublicLayout from "../views/publicLayout";
-import MultiSelect from "../../lib/components/MultiSelect/MultiSelect";
+import MultiSelect from "../../lib/components/MultiSelect";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   props: {
@@ -24,7 +24,7 @@ const names = ["Leslie Alexander", "Michael Foster"];
 export default function MultiSelectDemoPage() {
   return (
     <>
-      <NextSeo title="Multi select" />
+      <NextSeo title={pages[0].title} />
       <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
       <Stack className="p-2">
         <MultiSelect

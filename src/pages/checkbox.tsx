@@ -1,11 +1,11 @@
-import Stack from "../../lib/components/Stack/Stack";
+import Stack from "../../lib/components/Stack";
 import getPublicLayout from "../views/publicLayout";
-import Text from "../../lib/components/Text/Text";
-import Checkbox from "../../lib/components/Checkbox/Checkbox";
+import Text from "../../lib/components/Text";
+import Checkbox from "../../lib/components/Checkbox";
 import { NextSeo } from "next-seo";
 import { GetServerSideProps } from "next";
 import { getCookies } from "cookies-next";
-import Breadcrumbs from "../../lib/components/Breadcrumbs/Breadcrumbs";
+import Breadcrumbs from "../../lib/components/Breadcrumbs";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   props: {
@@ -18,7 +18,7 @@ const pages = [{ title: "Checkbox" }];
 export default function CheckboxDemoPage() {
   return (
     <>
-      <NextSeo title="Button" />
+      <NextSeo title={pages[0].title} />
       <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
       <Stack className="p-2">
         <Text variant="label">Checkbox with label and description</Text>

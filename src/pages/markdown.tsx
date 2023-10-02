@@ -1,10 +1,10 @@
-import Stack from "../../lib/components/Stack/Stack";
+import Stack from "../../lib/components/Stack";
 import getPublicLayout from "../views/publicLayout";
 import { NextSeo } from "next-seo";
 import { GetServerSideProps } from "next";
 import { getCookies } from "cookies-next";
-import Breadcrumbs from "../../lib/components/Breadcrumbs/Breadcrumbs";
-import Markdown from "../../lib/components/Markdown/Markdown";
+import Breadcrumbs from "../../lib/components/Breadcrumbs";
+import Markdown from "../../lib/components/Markdown";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   props: {
@@ -18,7 +18,7 @@ const pages = [{ title: "Markdown" }];
 export default function ButtonDemoPage() {
   return (
     <>
-      <NextSeo title="Markdown" />
+      <NextSeo title={pages[0].title} />
       <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
       <Stack className="p-2">
         <Markdown>{`# Hello, *world*!

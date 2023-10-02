@@ -7,10 +7,10 @@ import {
   useEffect,
   useState,
 } from "react";
-import Loading from "../Loading/Loading";
-import { Skeleton } from "../Skeleton/Skeleton";
-import Stack from "../Stack/Stack";
-import Text from "../Text/Text";
+import Loading from "../Loading";
+import Skeleton from "../Skeleton";
+import Stack from "../Stack";
+import Text from "../Text";
 import Table from "./Table";
 import clsx from "clsx";
 import { ChevronUpIcon } from "@heroicons/react/20/solid";

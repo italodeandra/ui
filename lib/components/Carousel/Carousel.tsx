@@ -3,7 +3,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import { EmblaOptionsType } from "embla-carousel";
 import clsx from "clsx";
 import { ReactNode, useEffect, useState } from "react";
-import Button from "../Button/Button";
+import Button from "../Button";
 import { useMeasure } from "react-use";
 import mergeRefs from "react-merge-refs";
 
@@ -14,7 +14,7 @@ export type CarouselProps = {
   navigation?: boolean;
 } & EmblaOptionsType;
 
-export function Carousel({
+export default function Carousel({
   children,
   className,
   carouselClassName,
@@ -93,7 +93,7 @@ export interface CarouselSlideProps {
   className?: string;
 }
 
-export function CarouselSlide({ children, className }: CarouselSlideProps) {
+function CarouselSlide({ children, className }: CarouselSlideProps) {
   return (
     <div className={clsx("min-w-0 flex-[0_0_auto]", className)}>{children}</div>
   );

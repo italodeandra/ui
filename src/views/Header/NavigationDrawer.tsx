@@ -1,10 +1,11 @@
 import { ReactNode } from "react";
 import { menu } from "../../menu";
-import UiNavigationDrawer from "../../../lib/components/NavigationDrawer/NavigationDrawer";
-import NavigationItem from "../../../lib/components/NavigationDrawer/NavigationItem";
-import Text from "../../../lib/components/Text/Text";
+import UiNavigationDrawer, {
+  NavigationItem,
+} from "../../../lib/components/NavigationDrawer";
+import Text from "../../../lib/components/Text";
 import { Disclosure } from "@headlessui/react";
-import Button from "../../../lib/components/Button/Button";
+import Button from "../../../lib/components/Button";
 import clsx from "clsx";
 import { ChevronUpIcon } from "@heroicons/react/20/solid";
 

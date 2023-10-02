@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import clsx from "clsx";
 import { ClipboardIcon } from "@heroicons/react/24/outline";
-import Button from "../Button/Button";
+import Button from "../Button";
 
 export type CopyButtonProps = {
   text: string;

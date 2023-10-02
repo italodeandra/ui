@@ -5,7 +5,7 @@ import {
 } from "@heroicons/react/20/solid";
 import clsx from "clsx";
 import { DetailedHTMLProps, HTMLAttributes, ReactNode } from "react";
-import Group from "../Group/Group";
+import Group from "../Group";
 
 const styles = {
   variants: {

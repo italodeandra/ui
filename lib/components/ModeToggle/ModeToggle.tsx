@@ -1,8 +1,8 @@
 import { MoonIcon, SunIcon } from "@heroicons/react/24/outline";
-import Button from "../Button/Button";
+import Button from "../Button";
 import clsx from "clsx";
 import { ForwardedRef, forwardRef } from "react";
-import { useModeToggle } from "./useModeToggle";
+import useModeToggle from "./useModeToggle";
 
 export interface ModeToggleProps {
   ariaLabel?: string;
@@ -31,4 +31,4 @@ const ModeToggle = forwardRef(function ModeToggle(
   );
 });
 
-export { ModeToggle };
+export default ModeToggle;

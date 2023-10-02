@@ -1,11 +1,11 @@
-import Button from "../../lib/components/Button/Button";
-import Stack from "../../lib/components/Stack/Stack";
+import Button from "../../lib/components/Button";
+import Stack from "../../lib/components/Stack";
 import getPublicLayout from "../views/publicLayout";
 import { CheckIcon } from "@heroicons/react/24/outline";
 import { NextSeo } from "next-seo";
 import { GetServerSideProps } from "next";
 import { getCookies } from "cookies-next";
-import Breadcrumbs from "../../lib/components/Breadcrumbs/Breadcrumbs";
+import Breadcrumbs from "../../lib/components/Breadcrumbs";
 import { closeDialog, showDialog } from "../../lib/components/Dialog";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({

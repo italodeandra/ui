@@ -1,16 +1,16 @@
 import { NextSeo } from "next-seo";
-import Breadcrumbs from "../../lib/components/Breadcrumbs/Breadcrumbs";
+import Breadcrumbs from "../../lib/components/Breadcrumbs";
 import getPublicLayout from "../views/publicLayout";
-import Stack from "../../lib/components/Stack/Stack";
-import ConfirmationButton from "../../lib/components/ConfirmationButton/ConfirmationButton";
-import { showNotification } from "../../lib/components/Notifications/notifications.state";
+import Stack from "../../lib/components/Stack";
+import ConfirmationButton from "../../lib/components/ConfirmationButton";
+import { showNotification } from "../../lib/components/Notifications";
 
 const pages = [{ title: "Confirmation button" }];
 
 export default function ConfirmationButtonPage() {
   return (
     <>
-      <NextSeo title="Confirmation button" />
+      <NextSeo title={pages[0].title} />
       <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
       <Stack className="p-2">
         <div>

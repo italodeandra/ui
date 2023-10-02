@@ -1,11 +1,11 @@
-import Button from "../../lib/components/Button/Button";
-import Stack from "../../lib/components/Stack/Stack";
+import Button from "../../lib/components/Button";
+import Stack from "../../lib/components/Stack";
 import getPublicLayout from "../views/publicLayout";
 import { NextSeo } from "next-seo";
-import Loading from "../../lib/components/Loading/Loading";
+import Loading from "../../lib/components/Loading";
 import { GetServerSideProps } from "next";
 import { getCookies } from "cookies-next";
-import Breadcrumbs from "../../lib/components/Breadcrumbs/Breadcrumbs";
+import Breadcrumbs from "../../lib/components/Breadcrumbs";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   props: {
@@ -18,7 +18,7 @@ const pages = [{ title: "Loading" }];
 export default function LoadingDemoPage() {
   return (
     <>
-      <NextSeo title="Loading" />
+      <NextSeo title={pages[0].title} />
       <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
       <Stack className="p-2">
         <Loading />
