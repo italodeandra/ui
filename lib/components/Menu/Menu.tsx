@@ -14,6 +14,7 @@ import clsx from "clsx";
 import Button from "../Button/Button";
 import UnstyledButton, { UnstyledButtonProps } from "../Button/UnstyledButton";
 import Text, { TextProps } from "../Text/Text";
+import { useMount } from "react-use";
 
 export const defaultMenuItemsClassName =
   "z-10 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-zinc-800";
@@ -105,6 +106,11 @@ let Menu = forwardRef(function Menu(
   }: MenuProps,
   ref: ForwardedRef<HTMLDivElement>
 ) {
+  useMount(() => {
+    console.warn(
+      "<Menu> was deprecated and should be replaced with <DropdownMenu>"
+    );
+  });
   return (
     <HuiMenu
       as="div"

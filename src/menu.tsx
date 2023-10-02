@@ -131,8 +131,8 @@ export const menu = [
         href: "/grid-pattern",
       },
       {
-        title: "Menu",
-        href: "/menu",
+        title: "Dropdown Menu",
+        href: "/dropdown-menu",
       },
       {
         title: "Modal",
