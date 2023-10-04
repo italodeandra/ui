@@ -112,6 +112,8 @@ const Select = {
   Group: RSelect.Group,
   Label: SelectLabel,
   Separator: SelectSeparator,
+  Icon: RSelect.Icon,
+  Value: RSelect.Value,
 };
 
 export default Select;
