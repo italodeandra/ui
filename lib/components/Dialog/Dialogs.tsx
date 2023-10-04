@@ -2,6 +2,7 @@ import { useSnapshot } from "valtio";
 import dialogsState, { IDialog } from "./dialogs.state";
 import { ComponentProps, ReactElement, ReactNode, useEffect } from "react";
 import Modal, { useModalState } from "../Modal";
+import clsx from "clsx";
 
 function Dialog({
   icon,
@@ -76,7 +77,7 @@ export default function Dialogs({
           key={dialog._id}
           {...(dialog as ComponentProps<typeof Dialog>)}
           containerClassName={containerClassName}
-          panelClassName={panelClassName}
+          panelClassName={clsx(panelClassName, dialog.panelClassName)}
         />
       ))}
     </>

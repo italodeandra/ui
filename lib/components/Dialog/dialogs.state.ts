@@ -11,6 +11,7 @@ export type IDialog = {
   icon?: ReactElement;
   open?: boolean;
   hideCloseButton?: boolean;
+  panelClassName?: string;
 };
 
 const dialogsState = proxy({
