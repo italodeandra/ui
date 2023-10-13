@@ -10,7 +10,7 @@ import Tooltip from "../Tooltip/Tooltip";
 
 export type TableActionButtonProps<Href extends string | undefined> = {
   title?: ReactNode;
-  href?: string;
+  href?: string | null;
 } & Omit<ButtonProps<Href>, "href">;
 
 export default function TableActionButton<Href extends string | undefined>({
