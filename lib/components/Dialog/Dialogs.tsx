@@ -1,6 +1,12 @@
 import { useSnapshot } from "valtio";
 import dialogsState, { IDialog } from "./dialogs.state";
-import { ComponentProps, ReactElement, ReactNode, useEffect } from "react";
+import {
+  ComponentProps,
+  CSSProperties,
+  ReactElement,
+  ReactNode,
+  useEffect,
+} from "react";
 import Modal, { useModalState } from "../Modal";
 import clsx from "clsx";
 
@@ -14,7 +20,14 @@ function Dialog({
   hideCloseButton,
   containerClassName,
   panelClassName,
-}: IDialog & { containerClassName?: string; panelClassName?: string }) {
+  style,
+  overlayClassName,
+}: IDialog & {
+  containerClassName?: string;
+  panelClassName?: string;
+  style?: CSSProperties;
+  overlayClassName?: string;
+}) {
   let [modalOpen, { openModal, closeModal }] = useModalState();
 
   useEffect(() => {
@@ -30,6 +43,8 @@ function Dialog({
       open={modalOpen}
       onClose={closeModal}
       panelClassName={panelClassName}
+      style={style}
+      overlayClassName={overlayClassName}
     >
       <Modal.Container className={containerClassName}>
         {!hideCloseButton && <Modal.CloseButton onClick={closeModal} />}
@@ -57,9 +72,11 @@ function Dialog({
 export default function Dialogs({
   containerClassName,
   panelClassName,
+  overlayClassName,
 }: {
   containerClassName?: string;
   panelClassName?: string;
+  overlayClassName?: string;
 }) {
   let { dialogs, setRendered } = useSnapshot(dialogsState);
 
@@ -78,6 +95,7 @@ export default function Dialogs({
           {...(dialog as ComponentProps<typeof Dialog>)}
           containerClassName={containerClassName}
           panelClassName={clsx(panelClassName, dialog.panelClassName)}
+          overlayClassName={overlayClassName}
         />
       ))}
     </>

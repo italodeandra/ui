@@ -1,6 +1,6 @@
 import { proxy, ref } from "valtio";
 import isomorphicObjectId from "@italodeandra/next/utils/isomorphicObjectId";
-import { ReactElement, ReactNode } from "react";
+import { CSSProperties, ReactElement, ReactNode } from "react";
 import { find } from "lodash";
 
 export type IDialog = {
@@ -12,6 +12,7 @@ export type IDialog = {
   open?: boolean;
   hideCloseButton?: boolean;
   panelClassName?: string;
+  style?: CSSProperties;
 };
 
 const dialogsState = proxy({

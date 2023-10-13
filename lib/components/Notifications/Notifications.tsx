@@ -10,7 +10,11 @@ import Button from "../Button";
 import { cloneElement, ReactElement, ReactNode, useEffect } from "react";
 import clsx from "clsx";
 
-export default function Notifications() {
+export default function Notifications({
+  notificationClassName,
+}: {
+  notificationClassName?: string;
+}) {
   let { notifications, remove, setRendered } = useSnapshot(notificationsState);
 
   useEffect(() => {
@@ -24,7 +28,16 @@ export default function Notifications() {
     <ul className="pointer-events-none fixed inset-0 z-30 flex flex-col items-center justify-end gap-3 px-4 py-6 sm:items-end sm:justify-start sm:p-6">
       <AnimatePresence initial={false}>
         {notifications.map(
-          ({ _id, dismissable, title, message, icon, actions, style }) => {
+          ({
+            _id,
+            dismissable,
+            title,
+            message,
+            icon,
+            actions,
+            style,
+            className,
+          }) => {
             // noinspection SuspiciousTypeOfGuard
             if (typeof icon === "string") {
               icon = {
@@ -41,7 +54,11 @@ export default function Notifications() {
                 initial={{ opacity: 0, y: 50, scale: 0.3 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.5, transition: { duration: 0.2 } }}
-                className="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black/5 dark:bg-zinc-800 dark:ring-white/10"
+                className={clsx(
+                  "pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black/5 dark:bg-zinc-800 dark:ring-white/10",
+                  notificationClassName,
+                  className
+                )}
                 style={style as MotionStyle}
               >
                 <div className="p-4">
@@ -61,11 +78,11 @@ export default function Notifications() {
                     )}
                     <div className="ml-1 w-0 flex-1 pt-0.5">
                       <p className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
-                        {title || message}
+                        {title || (message as ReactNode)}
                       </p>
                       {title && message && (
                         <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
-                          {message}
+                          {message as ReactNode}
                         </p>
                       )}
                       {actions && (

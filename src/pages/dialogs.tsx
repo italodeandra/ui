@@ -7,6 +7,7 @@ import { GetServerSideProps } from "next";
 import { getCookies } from "cookies-next";
 import Breadcrumbs from "../../lib/components/Breadcrumbs";
 import { closeDialog, showDialog } from "../../lib/components/Dialog";
+import { showNotification } from "../../lib/components/Notifications";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   props: {
@@ -28,13 +29,22 @@ export default function Page() {
               showDialog({
                 icon: <CheckIcon />,
                 actions: (_id) => (
-                  <Button
-                    variant="filled"
-                    className="w-full"
-                    onClick={() => closeDialog(_id)}
-                  >
-                    Go back to dashboard
-                  </Button>
+                  <>
+                    <Button
+                      variant="filled"
+                      className="w-full"
+                      onClick={() => showNotification("Test")}
+                    >
+                      Show notification
+                    </Button>
+                    <Button
+                      variant="filled"
+                      className="w-full"
+                      onClick={() => closeDialog(_id)}
+                    >
+                      Go back to dashboard
+                    </Button>
+                  </>
                 ),
                 title: "Payment successful",
                 content:

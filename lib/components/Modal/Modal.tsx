@@ -1,6 +1,7 @@
 import {
   cloneElement,
   ComponentPropsWithoutRef,
+  CSSProperties,
   Fragment,
   ReactElement,
   ReactNode,
@@ -22,6 +23,7 @@ export default function Modal({
   dialogClassName,
   dialogOuterPanelClassName,
   dialogOverflowClassName,
+  style,
 }: {
   open?: boolean;
   onClose?: () => void;
@@ -31,6 +33,7 @@ export default function Modal({
   dialogClassName?: string;
   dialogOuterPanelClassName?: string;
   dialogOverflowClassName?: string;
+  style?: CSSProperties;
 }) {
   let handleOnClose = useCallback(() => onClose?.(), [onClose]);
 
@@ -40,6 +43,7 @@ export default function Modal({
         as="div"
         className={clsx("relative z-10", dialogClassName)}
         onClose={handleOnClose}
+        style={style}
       >
         <Transition.Child
           as={Fragment}
