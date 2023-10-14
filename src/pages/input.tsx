@@ -28,7 +28,7 @@ export default function InputDemoPage() {
           helpText="This field is required"
         />
         <Input label="Disabled field" disabled />
-        <Input select>
+        <Input label="Select" select readOnly>
           <option>1</option>
           <option>2</option>
           <option>3</option>

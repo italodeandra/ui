@@ -2,7 +2,7 @@ import UnstyledInput, { UnstyledInputProps } from "../Input/UnstyledInput";
 import { defaultTextStyles } from "../Text";
 import { ExclamationCircleIcon } from "@heroicons/react/20/solid";
 import InputIcon from "./InputIcon";
-import { ForwardedRef, forwardRef } from "react";
+import { cloneElement, ForwardedRef, forwardRef } from "react";
 import clsx from "clsx";
 
 export type InputProps<Select extends boolean | undefined> = {
@@ -37,6 +37,7 @@ function Input<Select extends boolean | undefined>(
     label,
     loading,
     readOnly,
+    children,
     ...props
   }: InputProps<Select>,
   ref: ForwardedRef<Select extends true ? HTMLSelectElement : HTMLInputElement>
@@ -100,7 +101,14 @@ function Input<Select extends boolean | undefined>(
       required={required}
       label={label}
       readOnly={readOnly}
-    />
+    >
+      {children &&
+        [...(Array.isArray(children) ? children : [children])].map((option) =>
+          cloneElement(option, {
+            disabled: readOnly,
+          })
+        )}
+    </UnstyledInput>
   );
 }
 
