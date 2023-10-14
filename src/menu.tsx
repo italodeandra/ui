@@ -39,6 +39,10 @@ export const menu = [
         href: "/checkbox",
       },
       {
+        title: "File input",
+        href: "/file-input",
+      },
+      {
         title: "Image input",
         href: "/image-input",
       },
