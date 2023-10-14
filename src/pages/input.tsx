@@ -29,12 +29,14 @@ export default function InputDemoPage() {
         />
         <Input label="Disabled field" disabled />
         <Input label="Select" select readOnly>
-          {["a", "b"].map((a) => (
-            <option key={a}>{a}</option>
-          ))}
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
+          <>
+            {["a", "b"].map((a) => (
+              <option key={a}>{a}</option>
+            ))}
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+          </>
         </Input>
         <Input label="Leading" leading="Qty" />
         <Input

@@ -4,7 +4,7 @@ import { ExclamationCircleIcon } from "@heroicons/react/20/solid";
 import InputIcon from "./InputIcon";
 import { cloneElement, ForwardedRef, forwardRef } from "react";
 import clsx from "clsx";
-import { flatten } from "lodash";
+import recursiveChildrenMap from "../../utils/recursiveChildrenMap";
 
 export type InputProps<Select extends boolean | undefined> = {
   error?: boolean;
@@ -103,13 +103,9 @@ function Input<Select extends boolean | undefined>(
       label={label}
       readOnly={readOnly}
     >
-      {children &&
-        flatten([...(Array.isArray(children) ? children : [children])]).map(
-          (option) =>
-            cloneElement(option, {
-              disabled: readOnly,
-            })
-        )}
+      {recursiveChildrenMap(children, (child) =>
+        cloneElement(child, { disabled: readOnly })
+      )}
     </UnstyledInput>
   );
 }
