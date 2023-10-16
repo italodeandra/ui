@@ -12,6 +12,7 @@ export type UnstyledButtonProps<Href extends string | undefined> = {
   href?: Href;
   target?: string;
   rel?: string;
+  download?: string;
 } & Omit<
   Href extends string
     ? ComponentProps<typeof NextLink>

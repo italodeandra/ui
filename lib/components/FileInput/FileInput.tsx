@@ -76,9 +76,16 @@ function PreviewFile({
             <div>{file.name}</div>
             {file.description && <div>{file.description}</div>}
             <Text size="sm">{fileFromFileOrUrl.type}</Text>
-            <Button leading={<ArrowDownTrayIcon />} className="mr-auto">
-              {downloadText}
-            </Button>
+            {!url.startsWith("blob") && (
+              <Button
+                leading={<ArrowDownTrayIcon />}
+                className="mr-auto"
+                href={url}
+                download={file.name}
+              >
+                {downloadText}
+              </Button>
+            )}
           </Stack>
         </Group>
       )}
@@ -142,7 +149,7 @@ function FileInput(
     if (defaultValue && !isEqual(defaultValue, value)) {
       setValue(defaultValue);
     }
-  }, [defaultValue]);
+  }, [{ defaultValue }]);
 
   const innerRef = useRef<HTMLInputElement>({
     get value() {
