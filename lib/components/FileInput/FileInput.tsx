@@ -7,7 +7,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { useAsync, useDeepCompareEffect, useUpdateEffect } from "react-use";
+import { useDeepCompareEffect, useUpdateEffect } from "react-use";
 import {
   defaultHelpTextClassName,
   defaultLabelClassName,
@@ -19,7 +19,6 @@ import isomorphicObjectId from "@italodeandra/next/utils/isomorphicObjectId";
 import { TrashIcon } from "@heroicons/react/20/solid";
 import { isEqual } from "lodash";
 import Text from "../Text/Text";
-import { blobUrlToObject } from "@italodeandra/next/fileStorage/converters";
 import Stack from "../Stack";
 import { ArrowDownTrayIcon, DocumentIcon } from "@heroicons/react/24/outline";
 import Group from "../Group";
@@ -28,12 +27,14 @@ export type FileFile = {
   file: File;
   description?: string;
   name: string;
+  type: string;
 };
 
 export type FileUrl = {
   url: string;
   description?: string;
   name: string;
+  type: string;
 };
 
 export type FileInputFile = FileFile | FileUrl;
@@ -52,19 +53,12 @@ function PreviewFile({
   let url = (file as FileFile).file
     ? URL.createObjectURL((file as FileFile).file)
     : (file as FileUrl).url;
-  let { value: fileFromFileOrUrl } = useAsync(
-    async () => (file as FileFile).file || (await blobUrlToObject(url))
-  );
-
-  if (!fileFromFileOrUrl) {
-    return null;
-  }
 
   return (
     <div className="group relative flex items-center justify-center rounded-md bg-zinc-200 dark:bg-zinc-800">
-      {fileFromFileOrUrl?.type.startsWith("video") ? (
+      {file.type.startsWith("video") ? (
         <video className="max-h-96 rounded-md" src={url} controls />
-      ) : fileFromFileOrUrl?.type.startsWith("image") ? (
+      ) : file.type.startsWith("image") ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img src={url} alt={file.description} className="max-h-96 rounded-md" />
       ) : (
@@ -75,13 +69,14 @@ function PreviewFile({
           <Stack className="gap-1">
             <div>{file.name}</div>
             {file.description && <div>{file.description}</div>}
-            <Text size="sm">{fileFromFileOrUrl.type}</Text>
+            <Text size="sm">{file.type}</Text>
             {!url.startsWith("blob") && (
               <Button
                 leading={<ArrowDownTrayIcon />}
                 className="mr-auto"
                 href={url}
                 download={file.name}
+                target="_blank"
               >
                 {downloadText}
               </Button>
@@ -183,6 +178,7 @@ function FileInput(
           _id: isomorphicObjectId(),
           name: file.name,
           file,
+          type: file.type,
         })),
     ]);
   };
@@ -198,6 +194,7 @@ function FileInput(
               : (image as FileUrl).url,
             description: image.description,
             name: (image as FileUrl).name,
+            type: image.type,
           })),
         },
         // eslint-disable-next-line @typescript-eslint/no-explicit-any

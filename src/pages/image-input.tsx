@@ -4,9 +4,10 @@ import { GetServerSideProps } from "next";
 import { getCookies } from "cookies-next";
 import Breadcrumbs from "../../lib/components/Breadcrumbs";
 import { FileSelectProvider } from "../../lib/components/FileSelect";
-import ImageInput, { Image } from "../../lib/components/ImageInput";
+import ImageInput from "../../lib/components/ImageInput";
 import Stack from "../../lib/components/Stack";
 import { useState } from "react";
+import { FileInputFile } from "../../lib/components/FileInput";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   props: {
@@ -17,7 +18,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
 const pages = [{ title: "Image input" }];
 
 export default function ImageInputDemoPage() {
-  let [value, setValue] = useState<Image[]>([]);
+  let [value, setValue] = useState<FileInputFile[]>([]);
   return (
     <FileSelectProvider>
       <NextSeo title={pages[0].title} />
