@@ -7,6 +7,7 @@ import Breadcrumbs from "../../lib/components/Breadcrumbs";
 import Carousel from "../../lib/components/Carousel";
 import { range } from "lodash";
 import Text from "../../lib/components/Text";
+import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   props: {
@@ -31,6 +32,7 @@ export default function CarouselDemoPage() {
           navigation
           skipSnaps
           slidesToScroll={1}
+          plugins={[WheelGesturesPlugin()]}
         >
           {slides.map((s) => (
             <Carousel.Slide key={s} className="pl-4">

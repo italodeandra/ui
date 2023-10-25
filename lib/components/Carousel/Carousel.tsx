@@ -1,6 +1,8 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
-import useEmblaCarousel from "embla-carousel-react";
-import { EmblaOptionsType } from "embla-carousel";
+import useEmblaCarousel, {
+  EmblaOptionsType,
+  EmblaPluginType,
+} from "embla-carousel-react";
 import clsx from "clsx";
 import { ReactNode, useEffect, useState } from "react";
 import Button from "../Button";
@@ -12,6 +14,7 @@ export type CarouselProps = {
   carouselClassName?: string;
   className?: string;
   navigation?: boolean;
+  plugins?: EmblaPluginType[];
 } & EmblaOptionsType;
 
 export default function Carousel({
@@ -19,9 +22,10 @@ export default function Carousel({
   className,
   carouselClassName,
   navigation,
+  plugins,
   ...options
 }: CarouselProps) {
-  let [emblaRef, embla] = useEmblaCarousel(options);
+  let [emblaRef, embla] = useEmblaCarousel(options, plugins);
   let [canScrollPrev, setCanScrollPrev] = useState(false);
   let [canScrollNext, setCanScrollNext] = useState(false);
   let [ref, { width, height }] = useMeasure();
@@ -50,38 +54,40 @@ export default function Carousel({
   }, [embla, width, height]);
 
   return (
-    <div
-      className={clsx("overflow-hidden", className)}
-      ref={mergeRefs([ref, emblaRef])}
-    >
-      <div className={clsx("flex", carouselClassName)}>{children}</div>
-      {navigation && (
-        <div className="flex h-full">
-          <Button
-            icon
-            variant="text"
-            className={clsx({
-              hidden: !canScrollPrev,
-            })}
-            disabled={!canScrollPrev}
-            onClick={() => embla?.scrollPrev()}
-          >
-            <ChevronLeftIcon />
-          </Button>
-          <div className="flex-grow" />
-          <Button
-            icon
-            variant="text"
-            className={clsx({
-              hidden: !canScrollNext,
-            })}
-            disabled={!canScrollNext}
-            onClick={() => embla?.scrollNext()}
-          >
-            <ChevronRightIcon />
-          </Button>
-        </div>
-      )}
+    <div data-axis={options.axis}>
+      <div
+        className={clsx("overflow-hidden", className)}
+        ref={mergeRefs([ref, emblaRef])}
+      >
+        <div className={clsx("flex", carouselClassName)}>{children}</div>
+        {navigation && (
+          <div className="flex h-full">
+            <Button
+              icon
+              variant="text"
+              className={clsx({
+                hidden: !canScrollPrev,
+              })}
+              disabled={!canScrollPrev}
+              onClick={() => embla?.scrollPrev()}
+            >
+              <ChevronLeftIcon />
+            </Button>
+            <div className="flex-grow" />
+            <Button
+              icon
+              variant="text"
+              className={clsx({
+                hidden: !canScrollNext,
+              })}
+              disabled={!canScrollNext}
+              onClick={() => embla?.scrollNext()}
+            >
+              <ChevronRightIcon />
+            </Button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
