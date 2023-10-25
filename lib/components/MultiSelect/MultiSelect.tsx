@@ -25,7 +25,7 @@ import Badge from "../Badge";
 const defaultMenuItemsClassName =
   "z-10 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-zinc-800";
 
-export interface MultiSelectProps<T extends { _id: string } | string>
+export interface MultiSelectProps<T extends object | string>
   extends Omit<
     UnstyledInputProps<false>,
     | "as"
@@ -57,23 +57,36 @@ export interface MultiSelectProps<T extends { _id: string } | string>
   creatable?: boolean;
   getCreateLabel?: (query: string) => string;
   itemsRenderLimit?: number;
+  valueProperty?: string | number;
 }
 
-function getValue<T extends { _id: string } | string>(item: T) {
-  return typeof item === "string" ? item : item._id;
+function getValue<Id extends string | number, T extends object | string>(
+  id: Id,
+  item: T
+): string | number {
+  return typeof item === "string"
+    ? item
+    : (item[id as unknown as keyof typeof item] as string | number);
 }
 
-function MultiSelectInput<T extends { _id: string } | string>({
+function MultiSelectInput<
+  Id extends string | number,
+  T extends object | string
+>({
   className,
   selectedItems,
   doRender,
   removeItem,
+  id,
+  readOnly,
   ...props
 }: {
   className?: string;
   selectedItems: T[];
   doRender: (item: T) => ReactNode;
   removeItem: (item: T) => () => void;
+  id: Id;
+  readOnly?: boolean;
 }) {
   let ref = useRef<HTMLInputElement>(null);
   return (
@@ -87,7 +100,10 @@ function MultiSelectInput<T extends { _id: string } | string>({
       {!!selectedItems.length && (
         <div className="flex flex-wrap items-center gap-1 p-1.5">
           {selectedItems.map((item) => (
-            <Badge key={getValue(item)} onActionClick={removeItem(item)}>
+            <Badge
+              key={getValue(id, item)}
+              onActionClick={!readOnly ? removeItem(item) : undefined}
+            >
               {doRender(item)}
             </Badge>
           ))}
@@ -98,12 +114,13 @@ function MultiSelectInput<T extends { _id: string } | string>({
         {...(props as any)}
         ref={ref}
         className="rounded-md border-none !ring-transparent disabled:cursor-not-allowed disabled:text-gray-500 dark:bg-zinc-800 dark:disabled:bg-zinc-900/90 sm:text-sm"
+        readOnly={readOnly}
       />
     </div>
   );
 }
 
-export default function MultiSelect<T extends { _id: string } | string>({
+export default function MultiSelect<T extends object | string>({
   placeholder,
   emptyText = "No item found.",
   items = [],
@@ -131,6 +148,10 @@ export default function MultiSelect<T extends { _id: string } | string>({
   getCreateLabel = (query: string) => `+ create "${query}"`,
   itemsRenderLimit,
   className,
+  valueProperty = "_id",
+  label,
+  required,
+  readOnly,
   ...props
 }: MultiSelectProps<T>) {
   let [query, setQuery] = useState(defaultQuery);
@@ -170,14 +191,15 @@ export default function MultiSelect<T extends { _id: string } | string>({
   trailing = loading ? (
     <Loading />
   ) : (
-    trailing || (
+    trailing ||
+    (!readOnly ? (
       <Combobox.Button className="pointer-events-auto -mr-1 flex items-center">
         <ChevronUpDownIcon
           className="h-5 w-5 text-gray-400"
           aria-hidden="true"
         />
       </Combobox.Button>
-    )
+    ) : undefined)
   );
 
   let ComponentInput = as || UnstyledInput;
@@ -207,10 +229,20 @@ export default function MultiSelect<T extends { _id: string } | string>({
   let removeItem = useCallback(
     (item: T) => () =>
       setSelectedItems((selectedItems) => [
-        ...selectedItems.filter((i) => getValue(i) !== getValue(item)),
+        ...selectedItems.filter(
+          (i) => getValue(valueProperty, i) !== getValue(valueProperty, item)
+        ),
       ]),
-    []
+    [valueProperty]
   );
+
+  if (label && required) {
+    label = (
+      <>
+        {label} <span className="text-red-500">*</span>
+      </>
+    );
+  }
 
   return (
     <div className={clsx("relative", className)}>
@@ -226,7 +258,7 @@ export default function MultiSelect<T extends { _id: string } | string>({
               /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
               {...(props as any)}
               as={MultiSelectInput}
-              placeholder={placeholder}
+              placeholder={!readOnly ? placeholder : undefined}
               value={query}
               onChange={(event) => setQuery(event.target.value)}
               trailing={trailing}
@@ -237,7 +269,10 @@ export default function MultiSelect<T extends { _id: string } | string>({
               inputClassName={clsx(
                 defaultInputClassName,
                 "bg-white dark:bg-zinc-800",
-                inputElementClassName
+                inputElementClassName,
+                {
+                  "border-dashed": readOnly,
+                }
               )}
               innerClassName={inputInnerClassName}
               trailingInputClassName={clsx(
@@ -253,58 +288,63 @@ export default function MultiSelect<T extends { _id: string } | string>({
               selectedItems={selectedItems}
               doRender={doRender}
               removeItem={removeItem}
+              required={required && !selectedItems.length}
+              label={label}
+              readOnly={readOnly}
             />
 
-            {((creatable && query) || filteredItems.length > 0) && (
-              <Combobox.Options
-                static={isStatic}
-                className={clsx(
-                  defaultMenuItemsClassName,
-                  "absolute z-10 mt-1 max-h-72 w-full scroll-py-2 overflow-y-auto py-2 text-sm text-gray-800 dark:text-zinc-200"
-                )}
-              >
-                {creatable && !filteredItems.length && !!query && (
-                  <Combobox.Option
-                    value={query}
-                    className={({ active }) =>
-                      clsx("cursor-default select-none px-4 py-2", {
-                        "bg-primary-600 text-white": active,
-                      })
-                    }
-                  >
-                    {({ selected }) => (
-                      <div className="flex">
-                        {selected && <CheckIcon className="mr-2 w-5" />}
-                        {selected ? query : getCreateLabel(query)}
-                      </div>
-                    )}
-                  </Combobox.Option>
-                )}
-                {(itemsRenderLimit
-                  ? take(filteredItems, itemsRenderLimit)
-                  : filteredItems
-                ).map((item) => (
-                  <Combobox.Option
-                    key={getValue(item)}
-                    value={item}
-                    className={({ active }) =>
-                      clsx("cursor-default select-none px-4 py-2", {
-                        "bg-primary-600 text-white": active,
-                      })
-                    }
-                  >
-                    {({ selected }) => (
-                      <div className="flex">
-                        {selected && <CheckIcon className="mr-2 w-5" />}
-                        {doRender(item)}
-                      </div>
-                    )}
-                  </Combobox.Option>
-                ))}
-              </Combobox.Options>
-            )}
+            {!readOnly &&
+              ((creatable && query) || filteredItems.length > 0) && (
+                <Combobox.Options
+                  static={isStatic}
+                  className={clsx(
+                    defaultMenuItemsClassName,
+                    "absolute z-10 mt-1 max-h-72 w-full scroll-py-2 overflow-y-auto py-2 text-sm text-gray-800 dark:text-zinc-200"
+                  )}
+                >
+                  {creatable && !filteredItems.length && !!query && (
+                    <Combobox.Option
+                      value={query}
+                      className={({ active }) =>
+                        clsx("cursor-default select-none px-4 py-2", {
+                          "bg-primary-600 text-white": active,
+                        })
+                      }
+                    >
+                      {({ selected }) => (
+                        <div className="flex">
+                          {selected && <CheckIcon className="mr-2 w-5" />}
+                          {selected ? query : getCreateLabel(query)}
+                        </div>
+                      )}
+                    </Combobox.Option>
+                  )}
+                  {(itemsRenderLimit
+                    ? take(filteredItems, itemsRenderLimit)
+                    : filteredItems
+                  ).map((item) => (
+                    <Combobox.Option
+                      key={getValue(valueProperty, item)}
+                      value={item}
+                      className={({ active }) =>
+                        clsx("cursor-default select-none px-4 py-2", {
+                          "bg-primary-600 text-white": active,
+                        })
+                      }
+                    >
+                      {({ selected }) => (
+                        <div className="flex">
+                          {selected && <CheckIcon className="mr-2 w-5" />}
+                          {doRender(item)}
+                        </div>
+                      )}
+                    </Combobox.Option>
+                  ))}
+                </Combobox.Options>
+              )}
 
-            {!creatable &&
+            {!readOnly &&
+              !creatable &&
               open &&
               emptyText &&
               query !== "" &&

@@ -5,6 +5,7 @@ import Breadcrumbs from "../../lib/components/Breadcrumbs";
 import Stack from "../../lib/components/Stack";
 import getPublicLayout from "../views/publicLayout";
 import MultiSelect from "../../lib/components/MultiSelect";
+import Button from "../../lib/components/Button";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   props: {
@@ -36,13 +37,19 @@ export default function MultiSelectDemoPage() {
           loading
           placeholder="+ friend"
         />
-        <MultiSelect
-          label="Names"
-          items={names}
-          onChange={console.info}
-          placeholder="+ name"
-          creatable
-        />
+        <form className="flex flex-col gap-2">
+          <MultiSelect
+            label="Names"
+            items={names}
+            onChange={console.info}
+            placeholder="+ name"
+            creatable
+            required
+            value={["Leslie Alexander"]}
+            readOnly
+          />
+          <Button type="submit">Submit</Button>
+        </form>
       </Stack>
     </>
   );
