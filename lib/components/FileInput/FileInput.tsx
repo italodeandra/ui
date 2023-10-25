@@ -39,16 +39,21 @@ export type FileUrl = {
 
 export type FileInputFile = FileFile | FileUrl;
 
+const videoExtensions = [".mp4"];
+const imageExtensions = [".png", ".jpg", ".jpeg"];
+
 function PreviewFile({
   file,
   readOnly,
   handleDeleteClick,
   downloadText,
+  preview,
 }: {
   file: FileInputFile;
   readOnly?: boolean;
   handleDeleteClick: () => void;
   downloadText: string;
+  preview?: boolean;
 }) {
   let url = (file as FileFile).file
     ? URL.createObjectURL((file as FileFile).file)
@@ -56,9 +61,13 @@ function PreviewFile({
 
   return (
     <div className="group relative flex items-center justify-center rounded-md bg-zinc-200 dark:bg-zinc-800">
-      {file.type.startsWith("video") ? (
+      {preview &&
+      (file.type?.startsWith("video") ||
+        videoExtensions.some((e) => url.endsWith(e))) ? (
         <video className="max-h-96 rounded-md" src={url} controls />
-      ) : file.type.startsWith("image") ? (
+      ) : preview &&
+        (file.type?.startsWith("image") ||
+          imageExtensions.some((e) => url.endsWith(e))) ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img src={url} alt={file.description} className="max-h-96 rounded-md" />
       ) : (
@@ -116,6 +125,7 @@ function FileInput(
     defaultValue,
     emptyText = "No files",
     downloadText = "Download",
+    preview,
     ...props
   }: Pick<
     InputProps<false>,
@@ -135,6 +145,7 @@ function FileInput(
       onChange?: (event: { target: { value: FileInputFile[] } }) => void;
       emptyText?: string;
       downloadText?: string;
+      preview?: boolean;
     },
   ref: ForwardedRef<HTMLInputElement>
 ) {
@@ -221,7 +232,12 @@ function FileInput(
       {label && (
         <label htmlFor={id} className={defaultLabelClassName}>
           {label}
-          {required && " *"}
+          {required && (
+            <>
+              {" "}
+              <span className="text-red-500">*</span>
+            </>
+          )}
         </label>
       )}
       <div
@@ -236,6 +252,7 @@ function FileInput(
             readOnly={readOnly}
             handleDeleteClick={handleDeleteClick(image)}
             downloadText={downloadText}
+            preview={preview}
           />
         ))}
         {readOnly && !value.length && (
