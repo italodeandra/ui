@@ -57,6 +57,10 @@ function CleaveInput(
     }
   };
 
+  useEffect(() => {
+    setValue(defaultValue);
+  }, [defaultValue]);
+
   return (
     <Input
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
