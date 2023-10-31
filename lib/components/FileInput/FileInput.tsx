@@ -71,12 +71,14 @@ function PreviewFile({
         // eslint-disable-next-line @next/next/no-img-element
         <img src={url} alt={file.description} className="max-h-96 rounded-md" />
       ) : (
-        <Group className="items-center gap-4 p-3">
+        <Group className="max-w-full items-center gap-4 p-3">
           <div className="rounded-lg bg-zinc-300 p-2 dark:bg-zinc-800">
             <DocumentIcon className="h-5 w-5" />
           </div>
-          <Stack className="gap-1">
-            <div>{file.name}</div>
+          <Stack className="flex-1 gap-1 overflow-hidden">
+            <div className="flex-1 truncate" title={file.name}>
+              {file.name}
+            </div>
             {file.description && <div>{file.description}</div>}
             <Text size="sm">{file.type}</Text>
             {!url.startsWith("blob") && (
