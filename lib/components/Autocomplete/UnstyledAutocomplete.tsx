@@ -114,11 +114,17 @@ export default function UnstyledAutocomplete<T extends { _id: string }>({
 
   trailing = loading ? (
     <Loading />
-  ) : trailing || !readOnly ? (
-    <Combobox.Button className="pointer-events-auto -mr-1 flex items-center">
-      <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
-    </Combobox.Button>
-  ) : undefined;
+  ) : (
+    trailing ||
+    (!readOnly ? (
+      <Combobox.Button className="pointer-events-auto -mr-1 flex items-center">
+        <ChevronUpDownIcon
+          className="h-5 w-5 text-gray-400"
+          aria-hidden="true"
+        />
+      </Combobox.Button>
+    ) : undefined)
+  );
 
   let ComponentInput = as || UnstyledInput;
 
