@@ -150,7 +150,9 @@ function FileInput(
       emptyText?: string;
       downloadText?: string;
       preview?: boolean;
-      asyncUpload?: (file: FileFile) => Promise<FileUrl>;
+      asyncUpload?: (
+        file: FileFile & { _id: string }
+      ) => Promise<FileUrl & { _id: string }>;
     },
   ref: ForwardedRef<HTMLInputElement>
 ) {
@@ -207,20 +209,13 @@ function FileInput(
         ),
         (file) =>
           asyncUpload({
+            _id: isomorphicObjectId().toString(),
             name: file.name,
             file,
             type: file.type,
           })
       );
-      setValue((value) => [
-        ...value,
-        ...uploadedFiles.map((file) => ({
-          _id: isomorphicObjectId(),
-          name: file.name,
-          url: file.url,
-          type: file.type,
-        })),
-      ]);
+      setValue((value) => [...value, ...uploadedFiles]);
       setUploading(false);
     }
   };

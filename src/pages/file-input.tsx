@@ -30,6 +30,7 @@ export default function DemoPage() {
           asyncUpload={async (file) => {
             await wait("5s");
             return {
+              _id: file._id,
               url: URL.createObjectURL(file.file),
               name: file.name,
               description: file.description,
