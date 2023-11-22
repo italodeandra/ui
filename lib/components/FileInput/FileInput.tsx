@@ -22,6 +22,7 @@ import Text from "../Text/Text";
 import Stack from "../Stack";
 import { ArrowDownTrayIcon, DocumentIcon } from "@heroicons/react/24/outline";
 import Group from "../Group";
+import asyncMap from "@italodeandra/next/utils/asyncMap";
 
 export type FileFile = {
   file: File;
@@ -128,6 +129,7 @@ function FileInput(
     emptyText = "No files",
     downloadText = "Download",
     preview,
+    asyncUpload,
     ...props
   }: Pick<
     InputProps<false>,
@@ -148,9 +150,11 @@ function FileInput(
       emptyText?: string;
       downloadText?: string;
       preview?: boolean;
+      asyncUpload?: (file: FileFile) => Promise<FileUrl>;
     },
   ref: ForwardedRef<HTMLInputElement>
 ) {
+  let [uploading, setUploading] = useState(false);
   const [value, setValue] = useState<FileInputFile[]>(defaultValue || []);
 
   useDeepCompareEffect(() => {
@@ -182,18 +186,43 @@ function FileInput(
     }
   }, [ref]);
 
-  const handleAcceptFiles = (files: File[]) => {
-    setValue((value) => [
-      ...value,
-      ...files
-        .filter((_file, index) => !limit || index <= limit - value.length - 1)
-        .map((file) => ({
+  const handleAcceptFiles = async (files: File[]) => {
+    if (!asyncUpload) {
+      setValue((value) => [
+        ...value,
+        ...files
+          .filter((_file, index) => !limit || index <= limit - value.length - 1)
+          .map((file) => ({
+            _id: isomorphicObjectId(),
+            name: file.name,
+            file,
+            type: file.type,
+          })),
+      ]);
+    } else {
+      setUploading(true);
+      let uploadedFiles = await asyncMap(
+        files.filter(
+          (_file, index) => !limit || index <= limit - value.length - 1
+        ),
+        (file) =>
+          asyncUpload({
+            name: file.name,
+            file,
+            type: file.type,
+          })
+      );
+      setValue((value) => [
+        ...value,
+        ...uploadedFiles.map((file) => ({
           _id: isomorphicObjectId(),
           name: file.name,
-          file,
+          url: file.url,
           type: file.type,
         })),
-    ]);
+      ]);
+      setUploading(false);
+    }
   };
 
   useUpdateEffect(() => {
@@ -243,7 +272,7 @@ function FileInput(
         </label>
       )}
       <div
-        className={clsx("grid grid-cols-1 gap-4", {
+        className={clsx("grid min-h-[140px] grid-cols-1 gap-4", {
           "md:grid-cols-2": !!value.length,
         })}
       >
@@ -266,6 +295,7 @@ function FileInput(
             id={id}
             onAcceptFiles={handleAcceptFiles}
             limit={limit ? limit - value.length : undefined}
+            uploading={uploading}
           />
         )}
       </div>

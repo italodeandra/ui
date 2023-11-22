@@ -7,6 +7,7 @@ import { FileSelectProvider } from "../../lib/components/FileSelect";
 import Stack from "../../lib/components/Stack";
 import { useState } from "react";
 import FileInput, { FileInputFile } from "../../lib/components/FileInput";
+import wait from "@italodeandra/next/utils/wait";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   props: {
@@ -26,6 +27,15 @@ export default function DemoPage() {
         <FileInput
           label="Attachments"
           onChange={(e) => setValue(e.target.value)}
+          asyncUpload={async (file) => {
+            await wait("5s");
+            return {
+              url: URL.createObjectURL(file.file),
+              name: file.name,
+              description: file.description,
+              type: file.type,
+            };
+          }}
         />
         <FileInput label="Read-only" readOnly defaultValue={value} />
       </Stack>

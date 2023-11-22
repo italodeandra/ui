@@ -15,6 +15,7 @@ import { HTML5Backend, NativeTypes } from "react-dnd-html5-backend";
 import numeral from "numeral";
 import { ArrowUpTrayIcon } from "@heroicons/react/24/solid";
 import { DocumentIcon } from "@heroicons/react/24/outline";
+import Loading from "../Loading";
 
 const translateAllowedType = (type: string) =>
   ({
@@ -36,6 +37,7 @@ export interface FileSelectProps {
   upToText?: string;
   anyFileText?: string;
   dropFilesHereText?: string;
+  uploadingText?: string;
   maxFileSize?: number | string;
   allowedFileTypes?: string[];
   id?: string;
@@ -45,6 +47,7 @@ export interface FileSelectProps {
   className?: string;
   error?: boolean;
   icon?: ReactElement;
+  uploading?: boolean;
 }
 
 let defaultIcon = <DocumentIcon />;
@@ -62,7 +65,9 @@ function FileSelect(
     upToText = "up to",
     anyFileText = "Any file",
     dropFilesHereText = "Drop files here",
+    uploadingText = "Uploading...",
     icon = defaultIcon,
+    uploading,
   }: FileSelectProps,
   ref: ForwardedRef<HTMLInputElement>
 ) {
@@ -118,7 +123,16 @@ function FileSelect(
         }
       )}
     >
-      {!canDrop ? (
+      {uploading ? (
+        <div className="flex flex-col items-center justify-center text-center">
+          <Loading
+            className={clsx("mb-2 h-10 w-10", {
+              "text-primary-500": isOver,
+            })}
+          />
+          <div>{uploadingText}</div>
+        </div>
+      ) : !canDrop ? (
         <div className="relative flex flex-col items-center justify-center space-y-1 text-center">
           {cloneElement(icon, {
             className: clsx(
