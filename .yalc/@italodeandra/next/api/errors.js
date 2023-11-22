@@ -1,4 +1,5 @@
 "use strict";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // noinspection JSUnusedGlobalSymbols
 var __assign = (this && this.__assign) || function () {
     __assign = Object.assign || function(t) {
@@ -12,14 +13,16 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isError = exports.tooManyRequests = exports.internalServerError = exports.conflict = exports.notFound = exports.unauthorized = exports.badRequest = void 0;
-var Error = Symbol();
+exports.tooManyRequests = exports.internalServerError = exports.conflict = exports.notFound = exports.unauthorized = exports.badRequest = void 0;
 /**
  * Respond with a bad request response.
  */
 var badRequest = function (res, body) {
     res.status(400).send(__assign({ message: "Bad Request" }, body));
-    return Error;
+    return {
+        status: 400,
+        body: body,
+    };
 };
 exports.badRequest = badRequest;
 /**
@@ -27,7 +30,10 @@ exports.badRequest = badRequest;
  */
 var unauthorized = function (res, body) {
     res.status(401).send(__assign({ message: "Unauthorized" }, body));
-    return Error;
+    return {
+        status: 401,
+        body: body,
+    };
 };
 exports.unauthorized = unauthorized;
 /**
@@ -35,7 +41,10 @@ exports.unauthorized = unauthorized;
  */
 var notFound = function (res, body) {
     res.status(404).send(__assign({ message: "Not Found" }, body));
-    return Error;
+    return {
+        status: 404,
+        body: body,
+    };
 };
 exports.notFound = notFound;
 /**
@@ -43,7 +52,10 @@ exports.notFound = notFound;
  */
 var conflict = function (res, body) {
     res.status(409).send(__assign({ message: "Conflict" }, body));
-    return Error;
+    return {
+        status: 409,
+        body: body,
+    };
 };
 exports.conflict = conflict;
 /**
@@ -51,20 +63,17 @@ exports.conflict = conflict;
  */
 var internalServerError = function (res, body) {
     res.status(500).send(__assign({ message: "Internal Server Error" }, body));
-    return Error;
+    return {
+        status: 500,
+        body: body,
+    };
 };
 exports.internalServerError = internalServerError;
 var tooManyRequests = function (res, body) {
     res.status(429).send(__assign({ message: "Too Many Requests" }, body));
-    return Error;
+    return {
+        status: 429,
+        body: body,
+    };
 };
 exports.tooManyRequests = tooManyRequests;
-var isError = function (error) {
-    return error === exports.badRequest ||
-        error === exports.unauthorized ||
-        error === exports.notFound ||
-        error === exports.conflict ||
-        error === exports.internalServerError ||
-        error === exports.tooManyRequests;
-};
-exports.isError = isError;

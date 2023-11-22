@@ -40,6 +40,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var axios_1 = __importDefault(require("axios"));
+var safeStringify_1 = __importDefault(require("./utils/safeStringify"));
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function log(content) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
@@ -56,8 +58,11 @@ function log(content) {
                         })];
                 case 1:
                     _a.sent();
-                    _a.label = 2;
-                case 2: return [2 /*return*/];
+                    return [3 /*break*/, 3];
+                case 2:
+                    console.info((0, safeStringify_1.default)(content));
+                    _a.label = 3;
+                case 3: return [2 /*return*/];
             }
         });
     });

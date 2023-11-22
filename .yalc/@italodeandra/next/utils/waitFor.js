@@ -39,53 +39,45 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var connectToFileStorage_1 = __importDefault(require("./connectToFileStorage"));
-var errors_1 = require("../api/errors");
-var handler = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var minio, params, file_1, e_1, err;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 4, , 5]);
-                return [4 /*yield*/, (0, connectToFileStorage_1.default)()];
-            case 1:
-                minio = _a.sent();
-                params = req.query.fileStorage;
-                if (!(params === null || params === void 0 ? void 0 : params.length)) {
-                    // noinspection ExceptionCaughtLocallyJS
-                    throw errors_1.badRequest;
-                }
-                if (!process.env.S3_BUCKET_NAME) {
-                    // noinspection ExceptionCaughtLocallyJS
-                    throw Error("Missing S3_BUCKET_NAME env var");
-                }
-                return [4 /*yield*/, minio.getObject(process.env.S3_BUCKET_NAME, params.join("/"))];
-            case 2:
-                file_1 = _a.sent();
-                return [4 /*yield*/, new Promise(function (resolve) {
-                        file_1.pipe(res);
-                        file_1.on("end", function (buffer) { return resolve(buffer); });
-                    })];
-            case 3:
-                _a.sent();
-                return [3 /*break*/, 5];
-            case 4:
-                e_1 = _a.sent();
-                if (typeof e_1 === "function") {
-                    throw e_1;
-                }
-                err = e_1;
-                if (err.code === "NoSuchKey") {
-                    throw errors_1.notFound;
-                }
-                console.error(e_1);
-                (0, errors_1.internalServerError)(res);
-                return [3 /*break*/, 5];
-            case 5: return [2 /*return*/];
-        }
+var ms_1 = __importDefault(require("ms"));
+function waitFor(asyncFunction, interval, timeout) {
+    return __awaiter(this, void 0, void 0, function () {
+        var start;
+        var _this = this;
+        return __generator(this, function (_a) {
+            start = Date.now();
+            return [2 /*return*/, new Promise(function (resolve, reject) {
+                    var intervalId = setInterval(function () { return __awaiter(_this, void 0, void 0, function () {
+                        var result, e_1;
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0:
+                                    _a.trys.push([0, 2, , 3]);
+                                    return [4 /*yield*/, asyncFunction()];
+                                case 1:
+                                    result = _a.sent();
+                                    return [3 /*break*/, 3];
+                                case 2:
+                                    e_1 = _a.sent();
+                                    clearInterval(intervalId);
+                                    reject(e_1);
+                                    return [2 /*return*/];
+                                case 3:
+                                    if (result) {
+                                        clearInterval(intervalId);
+                                        resolve(result);
+                                    }
+                                    else if (Date.now() - start >=
+                                        (typeof timeout === "string" ? (0, ms_1.default)(timeout) : timeout)) {
+                                        clearInterval(intervalId);
+                                        reject(new Error("Timeout reached"));
+                                    }
+                                    return [2 /*return*/];
+                            }
+                        });
+                    }); }, typeof interval === "string" ? (0, ms_1.default)(interval) : interval);
+                })];
+        });
     });
-}); };
-var FileStorage = function () {
-    return handler;
-};
-exports.default = FileStorage;
+}
+exports.default = waitFor;

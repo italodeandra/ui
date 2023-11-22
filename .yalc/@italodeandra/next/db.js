@@ -1,4 +1,27 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -39,12 +62,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.connectDb = exports.client = void 0;
+exports.clearPromise = exports.connectDb = exports.client = void 0;
 var mongodb_1 = require("mongodb");
-var mongodb_memory_server_1 = require("mongodb-memory-server");
 var papr_1 = __importDefault(require("papr"));
 var isServer_1 = require("./utils/isServer");
 var uri = process.env.MONGODB_URI;
+var appEnv = process.env.APP_ENV;
 var options = {};
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
@@ -64,44 +87,50 @@ function connectDb(afterConnected) {
                         return [2 /*return*/, global._dbPromise];
                     }
                     connect = function () { return __awaiter(_this, void 0, void 0, function () {
-                        var mongod, _i, afterConnected_1, runAfterConnected;
+                        var MongoMemoryServer, mongod, _i, afterConnected_1, runAfterConnected;
                         return __generator(this, function (_a) {
                             switch (_a.label) {
                                 case 0:
-                                    if (!!uri) return [3 /*break*/, 2];
-                                    return [4 /*yield*/, mongodb_memory_server_1.MongoMemoryServer.create({
+                                    if (!(!uri && appEnv !== "production")) return [3 /*break*/, 3];
+                                    return [4 /*yield*/, Promise.resolve().then(function () { return __importStar(require("mongodb-memory-server")); })];
+                                case 1:
+                                    MongoMemoryServer = (_a.sent()).MongoMemoryServer;
+                                    return [4 /*yield*/, MongoMemoryServer.create({
                                             instance: {
                                                 port: 5432,
                                                 dbName: process.env.MONGODB_MEMORY_SERVER_DBNAME,
                                             },
                                         })];
-                                case 1:
+                                case 2:
                                     mongod = _a.sent();
                                     uri = "".concat(mongod.getUri()).concat(process.env.MONGODB_MEMORY_SERVER_DBNAME || "test");
-                                    _a.label = 2;
-                                case 2:
+                                    _a.label = 3;
+                                case 3:
+                                    if (!uri) {
+                                        throw Error("[MongoDB] URI not found");
+                                    }
                                     exports.client = new mongodb_1.MongoClient(uri, options);
                                     return [4 /*yield*/, exports.client.connect()];
-                                case 3:
+                                case 4:
                                     _a.sent();
                                     papr.initialize(exports.client.db());
                                     return [4 /*yield*/, papr.updateSchemas()];
-                                case 4:
-                                    _a.sent();
-                                    if (!afterConnected) return [3 /*break*/, 8];
-                                    _i = 0, afterConnected_1 = afterConnected;
-                                    _a.label = 5;
                                 case 5:
-                                    if (!(_i < afterConnected_1.length)) return [3 /*break*/, 8];
+                                    _a.sent();
+                                    if (!afterConnected) return [3 /*break*/, 9];
+                                    _i = 0, afterConnected_1 = afterConnected;
+                                    _a.label = 6;
+                                case 6:
+                                    if (!(_i < afterConnected_1.length)) return [3 /*break*/, 9];
                                     runAfterConnected = afterConnected_1[_i];
                                     return [4 /*yield*/, runAfterConnected(exports.client.db())];
-                                case 6:
-                                    _a.sent();
-                                    _a.label = 7;
                                 case 7:
-                                    _i++;
-                                    return [3 /*break*/, 5];
+                                    _a.sent();
+                                    _a.label = 8;
                                 case 8:
+                                    _i++;
+                                    return [3 /*break*/, 6];
+                                case 9:
                                     console.info("[MongoDB] Connected to \"".concat(uri, "\""));
                                     return [2 /*return*/, papr];
                             }
@@ -123,4 +152,10 @@ function connectDb(afterConnected) {
     });
 }
 exports.connectDb = connectDb;
+function clearPromise() {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    delete global._dbPromise;
+}
+exports.clearPromise = clearPromise;
 exports.default = papr;

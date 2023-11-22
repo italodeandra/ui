@@ -1,1 +1,1 @@
-export default function log(content: any): Promise<void>;
+export default function log(content: Record<string, any>): Promise<void>;

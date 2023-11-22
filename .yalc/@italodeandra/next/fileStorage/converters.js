@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.base64ToBuffer = exports.blobUrlToBase64 = exports.blobUrlToObject = exports.blobToBase64 = void 0;
+exports.base64ToBlobUrl = exports.base64ToBuffer = exports.blobUrlToBase64 = exports.blobUrlToObject = exports.blobToBase64 = void 0;
 function blobToBase64(blob) {
     return new Promise(function (resolve) {
         var reader = new FileReader();
@@ -73,3 +73,12 @@ function base64ToBuffer(base64) {
     return Buffer.from(base64.replace(/^data:.+;base64,/, ""), "base64");
 }
 exports.base64ToBuffer = base64ToBuffer;
+function base64ToBlobUrl(base64) {
+    if (!base64.startsWith("data:")) {
+        return base64;
+    }
+    return fetch(base64)
+        .then(function (res) { return res.blob(); })
+        .then(function (blob) { return URL.createObjectURL(blob); });
+}
+exports.base64ToBlobUrl = base64ToBlobUrl;

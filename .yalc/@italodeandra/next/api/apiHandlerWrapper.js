@@ -53,49 +53,68 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.mutationFnWrapper = exports.queryFnWrapper = exports.apiHandlerWrapper = void 0;
 var errors_1 = require("./errors");
 var bsonToJson_1 = __importDefault(require("../utils/bsonToJson"));
+var lodash_1 = require("lodash");
 var log_1 = __importDefault(require("../log"));
+var safeStringify_1 = __importDefault(require("../utils/safeStringify"));
+function clearPromise() {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    delete global._dbPromise;
+}
+var config = {
+    configurable: true,
+    value: function () {
+        var alt = {};
+        var storeKey = function (key) {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            alt[key] = this[key];
+        };
+        Object.getOwnPropertyNames(this).forEach(storeKey, this);
+        return alt;
+    },
+};
+Object.defineProperty(Error.prototype, "toJSON", config);
+// noinspection JSUnusedGlobalSymbols
 var apiHandlerWrapper = function (handler) {
     return (function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
         var data, e_1, error;
-        var _a, _b;
-        return __generator(this, function (_c) {
-            switch (_c.label) {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
                 case 0:
                     if (req.method === "OPTIONS")
                         return [2 /*return*/, res.send(undefined)];
-                    _c.label = 1;
+                    _a.label = 1;
                 case 1:
-                    _c.trys.push([1, 3, , 4]);
+                    _a.trys.push([1, 3, , 4]);
                     return [4 /*yield*/, handler((req.method === "POST"
                             ? req.body
                             : req.query) || {}, req, res)];
                 case 2:
-                    data = _c.sent();
+                    data = _a.sent();
                     res.send((0, bsonToJson_1.default)(data));
                     return [3 /*break*/, 4];
                 case 3:
-                    e_1 = _c.sent();
-                    error = e_1;
-                    if (typeof e_1 === "function") {
-                        e_1(res);
-                    }
-                    else if (!res.headersSent) {
-                        console.error(e_1);
-                        if ((_b = (_a = e_1.errInfo) === null || _a === void 0 ? void 0 : _a.details) === null || _b === void 0 ? void 0 : _b.schemaRulesNotSatisfied) {
-                            console.error("Schema Rules Not Satisfied", JSON.stringify(e_1.errInfo.details.schemaRulesNotSatisfied, null, 2));
-                        }
-                        (0, log_1.default)({
-                            errorMessage: error.message,
-                            stack: error.stack,
-                            mongoErrorInfo: error.errInfo,
-                            request: req && {
-                                url: req.url,
-                                method: req.method,
-                                body: req.body,
-                                headers: req.headers,
-                            },
-                        });
+                    e_1 = _a.sent();
+                    if (e_1.message === "Collection is not initialized!") {
+                        clearPromise();
                         (0, errors_1.internalServerError)(res);
+                    }
+                    else {
+                        error = void 0;
+                        if (typeof e_1 === "function") {
+                            error = e_1(res);
+                        }
+                        else {
+                            error = JSON.parse((0, safeStringify_1.default)(e_1));
+                            if (!res.headersSent) {
+                                (0, errors_1.internalServerError)(res);
+                            }
+                        }
+                        void (0, log_1.default)({
+                            error: error,
+                            request: (0, lodash_1.pick)(req, ["body", "headers", "url", "method", "query"]),
+                        });
                     }
                     return [3 /*break*/, 4];
                 case 4: return [2 /*return*/];
@@ -104,6 +123,7 @@ var apiHandlerWrapper = function (handler) {
     }); });
 };
 exports.apiHandlerWrapper = apiHandlerWrapper;
+// noinspection JSUnusedGlobalSymbols
 var queryFnWrapper = function (queryKey, args) {
     return function (reactQuerySignal) {
         return fetch(queryKey +
@@ -137,6 +157,7 @@ var queryFnWrapper = function (queryKey, args) {
     };
 };
 exports.queryFnWrapper = queryFnWrapper;
+// noinspection JSUnusedGlobalSymbols
 var mutationFnWrapper = function (mutationKey) {
     return function (args) {
         return fetch(mutationKey, {
@@ -150,19 +171,16 @@ var mutationFnWrapper = function (mutationKey) {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        data = null;
-                        _a.label = 1;
-                    case 1:
-                        _a.trys.push([1, 3, , 4]);
+                        _a.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, res.json()];
-                    case 2:
+                    case 1:
                         data = _a.sent();
-                        return [3 /*break*/, 4];
-                    case 3:
+                        return [3 /*break*/, 3];
+                    case 2:
                         e_3 = _a.sent();
                         data = null;
-                        return [3 /*break*/, 4];
-                    case 4:
+                        return [3 /*break*/, 3];
+                    case 3:
                         if (res.ok) {
                             return [2 /*return*/, data];
                         }

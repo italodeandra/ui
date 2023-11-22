@@ -50,7 +50,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.uploadImage = void 0;
+exports.uploadFile = exports.uploadImage = void 0;
 var sharp_1 = __importDefault(require("sharp"));
 var connectToFileStorage_1 = __importDefault(require("./connectToFileStorage"));
 var converters_1 = require("./converters");
@@ -97,3 +97,36 @@ metaData) {
     });
 }
 exports.uploadImage = uploadImage;
+function uploadFile(file, objectFileName, contentType, 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+metaData) {
+    return __awaiter(this, void 0, void 0, function () {
+        var fileStorage, buffer, result;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    if (process.env.APP_ENV === "development") {
+                        return [2 /*return*/, file];
+                    }
+                    if (!(file === null || file === void 0 ? void 0 : file.startsWith("data:"))) {
+                        return [2 /*return*/, file];
+                    }
+                    return [4 /*yield*/, (0, connectToFileStorage_1.default)()];
+                case 1:
+                    fileStorage = _a.sent();
+                    buffer = (0, converters_1.base64ToBuffer)(file);
+                    if (!process.env.S3_BUCKET_NAME) {
+                        throw Error("Missing S3_BUCKET_NAME env var");
+                    }
+                    return [4 /*yield*/, fileStorage.putObject(process.env.S3_BUCKET_NAME, objectFileName, buffer, __assign({ "Content-Type": contentType }, metaData))];
+                case 2:
+                    result = _a.sent();
+                    if (!result.etag) {
+                        throw Error("There was an unexpected error trying to upload \"".concat(file, "\""));
+                    }
+                    return [2 /*return*/, "/file/".concat(objectFileName)];
+            }
+        });
+    });
+}
+exports.uploadFile = uploadFile;
