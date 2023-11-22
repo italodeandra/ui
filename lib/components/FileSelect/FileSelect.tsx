@@ -8,6 +8,7 @@ import {
   useCallback,
   useEffect,
   useId,
+  useState,
 } from "react";
 import clsx from "clsx";
 import { DndProvider, useDrop } from "react-dnd";
@@ -52,6 +53,14 @@ export interface FileSelectProps {
 
 let defaultIcon = <DocumentIcon />;
 
+function checkAllowedFileTypesFn(file: File, allowedFileTypes?: string[]) {
+  return (
+    !allowedFileTypes ||
+    allowedFileTypes.includes(file.type) ||
+    allowedFileTypes.some((t) => file.name.endsWith(t))
+  );
+}
+
 function FileSelect(
   {
     maxFileSize,
@@ -80,10 +89,7 @@ function FileSelect(
   maxFileSize = maxFileSize || numeral("10MB").value() || undefined;
 
   let checkAllowedFileTypes = useCallback(
-    (file: File) =>
-      !allowedFileTypes ||
-      allowedFileTypes.includes(file.type) ||
-      allowedFileTypes.some((t) => file.name.endsWith(t)),
+    (file: File) => checkAllowedFileTypesFn(file, allowedFileTypes),
     [allowedFileTypes]
   );
 
@@ -97,7 +103,8 @@ function FileSelect(
     event.target.value = "";
   };
 
-  useOnPasteFiles(onAcceptFiles, allowedFileTypes);
+  let [pasteEnabled, setPasteEnabled] = useState(false);
+  useOnPasteFiles(pasteEnabled, onAcceptFiles, allowedFileTypes);
 
   const [{ canDrop, isOver }, drop] = useDrop(() => ({
     accept: [NativeTypes.FILE],
@@ -116,12 +123,16 @@ function FileSelect(
     <div
       ref={drop}
       className={clsx(
-        "flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6 dark:border-gray-700",
+        "flex justify-center rounded-md border-2 border-dashed px-6 pt-5 pb-6",
+        "border-gray-300 dark:border-gray-700",
+        "hover:border-gray-400 dark:hover:border-gray-600",
         className,
         {
           "border-primary-300 dark:border-primary-700": isOver,
         }
       )}
+      onMouseMove={() => setPasteEnabled(true)}
+      onMouseOut={() => setPasteEnabled(false)}
     >
       {uploading ? (
         <div className="flex flex-col items-center justify-center text-center">
@@ -183,30 +194,33 @@ function FileSelect(
 export default forwardRef(FileSelect);
 
 const useOnPasteFiles = (
+  enabled: boolean,
   onAcceptFiles: (files: File[]) => void,
   allowedFileTypes?: string[]
 ): void => {
   useEffect(() => {
-    document.onpaste = function (event) {
-      const items =
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (event.clipboardData || (event as any).originalEvent.clipboardData)
-          .items;
-      for (const index in items) {
-        const item = items[index];
-        if (item.kind === "file") {
-          const file = item.getAsFile();
-          if (!allowedFileTypes || allowedFileTypes.includes(file.type)) {
-            onAcceptFiles([file]);
+    if (enabled) {
+      document.onpaste = function (event) {
+        const items =
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (event.clipboardData || (event as any).originalEvent.clipboardData)
+            .items;
+        for (const index in items) {
+          const item = items[index];
+          if (item.kind === "file") {
+            const file = item.getAsFile();
+            if (checkAllowedFileTypesFn(file, allowedFileTypes)) {
+              onAcceptFiles([file]);
+            }
           }
         }
-      }
-    };
+      };
 
-    return () => {
-      document.onpaste = null;
-    };
-  }, [allowedFileTypes, onAcceptFiles]);
+      return () => {
+        document.onpaste = null;
+      };
+    }
+  }, [allowedFileTypes, enabled, onAcceptFiles]);
 };
 
 export function FileSelectProvider({ children }: { children: ReactNode }) {

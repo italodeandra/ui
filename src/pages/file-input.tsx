@@ -19,11 +19,26 @@ const pages = [{ title: "File input" }];
 
 export default function DemoPage() {
   let [value, setValue] = useState<FileInputFile[]>([]);
+  let [, setValue2] = useState<FileInputFile[]>([]);
   return (
     <FileSelectProvider>
       <NextSeo title={pages[0].title} />
       <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
       <Stack className="p-2">
+        <FileInput
+          label="Attachments"
+          onChange={(e) => setValue2(e.target.value)}
+          asyncUpload={async (file) => {
+            await wait("5s");
+            return {
+              _id: file._id,
+              url: URL.createObjectURL(file.file),
+              name: file.name,
+              description: file.description,
+              type: file.type,
+            };
+          }}
+        />
         <FileInput
           label="Attachments"
           onChange={(e) => setValue(e.target.value)}
