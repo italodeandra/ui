@@ -123,7 +123,8 @@ let Menu = forwardRef(function Menu(
           <HuiMenu.Button as={Fragment}>{button}</HuiMenu.Button>
         ) : (
           <HuiMenu.Button
-            as={Button}
+            /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+            as={Button as any}
             className={clsx("flex w-full", buttonProps?.className)}
             trailing={<ChevronDownIcon className={iconClassName} />}
             {...buttonProps}
