@@ -13,6 +13,7 @@ export type UnstyledButtonProps<Href extends string | undefined> = {
   target?: string;
   rel?: string;
   download?: string;
+  as?: string;
 } & Omit<
   Href extends string
     ? ComponentProps<typeof NextLink>
@@ -24,9 +25,21 @@ export type UnstyledButtonProps<Href extends string | undefined> = {
 >;
 
 const UnstyledButton = <Href extends string | undefined>(
-  { href, ...props }: UnstyledButtonProps<Href>,
+  { href, as, ...props }: UnstyledButtonProps<Href>,
   ref: ForwardedRef<Href extends string ? HTMLAnchorElement : HTMLButtonElement>
 ) => {
+  if (as) {
+    let Component = as;
+    return (
+      <Component
+        {...(props as UnstyledButtonProps<undefined>)}
+        {...{
+          ref,
+        }}
+      />
+    );
+  }
+
   if (href) {
     return (
       <NextLink
