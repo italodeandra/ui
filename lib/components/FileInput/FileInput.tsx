@@ -267,8 +267,9 @@ function FileInput(
         </label>
       )}
       <div
-        className={clsx("grid min-h-[140px] grid-cols-1 gap-4", {
+        className={clsx("grid grid-cols-1 gap-4", {
           "md:grid-cols-2": !!value.length,
+          "min-h-[140px]": !!value.length || !readOnly,
         })}
       >
         {value.map((image, i) => (
