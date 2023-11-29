@@ -30,6 +30,9 @@ const translateAllowedType = (type: string) =>
     "video/mp4": "MP4",
     ".mp4": "MP4",
     ".csv": "CSV",
+    "audio/mpeg": "MP3",
+    "application/pdf": "PDF",
+    "text/csv": "CSV",
   }[type]);
 
 export interface FileSelectProps {
