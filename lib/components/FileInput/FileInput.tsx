@@ -16,7 +16,10 @@ import {
 import Button from "../Button";
 import FileSelect, { FileSelectProps } from "../FileSelect";
 import isomorphicObjectId from "@italodeandra/next/utils/isomorphicObjectId";
-import { TrashIcon } from "@heroicons/react/20/solid";
+import {
+  ArrowTopRightOnSquareIcon,
+  TrashIcon,
+} from "@heroicons/react/20/solid";
 import { isEqual } from "lodash";
 import Text from "../Text/Text";
 import Stack from "../Stack";
@@ -48,12 +51,14 @@ function PreviewFile({
   readOnly,
   handleDeleteClick,
   downloadText,
+  openText,
   preview,
 }: {
   file: FileInputFile;
   readOnly?: boolean;
   handleDeleteClick: () => void;
   downloadText: string;
+  openText: string;
   preview?: boolean;
 }) {
   let url = (file as FileFile).file
@@ -83,15 +88,22 @@ function PreviewFile({
             {file.description && <div>{file.description}</div>}
             <Text size="sm">{file.type}</Text>
             {!url.startsWith("blob") && (
-              <Button
-                leading={<ArrowDownTrayIcon />}
-                className="mr-auto"
-                href={url}
-                download={file.name}
-                target="_blank"
-              >
-                {downloadText}
-              </Button>
+              <Group className="mr-auto">
+                <Button
+                  leading={<ArrowTopRightOnSquareIcon />}
+                  href={url}
+                  target="_blank"
+                >
+                  {openText}
+                </Button>
+                <Button
+                  leading={<ArrowDownTrayIcon />}
+                  href={url}
+                  download={file.name}
+                >
+                  {downloadText}
+                </Button>
+              </Group>
             )}
           </Stack>
         </Group>
@@ -128,6 +140,7 @@ function FileInput(
     defaultValue,
     emptyText = "No files",
     downloadText = "Download",
+    openText = "Open",
     preview,
     asyncUpload,
     ...props
@@ -149,6 +162,7 @@ function FileInput(
       onChange?: (event: { target: { value: FileInputFile[] } }) => void;
       emptyText?: string;
       downloadText?: string;
+      openText?: string;
       preview?: boolean;
       asyncUpload?: (
         file: FileFile & { _id: string }
@@ -280,6 +294,7 @@ function FileInput(
             handleDeleteClick={handleDeleteClick(image)}
             downloadText={downloadText}
             preview={preview}
+            openText={openText}
           />
         ))}
         {readOnly && !value.length && (
