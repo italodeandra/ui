@@ -18,7 +18,11 @@ function DropdownMenuContent({
       <RDropdownMenu.Content
         sideOffset={5}
         {...props}
-        className={clsx(menuContentClassName, className)}
+        className={clsx(
+          "ui-dropdown-menu-content",
+          menuContentClassName,
+          className
+        )}
       >
         {children}
         <RDropdownMenu.Arrow className="mt-px fill-black/5" />
@@ -34,7 +38,11 @@ function DropdownMenuSeparator({
   return (
     <RDropdownMenu.Separator
       {...props}
-      className={clsx(menuSeparatorClassName, className)}
+      className={clsx(
+        "ui-dropdown-menu-separator",
+        menuSeparatorClassName,
+        className
+      )}
     />
   );
 }
@@ -50,7 +58,11 @@ function DropdownMenuItem({
   return (
     <RDropdownMenu.Item
       {...props}
-      className={clsx(dropdownMenuItemClassName, className)}
+      className={clsx(
+        "ui-dropdown-menu-item",
+        dropdownMenuItemClassName,
+        className
+      )}
     />
   );
 }
@@ -63,7 +75,11 @@ function DropdownMenuCheckboxItem({
   return (
     <RDropdownMenu.CheckboxItem
       {...props}
-      className={clsx(dropdownMenuItemClassName, className)}
+      className={clsx(
+        "ui-dropdown-menu-checkbox-item",
+        dropdownMenuItemClassName,
+        className
+      )}
     >
       <RDropdownMenu.ItemIndicator className="absolute left-0 inline-flex w-[25px] items-center justify-center">
         <CheckIcon className="h-3 w-3" />
