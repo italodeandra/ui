@@ -1,11 +1,8 @@
-"use client";
-
 import clsx from "clsx";
 import { useScrollYMovement } from "../../hooks/useScroll";
-import { DetailedHTMLProps, HTMLAttributes, useEffect } from "react";
-import { useRef } from "react";
-import { useMedia } from "react-use";
+import { DetailedHTMLProps, HTMLAttributes, useEffect, useRef } from "react";
 import defaultTheme from "tailwindcss/defaultTheme";
+import useMediaQuery from "../../hooks/useMediaQuery";
 
 export type HeaderProps = { hideOnScroll?: boolean } & DetailedHTMLProps<
   HTMLAttributes<HTMLElement>,
@@ -18,7 +15,7 @@ export default function Header({
   ...props
 }: HeaderProps) {
   let ref = useRef<HTMLElement>(null);
-  let isMobile = useMedia(`(max-width: ${defaultTheme.screens.md})`, false);
+  let isMobile = useMediaQuery(`(max-width: ${defaultTheme.screens.md})`);
   useScrollYMovement(
     74,
     (scrollYMovement) => {
