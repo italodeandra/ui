@@ -1,10 +1,10 @@
 import clsx from "clsx";
 import { useRouter } from "next/dist/client/router";
 import { cloneElement, ReactElement, ReactNode } from "react";
-import { useMedia } from "react-use";
 import Button from "../Button";
 import navigationDrawerState from "./navigationDrawer.state";
 import defaultTheme from "tailwindcss/defaultTheme";
+import useMediaQuery from "../../hooks/useMediaQuery";
 
 export default function NavigationItem({
   icon,
@@ -26,7 +26,7 @@ export default function NavigationItem({
     : router.pathname.includes(href) ||
       alternativeActiveHrefs?.some((href) => router.pathname.includes(href));
 
-  let isMobile = useMedia(`(max-width: ${defaultTheme.screens.lg})`, false);
+  let isMobile = useMediaQuery(`(max-width: ${defaultTheme.screens.lg})`);
 
   return (
     <Button

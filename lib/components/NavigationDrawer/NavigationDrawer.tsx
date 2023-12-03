@@ -4,8 +4,8 @@ import navigationDrawerState from "./navigationDrawer.state";
 import { useSnapshot } from "valtio";
 import { Transition } from "@headlessui/react";
 import clsx from "clsx";
-import { useMedia } from "react-use";
 import defaultTheme from "tailwindcss/defaultTheme";
+import useMediaQuery from "../../hooks/useMediaQuery";
 
 export default function NavigationDrawer({
   children,
@@ -20,7 +20,7 @@ export default function NavigationDrawer({
 }) {
   let { isOpen, setOpen } = useSnapshot(navigationDrawerState);
 
-  let isDesktop = useMedia(`(min-width: ${defaultTheme.screens.lg})`, false);
+  let isDesktop = useMediaQuery(`(min-width: ${defaultTheme.screens.lg})`);
   let isMobile = !isDesktop;
 
   return (
