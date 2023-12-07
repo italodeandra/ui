@@ -1,7 +1,8 @@
-import React, { ComponentProps } from "react";
+import React, { ComponentProps, Fragment } from "react";
 import * as RDropdownMenu from "@radix-ui/react-dropdown-menu";
 import clsx from "clsx";
 import { CheckIcon } from "@heroicons/react/20/solid";
+import Link from "next/link";
 
 export const menuContentClassName =
   "z-20 min-w-[220px] rounded-md bg-white p-[5px] shadow-lg ring-1 ring-black/5 will-change-[opacity,transform] data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade";
@@ -53,17 +54,22 @@ const dropdownMenuItemClassName = clsx(menuItemClassName, "group px-[5px]");
 
 function DropdownMenuItem({
   className,
+  href,
   ...props
-}: ComponentProps<typeof RDropdownMenu.Item>) {
+}: ComponentProps<typeof RDropdownMenu.Item> & { href?: string }) {
+  let Wrapper = href ? Link : Fragment;
   return (
-    <RDropdownMenu.Item
-      {...props}
-      className={clsx(
-        "ui-dropdown-menu-item",
-        dropdownMenuItemClassName,
-        className
-      )}
-    />
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    <Wrapper {...(href ? ({ href } as any) : {})}>
+      <RDropdownMenu.Item
+        {...props}
+        className={clsx(
+          "ui-dropdown-menu-item",
+          dropdownMenuItemClassName,
+          className
+        )}
+      />
+    </Wrapper>
   );
 }
 
