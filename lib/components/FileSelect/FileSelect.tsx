@@ -33,6 +33,11 @@ const translateAllowedType = (type: string) =>
     "audio/mpeg": "MP3",
     "application/pdf": "PDF",
     "text/csv": "CSV",
+    "application/msword": "DOC",
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+      "DOCX",
+    "application/vnd.openxmlformats-officedocument.presentationml.presentation":
+      "PPTX",
   }[type]);
 
 export interface FileSelectProps {
