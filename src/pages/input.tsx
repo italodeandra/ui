@@ -56,6 +56,7 @@ export default function InputDemoPage() {
             noImmediatePrefix: true,
             rawValueTrimPrefix: true,
           }}
+          value={18.5}
           onChange={(event) => console.info("value", event.target.value)}
         />
       </Stack>

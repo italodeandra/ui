@@ -18,8 +18,10 @@ function CleaveInput(
   }: CleaveInputProps,
   ref: ForwardedRef<HTMLInputElement>
 ) {
-  const [value, setValue] = useState<typeof defaultValue>(defaultValue);
-  let valueRef = useRef(defaultValue);
+  const [value, setValue] = useState<typeof defaultValue>(
+    defaultValue?.toString().replace(".", ",")
+  );
+  let valueRef = useRef(defaultValue?.toString().replace(".", ","));
 
   const innerRef = useRef<HTMLInputElement>({
     get value() {
@@ -46,7 +48,7 @@ function CleaveInput(
 
   const handleOnChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     if (onChange) {
-      valueRef.current = +event.target.rawValue;
+      valueRef.current = event.target.rawValue;
       onChange({
         target: {
           name,
@@ -58,7 +60,7 @@ function CleaveInput(
   };
 
   useEffect(() => {
-    setValue(defaultValue);
+    setValue(defaultValue?.toString().replace(".", ","));
   }, [defaultValue]);
 
   return (
