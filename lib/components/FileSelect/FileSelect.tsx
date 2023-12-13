@@ -57,6 +57,7 @@ export interface FileSelectProps {
   error?: boolean;
   icon?: ReactElement;
   uploading?: boolean;
+  disabled?: boolean;
 }
 
 let defaultIcon = <DocumentIcon />;
@@ -85,6 +86,7 @@ function FileSelect(
     uploadingText = "Uploading...",
     icon = defaultIcon,
     uploading,
+    disabled,
   }: FileSelectProps,
   ref: ForwardedRef<HTMLInputElement>
 ) {
@@ -117,9 +119,11 @@ function FileSelect(
   const [{ canDrop, isOver }, drop] = useDrop(() => ({
     accept: [NativeTypes.FILE],
     drop(item: { files: File[] }) {
-      let files = item.files;
-      files = files.filter(checkAllowedFileTypes);
-      onAcceptFiles(files);
+      if (!disabled) {
+        let files = item.files;
+        files = files.filter(checkAllowedFileTypes);
+        onAcceptFiles(files);
+      }
     },
     collect: (monitor) => ({
       isOver: monitor.isOver(),
@@ -132,15 +136,16 @@ function FileSelect(
       ref={drop}
       className={clsx(
         "flex justify-center rounded-md border-2 border-dashed px-6 pt-5 pb-6",
-        "border-gray-300 dark:border-gray-700",
-        "hover:border-gray-400 dark:hover:border-gray-600",
         className,
         {
           "border-primary-300 dark:border-primary-700": isOver,
+          "border-gray-300 hover:border-gray-400 dark:border-gray-700 dark:hover:border-gray-600":
+            !disabled,
+          "cursor-not-allowed border-gray-200 dark:border-gray-800": disabled,
         }
       )}
-      onMouseMove={() => setPasteEnabled(true)}
-      onMouseOut={() => setPasteEnabled(false)}
+      onMouseMove={!disabled ? () => setPasteEnabled(true) : undefined}
+      onMouseOut={!disabled ? () => setPasteEnabled(false) : undefined}
     >
       {uploading ? (
         <div className="flex flex-col items-center justify-center text-center">
@@ -151,7 +156,7 @@ function FileSelect(
           />
           <div>{uploadingText}</div>
         </div>
-      ) : !canDrop ? (
+      ) : !canDrop || disabled ? (
         <div className="relative flex flex-col items-center justify-center space-y-1 text-center">
           {cloneElement(icon, {
             className: clsx(
@@ -162,19 +167,27 @@ function FileSelect(
           <div className="text-sm">
             <label
               htmlFor={id}
-              className="relative cursor-pointer rounded-md font-medium text-primary-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-primary-500 focus-within:ring-offset-2 hover:text-primary-500 dark:ring-offset-slate-900"
+              className={clsx(
+                "relative rounded-md font-medium text-primary-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-primary-500 focus-within:ring-offset-2 hover:text-primary-500 dark:ring-offset-slate-900",
+                {
+                  "cursor-pointer": !disabled,
+                  "cursor-not-allowed": disabled,
+                }
+              )}
             >
               <span>{uploadAFileText}</span>
-              <input
-                id={id}
-                name={id}
-                type="file"
-                className="sr-only"
-                accept={allowedFileTypes?.join(",")}
-                onChange={handleFileBrowse}
-                multiple={limit !== 1}
-                ref={ref}
-              />
+              {!disabled && (
+                <input
+                  id={id}
+                  name={id}
+                  type="file"
+                  className="sr-only"
+                  accept={allowedFileTypes?.join(",")}
+                  onChange={handleFileBrowse}
+                  multiple={limit !== 1}
+                  ref={ref}
+                />
+              )}
             </label>
             <span className="pl-1">{orDragAndDropText}</span>
           </div>

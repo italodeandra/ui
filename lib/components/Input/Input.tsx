@@ -11,7 +11,7 @@ export type InputProps<Select extends boolean | undefined> = {
   loading?: boolean;
 } & UnstyledInputProps<Select>;
 
-export const defaultLabelClassName = `block ${defaultTextStyles.variant.label} mb-1`;
+export const defaultLabelClassName = `ui-input-label block ${defaultTextStyles.variant.label} mb-1`;
 export const defaultInputClassNameUncolored =
   "block w-full rounded-md shadow-sm sm:text-sm disabled:cursor-not-allowed dark:bg-zinc-800";
 export const defaultInputClassName = `ui-input-input ${defaultInputClassNameUncolored} border-gray-300 dark:border-zinc-700 focus:border-primary-500 dark:focus:border-primary-500 focus:ring-primary-500 disabled:border-gray-200 dark:disabled:border-zinc-800 disabled:bg-gray-50 dark:disabled:bg-zinc-900/90 disabled:text-gray-500`;
