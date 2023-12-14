@@ -1,11 +1,16 @@
-import type { DetailedHTMLProps, HTMLAttributes } from "react";
+import {
+  DetailedHTMLProps,
+  ForwardedRef,
+  forwardRef,
+  HTMLAttributes,
+} from "react";
 import { ComponentProps } from "react";
 import clsx from "clsx";
 import NextLink from "next/link";
 
 export const defaultTextStyles = {
   variant: {
-    default: "text-gray-700 hover:text-gray-700 dark:text-zinc-200",
+    default: "text-gray-700 dark:text-zinc-200",
     label: "text-gray-800 font-medium dark:text-zinc-100",
     secondary: "text-sm text-gray-500 dark:text-zinc-400",
     link: "font-medium text-primary-500 hover:decoration-primary-500 underline decoration-2 decoration-primary-500/40 transition-colors",
@@ -36,18 +41,21 @@ export type TextProps<
   ? DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>
   : DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>);
 
-export default function Text<
+function Text<
   Inline extends boolean | undefined,
   Href extends string | undefined
->({
-  inline,
-  variant = "default",
-  className,
-  href,
-  target,
-  size = variant !== "label" ? "base" : "sm",
-  ...props
-}: TextProps<Inline, Href>) {
+>(
+  {
+    inline,
+    variant = "default",
+    className,
+    href,
+    target,
+    size = variant !== "label" ? "base" : "sm",
+    ...props
+  }: TextProps<Inline, Href>,
+  ref: ForwardedRef<HTMLDivElement>
+) {
   className = clsx(
     defaultTextStyles.variant[variant],
     defaultTextStyles.size[size],
@@ -56,6 +64,7 @@ export default function Text<
   if (href) {
     return (
       <NextLink
+        ref={ref}
         href={href}
         target={target}
         /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
@@ -65,8 +74,10 @@ export default function Text<
     );
   }
   if (inline) {
-    return <span {...props} className={className} />;
+    return <span ref={ref} {...props} className={className} />;
   }
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return <div {...(props as any)} className={className} />;
+  return <div ref={ref} {...(props as any)} className={className} />;
 }
+
+export default forwardRef(Text);
