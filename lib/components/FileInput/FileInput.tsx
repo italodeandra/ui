@@ -28,6 +28,7 @@ import Group from "../Group";
 import asyncMap from "@italodeandra/next/utils/asyncMap";
 
 export type FileFile = {
+  _id: string;
   file: File;
   description?: string;
   name: string;
@@ -35,6 +36,7 @@ export type FileFile = {
 };
 
 export type FileUrl = {
+  _id: string;
   url: string;
   description?: string;
   name: string;
@@ -209,7 +211,7 @@ function FileInput(
         ...files
           .filter((_file, index) => !limit || index <= limit - value.length - 1)
           .map((file) => ({
-            _id: isomorphicObjectId(),
+            _id: isomorphicObjectId().toString(),
             name: file.name,
             file,
             type: file.type,
@@ -240,6 +242,7 @@ function FileInput(
         target: {
           name,
           value: value.map((image) => ({
+            _id: image._id,
             url: (image as FileFile).file
               ? URL.createObjectURL((image as FileFile).file)
               : (image as FileUrl).url,
