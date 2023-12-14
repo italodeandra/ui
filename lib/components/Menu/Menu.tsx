@@ -77,9 +77,11 @@ export type MenuLabelProps<
 const Label = function MenuLabel<
   Inline extends boolean | undefined,
   Href extends string | undefined
->(props: MenuLabelProps<Inline, Href>) {
+>({ ref, ...props }: MenuLabelProps<Inline, Href>) {
   return (
     <Text
+      /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+      ref={ref as any}
       {...props}
       variant="label"
       className={clsx(
