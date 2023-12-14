@@ -1,4 +1,4 @@
-import "@fontsource/inter/variable.css";
+import "@fontsource-variable/inter";
 import "../../lib/bootstrap/suppressConsoleLog";
 import { DefaultSeo } from "next-seo";
 import "focus-visible";

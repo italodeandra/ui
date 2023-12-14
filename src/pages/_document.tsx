@@ -10,7 +10,7 @@ export default class _Document extends Document {
           <script dangerouslySetInnerHTML={{ __html: scrolledScript }} />
           <script dangerouslySetInnerHTML={{ __html: modeScript }} />
         </Head>
-        <body className="flex h-full flex-col bg-zinc-100 dark:bg-zinc-900 dark:text-zinc-100">
+        <body className="ui-theme-default flex h-full flex-col bg-zinc-100 dark:bg-zinc-900 dark:text-zinc-100">
           <Main />
           <NextScript />
         </body>

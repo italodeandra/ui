@@ -1,0 +1,42 @@
+.ui-theme-default .ui-multi-text {
+    @apply border rounded flex flex-wrap gap-2 items-center px-2 py-1 shadow-sm transition-all
+    border-zinc-300 bg-white
+    dark:border-zinc-700 dark:bg-zinc-800
+}
+
+.ui-theme-default .ui-multi-text[data-error], .ui-theme-default .ui-multi-text[data-error][data-focused] {
+    @apply border-error-500 ring-error-500
+}
+
+.ui-theme-default .ui-multi-text[data-focused] {
+    @apply
+    border-primary-500 ring-primary-500 ring-1
+}
+
+.ui-theme-default .ui-multi-text-input {
+    @apply border-none bg-transparent p-0 flex-grow focus:ring-0 py-1
+}
+
+.ui-theme-default .ui-multi-text-item {
+    @apply rounded flex items-center px-2 py-1 gap-2 max-w-full
+    bg-zinc-100
+    dark:bg-zinc-800
+}
+
+.ui-theme-default .ui-multi-text-item:first-of-type {
+    @apply -ml-1
+}
+
+.ui-theme-default .ui-multi-text-item-content {
+    @apply truncate
+}
+
+.ui-theme-default .ui-multi-text-delete-icon {
+    @apply w-4 h-4
+}
+
+.ui-theme-default .ui-multi-text-delete-button {
+    @apply rounded
+    hover:bg-black/10
+    dark:hover:bg-white/10
+}

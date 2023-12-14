@@ -31,6 +31,10 @@ export const menu = [
         href: "/input",
       },
       {
+        title: "Multi Text",
+        href: "/multi-text",
+      },
+      {
         title: "Autocomplete",
         href: "/autocomplete",
       },

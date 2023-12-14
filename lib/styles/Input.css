@@ -1,0 +1,23 @@
+.ui-theme-default .ui-input-wrapper {
+    @apply flex flex-col gap-1
+}
+
+.ui-theme-default .ui-input-wrapper-label {
+    @apply font-medium
+    text-zinc-800
+    dark:text-zinc-100
+}
+
+.ui-theme-default .ui-input-wrapper-help-text {
+    @apply text-sm
+    text-zinc-500
+    dark:text-zinc-400
+}
+
+.ui-theme-default .ui-input-wrapper[data-error] .ui-input-wrapper-label {
+    @apply text-error-500
+}
+
+.ui-theme-default .ui-input-wrapper[data-error] .ui-input-wrapper-help-text {
+    @apply text-error-500
+}
