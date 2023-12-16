@@ -26,6 +26,7 @@ import Stack from "../Stack";
 import { ArrowDownTrayIcon, DocumentIcon } from "@heroicons/react/24/outline";
 import Group from "../Group";
 import asyncMap from "@italodeandra/next/utils/asyncMap";
+import numeral from "numeral";
 
 export type FileFile = {
   _id: string;
@@ -33,6 +34,7 @@ export type FileFile = {
   description?: string;
   name: string;
   type: string;
+  size: number;
 };
 
 export type FileUrl = {
@@ -41,6 +43,7 @@ export type FileUrl = {
   description?: string;
   name: string;
   type: string;
+  size: number;
 };
 
 export type FileInputFile = FileFile | FileUrl;
@@ -89,6 +92,9 @@ function PreviewFile({
             </div>
             {file.description && <div>{file.description}</div>}
             <Text size="sm">{file.type}</Text>
+            {file.size && (
+              <Text size="sm">{numeral(file.size).format("0b")}</Text>
+            )}
             {!url.startsWith("blob") && (
               <Group className="mr-auto">
                 <Button
@@ -215,6 +221,7 @@ function FileInput(
             name: file.name,
             file,
             type: file.type,
+            size: file.size,
           })),
       ]);
     } else {
@@ -229,6 +236,7 @@ function FileInput(
             name: file.name,
             file,
             type: file.type,
+            size: file.size,
           })
       );
       setValue((value) => [...value, ...uploadedFiles]);
@@ -241,14 +249,15 @@ function FileInput(
       onChange({
         target: {
           name,
-          value: value.map((image) => ({
-            _id: image._id,
-            url: (image as FileFile).file
-              ? URL.createObjectURL((image as FileFile).file)
-              : (image as FileUrl).url,
-            description: image.description,
-            name: (image as FileUrl).name,
-            type: image.type,
+          value: value.map((file) => ({
+            _id: file._id,
+            url: (file as FileFile).file
+              ? URL.createObjectURL((file as FileFile).file)
+              : (file as FileUrl).url,
+            description: file.description,
+            name: (file as FileUrl).name,
+            type: file.type,
+            size: file.size,
           })),
         },
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -289,12 +298,12 @@ function FileInput(
           "min-h-[140px]": !!value.length || !readOnly,
         })}
       >
-        {value.map((image, i) => (
+        {value.map((file, i) => (
           <PreviewFile
             key={i}
-            file={image}
+            file={file}
             readOnly={readOnly}
-            handleDeleteClick={handleDeleteClick(image)}
+            handleDeleteClick={handleDeleteClick(file)}
             downloadText={downloadText}
             preview={preview}
             openText={openText}
