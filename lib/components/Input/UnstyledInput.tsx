@@ -23,6 +23,7 @@ export type UnstyledInputCommonProps = {
   leading?: ReactNode;
   as?: typeof Combobox.Input;
   innerClassName?: string;
+  error?: boolean;
 };
 
 export type UnstyledInputProps<Select extends boolean | undefined> =
