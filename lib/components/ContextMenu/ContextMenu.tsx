@@ -2,7 +2,7 @@ import React, { ComponentProps, Fragment } from "react";
 import * as RContextMenu from "@radix-ui/react-context-menu";
 import { CheckIcon } from "@heroicons/react/16/solid";
 import Link from "next/link";
-import { twMerge } from "tailwind-merge";
+import clsx from "../../utils/clsx";
 
 function ContextMenuContent({
   className,
@@ -13,7 +13,7 @@ function ContextMenuContent({
     <RContextMenu.Portal>
       <RContextMenu.Content
         {...props}
-        className={twMerge("ui-context-menu-content", className)}
+        className={clsx("ui-context-menu-content", className)}
       >
         {children}
       </RContextMenu.Content>
@@ -28,7 +28,7 @@ function ContextMenuSeparator({
   return (
     <RContextMenu.Separator
       {...props}
-      className={twMerge("ui-context-menu-separator", className)}
+      className={clsx("ui-context-menu-separator", className)}
     />
   );
 }
@@ -44,7 +44,7 @@ function ContextMenuItem({
     <Wrapper {...(href ? ({ href } as any) : {})}>
       <RContextMenu.Item
         {...props}
-        className={twMerge("ui-context-menu-item", className)}
+        className={clsx("ui-context-menu-item", className)}
       />
     </Wrapper>
   );
@@ -58,7 +58,7 @@ function ContextMenuCheckboxItem({
   return (
     <RContextMenu.CheckboxItem
       {...props}
-      className={twMerge("ui-context-menu-checkbox-item", className)}
+      className={clsx("ui-context-menu-checkbox-item", className)}
     >
       <RContextMenu.ItemIndicator className="ui-context-menu-checkbox-item-indicator">
         <CheckIcon />
