@@ -1,0 +1,15 @@
+.ui-theme-default .ui-pagination {
+    @apply flex
+}
+
+.ui-theme-default .ui-pagination > * {
+    @apply min-w-[32px] h-8 rounded items-center justify-center flex px-2
+    hover:bg-black/5
+    dark:hover:bg-white/5
+
+    disabled:pointer-events-none disabled:opacity-50
+
+    data-[active]:bg-primary-500 data-[active]:text-white
+    data-[active]:hover:bg-primary-600
+    data-[active]:dark:hover:bg-primary-400
+}

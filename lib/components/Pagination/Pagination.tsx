@@ -2,7 +2,6 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import clsx from "clsx";
 import { range } from "lodash";
-import Button from "../Button";
 
 export interface PaginationProps {
   totalItems?: number;
@@ -68,47 +67,30 @@ export default function Pagination({
   let handlePageClick = useCallback((page: number) => () => setPage(page), []);
 
   return (
-    <nav
-      className={clsx(
-        "isolate inline-flex -space-x-px rounded-md shadow-sm",
-        className
-      )}
-      aria-label="Pagination"
-    >
-      <Button
-        disabled={page === 1}
-        onClick={handlePageClick(page - 1)}
-        className="rounded-none rounded-l-md !px-2"
-      >
+    <nav className={clsx("ui-pagination", className)} aria-label="Pagination">
+      <button disabled={page === 1} onClick={handlePageClick(page - 1)}>
         <span className="sr-only">Previous</span>
         <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
-      </Button>
+      </button>
       {pages.map((p) =>
         typeof p === "number" ? (
-          <Button
+          <button
             key={p}
             onClick={handlePageClick(p)}
-            variant={page === p ? "light" : "outlined"}
-            className={clsx("rounded-none !px-4", {
-              "z-10": page === p,
-            })}
+            data-active={page === p ? "" : undefined}
           >
             {p}
-          </Button>
+          </button>
         ) : (
-          <Button key={p} className="pointer-events-none rounded-none !px-3.5">
+          <button key={p} disabled>
             ...
-          </Button>
+          </button>
         )
       )}
-      <Button
-        disabled={page === pageCount}
-        onClick={handlePageClick(page + 1)}
-        className="rounded-none rounded-r-md !px-2"
-      >
+      <button disabled={page === pageCount} onClick={handlePageClick(page + 1)}>
         <span className="sr-only">Next</span>
         <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
-      </Button>
+      </button>
     </nav>
   );
 }
