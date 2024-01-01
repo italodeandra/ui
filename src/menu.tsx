@@ -158,6 +158,10 @@ export const menu = [
         title: "Tooltip",
         href: "/tooltip",
       },
+      {
+        title: "Tabs",
+        href: "/tabs",
+      },
       //
       {
         title: "Typography",
