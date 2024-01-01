@@ -36,6 +36,7 @@ export default function DemoPage() {
               name: file.name,
               description: file.description,
               type: file.type,
+              size: file.size,
             };
           }}
           disabled
@@ -51,6 +52,7 @@ export default function DemoPage() {
               name: file.name,
               description: file.description,
               type: file.type,
+              size: file.size,
             };
           }}
         />

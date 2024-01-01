@@ -6,7 +6,6 @@ import { NextSeo } from "next-seo";
 import { GetServerSideProps } from "next";
 import { getCookies } from "cookies-next";
 import Breadcrumbs from "../../lib/components/Breadcrumbs";
-import DropdownMenu from "../../lib/components/DropdownMenu";
 import ContextMenu from "../../lib/components/ContextMenu";
 import { useState } from "react";
 
