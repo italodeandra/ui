@@ -1,5 +1,12 @@
 @import "./styles/MultiText.css";
 @import "./styles/Input.css";
+@import "./styles/ContextMenu.css";
+
+body.ui-theme-default {
+  @apply flex h-full flex-col
+  bg-neutral-50 text-neutral-900
+  dark:bg-neutral-900 dark:text-neutral-50
+}
 
 button {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);

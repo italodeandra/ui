@@ -143,6 +143,10 @@ export const menu = [
         href: "/dropdown-menu",
       },
       {
+        title: "Context menu",
+        href: "/context-menu",
+      },
+      {
         title: "Modal",
         href: "/modal",
       },

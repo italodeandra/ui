@@ -15,8 +15,6 @@ export default function getPublicLayout(children: ReactNode) {
     <>
       <Header />
       <NavigationDrawer>
-        <TopBlurryPoint />
-        <BottomBlurryPoint />
         {/* eslint-disable-next-line react/jsx-no-undef */}
         <Footer
           companyName={
