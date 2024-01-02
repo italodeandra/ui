@@ -58,6 +58,7 @@ export interface FileSelectProps {
   icon?: ReactElement;
   uploading?: boolean;
   disabled?: boolean;
+  additionalBottomInfo?: ReactNode;
 }
 
 let defaultIcon = <DocumentIcon />;
@@ -87,6 +88,7 @@ function FileSelect(
     icon = defaultIcon,
     uploading,
     disabled,
+    additionalBottomInfo,
   }: FileSelectProps,
   ref: ForwardedRef<HTMLInputElement>
 ) {
@@ -197,6 +199,7 @@ function FileSelect(
               : anyFileText}{" "}
             {upToText} {numeral(maxFileSize).format("0b")}
           </p>
+          {additionalBottomInfo}
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center text-center">
