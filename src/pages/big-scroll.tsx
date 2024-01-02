@@ -2,11 +2,18 @@ import { NextSeo } from "next-seo";
 import Breadcrumbs from "../../lib/components/Breadcrumbs";
 import getPublicLayout from "../views/publicLayout";
 import Stack from "../../lib/components/Stack";
+import { GetServerSideProps } from "next";
+import { getCookies } from "cookies-next";
+
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
+  props: {
+    cookies: getCookies({ req, res }),
+  },
+});
 
 const pages = [{ title: "Big scroll" }];
 
-// noinspection JSUnusedGlobalSymbols
-export default function BigScrollPage() {
+export default function Page() {
   return (
     <>
       <NextSeo title={pages[0].title} />
@@ -18,4 +25,4 @@ export default function BigScrollPage() {
   );
 }
 
-BigScrollPage.getLayout = getPublicLayout;
+Page.getLayout = getPublicLayout;

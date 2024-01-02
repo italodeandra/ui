@@ -22,7 +22,7 @@ const people = [
 
 const names = ["Leslie Alexander", "Michael Foster"];
 
-export default function MultiSelectDemoPage() {
+export default function Page() {
   return (
     <>
       <NextSeo title={pages[0].title} />
@@ -55,4 +55,4 @@ export default function MultiSelectDemoPage() {
   );
 }
 
-MultiSelectDemoPage.getLayout = getPublicLayout;
+Page.getLayout = getPublicLayout;

@@ -75,7 +75,7 @@ function MultiSelectExample(
   );
 }
 
-export default function HomePage() {
+export default function Page() {
   let getExampleCodeMouseEvents = useExampleCodeCallback();
 
   return (
@@ -221,4 +221,4 @@ export default function HomePage() {
   );
 }
 
-HomePage.getLayout = getPublicLayout;
+Page.getLayout = getPublicLayout;

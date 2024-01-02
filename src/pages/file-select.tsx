@@ -6,6 +6,7 @@ import Breadcrumbs from "../../lib/components/Breadcrumbs";
 import FileSelect, {
   FileSelectProvider,
 } from "../../lib/components/FileSelect";
+import Stack from "../../lib/components/Stack";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   props: {
@@ -15,16 +16,16 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
 
 const pages = [{ title: "File select" }];
 
-export default function FileSelectDemoPage() {
+export default function Page() {
   return (
     <FileSelectProvider>
       <NextSeo title={pages[0].title} />
       <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
-      <div className="p-2">
+      <Stack className="p-2">
         <FileSelect onAcceptFiles={console.info} />
-      </div>
+      </Stack>
     </FileSelectProvider>
   );
 }
 
-FileSelectDemoPage.getLayout = getPublicLayout;
+Page.getLayout = getPublicLayout;

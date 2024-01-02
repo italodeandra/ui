@@ -19,7 +19,7 @@ const people = [
   { _id: "2", name: "Michael Foster", url: "#" },
 ];
 
-export default function AutocompleteDemoPage() {
+export default function Page() {
   return (
     <>
       <NextSeo title={pages[0].title} />
@@ -47,4 +47,4 @@ export default function AutocompleteDemoPage() {
   );
 }
 
-AutocompleteDemoPage.getLayout = getPublicLayout;
+Page.getLayout = getPublicLayout;

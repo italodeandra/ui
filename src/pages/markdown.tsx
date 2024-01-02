@@ -14,8 +14,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
 
 const pages = [{ title: "Markdown" }];
 
-// noinspection JSUnusedGlobalSymbols
-export default function ButtonDemoPage() {
+export default function Page() {
   return (
     <>
       <NextSeo title={pages[0].title} />
@@ -28,4 +27,4 @@ Just a link: https://reactjs.com.`}</Markdown>
   );
 }
 
-ButtonDemoPage.getLayout = getPublicLayout;
+Page.getLayout = getPublicLayout;

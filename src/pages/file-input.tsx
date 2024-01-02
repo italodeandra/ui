@@ -17,7 +17,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
 
 const pages = [{ title: "File input" }];
 
-export default function DemoPage() {
+export default function Page() {
   let [value, setValue] = useState<FileInputFile[]>([]);
   let [, setValue2] = useState<FileInputFile[]>([]);
   return (
@@ -62,4 +62,4 @@ export default function DemoPage() {
   );
 }
 
-DemoPage.getLayout = getPublicLayout;
+Page.getLayout = getPublicLayout;

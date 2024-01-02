@@ -7,6 +7,7 @@ import Breadcrumbs from "../../lib/components/Breadcrumbs";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import Spotlight from "../../lib/components/Spotlight";
 import { useModalState } from "../../lib/components/Modal";
+import Stack from "../../lib/components/Stack";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   props: {
@@ -22,19 +23,19 @@ const people = [
   { _id: "2", name: "Leslie 3", url: "#" },
 ];
 
-export default function SpotlightDemoPage() {
+export default function Page() {
   const [open, { openModal, closeModal }] = useModalState();
 
   return (
     <>
       <NextSeo title={pages[0].title} />
       <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
-      <div className="p-2">
+      <Stack className="p-2">
         <Button onClick={openModal}>
           <MagnifyingGlassIcon className="mr-2 w-5" />
           Search
         </Button>
-      </div>
+      </Stack>
       <Spotlight
         open={open}
         onClose={closeModal}
@@ -48,4 +49,4 @@ export default function SpotlightDemoPage() {
   );
 }
 
-SpotlightDemoPage.getLayout = getPublicLayout;
+Page.getLayout = getPublicLayout;

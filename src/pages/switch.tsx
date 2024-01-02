@@ -15,7 +15,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
 
 const pages = [{ title: "Switch" }];
 
-export default function SwitchDemoPage() {
+export default function Page() {
   let [checked, setChecked] = useState(false);
 
   return (
@@ -46,4 +46,4 @@ export default function SwitchDemoPage() {
   );
 }
 
-SwitchDemoPage.getLayout = getPublicLayout;
+Page.getLayout = getPublicLayout;

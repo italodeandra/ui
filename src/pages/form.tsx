@@ -29,7 +29,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
 
 const pages = [{ title: "Form" }];
 
-export default function FormDemoPage() {
+export default function Page() {
   const {
     register,
     handleSubmit,
@@ -125,4 +125,4 @@ export default function FormDemoPage() {
   );
 }
 
-FormDemoPage.getLayout = getPublicLayout;
+Page.getLayout = getPublicLayout;

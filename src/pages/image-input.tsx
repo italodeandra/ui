@@ -17,7 +17,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
 
 const pages = [{ title: "Image input" }];
 
-export default function ImageInputDemoPage() {
+export default function Page() {
   let [value, setValue] = useState<FileInputFile[]>([]);
   return (
     <FileSelectProvider>
@@ -34,4 +34,4 @@ export default function ImageInputDemoPage() {
   );
 }
 
-ImageInputDemoPage.getLayout = getPublicLayout;
+Page.getLayout = getPublicLayout;

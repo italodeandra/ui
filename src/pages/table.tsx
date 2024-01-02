@@ -18,7 +18,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
 
 const pages = [{ title: "Table" }];
 
-export default function TableDemoPage() {
+export default function Page() {
   return (
     <div className="flex flex-1 flex-col">
       <NextSeo title={pages[0].title} />
@@ -77,4 +77,4 @@ export default function TableDemoPage() {
   );
 }
 
-TableDemoPage.getLayout = getPublicLayout;
+Page.getLayout = getPublicLayout;

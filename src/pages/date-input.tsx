@@ -14,7 +14,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
 
 const pages = [{ title: "Date time input" }];
 
-export default function DateTimeInputDemoPage() {
+export default function Page() {
   return (
     <>
       <NextSeo title={pages[0].title} />
@@ -27,4 +27,4 @@ export default function DateTimeInputDemoPage() {
   );
 }
 
-DateTimeInputDemoPage.getLayout = getPublicLayout;
+Page.getLayout = getPublicLayout;

@@ -17,7 +17,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
 
 const pages = [{ title: "Carousel" }];
 
-export default function CarouselDemoPage() {
+export default function Page() {
   let slides = range(1, 10);
 
   return (
@@ -62,4 +62,4 @@ export default function CarouselDemoPage() {
   );
 }
 
-CarouselDemoPage.getLayout = getPublicLayout;
+Page.getLayout = getPublicLayout;

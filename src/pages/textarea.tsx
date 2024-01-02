@@ -14,7 +14,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
 
 const pages = [{ title: "Textarea" }];
 
-export default function TextareaDemoPage() {
+export default function Page() {
   return (
     <>
       <NextSeo title={pages[0].title} />
@@ -26,4 +26,4 @@ export default function TextareaDemoPage() {
   );
 }
 
-TextareaDemoPage.getLayout = getPublicLayout;
+Page.getLayout = getPublicLayout;

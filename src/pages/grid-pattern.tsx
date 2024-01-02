@@ -13,7 +13,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
 
 const pages = [{ title: "Grid pattern" }];
 
-export default function GridPatternDemoPage() {
+export default function Page() {
   return (
     <>
       <NextSeo title={pages[0].title} />
@@ -27,4 +27,4 @@ export default function GridPatternDemoPage() {
   );
 }
 
-GridPatternDemoPage.getLayout = getPublicLayout;
+Page.getLayout = getPublicLayout;

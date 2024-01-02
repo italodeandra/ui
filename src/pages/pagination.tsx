@@ -18,7 +18,7 @@ const pages = [{ title: "Pagination" }];
 
 const items = range(1, 100);
 
-export default function PaginationDemoPage() {
+export default function Page() {
   let [page, setPage] = useState(1);
 
   return (
@@ -37,4 +37,4 @@ export default function PaginationDemoPage() {
   );
 }
 
-PaginationDemoPage.getLayout = getPublicLayout;
+Page.getLayout = getPublicLayout;

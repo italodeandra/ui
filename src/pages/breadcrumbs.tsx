@@ -17,10 +17,11 @@ const pages = [
   { title: "Loading", loading: true },
 ];
 
-export default function BreadcrumbsDemoPage() {
+export default function Page() {
   return (
     <>
-      <NextSeo title="Breadcrumbs" />
+      d
+      <NextSeo title={pages[0].title} />
       <Breadcrumbs pages={pages} className="mb-2 md:mx-2" loading />
       <Stack className="p-2">
         <div>
@@ -34,4 +35,4 @@ export default function BreadcrumbsDemoPage() {
   );
 }
 
-BreadcrumbsDemoPage.getLayout = getPublicLayout;
+Page.getLayout = getPublicLayout;

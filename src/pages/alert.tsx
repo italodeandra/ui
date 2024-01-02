@@ -15,7 +15,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
 
 const pages = [{ title: "Alert" }];
 
-export default function AlertDemoPage() {
+export default function Page() {
   return (
     <>
       <NextSeo title={pages[0].title} />
@@ -47,4 +47,4 @@ export default function AlertDemoPage() {
   );
 }
 
-AlertDemoPage.getLayout = getPublicLayout;
+Page.getLayout = getPublicLayout;

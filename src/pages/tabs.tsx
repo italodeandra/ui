@@ -15,7 +15,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
 
 const pages = [{ title: "Tabs" }];
 
-export default function DemoPage() {
+export default function Page() {
   let [tab, setTab] = useState(0);
 
   return (
@@ -40,4 +40,4 @@ export default function DemoPage() {
   );
 }
 
-DemoPage.getLayout = getPublicLayout;
+Page.getLayout = getPublicLayout;

@@ -4,10 +4,18 @@ import getPublicLayout from "../views/publicLayout";
 import Stack from "../../lib/components/Stack";
 import ConfirmationButton from "../../lib/components/ConfirmationButton";
 import { showNotification } from "../../lib/components/Notifications";
+import { GetServerSideProps } from "next";
+import { getCookies } from "cookies-next";
+
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
+  props: {
+    cookies: getCookies({ req, res }),
+  },
+});
 
 const pages = [{ title: "Confirmation button" }];
 
-export default function ConfirmationButtonPage() {
+export default function Page() {
   return (
     <>
       <NextSeo title={pages[0].title} />
@@ -26,4 +34,4 @@ export default function ConfirmationButtonPage() {
   );
 }
 
-ConfirmationButtonPage.getLayout = getPublicLayout;
+Page.getLayout = getPublicLayout;

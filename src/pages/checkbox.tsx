@@ -15,7 +15,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
 
 const pages = [{ title: "Checkbox" }];
 
-export default function CheckboxDemoPage() {
+export default function Page() {
   return (
     <>
       <NextSeo title={pages[0].title} />
@@ -42,4 +42,4 @@ export default function CheckboxDemoPage() {
   );
 }
 
-CheckboxDemoPage.getLayout = getPublicLayout;
+Page.getLayout = getPublicLayout;

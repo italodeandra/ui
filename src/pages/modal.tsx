@@ -6,6 +6,7 @@ import { getCookies } from "cookies-next";
 import Breadcrumbs from "../../lib/components/Breadcrumbs";
 import Modal, { useModalState } from "../../lib/components/Modal";
 import { CheckIcon } from "@heroicons/react/24/outline";
+import Stack from "../../lib/components/Stack";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   props: {
@@ -15,16 +16,16 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
 
 const pages = [{ title: "Modal" }];
 
-export default function ModalDemoPage() {
+export default function Page() {
   let [modalOpen, { openModal, closeModal }] = useModalState();
 
   return (
     <>
       <NextSeo title={pages[0].title} />
       <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
-      <div className="p-2">
+      <Stack className="p-2">
         <Button onClick={openModal}>Open modal</Button>
-      </div>
+      </Stack>
       <Modal open={modalOpen} onClose={closeModal}>
         <Modal.Container>
           <Modal.CloseButton onClick={closeModal} />
@@ -47,4 +48,4 @@ export default function ModalDemoPage() {
   );
 }
 
-ModalDemoPage.getLayout = getPublicLayout;
+Page.getLayout = getPublicLayout;

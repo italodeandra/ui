@@ -10,8 +10,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   },
 });
 
-export default function UnstyledButtonPage() {
+export default function Page() {
   return <UnstyledButtonDoc />;
 }
 
-UnstyledButtonPage.getLayout = getPublicLayout;
+Page.getLayout = getPublicLayout;

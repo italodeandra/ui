@@ -10,8 +10,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   },
 });
 
-export default function ButtonPage() {
+export default function Page() {
   return <ButtonDoc />;
 }
 
-ButtonPage.getLayout = getPublicLayout;
+Page.getLayout = getPublicLayout;

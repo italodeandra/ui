@@ -20,7 +20,7 @@ function Quote({ children }: { children: ReactNode }) {
   );
 }
 
-export default function ButtonDemoPage() {
+export default function Page() {
   return (
     <DocPage title="Getting started">
       <Text variant="label">First steps</Text>
@@ -319,4 +319,4 @@ export default function Home() {
   );
 }
 
-ButtonDemoPage.getLayout = getPublicLayout;
+Page.getLayout = getPublicLayout;

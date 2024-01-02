@@ -16,7 +16,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
 
 const pages = [{ title: "Dropdown menu" }];
 
-export default function MenuDemoPage() {
+export default function Page() {
   return (
     <>
       <NextSeo title={pages[0].title} />
@@ -40,4 +40,4 @@ export default function MenuDemoPage() {
   );
 }
 
-MenuDemoPage.getLayout = getPublicLayout;
+Page.getLayout = getPublicLayout;

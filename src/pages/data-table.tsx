@@ -75,7 +75,7 @@ const actions = [
 
 const pages = [{ title: "DataTable" }];
 
-export default function DataTableDemoPage() {
+export default function Page() {
   let [isLoading, setLoading] = useState(true);
   let [page, setPage] = useState(1);
   let [sort, setSort] = useState<[string, "asc" | "desc"][]>([]);
@@ -122,4 +122,4 @@ export default function DataTableDemoPage() {
   );
 }
 
-DataTableDemoPage.getLayout = getPublicLayout;
+Page.getLayout = getPublicLayout;

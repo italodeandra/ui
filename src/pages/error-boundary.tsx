@@ -14,7 +14,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
 
 const pages = [{ title: "Error boundary" }];
 
-export default function ErrorBoundaryDemoPage() {
+export default function Page() {
   return (
     <>
       <NextSeo title={pages[0].title} />
@@ -26,4 +26,4 @@ export default function ErrorBoundaryDemoPage() {
   );
 }
 
-ErrorBoundaryDemoPage.getLayout = getPublicLayout;
+Page.getLayout = getPublicLayout;

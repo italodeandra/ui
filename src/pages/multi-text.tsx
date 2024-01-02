@@ -18,7 +18,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
 
 const pages = [{ title: "MultiText" }];
 
-export default function DemoPage() {
+export default function Page() {
   let { register, watch, handleSubmit } = useForm({
     defaultValues: {
       names: [],
@@ -46,4 +46,4 @@ export default function DemoPage() {
   );
 }
 
-DemoPage.getLayout = getPublicLayout;
+Page.getLayout = getPublicLayout;
