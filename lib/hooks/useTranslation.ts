@@ -1,11 +1,14 @@
 import { useCallback } from "react";
 import { get } from "lodash";
 
-export type Intl<T> = { [key: string]: Intl<T> | T };
+export type Intl<T = string> = { [key: string]: Intl<T> | T };
 
-export default function useTranslation(intl?: Intl<string>, prePath?: string) {
+export default function useTranslation<K extends string>(
+  intl?: Intl,
+  prePath?: string
+) {
   return useCallback(
-    (sentence: string, path?: string) => {
+    (sentence: K, path?: string) => {
       return (
         (get(
           intl,
