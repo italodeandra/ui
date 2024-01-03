@@ -1,24 +1,29 @@
-.ui-theme-default .ui-context-menu-content {
-    @apply rounded overflow-hidden p-1 shadow-md text-sm
+.ui-theme-default .ui-context-menu-content,
+.ui-theme-default .ui-select-content {
+    @apply z-20 rounded overflow-hidden p-1 shadow-md text-sm
     bg-white shadow-black/5
     dark:bg-neutral-800 dark:border dark:border-white dark:border-opacity-[0.03]
 }
 
 .ui-theme-default .ui-context-menu-item,
-.ui-theme-default .ui-context-menu-checkbox-item {
+.ui-theme-default .ui-context-menu-checkbox-item,
+.ui-theme-default .ui-select-item {
     @apply relative rounded py-1 px-7 cursor-pointer outline-none select-none
     data-[highlighted]:bg-black/5
     dark:data-[highlighted]:bg-white/5
 }
 
-.ui-theme-default .ui-context-menu-checkbox-item .ui-context-menu-checkbox-item-indicator {
+.ui-theme-default .ui-context-menu-checkbox-item-indicator,
+.ui-theme-default .ui-select-item .ui-select-item-indicator {
     @apply absolute left-1.5 top-1.5 inline-flex items-center justify-center
 }
 
-.ui-theme-default .ui-context-menu-checkbox-item .ui-context-menu-checkbox-item-indicator > svg {
+.ui-theme-default .ui-context-menu-checkbox-item-indicator > svg,
+.ui-theme-default .ui-select-item .ui-select-item-indicator > svg {
     @apply w-4 h-4
 }
 
-.ui-theme-default .ui-context-menu-separator {
+.ui-theme-default .ui-context-menu-separator,
+.ui-theme-default .ui-select-separator {
     @apply h-px bg-neutral-100 dark:bg-neutral-700/30 my-1 mx-[6px]
 }

@@ -1,22 +1,47 @@
-import React, {
-  ComponentProps,
-  ForwardedRef,
-  forwardRef,
-  ReactNode,
-} from "react";
+import React, { ComponentProps, ForwardedRef, forwardRef } from "react";
 import * as RSelect from "@radix-ui/react-select";
 import {
   CheckIcon,
   ChevronDownIcon,
   ChevronUpIcon,
-} from "@heroicons/react/20/solid";
-import clsx from "clsx";
-import {
-  menuContentClassName,
-  menuItemClassName,
-  menuSeparatorClassName,
-} from "../DropdownMenu";
+} from "@heroicons/react/16/solid";
 import Button from "../Button";
+import clsx from "../../utils/clsx";
+
+function SelectContent({
+  className,
+  children,
+  ...props
+}: ComponentProps<typeof RSelect.Content>) {
+  return (
+    <RSelect.Portal>
+      <RSelect.Content
+        {...props}
+        className={clsx("ui-select-content", className)}
+      >
+        <RSelect.ScrollUpButton className="ui-select-scroll-button">
+          <ChevronUpIcon />
+        </RSelect.ScrollUpButton>
+        <RSelect.Viewport>{children}</RSelect.Viewport>
+        <RSelect.ScrollDownButton className="ui-select-scroll-button">
+          <ChevronDownIcon />
+        </RSelect.ScrollDownButton>
+      </RSelect.Content>
+    </RSelect.Portal>
+  );
+}
+
+function SelectSeparator({
+  className,
+  ...props
+}: ComponentProps<typeof RSelect.Separator>) {
+  return (
+    <RSelect.Separator
+      {...props}
+      className={clsx("ui-select-separator", className)}
+    />
+  );
+}
 
 function SelectItemComponent(
   { children, className, ...props }: ComponentProps<typeof RSelect.Item>,
@@ -24,14 +49,14 @@ function SelectItemComponent(
 ) {
   return (
     <RSelect.Item
-      className={clsx(menuItemClassName, "pr-[35px]", className)}
+      className={clsx("ui-select-item", className)}
       {...props}
       ref={forwardedRef}
     >
-      <RSelect.ItemText>{children}</RSelect.ItemText>
-      <RSelect.ItemIndicator className="absolute left-0 inline-flex w-[25px] items-center justify-center">
-        <CheckIcon className="h-3 w-3" />
+      <RSelect.ItemIndicator className="ui-select-item-indicator">
+        <CheckIcon />
       </RSelect.ItemIndicator>
+      <RSelect.ItemText>{children}</RSelect.ItemText>
     </RSelect.Item>
   );
 }
@@ -61,46 +86,12 @@ function SelectTrigger({
   );
 }
 
-function SelectContent({ children }: { children: ReactNode }) {
-  return (
-    <RSelect.Portal>
-      <RSelect.Content className={menuContentClassName}>
-        <RSelect.ScrollUpButton className="flex h-[25px] cursor-default items-center justify-center bg-white text-zinc-900">
-          <ChevronUpIcon className="h-5 w-5" />
-        </RSelect.ScrollUpButton>
-        <RSelect.Viewport>{children}</RSelect.Viewport>
-        <RSelect.ScrollDownButton className="flex h-[25px] cursor-default items-center justify-center bg-white text-zinc-900">
-          <ChevronDownIcon className="h-5 w-5" />
-        </RSelect.ScrollDownButton>
-      </RSelect.Content>
-    </RSelect.Portal>
-  );
-}
-
 function SelectLabel({
   className,
   ...props
 }: ComponentProps<typeof RSelect.Label>) {
   return (
-    <RSelect.Label
-      className={clsx(
-        "px-[25px] text-xs font-medium leading-[25px] text-zinc-400",
-        className
-      )}
-      {...props}
-    />
-  );
-}
-
-function SelectSeparator({
-  className,
-  ...props
-}: ComponentProps<typeof RSelect.Label>) {
-  return (
-    <RSelect.Separator
-      className={clsx(menuSeparatorClassName, className)}
-      {...props}
-    />
+    <RSelect.Label className={clsx("ui-select-label", className)} {...props} />
   );
 }
 

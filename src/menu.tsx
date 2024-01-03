@@ -63,6 +63,10 @@ export const menu = [
         href: "/multi-select",
       },
       {
+        title: "Select",
+        href: "/select",
+      },
+      {
         title: "Switch",
         href: "/switch",
       },

@@ -3,7 +3,7 @@
 }
 
 .ui-theme-default .ui-pagination > * {
-    @apply min-w-[32px] h-8 rounded items-center justify-center flex px-2
+    @apply min-w-[32px] h-8 rounded items-center justify-center flex px-2 text-sm font-medium
     hover:bg-black/5
     dark:hover:bg-white/5
 
@@ -12,4 +12,8 @@
     data-[active]:bg-primary-500 data-[active]:text-white
     data-[active]:hover:bg-primary-600
     data-[active]:dark:hover:bg-primary-400
+}
+
+.ui-theme-default .ui-pagination > * > svg {
+    @apply -mx-2
 }

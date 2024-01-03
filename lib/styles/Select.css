@@ -1,0 +1,13 @@
+.ui-theme-default .ui-select-label {
+    @apply pl-7 text-xs font-medium leading-6  text-neutral-500
+}
+
+.ui-theme-default .ui-select-scroll-button {
+    @apply flex h-6 cursor-default items-center justify-center
+    bg-white
+    dark:bg-neutral-800
+}
+
+.ui-theme-default .ui-select-scroll-button > svg {
+    @apply w-4 h-4
+}
