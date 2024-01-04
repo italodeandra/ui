@@ -8,7 +8,7 @@ import {
   useEffect,
 } from "react";
 import Modal, { useModalState } from "../Modal";
-import clsx from "clsx";
+import clsx from "../../utils/clsx";
 
 function Dialog({
   icon,
@@ -22,11 +22,13 @@ function Dialog({
   panelClassName,
   style,
   overlayClassName,
+  dialogClassName,
 }: IDialog & {
   containerClassName?: string;
   panelClassName?: string;
   style?: CSSProperties;
   overlayClassName?: string;
+  dialogClassName?: string;
 }) {
   let [modalOpen, { openModal, closeModal }] = useModalState();
 
@@ -45,6 +47,7 @@ function Dialog({
       panelClassName={panelClassName}
       style={style}
       overlayClassName={overlayClassName}
+      dialogClassName={dialogClassName}
     >
       <Modal.Container className={containerClassName}>
         {!hideCloseButton && <Modal.CloseButton onClick={closeModal} />}
@@ -73,10 +76,12 @@ export default function Dialogs({
   containerClassName,
   panelClassName,
   overlayClassName,
+  dialogClassName,
 }: {
   containerClassName?: string;
   panelClassName?: string;
   overlayClassName?: string;
+  dialogClassName?: string;
 }) {
   let { dialogs, setRendered } = useSnapshot(dialogsState);
 
@@ -96,6 +101,7 @@ export default function Dialogs({
           containerClassName={containerClassName}
           panelClassName={clsx(panelClassName, dialog.panelClassName)}
           overlayClassName={overlayClassName}
+          dialogClassName={clsx(dialogClassName, dialog.dialogClassName)}
         />
       ))}
     </>

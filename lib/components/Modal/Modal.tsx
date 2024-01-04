@@ -10,9 +10,9 @@ import {
 import { Dialog, Transition } from "@headlessui/react";
 import Stack from "../Stack";
 import Group from "../Group";
-import clsx from "clsx";
 import Button from "../Button";
 import { XMarkIcon } from "@heroicons/react/24/solid";
+import clsx from "../../utils/clsx";
 
 export default function Modal({
   open,

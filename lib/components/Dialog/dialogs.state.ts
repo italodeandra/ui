@@ -12,6 +12,7 @@ export type IDialog = {
   open?: boolean;
   hideCloseButton?: boolean;
   panelClassName?: string;
+  dialogClassName?: string;
   style?: CSSProperties;
 };
 
