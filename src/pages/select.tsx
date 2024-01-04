@@ -33,7 +33,9 @@ export default function Page() {
             <Select.Item value="quantity">Quantity</Select.Item>
             <Select.Item value="size">Size</Select.Item>
             {fakeArray(50).map((n) => (
-              <Select.Item value={n.toString()}>Option {n}</Select.Item>
+              <Select.Item key={n} value={n.toString()}>
+                Option {n}
+              </Select.Item>
             ))}
           </Select.Content>
         </Select.Root>
