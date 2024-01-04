@@ -113,7 +113,7 @@ function MultiSelectInput<
         /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
         {...(props as any)}
         ref={ref}
-        className="rounded-md border-none !ring-transparent disabled:cursor-not-allowed disabled:text-gray-500 dark:bg-zinc-800 dark:disabled:bg-zinc-900/90 sm:text-sm"
+        className="rounded-md border-none !ring-transparent disabled:cursor-not-allowed disabled:text-zinc-500 sm:text-sm dark:bg-zinc-800 dark:disabled:bg-zinc-900/90"
         readOnly={readOnly}
       />
     </div>
@@ -195,7 +195,7 @@ export default function MultiSelect<T extends object | string>({
     (!readOnly ? (
       <Combobox.Button className="pointer-events-auto -mr-1 flex items-center">
         <ChevronUpDownIcon
-          className="h-5 w-5 text-gray-400"
+          className="h-5 w-5 text-zinc-400"
           aria-hidden="true"
         />
       </Combobox.Button>
@@ -299,7 +299,7 @@ export default function MultiSelect<T extends object | string>({
                   static={isStatic}
                   className={clsx(
                     defaultMenuItemsClassName,
-                    "absolute z-10 mt-1 max-h-72 w-full scroll-py-2 overflow-y-auto py-2 text-sm text-gray-800 dark:text-zinc-200"
+                    "absolute z-10 mt-1 max-h-72 w-full scroll-py-2 overflow-y-auto py-2 text-sm text-zinc-800 dark:text-zinc-200"
                   )}
                 >
                   {creatable && !filteredItems.length && !!query && (
@@ -352,7 +352,7 @@ export default function MultiSelect<T extends object | string>({
                 <p
                   className={clsx(
                     defaultMenuItemsClassName,
-                    "absolute mt-1 w-full p-4 text-sm text-gray-500 dark:text-zinc-400"
+                    "absolute mt-1 w-full p-4 text-sm text-zinc-500 dark:text-zinc-400"
                   )}
                 >
                   {emptyText}

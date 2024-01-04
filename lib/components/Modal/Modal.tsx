@@ -85,7 +85,7 @@ export default function Modal({
             >
               <Dialog.Panel
                 className={clsx(
-                  "relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all dark:bg-zinc-900 dark:ring-1 dark:ring-white/5 sm:my-8 sm:w-full sm:max-w-sm",
+                  "relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm dark:bg-zinc-900 dark:ring-1 dark:ring-white/5",
                   panelClassName
                 )}
               >
@@ -109,7 +109,7 @@ function ModalContainer({
   className?: string;
 }) {
   return (
-    <Stack className={clsx("!gap-4 px-4 pt-5 pb-4 sm:p-6", className)}>
+    <Stack className={clsx("!gap-4 px-4 pb-4 pt-5 sm:p-6", className)}>
       {children}
     </Stack>
   );
@@ -149,7 +149,7 @@ function ModalContent({
   return (
     <div
       className={clsx(
-        "text-center text-sm text-gray-500 dark:text-gray-400",
+        "text-center text-sm text-zinc-500 dark:text-zinc-400",
         className
       )}
     >

@@ -52,7 +52,7 @@ export default function NavigationDrawer({
       </Transition>
       <div
         className={clsx(
-          "flex min-h-screen flex-col ring-offset-gray-100 transition-all duration-300",
+          "flex min-h-screen flex-col ring-offset-zinc-100 transition-all duration-300",
           {
             "pl-80 duration-150": isOpen && !isMobile,
           }

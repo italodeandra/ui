@@ -68,7 +68,7 @@ export default function TableFooterWithPagination({
       </div>
       <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
         <div>
-          <p className="text-sm text-gray-700 dark:text-zinc-100">
+          <p className="text-sm text-zinc-700 dark:text-zinc-100">
             {showingText} <span className="font-medium">{start}</span> {toText}{" "}
             <span className="font-medium">{end}</span>
             {totalItems !== undefined && itemsPerPage !== undefined && (

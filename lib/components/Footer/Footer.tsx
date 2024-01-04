@@ -28,7 +28,7 @@ export default function Footer({
     <>
       <div className="flex min-h-screen flex-col flex-col">{children}</div>
       <footer className="border-t border-slate-900/5 bg-white dark:border-slate-50/5 dark:bg-zinc-900">
-        <div className="mx-auto max-w-7xl overflow-hidden py-12 px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl overflow-hidden px-4 py-12 sm:px-6 lg:px-8">
           {main && (
             <nav
               className="-mx-5 -my-2 mb-8 flex flex-wrap justify-center"
@@ -38,7 +38,7 @@ export default function Footer({
                 <div key={item.name} className="px-5 py-2">
                   <a
                     href={item.href}
-                    className="text-base text-gray-500 hover:text-gray-900"
+                    className="text-base text-zinc-500 hover:text-zinc-900"
                   >
                     {item.name}
                   </a>
@@ -52,7 +52,7 @@ export default function Footer({
                 <a
                   key={item.name}
                   href={item.href}
-                  className="text-gray-400 hover:text-gray-500"
+                  className="text-zinc-400 hover:text-zinc-500"
                 >
                   <span className="sr-only">{item.name}</span>
                   {cloneElement(item.icon, {
@@ -63,7 +63,7 @@ export default function Footer({
               ))}
             </div>
           )}
-          <p className="text-center text-base text-gray-400">
+          <p className="text-center text-base text-zinc-400">
             {companyName} &copy; {CURRENT_YEAR}. {allRightsReserved}.
           </p>
         </div>

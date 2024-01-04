@@ -12,7 +12,7 @@ export default function Loading({ className }: LoadingProps) {
         {
           "h-5": !className?.includes("h-"),
           "w-5": !className?.includes("w-"),
-          "text-gray-400": !className?.includes("text-"),
+          "text-zinc-400": !className?.includes("text-"),
         },
         className
       )}

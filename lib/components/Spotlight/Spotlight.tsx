@@ -59,7 +59,7 @@ export default function Spotlight<T extends { _id: string }>({
         >
           <div
             className={clsx(
-              "fixed inset-0 bg-gray-500 !bg-opacity-25 transition-opacity dark:bg-zinc-800",
+              "fixed inset-0 bg-zinc-500 !bg-opacity-25 transition-opacity dark:bg-zinc-800",
               "bg-white/50 backdrop-blur [@supports(backdrop-filter:blur(0))]:bg-white/30",
               "dark:bg-zinc-900/50 dark:[@supports(backdrop-filter:blur(0))]:bg-zinc-900/30"
             )}
@@ -76,15 +76,15 @@ export default function Spotlight<T extends { _id: string }>({
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-95"
           >
-            <Dialog.Panel className="mx-auto max-w-xl transform divide-y divide-gray-100 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-10 transition-all dark:divide-zinc-800 dark:bg-zinc-900 dark:ring-1 dark:ring-white/5">
+            <Dialog.Panel className="mx-auto max-w-xl transform divide-y divide-zinc-100 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-10 transition-all dark:divide-zinc-800 dark:bg-zinc-900 dark:ring-1 dark:ring-white/5">
               {/*<Combobox onChange={handleSelect}>
                 <div className="relative flex">
                   <MagnifyingGlassIcon
-                    className="pointer-events-none absolute top-3.5 left-4 h-5 w-5 text-gray-400"
+                    className="pointer-events-none absolute top-3.5 left-4 h-5 w-5 text-zinc-400"
                     aria-hidden="true"
                   />
                   <Combobox.Input
-                    className="h-12 w-full border-0 bg-transparent pl-11 pr-4 text-gray-800 placeholder-gray-400 focus:ring-0 dark:text-zinc-200 sm:text-sm"
+                    className="h-12 w-full border-0 bg-transparent pl-11 pr-4 text-zinc-800 placeholder-zinc-400 focus:ring-0 dark:text-zinc-200 sm:text-sm"
                     placeholder={placeholder}
                     onChange={(event) => setQuery(event.target.value)}
                   />
@@ -94,7 +94,7 @@ export default function Spotlight<T extends { _id: string }>({
                 {filteredItems.length > 0 && (
                   <Combobox.Options
                     static
-                    className="max-h-72 scroll-py-2 overflow-y-auto py-2 text-sm text-gray-800 dark:text-zinc-200"
+                    className="max-h-72 scroll-py-2 overflow-y-auto py-2 text-sm text-zinc-800 dark:text-zinc-200"
                   >
                     {filteredItems.map((item) => (
                       <Combobox.Option
@@ -116,7 +116,7 @@ export default function Spotlight<T extends { _id: string }>({
                 )}
 
                 {query !== "" && filteredItems.length === 0 && (
-                  <p className="p-4 text-sm text-gray-500">{emptyText}</p>
+                  <p className="p-4 text-sm text-zinc-500">{emptyText}</p>
                 )}
               </Combobox>*/}
               <UnstyledAutocomplete
@@ -131,8 +131,8 @@ export default function Spotlight<T extends { _id: string }>({
                     <MagnifyingGlassIcon aria-hidden="true" />
                   </InputIcon>
                 }
-                emptyTextClassName="p-4 text-sm text-gray-500 dark:text-zinc-400"
-                optionsClassName="max-h-72 scroll-py-2 overflow-y-auto py-2 text-sm text-gray-800 dark:text-zinc-200"
+                emptyTextClassName="p-4 text-sm text-zinc-500 dark:text-zinc-400"
+                optionsClassName="max-h-72 scroll-py-2 overflow-y-auto py-2 text-sm text-zinc-800 dark:text-zinc-200"
                 optionClassName={({ active }) =>
                   clsx(
                     "cursor-default select-none px-4 py-2",

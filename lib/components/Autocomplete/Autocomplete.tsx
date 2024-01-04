@@ -42,11 +42,11 @@ export default function Autocomplete<T extends { _id: string }>({
         onChangeQuery={setQuery}
         emptyTextClassName={clsx(
           defaultMenuItemsClassName,
-          "p-4 text-sm text-gray-500 dark:text-zinc-400 mt-1 absolute w-full"
+          "p-4 text-sm text-zinc-500 dark:text-zinc-400 mt-1 absolute w-full"
         )}
         optionsClassName={clsx(
           defaultMenuItemsClassName,
-          "max-h-72 scroll-py-2 overflow-y-auto py-2 text-sm text-gray-800 dark:text-zinc-200 absolute z-10 mt-1 w-full"
+          "max-h-72 scroll-py-2 overflow-y-auto py-2 text-sm text-zinc-800 dark:text-zinc-200 absolute z-10 mt-1 w-full"
         )}
         optionClassName={({ active }) =>
           clsx(

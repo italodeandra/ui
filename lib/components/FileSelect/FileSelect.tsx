@@ -137,13 +137,13 @@ function FileSelect(
     <div
       ref={drop}
       className={clsx(
-        "flex justify-center rounded-md border-2 border-dashed px-6 pt-5 pb-6",
+        "flex justify-center rounded-md border-2 border-dashed px-6 pb-6 pt-5",
         className,
         {
           "border-primary-300 dark:border-primary-700": isOver,
-          "border-gray-300 hover:border-gray-400 dark:border-gray-700 dark:hover:border-gray-600":
+          "border-zinc-300 hover:border-zinc-400 dark:border-zinc-700 dark:hover:border-zinc-600":
             !disabled,
-          "cursor-not-allowed border-gray-200 dark:border-gray-800": disabled,
+          "cursor-not-allowed border-zinc-200 dark:border-zinc-800": disabled,
         }
       )}
       onMouseMove={!disabled ? () => setPasteEnabled(true) : undefined}
@@ -162,7 +162,7 @@ function FileSelect(
         <div className="relative flex flex-col items-center justify-center space-y-1 text-center">
           {cloneElement(icon, {
             className: clsx(
-              "mx-auto h-12 w-12 text-gray-400",
+              "mx-auto h-12 w-12 text-zinc-400",
               icon.props.className
             ),
           })}
@@ -193,7 +193,7 @@ function FileSelect(
             </label>
             <span className="pl-1">{orDragAndDropText}</span>
           </div>
-          <p className="text-xs text-gray-500">
+          <p className="text-xs text-zinc-500">
             {allowedFileTypes
               ? allowedFileTypes.map(translateAllowedType).join(", ")
               : anyFileText}{" "}

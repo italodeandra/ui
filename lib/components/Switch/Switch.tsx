@@ -56,7 +56,7 @@ export default function Switch({
       </HuiSwitch>
       {rightLabel && (
         <HuiSwitch.Label as="span" className="ml-3">
-          <span className="text-sm text-gray-500 dark:text-gray-300">
+          <span className="text-sm text-zinc-500 dark:text-zinc-300">
             {rightLabel}
           </span>
         </HuiSwitch.Label>

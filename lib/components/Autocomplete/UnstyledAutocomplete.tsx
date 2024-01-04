@@ -119,7 +119,7 @@ export default function UnstyledAutocomplete<T extends { _id: string }>({
     (!readOnly ? (
       <Combobox.Button className="pointer-events-auto -mr-1 flex items-center">
         <ChevronUpDownIcon
-          className="h-5 w-5 text-gray-400"
+          className="h-5 w-5 text-zinc-400"
           aria-hidden="true"
         />
       </Combobox.Button>

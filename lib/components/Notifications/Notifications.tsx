@@ -102,7 +102,7 @@ export default function Notifications({
                           variant="text"
                         >
                           <XMarkIcon
-                            className="h-5 w-5 text-gray-400"
+                            className="h-5 w-5 text-zinc-400"
                             aria-label="Close"
                           />
                         </Button>
