@@ -1,10 +1,5 @@
 import clsx from "clsx";
-import {
-  cloneElement,
-  MouseEventHandler,
-  ReactElement,
-  ReactNode,
-} from "react";
+import { cloneElement, MouseEvent, MouseEventHandler, ReactElement, ReactNode } from "react";
 import Button, { ButtonProps } from "../Button/Button";
 import Tooltip from "../Tooltip/Tooltip";
 
@@ -14,15 +9,15 @@ export type TableActionButtonProps<Href extends string | undefined> = {
 } & Omit<ButtonProps<Href>, "href">;
 
 export default function TableActionButton<Href extends string | undefined>({
-  children,
-  className,
-  title,
-  onClick,
-  ...props
-}: TableActionButtonProps<Href>) {
+                                                                             children,
+                                                                             className,
+                                                                             title,
+                                                                             onClick,
+                                                                             ...props
+                                                                           }: TableActionButtonProps<Href>) {
   const handleClick: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.stopPropagation();
-    onClick?.(e);
+    onClick?.(e as MouseEvent<HTMLAnchorElement> & MouseEvent<HTMLButtonElement>);
   };
 
   const button = (
@@ -37,7 +32,7 @@ export default function TableActionButton<Href extends string | undefined>({
         className: clsx(
           "!h-[20px] !w-[20px]",
           (children as ReactElement)?.props?.className
-        ),
+        )
       })}
     </Button>
   );
