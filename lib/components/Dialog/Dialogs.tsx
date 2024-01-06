@@ -23,12 +23,14 @@ function Dialog({
   style,
   overlayClassName,
   dialogClassName,
+  dialogOuterPanelClassName,
 }: IDialog & {
   containerClassName?: string;
   panelClassName?: string;
   style?: CSSProperties;
   overlayClassName?: string;
   dialogClassName?: string;
+  dialogOuterPanelClassName?: string;
 }) {
   let [modalOpen, { openModal, closeModal }] = useModalState();
 
@@ -48,6 +50,7 @@ function Dialog({
       style={style}
       overlayClassName={overlayClassName}
       dialogClassName={dialogClassName}
+      dialogOuterPanelClassName={dialogOuterPanelClassName}
     >
       <Modal.Container className={containerClassName}>
         {!hideCloseButton && <Modal.CloseButton onClick={closeModal} />}
@@ -77,11 +80,13 @@ export default function Dialogs({
   panelClassName,
   overlayClassName,
   dialogClassName,
+  dialogOuterPanelClassName,
 }: {
   containerClassName?: string;
   panelClassName?: string;
   overlayClassName?: string;
   dialogClassName?: string;
+  dialogOuterPanelClassName?: string;
 }) {
   let { dialogs, setRendered } = useSnapshot(dialogsState);
 
@@ -102,6 +107,7 @@ export default function Dialogs({
           panelClassName={clsx(panelClassName, dialog.panelClassName)}
           overlayClassName={overlayClassName}
           dialogClassName={clsx(dialogClassName, dialog.dialogClassName)}
+          dialogOuterPanelClassName={dialogOuterPanelClassName}
         />
       ))}
     </>
