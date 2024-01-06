@@ -3,7 +3,7 @@ import { Dialog as HuiDialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import Button from "../Button/Button";
 import Group from "../Group/Group";
-import clsx from "clsx";
+import clsx from "../../utils/clsx";
 
 export type DialogProps = {
   open?: boolean;
@@ -14,6 +14,7 @@ export type DialogProps = {
   actions?: ReactNode;
   hideOverlay?: boolean;
   className?: string;
+  noPadding?: boolean
 };
 
 export default function Drawer({
@@ -25,6 +26,7 @@ export default function Drawer({
   actions,
   hideOverlay,
   className,
+  noPadding
 }: DialogProps) {
   const [open, setOpen] = useState(defaultOpen);
 
@@ -67,9 +69,9 @@ export default function Drawer({
               className={clsx(
                 "pointer-events-none fixed inset-y-0 flex max-w-full",
                 {
-                  ["left-0 pr-10"]: position === "left",
-                  ["right-0 pl-10"]: position === "right",
-                }
+                  ["left-0 pr-10"]: !noPadding && position === "left",
+                  ["right-0 pl-10"]: !noPadding && position === "right",
+                },
               )}
             >
               <Transition.Child
