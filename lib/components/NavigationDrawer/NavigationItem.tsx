@@ -1,4 +1,4 @@
-import clsx from "clsx";
+import clsx from "../../utils/clsx";
 import { useRouter } from "next/dist/client/router";
 import { cloneElement, ReactElement, ReactNode } from "react";
 import Button from "../Button";
@@ -12,12 +12,15 @@ export default function NavigationItem({
   href,
   exact,
   alternativeActiveHrefs,
+  className,
 }: {
   icon?: ReactElement;
+
   children: ReactNode;
   href: string;
   exact?: boolean;
   alternativeActiveHrefs?: string[];
+  className?: string;
 }) {
   let router = useRouter();
   let active = exact
@@ -31,7 +34,7 @@ export default function NavigationItem({
   return (
     <Button
       variant={active ? "light" : "text"}
-      className={clsx("w-full !justify-start !border-transparent")}
+      className={clsx("w-full justify-start border-transparent", className)}
       leading={
         icon &&
         cloneElement(icon, {
