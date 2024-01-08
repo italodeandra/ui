@@ -8,6 +8,8 @@ import Stack from "../../lib/components/Stack";
 import { useState } from "react";
 import FileInput, { FileInputFile } from "../../lib/components/FileInput";
 import wait from "@italodeandra/next/utils/wait";
+import { showNotification } from "../../lib/components/Notifications";
+import numeral from "numeral";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   props: {
@@ -54,6 +56,34 @@ export default function Page() {
               type: file.type,
               size: file.size,
             };
+          }}
+          limit={10}
+          maxFileSize="20MB"
+          onRejectFiles={(files, reason) => {
+            switch (reason) {
+              case "size":
+                return showNotification({
+                  icon: "error",
+                  title: "File size not allowed",
+                  message: files
+                    .map((f) => `${f.name} (${numeral(f.size).format("0b")})`)
+                    .join(", "),
+                });
+              case "type":
+                return showNotification({
+                  icon: "error",
+                  title: "File types not allowed",
+                  message: files.map((f) => f.name).join(", "),
+                });
+              case "limit":
+                return showNotification({
+                  icon: "error",
+                  title: "File limit count reached",
+                  message: `Files ignored: ${files
+                    .map((f) => f.name)
+                    .join(", ")}`,
+                });
+            }
           }}
         />
         <FileInput label="Read-only" readOnly defaultValue={value} />

@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import {
+  ComponentPropsWithRef,
   ForwardedRef,
   forwardRef,
   useCallback,
@@ -25,7 +26,6 @@ import Text from "../Text/Text";
 import Stack from "../Stack";
 import { ArrowDownTrayIcon, DocumentIcon } from "@heroicons/react/24/outline";
 import Group from "../Group";
-import asyncMap from "@italodeandra/next/utils/asyncMap";
 import numeral from "numeral";
 
 export type FileFile = {
@@ -151,6 +151,7 @@ function FileInput(
     openText = "Open",
     preview,
     asyncUpload,
+    onRejectFiles,
     ...props
   }: Pick<
     InputProps<false>,
@@ -164,7 +165,7 @@ function FileInput(
     | "onMouseOver"
     | "onMouseOut"
   > &
-    Omit<FileSelectProps, "onAcceptFiles"> & {
+    Omit<FileSelectProps, "onAcceptFiles" | "onRejectFiles"> & {
       readOnly?: boolean;
       defaultValue?: FileInputFile[];
       onChange?: (event: { target: { value: FileInputFile[] } }) => void;
@@ -173,10 +174,14 @@ function FileInput(
       openText?: string;
       preview?: boolean;
       asyncUpload?: (
-        file: FileFile & { _id: string }
+        file: FileFile & { _id: string },
       ) => Promise<FileUrl & { _id: string }>;
+      onRejectFiles?: (
+        files: File[],
+        reason: "type" | "size" | "limit",
+      ) => void;
     },
-  ref: ForwardedRef<HTMLInputElement>
+  ref: ForwardedRef<HTMLInputElement>,
 ) {
   let [uploading, setUploading] = useState(false);
   const [value, setValue] = useState<FileInputFile[]>(defaultValue || []);
@@ -226,20 +231,27 @@ function FileInput(
       ]);
     } else {
       setUploading(true);
-      let uploadedFiles = await asyncMap(
-        files.filter(
-          (_file, index) => !limit || index <= limit - value.length - 1
-        ),
-        (file) =>
-          asyncUpload({
-            _id: isomorphicObjectId().toString(),
-            name: file.name,
-            file,
-            type: file.type,
-            size: file.size,
-          })
+      if (onRejectFiles) {
+        let rejectedFilesLimit = files.filter(
+          (_file, index) => !(!limit || index <= limit - value.length - 1),
+        );
+        if (rejectedFilesLimit.length) {
+          onRejectFiles(rejectedFilesLimit, "limit");
+        }
+      }
+      let acceptedFiles = files.filter(
+        (_file, index) => !limit || index <= limit - value.length - 1,
       );
-      setValue((value) => [...value, ...uploadedFiles]);
+      for (let file of acceptedFiles) {
+        let uploadedFile = await asyncUpload({
+          _id: isomorphicObjectId().toString(),
+          name: file.name,
+          file,
+          type: file.type,
+          size: file.size,
+        });
+        setValue((value) => [...value, uploadedFile]);
+      }
       setUploading(false);
     }
   };
@@ -270,7 +282,7 @@ function FileInput(
     (clickedFile: FileInputFile) => () => {
       setValue((value) => [...value.filter((file) => file !== clickedFile)]);
     },
-    []
+    [],
   );
 
   return (
@@ -319,6 +331,7 @@ function FileInput(
             onAcceptFiles={handleAcceptFiles}
             limit={limit ? limit - value.length : undefined}
             uploading={uploading}
+            onRejectFiles={onRejectFiles}
           />
         )}
       </div>
@@ -326,5 +339,7 @@ function FileInput(
     </div>
   );
 }
+
+export type FileInputProps = ComponentPropsWithRef<typeof FileInput>;
 
 export default forwardRef(FileInput);

@@ -38,7 +38,7 @@ const translateAllowedType = (type: string) =>
       "DOCX",
     "application/vnd.openxmlformats-officedocument.presentationml.presentation":
       "PPTX",
-  }[type]);
+  })[type];
 
 export interface FileSelectProps {
   uploadAFileText?: string;
@@ -52,6 +52,7 @@ export interface FileSelectProps {
   id?: string;
   limit?: number;
   onAcceptFiles: (files: File[]) => void;
+  onRejectFiles?: (files: File[], reason: "type" | "size") => void;
   helperText?: string;
   className?: string;
   error?: boolean;
@@ -89,8 +90,9 @@ function FileSelect(
     uploading,
     disabled,
     additionalBottomInfo,
+    onRejectFiles,
   }: FileSelectProps,
-  ref: ForwardedRef<HTMLInputElement>
+  ref: ForwardedRef<HTMLInputElement>,
 ) {
   const innerId = useId();
   id = id || innerId;
@@ -102,7 +104,7 @@ function FileSelect(
 
   let checkAllowedFileTypes = useCallback(
     (file: File) => checkAllowedFileTypesFn(file, allowedFileTypes),
-    [allowedFileTypes]
+    [allowedFileTypes],
   );
 
   const handleFileBrowse: ChangeEventHandler<HTMLInputElement> = (event) => {
@@ -110,8 +112,25 @@ function FileSelect(
       throw Error("Files is falsy");
     }
     let files = Array.from(event.target.files);
-    files = files.filter(checkAllowedFileTypes);
-    onAcceptFiles(files);
+    let acceptedFiles = files.filter(
+      (file) =>
+        checkAllowedFileTypes(file) && file.size <= (maxFileSize as number),
+    );
+    if (onRejectFiles) {
+      let rejectedFilesType = files.filter(
+        (file) => !checkAllowedFileTypes(file),
+      );
+      if (rejectedFilesType.length) {
+        onRejectFiles(rejectedFilesType, "type");
+      }
+      let rejectedFilesSize = files.filter(
+        (file) => file.size > (maxFileSize as number),
+      );
+      if (rejectedFilesSize.length) {
+        onRejectFiles(rejectedFilesSize, "size");
+      }
+    }
+    onAcceptFiles(acceptedFiles);
     event.target.value = "";
   };
 
@@ -144,7 +163,7 @@ function FileSelect(
           "border-zinc-300 hover:border-zinc-400 dark:border-zinc-700 dark:hover:border-zinc-600":
             !disabled,
           "cursor-not-allowed border-zinc-200 dark:border-zinc-800": disabled,
-        }
+        },
       )}
       onMouseMove={!disabled ? () => setPasteEnabled(true) : undefined}
       onMouseOut={!disabled ? () => setPasteEnabled(false) : undefined}
@@ -163,7 +182,7 @@ function FileSelect(
           {cloneElement(icon, {
             className: clsx(
               "mx-auto h-12 w-12 text-zinc-400",
-              icon.props.className
+              icon.props.className,
             ),
           })}
           <div className="text-sm">
@@ -174,7 +193,7 @@ function FileSelect(
                 {
                   "cursor-pointer": !disabled,
                   "cursor-not-allowed": disabled,
-                }
+                },
               )}
             >
               <span>{uploadAFileText}</span>
@@ -220,7 +239,7 @@ export default forwardRef(FileSelect);
 const useOnPasteFiles = (
   enabled: boolean,
   onAcceptFiles: (files: File[]) => void,
-  allowedFileTypes?: string[]
+  allowedFileTypes?: string[],
 ): void => {
   useEffect(() => {
     if (enabled) {
