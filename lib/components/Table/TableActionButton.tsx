@@ -1,23 +1,30 @@
 import clsx from "clsx";
-import { cloneElement, MouseEvent, MouseEventHandler, ReactElement, ReactNode } from "react";
+import {
+  cloneElement,
+  MouseEventHandler,
+  ReactElement,
+  ReactNode,
+} from "react";
 import Button, { ButtonProps } from "../Button/Button";
 import Tooltip from "../Tooltip/Tooltip";
 
-export type TableActionButtonProps<Href extends string | undefined> = {
-  title?: ReactNode;
-  href?: string | null;
-} & Omit<ButtonProps<Href>, "href">;
+export type TableActionButtonProps<T extends HTMLElement = HTMLButtonElement> =
+  {
+    title?: ReactNode;
+  } & ButtonProps<T>;
 
-export default function TableActionButton<Href extends string | undefined>({
-                                                                             children,
-                                                                             className,
-                                                                             title,
-                                                                             onClick,
-                                                                             ...props
-                                                                           }: TableActionButtonProps<Href>) {
-  const handleClick: MouseEventHandler<HTMLButtonElement> = (e) => {
+export default function TableActionButton<
+  T extends HTMLElement = HTMLButtonElement,
+>({
+  children,
+  className,
+  title,
+  onClick,
+  ...props
+}: TableActionButtonProps<T>) {
+  const handleClick: MouseEventHandler<T> = (e) => {
     e.stopPropagation();
-    onClick?.(e as MouseEvent<HTMLAnchorElement> & MouseEvent<HTMLButtonElement>);
+    onClick?.(e);
   };
 
   const button = (
@@ -31,8 +38,8 @@ export default function TableActionButton<Href extends string | undefined>({
       {cloneElement(children as ReactElement, {
         className: clsx(
           "!h-[20px] !w-[20px]",
-          (children as ReactElement)?.props?.className
-        )
+          (children as ReactElement)?.props?.className,
+        ),
       })}
     </Button>
   );

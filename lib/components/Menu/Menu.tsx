@@ -32,17 +32,17 @@ export type MenuProps = {
   ref?: Ref<HTMLDivElement>;
 };
 
-export type MenuItemProps<Href extends string | undefined> =
-  UnstyledButtonProps<Href> & {
+export type MenuItemProps<T extends HTMLElement = HTMLButtonElement> =
+  UnstyledButtonProps<T> & {
     icon?: ReactElement;
   };
 
-const Item = function MenuItem<Href extends string | undefined>({
+const Item = function MenuItem<T extends HTMLElement = HTMLButtonElement>({
   className,
   icon,
   children,
   ...props
-}: MenuItemProps<Href>) {
+}: MenuItemProps<T>) {
   return (
     <HuiMenu.Item>
       {({ active }) => (
@@ -55,7 +55,7 @@ const Item = function MenuItem<Href extends string | undefined>({
               ? "bg-zinc-100 text-zinc-900 dark:bg-zinc-700/50 dark:text-zinc-100"
               : "text-zinc-700 dark:text-zinc-200",
             "block px-4 py-2 text-sm",
-            className
+            className,
           )}
         >
           {icon &&
@@ -71,12 +71,12 @@ const Item = function MenuItem<Href extends string | undefined>({
 
 export type MenuLabelProps<
   Inline extends boolean | undefined,
-  Href extends string | undefined
+  Href extends string | undefined,
 > = TextProps<Inline, Href>;
 
 const Label = function MenuLabel<
   Inline extends boolean | undefined,
-  Href extends string | undefined
+  Href extends string | undefined,
 >({ ref, ...props }: MenuLabelProps<Inline, Href>) {
   return (
     <Text
@@ -87,7 +87,7 @@ const Label = function MenuLabel<
       className={clsx(
         "w-full text-left",
         "block px-4 py-2 text-sm",
-        props.className
+        props.className,
       )}
     />
   );
@@ -106,11 +106,11 @@ let Menu = forwardRef(function Menu(
     menuItemsClassName,
     ...props
   }: MenuProps,
-  ref: ForwardedRef<HTMLDivElement>
+  ref: ForwardedRef<HTMLDivElement>,
 ) {
   useMount(() => {
     console.warn(
-      "<Menu> was deprecated and should be replaced with <DropdownMenu>"
+      "<Menu> was deprecated and should be replaced with <DropdownMenu>",
     );
   });
   return (
@@ -163,7 +163,7 @@ let Menu = forwardRef(function Menu(
               "left-0": position.includes("left"),
               "bottom-0": position.includes("bottom"),
             },
-            menuItemsClassName
+            menuItemsClassName,
           )}
         >
           <div className="py-1">{children}</div>

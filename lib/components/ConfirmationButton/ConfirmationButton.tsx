@@ -12,7 +12,7 @@ export type ConfirmationButtonProps = {
   cancel?: string;
   position?: MenuProps["position"];
   buttonClassName?: string;
-  buttonProps?: Partial<ButtonProps<undefined>>;
+  buttonProps?: Partial<ButtonProps>;
   menuProps?: Partial<MenuProps>;
 };
 

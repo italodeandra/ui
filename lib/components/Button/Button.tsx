@@ -7,7 +7,7 @@ const styles = {
   root: clsx(
     "appearance-none select-none border transition-colors inline-flex items-center justify-center font-medium leading-4 focus:outline-none",
     "ring-offset-zinc-100 focus-visible:ring-2 focus:ring-primary-500 focus:ring-offset-2",
-    "dark:ring-offset-zinc-900"
+    "dark:ring-offset-zinc-900",
   ),
   variant: {
     filled: "shadow-sm",
@@ -120,22 +120,24 @@ const styles = {
   },
 };
 
-export type ButtonProps<Href extends string | undefined = undefined> =
-  UnstyledButtonProps<Href> & {
-    variant?: keyof (typeof styles)["variant"];
-    color?: keyof (typeof styles)["color"] | "white";
-    size?: keyof (typeof styles)["size"];
-    icon?: boolean;
-    leadingIcon?: ReactElement;
-    leading?: ReactElement;
-    trailingIcon?: ReactElement;
-    trailing?: ReactElement;
-    loading?: boolean;
-    disabled?: boolean;
-    rounded?: boolean;
-  };
+export type ButtonProps<T extends HTMLElement = HTMLButtonElement> = Omit<
+  UnstyledButtonProps<T>,
+  "size"
+> & {
+  variant?: keyof (typeof styles)["variant"];
+  color?: keyof (typeof styles)["color"] | "white";
+  size?: keyof (typeof styles)["size"];
+  icon?: boolean;
+  leadingIcon?: ReactElement;
+  leading?: ReactElement;
+  trailingIcon?: ReactElement;
+  trailing?: ReactElement;
+  loading?: boolean;
+  disabled?: boolean;
+  rounded?: boolean;
+};
 
-const Button = <Href extends string | undefined>(
+const Button = <T extends HTMLElement = HTMLButtonElement>(
   {
     variant = "outlined",
     color = "default",
@@ -152,25 +154,25 @@ const Button = <Href extends string | undefined>(
     disabled,
     rounded,
     ...props
-  }: ButtonProps<Href>,
-  ref: ForwardedRef<Href extends string ? HTMLAnchorElement : HTMLButtonElement>
+  }: ButtonProps<T>,
+  ref: ForwardedRef<T>,
 ) => {
   if (color === "white") {
     color = "default";
     console.error(
-      `[Button] Color "white" was deprecated. Change to "default".`
+      `[Button] Color "white" was deprecated. Change to "default".`,
     );
   }
   if (trailingIcon) {
     trailing = trailingIcon;
     console.error(
-      `[Button] Property "trailingIcon" was deprecated. Change to "trailing".`
+      `[Button] Property "trailingIcon" was deprecated. Change to "trailing".`,
     );
   }
   if (leadingIcon) {
     leading = leadingIcon;
     console.error(
-      `[Button] Property "leadingIcon" was deprecated. Change to "leading".`
+      `[Button] Property "leadingIcon" was deprecated. Change to "leading".`,
     );
   }
 
@@ -200,7 +202,7 @@ const Button = <Href extends string | undefined>(
         {
           [styles.disabled]: disabled,
         },
-        className
+        className,
       )}
       type={type}
       disabled={disabled}
@@ -211,34 +213,34 @@ const Button = <Href extends string | undefined>(
             "",
             styles.icon[size].icon,
             styles.icon[size].leading,
-            leading?.props?.className
+            leading?.props?.className,
           ),
         })}
       {!icon
         ? children
         : Array.isArray(children)
-        ? children.map((child, key) =>
-            cloneElement(child as ReactElement, {
-              key,
+          ? children.map((child, key) =>
+              cloneElement(child as ReactElement, {
+                key,
+                className: clsx(
+                  styles.icon[size].icon,
+                  (child as ReactElement)?.props?.className,
+                ),
+              }),
+            )
+          : cloneElement(children as ReactElement, {
               className: clsx(
                 styles.icon[size].icon,
-                (child as ReactElement)?.props?.className
+                (children as ReactElement)?.props?.className,
               ),
-            })
-          )
-        : cloneElement(children as ReactElement, {
-            className: clsx(
-              styles.icon[size].icon,
-              (children as ReactElement)?.props?.className
-            ),
-          })}
+            })}
       {trailing &&
         cloneElement(trailing, {
           className: clsx(
             "",
             styles.icon[size].icon,
             styles.icon[size].trailing,
-            trailing?.props?.className
+            trailing?.props?.className,
           ),
         })}
     </UnstyledButton>
