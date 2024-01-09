@@ -32,7 +32,7 @@ export default function Page() {
       <Stack className="max-w-xl p-2">
         <form onSubmit={handleSubmit(console.info)}>
           <MultiText
-            label="Names"
+            label="Emails"
             helpText="Type more than one"
             {...register("names")}
             validate={(value) => emailRegExp.test(value)}
