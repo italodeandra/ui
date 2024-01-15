@@ -178,7 +178,7 @@ function FileInput(
       ) => Promise<FileUrl & { _id: string }>;
       onRejectFiles?: (
         files: File[],
-        reason: "type" | "size" | "limit",
+        reason: "type" | "size" | "limit" | "upload-error",
       ) => void;
     },
   ref: ForwardedRef<HTMLInputElement>,
@@ -242,15 +242,23 @@ function FileInput(
       let acceptedFiles = files.filter(
         (_file, index) => !limit || index <= limit - value.length - 1,
       );
+      let filesNotUploaded: typeof acceptedFiles = [];
       for (let file of acceptedFiles) {
-        let uploadedFile = await asyncUpload({
-          _id: isomorphicObjectId().toString(),
-          name: file.name,
-          file,
-          type: file.type,
-          size: file.size,
-        });
-        setValue((value) => [...value, uploadedFile]);
+        try {
+          let uploadedFile = await asyncUpload({
+            _id: isomorphicObjectId().toString(),
+            name: file.name,
+            file,
+            type: file.type,
+            size: file.size,
+          });
+          setValue((value) => [...value, uploadedFile]);
+        } catch (e) {
+          filesNotUploaded.push(file);
+        }
+      }
+      if (onRejectFiles && filesNotUploaded.length) {
+        onRejectFiles(filesNotUploaded, "upload-error");
       }
       setUploading(false);
     }
