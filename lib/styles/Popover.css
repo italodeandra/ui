@@ -1,0 +1,4 @@
+.ui-theme-default .ui-popover-arrow {
+    @apply fill-white
+    dark:fill-white/[0.09]
+}

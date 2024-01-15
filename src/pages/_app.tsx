@@ -1,7 +1,6 @@
 import "@fontsource-variable/inter";
 import "../../lib/bootstrap/suppressConsoleLog";
 import { DefaultSeo } from "next-seo";
-import "focus-visible";
 import "../globals.css";
 import AppProps from "../../lib/bootstrap/AppProps";
 import colors from "tailwindcss/colors";
@@ -9,6 +8,10 @@ import { hydrateNavigationDrawerState } from "../../lib/components/NavigationDra
 import Notifications from "../../lib/components/Notifications";
 import setupNProgress from "../../lib/bootstrap/nprogress";
 import Dialogs from "../../lib/components/Dialog";
+import localizedFormat from "dayjs/plugin/localizedFormat";
+import dayjs from "dayjs";
+
+dayjs.extend(localizedFormat);
 
 const appName = "@italodeandra/ui";
 const appDescription = "Demo of @italodeandra/ui";

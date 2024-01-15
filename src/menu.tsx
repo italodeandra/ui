@@ -55,6 +55,10 @@ export const menu = [
         href: "/date-input",
       },
       {
+        title: "Date range picker",
+        href: "/date-range-picker",
+      },
+      {
         title: "File select",
         href: "/file-select",
       },

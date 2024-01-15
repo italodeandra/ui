@@ -1,5 +1,6 @@
 .ui-theme-default .ui-context-menu-content,
-.ui-theme-default .ui-select-content {
+.ui-theme-default .ui-select-content,
+.ui-theme-default .ui-popover-content {
     @apply z-20 rounded overflow-hidden p-1 shadow-md text-sm
     bg-white shadow-black/5
     dark:bg-zinc-900 dark:border dark:border-white dark:border-opacity-[0.03]
