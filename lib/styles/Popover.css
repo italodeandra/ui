@@ -1,4 +1,6 @@
-.ui-theme-default .ui-popover-arrow {
-    @apply fill-white
+.ui-theme-default .ui-popover-arrow,
+.ui-theme-default .ui-dropdown-arrow {
+    @apply mt-px
+    fill-black/5
     dark:fill-white/[0.09]
 }

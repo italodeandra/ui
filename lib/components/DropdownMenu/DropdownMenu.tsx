@@ -4,29 +4,21 @@ import clsx from "clsx";
 import { CheckIcon } from "@heroicons/react/20/solid";
 import Link from "next/link";
 
-export const menuContentClassName =
-  "z-20 min-w-[220px] rounded-md bg-white p-[5px] shadow-lg ring-1 ring-black/5 will-change-[opacity,transform] data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade";
-
-export const menuSeparatorClassName = "m-[5px] h-[1px] bg-zinc-200";
-
 function DropdownMenuContent({
   className,
   children,
+  sideOffset = 5,
   ...props
 }: ComponentProps<typeof RDropdownMenu.Content>) {
   return (
     <RDropdownMenu.Portal>
       <RDropdownMenu.Content
-        sideOffset={5}
+        sideOffset={sideOffset}
         {...props}
-        className={clsx(
-          "ui-dropdown-menu-content",
-          menuContentClassName,
-          className
-        )}
+        className={clsx("ui-dropdown-menu-content", className)}
       >
         {children}
-        <RDropdownMenu.Arrow className="mt-px fill-black/5" />
+        <RDropdownMenu.Arrow className="ui-dropdown-arrow" />
       </RDropdownMenu.Content>
     </RDropdownMenu.Portal>
   );
@@ -39,18 +31,10 @@ function DropdownMenuSeparator({
   return (
     <RDropdownMenu.Separator
       {...props}
-      className={clsx(
-        "ui-dropdown-menu-separator",
-        menuSeparatorClassName,
-        className
-      )}
+      className={clsx("ui-dropdown-menu-separator", className)}
     />
   );
 }
-
-export const menuItemClassName =
-  "relative flex h-[25px] select-none items-center rounded-[3px] pl-[25px] text-[13px] leading-none text-zinc-900 outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-primary-500 data-[disabled]:text-zinc-300 data-[highlighted]:text-white";
-const dropdownMenuItemClassName = clsx(menuItemClassName, "group px-[5px]");
 
 function DropdownMenuItem({
   className,
@@ -63,11 +47,7 @@ function DropdownMenuItem({
     <Wrapper {...(href ? ({ href } as any) : {})}>
       <RDropdownMenu.Item
         {...props}
-        className={clsx(
-          "ui-dropdown-menu-item",
-          dropdownMenuItemClassName,
-          className
-        )}
+        className={clsx("ui-dropdown-menu-item", className)}
       />
     </Wrapper>
   );
@@ -81,14 +61,10 @@ function DropdownMenuCheckboxItem({
   return (
     <RDropdownMenu.CheckboxItem
       {...props}
-      className={clsx(
-        "ui-dropdown-menu-checkbox-item",
-        dropdownMenuItemClassName,
-        className
-      )}
+      className={clsx("ui-dropdown-menu-checkbox-item", className)}
     >
-      <RDropdownMenu.ItemIndicator className="absolute left-0 inline-flex w-[25px] items-center justify-center">
-        <CheckIcon className="h-3 w-3" />
+      <RDropdownMenu.ItemIndicator className="ui-dropdown-menu-checkbox-item-indicator">
+        <CheckIcon />
       </RDropdownMenu.ItemIndicator>
       {children}
     </RDropdownMenu.CheckboxItem>
