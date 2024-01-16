@@ -19,6 +19,7 @@ const classNames = {
     "absolute border rounded p-1.5 [&_svg]:w-3 [&_svg]:h-3 transition",
     "border-zinc-100 hover:bg-zinc-100 bg-white active:border-zinc-200",
     "dark:border-zinc-800 dark:hover:bg-zinc-800 dark:bg-zinc-900 dark:active:border-zinc-700",
+    "disabled:opacity-50 disabled:cursor-not-allowed",
   ),
   head: "text-xs dark:text-zinc-500",
   headCell: "font-normal",
@@ -26,6 +27,8 @@ const classNames = {
     "w-8 h-8 rounded transition",
     "text-zinc-700 hover:bg-black/10",
     "dark:text-zinc-300 dark:hover:bg-white/10",
+    "disabled:opacity-30 disabled:cursor-not-allowed",
+    "dark:disabled:opacity-20",
   ),
   dayRangeStart: clsx(
     "!text-onPrimary dark:!text-onPrimary",
@@ -61,11 +64,19 @@ export default function DateRangePicker({
   onChangeValue,
   children,
   buttonProps,
+  fromDate,
+  toDate,
+  min,
+  max,
 }: {
   value?: DateRange;
   onChangeValue?: (value?: DateRange) => void;
   children?: (value: string) => ReactElement;
   buttonProps?: ComponentProps<typeof Button>;
+  fromDate?: Date;
+  toDate?: Date;
+  min?: number;
+  max?: number;
 }) {
   let [range, setRange] = useState<DateRange | undefined>(value);
 
@@ -135,6 +146,10 @@ export default function DateRangePicker({
               day_outside: "ui-date-picker-day-outside",
               day_range_middle: "ui-date-picker-day-range-middle",
             }}
+            fromDate={fromDate}
+            toDate={toDate}
+            min={min}
+            max={max}
           />
         </Popover.Content>
       </Popover.Portal>

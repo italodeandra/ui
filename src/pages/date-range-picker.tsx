@@ -25,7 +25,11 @@ export default function Page() {
       <NextSeo title={pages[0].title} />
       <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
       <Stack className="p-2">
-        <DateRangePicker value={range} onChangeValue={setRange} />
+        <DateRangePicker
+          value={range}
+          onChangeValue={setRange}
+          fromDate={new Date()}
+        />
       </Stack>
     </>
   );
