@@ -3,8 +3,8 @@ import { defaultTextStyles } from "../Text";
 import { ExclamationCircleIcon } from "@heroicons/react/20/solid";
 import InputIcon from "./InputIcon";
 import { cloneElement, ForwardedRef, forwardRef } from "react";
-import clsx from "clsx";
 import recursiveChildrenMap from "../../utils/recursiveChildrenMap";
+import clsx from "../../utils/clsx";
 
 export type InputProps<Select extends boolean | undefined> = {
   error?: boolean;
@@ -41,7 +41,7 @@ function Input<Select extends boolean | undefined>(
     children,
     ...props
   }: InputProps<Select>,
-  ref: ForwardedRef<Select extends true ? HTMLSelectElement : HTMLInputElement>
+  ref: ForwardedRef<Select extends true ? HTMLSelectElement : HTMLInputElement>,
 ) {
   trailing =
     trailing ||
@@ -57,18 +57,18 @@ function Input<Select extends boolean | undefined>(
     inputClassName,
     {
       "animate-pulse": loading,
-    }
+    },
   );
   helpTextClassName = clsx(defaultHelpTextClassName, helpTextClassName);
   trailingClassName = clsx(defaultTrailingClassName, trailingClassName);
   leadingClassName = clsx(defaultLeadingClassName, leadingClassName);
   leadingInputClassName = clsx(
     defaultLeadingInputClassName,
-    leadingInputClassName
+    leadingInputClassName,
   );
   trailingInputClassName = clsx(
     defaultTrailingInputClassName,
-    trailingInputClassName
+    trailingInputClassName,
   );
   if (error) {
     inputClassName = `${inputClassName} border-error-300 dark:border-error-500 text-error-900 dark:text-error-500 placeholder-error-300 focus:border-error-500 dark:focus:border-error-500 focus:ring-error-500`;
@@ -104,7 +104,7 @@ function Input<Select extends boolean | undefined>(
       readOnly={readOnly}
     >
       {recursiveChildrenMap(children, (child) =>
-        cloneElement(child, { disabled: readOnly })
+        cloneElement(child, { disabled: readOnly }),
       )}
     </UnstyledInput>
   );

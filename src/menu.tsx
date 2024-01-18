@@ -78,6 +78,10 @@ export const menu = [
         title: "Textarea",
         href: "/textarea",
       },
+      {
+        title: "Slider",
+        href: "/slider",
+      },
       //
       {
         title: "Feedback",
