@@ -1,24 +1,46 @@
 import React, { ComponentProps, Fragment } from "react";
 import * as RDropdownMenu from "@radix-ui/react-dropdown-menu";
-import clsx from "clsx";
+import clsx from "../../utils/clsx";
 import { CheckIcon } from "@heroicons/react/20/solid";
 import Link from "next/link";
+import {
+  dropdownArrowClassName,
+  dropdownCheckboxItemClassName,
+  dropdownCheckboxItemIndicatorClassName,
+  dropdownContentClassName,
+  dropdownItemClassName,
+  dropdownLabelClassName,
+  dropdownSeparatorClassName,
+} from "../../styles/Dropdown.styles";
 
 function DropdownMenuContent({
   className,
+  arrowClassName,
   children,
   sideOffset = 5,
+  collisionPadding = 8,
   ...props
-}: ComponentProps<typeof RDropdownMenu.Content>) {
+}: ComponentProps<typeof RDropdownMenu.Content> & { arrowClassName?: string }) {
   return (
     <RDropdownMenu.Portal>
       <RDropdownMenu.Content
         sideOffset={sideOffset}
+        collisionPadding={collisionPadding}
         {...props}
-        className={clsx("ui-dropdown-menu-content", className)}
+        className={clsx(
+          dropdownContentClassName,
+          "ui-dropdown-menu-content",
+          className,
+        )}
       >
         {children}
-        <RDropdownMenu.Arrow className="ui-dropdown-arrow" />
+        <RDropdownMenu.Arrow
+          className={clsx(
+            dropdownArrowClassName,
+            "ui-dropdown-menu-arrow",
+            arrowClassName,
+          )}
+        />
       </RDropdownMenu.Content>
     </RDropdownMenu.Portal>
   );
@@ -31,7 +53,11 @@ function DropdownMenuSeparator({
   return (
     <RDropdownMenu.Separator
       {...props}
-      className={clsx("ui-dropdown-menu-separator", className)}
+      className={clsx(
+        dropdownSeparatorClassName,
+        "ui-dropdown-menu-separator",
+        className,
+      )}
     />
   );
 }
@@ -47,23 +73,56 @@ function DropdownMenuItem({
     <Wrapper {...(href ? ({ href } as any) : {})}>
       <RDropdownMenu.Item
         {...props}
-        className={clsx("ui-dropdown-menu-item", className)}
+        className={clsx(
+          dropdownItemClassName,
+          "ui-dropdown-menu-item",
+          className,
+        )}
       />
     </Wrapper>
+  );
+}
+
+function DropdownMenuLabel({
+  className,
+  ...props
+}: ComponentProps<typeof RDropdownMenu.Item>) {
+  return (
+    <RDropdownMenu.Item
+      {...props}
+      className={clsx(
+        dropdownLabelClassName,
+        "ui-dropdown-menu-label",
+        className,
+      )}
+    />
   );
 }
 
 function DropdownMenuCheckboxItem({
   className,
   children,
+  indicatorClassName,
   ...props
-}: ComponentProps<typeof RDropdownMenu.CheckboxItem>) {
+}: ComponentProps<typeof RDropdownMenu.CheckboxItem> & {
+  indicatorClassName?: string;
+}) {
   return (
     <RDropdownMenu.CheckboxItem
       {...props}
-      className={clsx("ui-dropdown-menu-checkbox-item", className)}
+      className={clsx(
+        dropdownCheckboxItemClassName,
+        "ui-dropdown-menu-checkbox-item",
+        className,
+      )}
     >
-      <RDropdownMenu.ItemIndicator className="ui-dropdown-menu-checkbox-item-indicator">
+      <RDropdownMenu.ItemIndicator
+        className={clsx(
+          dropdownCheckboxItemIndicatorClassName,
+          "ui-dropdown-menu-checkbox-item-indicator",
+          indicatorClassName,
+        )}
+      >
         <CheckIcon />
       </RDropdownMenu.ItemIndicator>
       {children}
@@ -78,6 +137,7 @@ const DropdownMenu = {
   Item: DropdownMenuItem,
   Separator: DropdownMenuSeparator,
   CheckboxItem: DropdownMenuCheckboxItem,
+  Label: DropdownMenuLabel,
 };
 
 export default DropdownMenu;

@@ -1,7 +1,6 @@
 .ui-theme-default .ui-context-menu-content,
 .ui-theme-default .ui-select-content,
-.ui-theme-default .ui-popover-content,
-.ui-theme-default .ui-dropdown-menu-content {
+.ui-theme-default .ui-popover-content {
     @apply z-20 rounded overflow-hidden p-1 shadow-md text-sm ring-1
     bg-white shadow-black/5 ring-black/5
     dark:bg-zinc-900 dark:ring-white/10
@@ -9,28 +8,23 @@
 
 .ui-theme-default .ui-context-menu-item,
 .ui-theme-default .ui-context-menu-checkbox-item,
-.ui-theme-default .ui-select-item,
-.ui-theme-default .ui-dropdown-menu-item,
-.ui-theme-default .ui-dropdown-menu-checkbox-item {
+.ui-theme-default .ui-select-item {
     @apply relative rounded py-1 px-7 cursor-pointer outline-none select-none
     data-[highlighted]:bg-black/5
     dark:data-[highlighted]:bg-white/5
 }
 
 .ui-theme-default .ui-context-menu-checkbox-item-indicator,
-.ui-theme-default .ui-select-item .ui-select-item-indicator,
-.ui-theme-default .ui-dropdown-menu-checkbox-item-indicator {
+.ui-theme-default .ui-select-item .ui-select-item-indicator {
     @apply absolute left-1.5 top-1.5 inline-flex items-center justify-center
 }
 
 .ui-theme-default .ui-context-menu-checkbox-item-indicator > svg,
-.ui-theme-default .ui-select-item .ui-select-item-indicator > svg,
-.ui-theme-default .ui-dropdown-menu-checkbox-item-indicator > svg {
+.ui-theme-default .ui-select-item .ui-select-item-indicator > svg {
     @apply w-4 h-4
 }
 
 .ui-theme-default .ui-context-menu-separator,
-.ui-theme-default .ui-select-separator,
-.ui-theme-default .ui-dropdown-menu-separator {
+.ui-theme-default .ui-select-separator {
     @apply h-px bg-zinc-100 dark:bg-zinc-700/30 my-1 mx-[6px]
 }

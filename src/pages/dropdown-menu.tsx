@@ -29,6 +29,7 @@ export default function Page() {
             </Button>
           </DropdownMenu.Trigger>
           <DropdownMenu.Content>
+            <DropdownMenu.Label>Label</DropdownMenu.Label>
             <DropdownMenu.Item>Account settings</DropdownMenu.Item>
             <DropdownMenu.Item>Support</DropdownMenu.Item>
             <DropdownMenu.Item>License</DropdownMenu.Item>
