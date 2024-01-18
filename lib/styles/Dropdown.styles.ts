@@ -30,7 +30,7 @@ export const dropdownItemClassName = clsx(
 
 export const dropdownLabelClassName = clsx(
   "ui-dropdown-label",
-  "py-1 px-7 text-xs font-medium cursor-default text-zinc-500",
+  "py-1 px-7 text-xs font-medium cursor-default text-zinc-500 outline-none",
 );
 
 export const dropdownCheckboxItemClassName = clsx(
