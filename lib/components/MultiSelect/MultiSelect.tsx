@@ -17,7 +17,7 @@ import Input, {
   UnstyledInput,
   UnstyledInputProps,
 } from "../Input";
-import clsx from "clsx";
+import clsx from "../../utils/clsx";
 import { isEqual, take } from "lodash";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import Badge from "../Badge";
@@ -62,7 +62,7 @@ export interface MultiSelectProps<T extends object | string>
 
 function getValue<Id extends string | number, T extends object | string>(
   id: Id,
-  item: T
+  item: T,
 ): string | number {
   return typeof item === "string"
     ? item
@@ -71,7 +71,7 @@ function getValue<Id extends string | number, T extends object | string>(
 
 function MultiSelectInput<
   Id extends string | number,
-  T extends object | string
+  T extends object | string,
 >({
   className,
   selectedItems,
@@ -93,7 +93,7 @@ function MultiSelectInput<
     <div
       className={clsx(
         "flex flex-wrap border focus-within:border-primary-500 focus-within:ring-1 focus-within:ring-primary-500 dark:focus-within:border-primary-500",
-        className
+        className,
       )}
       onClick={() => ref.current?.focus()}
     >
@@ -183,9 +183,9 @@ export default function MultiSelect<T extends object | string>({
                   : (item[filterProperty] as string)
                 )
                   .toLowerCase()
-                  .includes(query.toLowerCase()))
+                  .includes(query.toLowerCase())),
           ),
-    [filterFunction, filterProperty, items, query]
+    [filterFunction, filterProperty, items, query],
   );
 
   trailing = loading ? (
@@ -209,9 +209,9 @@ export default function MultiSelect<T extends object | string>({
       renderFunction
         ? renderFunction(item)
         : typeof item === "string"
-        ? item
-        : (item[renderProperty] as string),
-    [renderFunction, renderProperty]
+          ? item
+          : (item[renderProperty] as string),
+    [renderFunction, renderProperty],
   );
 
   useEffect(() => {
@@ -230,10 +230,10 @@ export default function MultiSelect<T extends object | string>({
     (item: T) => () =>
       setSelectedItems((selectedItems) => [
         ...selectedItems.filter(
-          (i) => getValue(valueProperty, i) !== getValue(valueProperty, item)
+          (i) => getValue(valueProperty, i) !== getValue(valueProperty, item),
         ),
       ]),
-    [valueProperty]
+    [valueProperty],
   );
 
   if (label && required) {
@@ -264,7 +264,7 @@ export default function MultiSelect<T extends object | string>({
               trailing={trailing}
               trailingClassName={clsx(
                 defaultTrailingClassName,
-                trailingClassName
+                trailingClassName,
               )}
               inputClassName={clsx(
                 defaultInputClassName,
@@ -272,16 +272,16 @@ export default function MultiSelect<T extends object | string>({
                 inputElementClassName,
                 {
                   "border-dashed": readOnly,
-                }
+                },
               )}
               innerClassName={inputInnerClassName}
               trailingInputClassName={clsx(
                 defaultTrailingInputClassName,
-                trailingInputClassName
+                trailingInputClassName,
               )}
               leadingInputClassName={clsx(
                 defaultLeadingInputClassName,
-                leadingInputClassName
+                leadingInputClassName,
               )}
               displayValue={displayValue}
               labelClassName={clsx(defaultLabelClassName, labelClassName)}
@@ -299,7 +299,7 @@ export default function MultiSelect<T extends object | string>({
                   static={isStatic}
                   className={clsx(
                     defaultMenuItemsClassName,
-                    "absolute z-10 mt-1 max-h-72 w-full scroll-py-2 overflow-y-auto py-2 text-sm text-zinc-800 dark:text-zinc-200"
+                    "absolute z-10 mt-1 max-h-72 w-full scroll-py-2 overflow-y-auto py-2 text-sm text-zinc-800 dark:text-zinc-200",
                   )}
                 >
                   {creatable && !filteredItems.length && !!query && (
@@ -352,7 +352,7 @@ export default function MultiSelect<T extends object | string>({
                 <p
                   className={clsx(
                     defaultMenuItemsClassName,
-                    "absolute mt-1 w-full p-4 text-sm text-zinc-500 dark:text-zinc-400"
+                    "absolute mt-1 w-full p-4 text-sm text-zinc-500 dark:text-zinc-400",
                   )}
                 >
                   {emptyText}

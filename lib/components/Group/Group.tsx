@@ -1,5 +1,5 @@
 import type { DetailedHTMLProps, HTMLAttributes } from "react";
-import clsx from "clsx";
+import clsx from "../../utils/clsx";
 
 export type GroupProps = {
   wrap?: boolean;
@@ -10,14 +10,11 @@ export default function Group({ wrap, className, ...props }: GroupProps) {
     <div
       {...props}
       className={clsx(
-        "flex",
-        {
-          "gap-2": !className?.includes("gap-"),
-        },
+        "flex gap-2",
         {
           "flex-wrap": wrap,
         },
-        className
+        className,
       )}
     />
   );

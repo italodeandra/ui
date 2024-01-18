@@ -1,4 +1,4 @@
-import clsx from "clsx";
+import clsx from "../../utils/clsx";
 import { ReactNode } from "react";
 import TableActionButton from "./TableActionButton";
 import TableBody from "./TableBody";
@@ -31,7 +31,7 @@ export default function Table({
           "shadow ring-1 ring-black/5 dark:ring-white/10 md:rounded-lg":
             !hideBorder,
         },
-        className
+        className,
       )}
     >
       <div
@@ -41,7 +41,7 @@ export default function Table({
       >
         <table
           className={clsx(
-            "w-full max-w-full divide-y divide-zinc-300 dark:divide-zinc-600"
+            "w-full max-w-full divide-y divide-zinc-300 dark:divide-zinc-600",
           )}
         >
           {children}

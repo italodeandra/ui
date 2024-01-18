@@ -1,4 +1,4 @@
-import clsx from "clsx";
+import clsx from "../../utils/clsx";
 import { useScrollYMovement } from "../../hooks/useScroll";
 import { DetailedHTMLProps, HTMLAttributes, useEffect, useRef } from "react";
 import defaultTheme from "tailwindcss/defaultTheme";
@@ -23,7 +23,7 @@ export default function Header({
         ref.current.style.transform = `translateY(-${scrollYMovement}px)`;
       }
     },
-    !hideOnScroll && !isMobile
+    !hideOnScroll && !isMobile,
   );
   useEffect(() => {
     if (ref.current) {
@@ -40,7 +40,7 @@ export default function Header({
         "bg-white/95 backdrop-blur [@supports(backdrop-filter:blur(0))]:bg-white/75",
         "dark:bg-zinc-900/95 dark:[@supports(backdrop-filter:blur(0))]:bg-zinc-900/75",
         "not-scrolled:!bg-transparent",
-        className
+        className,
       )}
     />
   );

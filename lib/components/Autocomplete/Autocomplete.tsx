@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import clsx from "clsx";
+import clsx from "../../utils/clsx";
 import UnstyledAutocomplete, {
   UnstyledAutocompleteProps,
 } from "../Autocomplete/UnstyledAutocomplete";
@@ -42,16 +42,16 @@ export default function Autocomplete<T extends { _id: string }>({
         onChangeQuery={setQuery}
         emptyTextClassName={clsx(
           defaultMenuItemsClassName,
-          "p-4 text-sm text-zinc-500 dark:text-zinc-400 mt-1 absolute w-full"
+          "p-4 text-sm text-zinc-500 dark:text-zinc-400 mt-1 absolute w-full",
         )}
         optionsClassName={clsx(
           defaultMenuItemsClassName,
-          "max-h-72 scroll-py-2 overflow-y-auto py-2 text-sm text-zinc-800 dark:text-zinc-200 absolute z-10 mt-1 w-full"
+          "max-h-72 scroll-py-2 overflow-y-auto py-2 text-sm text-zinc-800 dark:text-zinc-200 absolute z-10 mt-1 w-full",
         )}
         optionClassName={({ active }) =>
           clsx(
             "cursor-default select-none px-4 py-2",
-            active && "bg-primary-600 text-white"
+            active && "bg-primary-600 text-white",
           )
         }
         emptyText={emptyText}

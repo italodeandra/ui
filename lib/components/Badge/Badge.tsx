@@ -1,4 +1,4 @@
-import clsx from "clsx";
+import clsx from "../../utils/clsx";
 import Link from "next/link";
 import {
   ElementType,
@@ -60,7 +60,7 @@ function Badge(
     ...props
   }: {
     color?: keyof typeof colorMap;
-    size?: keyof typeof sizeMap["badge"];
+    size?: keyof (typeof sizeMap)["badge"];
     className?: string;
     children: ReactNode;
     onActionClick?: () => void;
@@ -68,7 +68,7 @@ function Badge(
     shallow?: boolean;
     onClick?: () => void;
   },
-  ref: ForwardedRef<HTMLSpanElement>
+  ref: ForwardedRef<HTMLSpanElement>,
 ) {
   const Component = href ? Link : ("span" as ElementType);
 
@@ -77,7 +77,7 @@ function Badge(
       e.preventDefault();
       onActionClick?.();
     },
-    [onActionClick]
+    [onActionClick],
   );
 
   return (
@@ -86,7 +86,7 @@ function Badge(
         "inline-flex items-center py-0.5 font-medium",
         sizeMap.badge[size],
         colorMap[color].badge,
-        className
+        className,
       )}
       href={href}
       shallow={shallow}
@@ -101,7 +101,7 @@ function Badge(
           className={clsx(
             "ml-0.5 inline-flex h-4 w-4 flex-shrink-0 items-center justify-center rounded-full focus:text-white focus:outline-none",
             sizeMap.button[size],
-            colorMap[color].button
+            colorMap[color].button,
           )}
           onClick={handleActionClick}
         >

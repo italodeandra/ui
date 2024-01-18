@@ -10,7 +10,7 @@ import {
   useId,
   useState,
 } from "react";
-import clsx from "clsx";
+import clsx from "../../utils/clsx";
 import { DndProvider, useDrop } from "react-dnd";
 import { HTML5Backend, NativeTypes } from "react-dnd-html5-backend";
 import numeral from "numeral";

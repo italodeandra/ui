@@ -1,6 +1,6 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import clsx from "clsx";
+import clsx from "../../utils/clsx";
 import { range } from "lodash";
 
 export interface PaginationProps {
@@ -85,7 +85,7 @@ export default function Pagination({
           <button key={p} disabled>
             ...
           </button>
-        )
+        ),
       )}
       <button disabled={page === pageCount} onClick={handlePageClick(page + 1)}>
         <span className="sr-only">Next</span>

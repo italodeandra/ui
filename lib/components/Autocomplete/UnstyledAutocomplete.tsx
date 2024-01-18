@@ -9,7 +9,7 @@ import Input, {
   UnstyledInput,
   UnstyledInputProps,
 } from "../Input";
-import clsx from "clsx";
+import clsx from "../../utils/clsx";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { useUpdateEffect } from "react-use";
 import { take } from "lodash";
@@ -107,9 +107,9 @@ export default function UnstyledAutocomplete<T extends { _id: string }>({
               ((item) =>
                 (item[filterProperty] as string)
                   .toLowerCase()
-                  .includes(query.toLowerCase()))
+                  .includes(query.toLowerCase())),
           ),
-    [filterFunction, filterProperty, items, query]
+    [filterFunction, filterProperty, items, query],
   );
 
   trailing = loading ? (
@@ -131,7 +131,7 @@ export default function UnstyledAutocomplete<T extends { _id: string }>({
   let doRender = useCallback(
     (item: T) =>
       renderFunction ? renderFunction(item) : (item[renderProperty] as string),
-    [renderFunction, renderProperty]
+    [renderFunction, renderProperty],
   );
 
   useUpdateEffect(() => {
@@ -160,20 +160,20 @@ export default function UnstyledAutocomplete<T extends { _id: string }>({
               trailing={trailing}
               trailingClassName={clsx(
                 defaultTrailingClassName,
-                trailingClassName
+                trailingClassName,
               )}
               inputClassName={clsx(
                 defaultInputClassName,
-                inputElementClassName
+                inputElementClassName,
               )}
               innerClassName={inputInnerClassName}
               trailingInputClassName={clsx(
                 defaultTrailingInputClassName,
-                trailingInputClassName
+                trailingInputClassName,
               )}
               leadingInputClassName={clsx(
                 defaultLeadingInputClassName,
-                leadingInputClassName
+                leadingInputClassName,
               )}
               displayValue={displayValue}
               readOnly={readOnly}
@@ -192,7 +192,7 @@ export default function UnstyledAutocomplete<T extends { _id: string }>({
                   className={({ active, selected }) =>
                     clsx(
                       "flex gap-2",
-                      optionClassName && optionClassName({ active, selected })
+                      optionClassName && optionClassName({ active, selected }),
                     )
                   }
                 >
@@ -202,7 +202,7 @@ export default function UnstyledAutocomplete<T extends { _id: string }>({
                         <span
                           className={clsx(
                             "flex items-center",
-                            active ? "text-white" : "text-primary-500"
+                            active ? "text-white" : "text-primary-500",
                           )}
                         >
                           <CheckIcon className="h-5 w-5" aria-hidden="true" />

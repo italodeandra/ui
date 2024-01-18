@@ -1,6 +1,6 @@
 import { Fragment, useCallback, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import clsx from "clsx";
+import clsx from "../../utils/clsx";
 import {
   UnstyledAutocomplete,
   UnstyledAutocompleteProps,
@@ -61,7 +61,7 @@ export default function Spotlight<T extends { _id: string }>({
             className={clsx(
               "fixed inset-0 bg-zinc-500 !bg-opacity-25 transition-opacity dark:bg-zinc-800",
               "bg-white/50 backdrop-blur [@supports(backdrop-filter:blur(0))]:bg-white/30",
-              "dark:bg-zinc-900/50 dark:[@supports(backdrop-filter:blur(0))]:bg-zinc-900/30"
+              "dark:bg-zinc-900/50 dark:[@supports(backdrop-filter:blur(0))]:bg-zinc-900/30",
             )}
           />
         </Transition.Child>
@@ -136,7 +136,7 @@ export default function Spotlight<T extends { _id: string }>({
                 optionClassName={({ active }) =>
                   clsx(
                     "cursor-default select-none px-4 py-2",
-                    active && "bg-primary-600 text-white"
+                    active && "bg-primary-600 text-white",
                   )
                 }
                 emptyText={emptyText}

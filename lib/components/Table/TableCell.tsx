@@ -1,4 +1,4 @@
-import clsx from "clsx";
+import clsx from "../../utils/clsx";
 import { ReactNode, useContext } from "react";
 import TableHeadContext from "./TableHeadContext";
 
@@ -24,7 +24,7 @@ export default function TableCell({
     {
       "py-2 last:pr-4 last:sm:pr-6": !actions,
       "py-0.5 text-right pr-2.5 sm:pr-5": actions,
-    }
+    },
   );
 
   if (isHead) {
@@ -32,7 +32,7 @@ export default function TableCell({
       <th
         className={clsx(
           commonClassName,
-          "sticky left-0 bg-zinc-50 py-2 text-left font-semibold text-zinc-900 dark:bg-zinc-900 dark:text-zinc-50"
+          "sticky left-0 bg-zinc-50 py-2 text-left font-semibold text-zinc-900 dark:bg-zinc-900 dark:text-zinc-50",
         )}
         colSpan={colSpan}
         title={title}
@@ -46,7 +46,7 @@ export default function TableCell({
     <td
       className={clsx(
         commonClassName,
-        "whitespace-nowrap text-zinc-500 dark:text-zinc-300"
+        "whitespace-nowrap text-zinc-500 dark:text-zinc-300",
       )}
       colSpan={colSpan}
       title={title}

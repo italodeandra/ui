@@ -3,7 +3,7 @@ import {
   ExclamationTriangleIcon,
   XCircleIcon,
 } from "@heroicons/react/20/solid";
-import clsx from "clsx";
+import clsx from "../../utils/clsx";
 import { DetailedHTMLProps, HTMLAttributes, ReactNode } from "react";
 import Group from "../Group";
 
@@ -61,7 +61,7 @@ export default function Alert({
       className={clsx(
         "rounded-md p-4",
         styles.variants[variant].root,
-        className
+        className,
       )}
       {...props}
     >
@@ -77,7 +77,7 @@ export default function Alert({
             <h3
               className={clsx(
                 "text-sm font-medium",
-                styles.variants[variant].title
+                styles.variants[variant].title,
               )}
             >
               {title}
@@ -86,7 +86,7 @@ export default function Alert({
               <div
                 className={clsx(
                   "mt-2 text-sm",
-                  styles.variants[variant].content
+                  styles.variants[variant].content,
                 )}
               >
                 {children}
@@ -97,7 +97,7 @@ export default function Alert({
             <Group
               className={clsx(
                 "-mx-4 mt-1 -mb-2 sm:-mx-2 sm:-my-2",
-                styles.variants[variant].content
+                styles.variants[variant].content,
               )}
             >
               {actions}

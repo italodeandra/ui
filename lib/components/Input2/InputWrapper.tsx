@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import clsx from "clsx";
+import clsx from "../../utils/clsx";
 
 export interface InputWrapperProps {
   children?: ReactNode;

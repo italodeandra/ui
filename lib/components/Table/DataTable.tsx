@@ -12,7 +12,7 @@ import Skeleton from "../Skeleton";
 import Stack from "../Stack";
 import Text from "../Text";
 import Table from "./Table";
-import clsx from "clsx";
+import clsx from "../../utils/clsx";
 import { ChevronUpIcon } from "@heroicons/react/20/solid";
 
 export type DataTableProps<RowData> = {
@@ -104,12 +104,12 @@ export default function DataTable<RowData>({
 
   const handleRowClick = useCallback(
     (item: RowData) => (onRowClick ? () => onRowClick(item) : undefined),
-    [onRowClick]
+    [onRowClick],
   );
 
   let getColumnSort = useCallback(
     (id: string) => sort.find((column) => id === column[0]),
-    [sort]
+    [sort],
   );
   let handleColumnClick = useCallback(
     (id: string) => () => {
@@ -142,7 +142,7 @@ export default function DataTable<RowData>({
         return newSort.filter((column) => !!column[1]);
       });
     },
-    [getColumnSort]
+    [getColumnSort],
   );
 
   useEffect(() => {
@@ -158,7 +158,7 @@ export default function DataTable<RowData>({
         {
           "flex flex-1 flex-col": autoHeight,
         },
-        className
+        className,
       )}
     >
       {(title || subtitle || headerContent) && (
@@ -192,7 +192,7 @@ export default function DataTable<RowData>({
                               columnSort?.[1],
                             "invisible group-hover:visible group-focus:visible":
                               !columnSort?.[1],
-                          }
+                          },
                         )}
                       >
                         <ChevronUpIcon

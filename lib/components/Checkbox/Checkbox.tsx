@@ -7,7 +7,7 @@ import {
   useId,
 } from "react";
 import { defaultTextStyles } from "../Text";
-import clsx from "clsx";
+import clsx from "../../utils/clsx";
 
 export type CheckboxProps = {
   label?: ReactNode;
@@ -36,7 +36,7 @@ function Checkbox(
     type = "checkbox",
     ...props
   }: CheckboxProps,
-  ref: ForwardedRef<HTMLInputElement>
+  ref: ForwardedRef<HTMLInputElement>,
 ) {
   const defaultInputId = useId();
   const descriptionId = useId();
@@ -51,7 +51,7 @@ function Checkbox(
   inputClassName = clsx(
     defaultInputClassName,
     inputClassName,
-    type === "radio" ? "rounded-full" : "rounded"
+    type === "radio" ? "rounded-full" : "rounded",
   );
 
   return (

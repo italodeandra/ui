@@ -1,4 +1,4 @@
-import clsx from "clsx";
+import clsx from "../../utils/clsx";
 
 export default function BottomBlurryPoint({
   className,
@@ -9,7 +9,7 @@ export default function BottomBlurryPoint({
     <div
       className={clsx(
         "pointer-events-none absolute inset-x-0 top-[calc(100%-22rem)] transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-43rem)]",
-        className
+        className,
       )}
     >
       <svg

@@ -1,4 +1,4 @@
-import clsx from "clsx";
+import clsx from "../../utils/clsx";
 
 export type LoadingProps = {
   className?: string;
@@ -14,7 +14,7 @@ export default function Loading({ className }: LoadingProps) {
           "w-5": !className?.includes("w-"),
           "text-zinc-400": !className?.includes("text-"),
         },
-        className
+        className,
       )}
       xmlns="http://www.w3.org/2000/svg"
       fill="none"

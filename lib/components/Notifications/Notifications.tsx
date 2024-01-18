@@ -8,7 +8,7 @@ import {
 import { XMarkIcon } from "@heroicons/react/20/solid";
 import Button from "../Button";
 import { cloneElement, ReactElement, ReactNode, useEffect } from "react";
-import clsx from "clsx";
+import clsx from "../../utils/clsx";
 
 export default function Notifications({
   notificationClassName,
@@ -57,7 +57,7 @@ export default function Notifications({
                 className={clsx(
                   "pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black/5 dark:bg-zinc-800 dark:ring-white/10",
                   notificationClassName,
-                  className
+                  className,
                 )}
                 style={style as MotionStyle}
               >
@@ -70,7 +70,7 @@ export default function Notifications({
                           : cloneElement(icon as ReactElement, {
                               className: clsx(
                                 "h-6 w-6 text-zinc-400 dark:text-zinc-600",
-                                icon.props?.className
+                                icon.props?.className,
                               ),
                               "aria-hidden": "true",
                             })}
@@ -112,7 +112,7 @@ export default function Notifications({
                 </div>
               </motion.li>
             );
-          }
+          },
         )}
       </AnimatePresence>
     </ul>

@@ -1,7 +1,7 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import clsx from "clsx";
+import clsx from "../../utils/clsx";
 
 export type MarkdownProps = {
   children?: string;

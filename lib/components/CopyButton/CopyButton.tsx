@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import clsx from "clsx";
+import clsx from "../../utils/clsx";
 import { ClipboardIcon } from "@heroicons/react/24/outline";
 import Button from "../Button";
 
@@ -43,7 +43,7 @@ export default function CopyButton({
         aria-hidden={copied}
         className={clsx(
           "pointer-events-none flex items-center gap-0.5 transition-[transform,opacity]",
-          copied && "-translate-y-1.5 opacity-0"
+          copied && "-translate-y-1.5 opacity-0",
         )}
       >
         <ClipboardIcon className="mr-2 h-4 w-4" />
@@ -53,7 +53,7 @@ export default function CopyButton({
         aria-hidden={!copied}
         className={clsx(
           "pointer-events-none absolute inset-0 flex items-center justify-center transition-[transform,opacity]",
-          !copied && "translate-y-1.5 opacity-0"
+          !copied && "translate-y-1.5 opacity-0",
         )}
       >
         {copiedText}

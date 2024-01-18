@@ -5,7 +5,7 @@ import {
   HTMLAttributes,
 } from "react";
 import { ComponentProps } from "react";
-import clsx from "clsx";
+import clsx from "../../utils/clsx";
 import NextLink from "next/link";
 
 export const defaultTextStyles = {
@@ -27,7 +27,7 @@ export const defaultTextStyles = {
 
 export type TextProps<
   Inline extends boolean | undefined,
-  Href extends string | undefined
+  Href extends string | undefined,
 > = {
   variant?: keyof (typeof defaultTextStyles)["variant"];
   size?: keyof (typeof defaultTextStyles)["size"];
@@ -38,12 +38,12 @@ export type TextProps<
 } & (Href extends true
   ? ComponentProps<typeof NextLink>
   : Inline extends true
-  ? DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>
-  : DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>);
+    ? DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>
+    : DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>);
 
 function Text<
   Inline extends boolean | undefined,
-  Href extends string | undefined
+  Href extends string | undefined,
 >(
   {
     inline,
@@ -54,12 +54,12 @@ function Text<
     size = variant !== "label" ? "base" : "sm",
     ...props
   }: TextProps<Inline, Href>,
-  ref: ForwardedRef<HTMLDivElement>
+  ref: ForwardedRef<HTMLDivElement>,
 ) {
   className = clsx(
     defaultTextStyles.variant[variant],
     defaultTextStyles.size[size],
-    className
+    className,
   );
   if (href) {
     return (

@@ -1,4 +1,4 @@
-import clsx from "clsx";
+import clsx from "../../utils/clsx";
 import { ClassAttributes, HTMLAttributes } from "react";
 
 export default function Skeleton({
@@ -11,7 +11,7 @@ export default function Skeleton({
     <div
       className={clsx(
         "animate-pulse rounded bg-zinc-300 dark:bg-zinc-700",
-        className
+        className,
       )}
       {...props}
     />

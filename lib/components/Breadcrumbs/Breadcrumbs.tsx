@@ -1,5 +1,5 @@
 import { HomeIcon } from "@heroicons/react/20/solid";
-import clsx from "clsx";
+import clsx from "../../utils/clsx";
 import Text from "../Text";
 import NextLink from "next/link";
 import Loading from "../Loading";
@@ -65,7 +65,7 @@ export default function Breadcrumbs({
                     {
                       "cursor-default": isLast,
                       "hover:!text-zinc-700 dark:hover:!text-zinc-200": !isLast,
-                    }
+                    },
                   )}
                   aria-current={isLast ? "page" : undefined}
                 >

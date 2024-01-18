@@ -3,7 +3,7 @@ import useEmblaCarousel, {
   EmblaOptionsType,
   EmblaPluginType,
 } from "embla-carousel-react";
-import clsx from "clsx";
+import clsx from "../../utils/clsx";
 import { ReactNode, useEffect, useState } from "react";
 import Button from "../Button";
 import { useMeasure } from "react-use";

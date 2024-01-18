@@ -30,7 +30,7 @@ import {
   useRole,
 } from "@floating-ui/react-dom-interactions";
 import { AnimatePresence, motion } from "framer-motion";
-import clsx from "clsx";
+import clsx from "../../utils/clsx";
 
 interface TooltipState
   extends UseFloatingReturn,
@@ -103,7 +103,7 @@ export function useTooltipState({
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       ...(data as any),
     }),
-    [open, setOpen, interactions, data]
+    [open, setOpen, interactions, data],
   );
 }
 
@@ -114,19 +114,19 @@ export const TooltipAnchor = forwardRef(function TooltipAnchor(
     asChild = false,
     ...props
   }: { children: JSX.Element | string; asChild?: boolean; state: TooltipState },
-  propRef
+  propRef,
 ) {
   const ref = useMemo(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     () => mergeRefs([state.reference, propRef, (children as any).ref]),
-    [state.reference, propRef, children]
+    [state.reference, propRef, children],
   );
 
   // `asChild` allows the user to pass any element as the anchor
   if (asChild && typeof children !== "string") {
     return cloneElement(
       children,
-      state.getReferenceProps({ ref, ...props, ...children.props })
+      state.getReferenceProps({ ref, ...props, ...children.props }),
     );
   }
 
@@ -143,13 +143,13 @@ export const TooltipContent = forwardRef(function TooltipContent(
     className,
     ...props
   }: { state: TooltipState; className?: string } & HTMLProps<HTMLDivElement>,
-  propRef
+  propRef,
 ) {
   const { delay } = useDelayGroupContext();
 
   const ref = useMemo(
     () => mergeRefs([state.floating, propRef]),
-    [state.floating, propRef]
+    [state.floating, propRef],
   );
 
   return (
@@ -169,7 +169,7 @@ export const TooltipContent = forwardRef(function TooltipContent(
             }
             className={clsx(
               "z-20 rounded bg-zinc-900/95 px-2 py-1 text-center text-sm text-white",
-              className
+              className,
             )}
             ref={ref}
             style={{

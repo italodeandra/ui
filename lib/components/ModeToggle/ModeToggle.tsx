@@ -1,6 +1,6 @@
 import { MoonIcon, SunIcon } from "@heroicons/react/24/outline";
 import Button from "../Button";
-import clsx from "clsx";
+import clsx from "../../utils/clsx";
 import { ForwardedRef, forwardRef } from "react";
 import useModeToggle from "./useModeToggle";
 
@@ -12,7 +12,7 @@ export interface ModeToggleProps {
 
 const ModeToggle = forwardRef(function ModeToggle(
   { ariaLabel = "Toggle dark mode", className, iconClassName }: ModeToggleProps,
-  ref: ForwardedRef<HTMLButtonElement>
+  ref: ForwardedRef<HTMLButtonElement>,
 ) {
   let toggleMode = useModeToggle();
 

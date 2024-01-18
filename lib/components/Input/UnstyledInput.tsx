@@ -6,7 +6,7 @@ import {
   ReactNode,
   useId,
 } from "react";
-import clsx from "clsx";
+import clsx from "../../utils/clsx";
 import { Combobox } from "@headlessui/react";
 
 export type UnstyledInputCommonProps = {
@@ -61,7 +61,7 @@ function UnstyledInput<Select extends boolean | undefined>(
     innerClassName,
     ...props
   }: UnstyledInputProps<Select>,
-  ref: ForwardedRef<Select extends true ? HTMLSelectElement : HTMLInputElement>
+  ref: ForwardedRef<Select extends true ? HTMLSelectElement : HTMLInputElement>,
 ) {
   const innerId = useId();
   id = id || innerId;
@@ -87,7 +87,7 @@ function UnstyledInput<Select extends boolean | undefined>(
             },
             trailingInputClassName && {
               [trailingInputClassName]: !!trailing,
-            }
+            },
           )}
           id={id}
           type={type}
