@@ -6,8 +6,15 @@
     "emitDeclarationOnly": false,
     "outDir": "../dist",
     "jsx": "react-jsx",
-    "module": "commonjs"
+    "module": "CommonJS",
+    "target": "es5"
   },
-  "include": ["**/*.ts", "**/*.js", "**/*.tsx"],
-  "exclude": ["**/*.doc.tsx"]
+  "include": [
+    "**/*.ts",
+    "**/*.js",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "**/*.doc.tsx"
+  ]
 }
