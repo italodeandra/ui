@@ -44,8 +44,14 @@ function SelectSeparator({
 }
 
 function SelectItemComponent(
-  { children, className, ...props }: ComponentProps<typeof RSelect.Item>,
-  forwardedRef: ForwardedRef<HTMLDivElement>
+  {
+    children,
+    className,
+    ...props
+  }: Omit<ComponentProps<typeof RSelect.Item>, "placeholder"> & {
+    placeholder?: string;
+  },
+  forwardedRef: ForwardedRef<HTMLDivElement>,
 ) {
   return (
     <RSelect.Item
