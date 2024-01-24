@@ -4,7 +4,6 @@
 @import "./styles/Pagination.css";
 @import "./styles/ContextMenu.css";
 @import "./styles/Select.css";
-@import "./styles/Popover.css";
 
 body.ui-theme-default {
     @apply flex h-full flex-col

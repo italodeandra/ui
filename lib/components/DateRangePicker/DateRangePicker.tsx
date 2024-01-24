@@ -113,46 +113,44 @@ export default function DateRangePicker({
   return (
     <Popover.Root>
       <Popover.Trigger asChild>{children2}</Popover.Trigger>
-      <Popover.Portal>
-        <Popover.Content>
-          <DayPicker
-            mode="range"
-            defaultMonth={value?.from}
-            selected={range}
-            onSelect={setRange}
-            numberOfMonths={2}
-            showOutsideDays
-            classNames={{
-              months: classNames.months,
-              caption: classNames.caption,
-              nav_button_previous: classNames.navButtonPrevious,
-              nav_button_next: classNames.navButtonNext,
-              nav_button: classNames.navButton,
-              head: classNames.head,
-              head_cell: classNames.headCell,
-              day: classNames.day,
-              cell: classNames.cell,
-              table: classNames.table,
+      <Popover.Content>
+        <DayPicker
+          mode="range"
+          defaultMonth={value?.from}
+          selected={range}
+          onSelect={setRange}
+          numberOfMonths={2}
+          showOutsideDays
+          classNames={{
+            months: classNames.months,
+            caption: classNames.caption,
+            nav_button_previous: classNames.navButtonPrevious,
+            nav_button_next: classNames.navButtonNext,
+            nav_button: classNames.navButton,
+            head: classNames.head,
+            head_cell: classNames.headCell,
+            day: classNames.day,
+            cell: classNames.cell,
+            table: classNames.table,
 
-              day_range_start: clsx(
-                "ui-date-picker-day-range-start",
-                classNames.dayRangeStart,
-              ),
-              day_range_end: clsx(
-                "ui-date-picker-day-range-end",
-                classNames.dayRangeEnd,
-              ),
+            day_range_start: clsx(
+              "ui-date-picker-day-range-start",
+              classNames.dayRangeStart,
+            ),
+            day_range_end: clsx(
+              "ui-date-picker-day-range-end",
+              classNames.dayRangeEnd,
+            ),
 
-              day_outside: "ui-date-picker-day-outside",
-              day_range_middle: "ui-date-picker-day-range-middle",
-            }}
-            fromDate={fromDate}
-            toDate={toDate}
-            min={min}
-            max={max}
-          />
-        </Popover.Content>
-      </Popover.Portal>
+            day_outside: "ui-date-picker-day-outside",
+            day_range_middle: "ui-date-picker-day-range-middle",
+          }}
+          fromDate={fromDate}
+          toDate={toDate}
+          min={min}
+          max={max}
+        />
+      </Popover.Content>
     </Popover.Root>
   );
 }

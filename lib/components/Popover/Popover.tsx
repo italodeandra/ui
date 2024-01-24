@@ -1,6 +1,10 @@
 import * as RPopover from "@radix-ui/react-popover";
 import React, { ComponentProps, ForwardedRef, forwardRef } from "react";
 import clsx from "../../utils/clsx";
+import {
+  dropdownArrowClassName,
+  dropdownContentClassName,
+} from "../../styles/Dropdown.styles";
 
 function PopoverContentWithRef(
   {
@@ -12,15 +16,21 @@ function PopoverContentWithRef(
   ref: ForwardedRef<HTMLDivElement>,
 ) {
   return (
-    <RPopover.Content
-      {...props}
-      className={clsx("ui-popover-content", className)}
-      sideOffset={sideOffset}
-      ref={ref}
-    >
-      {children}
-      <PopoverArrow />
-    </RPopover.Content>
+    <RPopover.Portal>
+      <RPopover.Content
+        {...props}
+        className={clsx(
+          dropdownContentClassName,
+          "ui-popover-content",
+          className,
+        )}
+        sideOffset={sideOffset}
+        ref={ref}
+      >
+        {children}
+        <PopoverArrow />
+      </RPopover.Content>
+    </RPopover.Portal>
   );
 }
 
@@ -33,14 +43,13 @@ function PopoverArrow({
   return (
     <RPopover.Arrow
       {...props}
-      className={clsx("ui-popover-arrow", className)}
+      className={clsx(dropdownArrowClassName, "ui-popover-arrow", className)}
     />
   );
 }
 
 const Popover = {
   Content: PopoverContent,
-  Portal: RPopover.Portal,
   Root: RPopover.Root,
   Trigger: RPopover.Trigger,
   Arrow: PopoverArrow,
