@@ -74,7 +74,10 @@ function SelectTrigger({
   placeholder,
   children,
   ...props
-}: ComponentProps<typeof RSelect.Trigger> & { placeholder?: string }) {
+}: ComponentProps<typeof RSelect.Trigger> &
+  ComponentProps<typeof Button> & {
+    placeholder?: string;
+  }) {
   return (
     <RSelect.Trigger asChild {...props} className={className}>
       {children || (
