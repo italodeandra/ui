@@ -26,39 +26,17 @@ export default function Page() {
         <Text variant="label">Only tooltip</Text>
         <div>
           <Group>
-            <Tooltip content="This is the tooltip" placement="bottom">
+            <Tooltip content="This is the tooltip">
               <Button>Hover to show tooltip</Button>
             </Tooltip>
-            <Tooltip
-              content="This is the tooltip"
-              placement="bottom"
-              delay={200}
-            >
+            <Tooltip content="This is the tooltip">
               <Button>Hover to show tooltip faster</Button>
             </Tooltip>
-            <Tooltip
-              content="This is a really big tooltip This is a really big tooltip This is a really big tooltip"
-              placement="bottom"
-              delay={200}
-            >
+            <Tooltip content="This is a really big tooltip This is a really big tooltip This is a really big tooltip">
               <Button>Hover to show tooltip faster</Button>
             </Tooltip>
           </Group>
         </div>
-        <Text variant="label">Grouped tooltips</Text>
-        <Tooltip.Group delay={200}>
-          <Group>
-            <Tooltip content="This is the tooltip 1" placement="bottom">
-              <Button>Hover to show tooltip 1</Button>
-            </Tooltip>
-            <Tooltip content="This is the tooltip 2" placement="bottom">
-              <Button>Hover to show tooltip 2</Button>
-            </Tooltip>
-            <Tooltip content="This is the tooltip 3" placement="bottom">
-              <Button>Hover to show tooltip 3</Button>
-            </Tooltip>
-          </Group>
-        </Tooltip.Group>
       </Stack>
     </>
   );

@@ -6,7 +6,7 @@ import {
   ReactNode,
 } from "react";
 import Button, { ButtonProps } from "../Button/Button";
-import Tooltip from "../Tooltip/Tooltip";
+import Tooltip from "../Tooltip";
 
 export type TableActionButtonProps<T extends HTMLElement = HTMLButtonElement> =
   {
