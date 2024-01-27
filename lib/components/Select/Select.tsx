@@ -102,17 +102,25 @@ function SelectItemComponent(
 
 const SelectItem = forwardRef(SelectItemComponent);
 
-function SelectTrigger({
-  className,
-  placeholder,
-  children,
-  ...props
-}: ComponentProps<typeof RSelect.Trigger> &
-  ComponentProps<typeof Button> & {
-    placeholder?: string;
-  }) {
+function SelectTrigger(
+  {
+    className,
+    placeholder,
+    children,
+    ...props
+  }: ComponentProps<typeof RSelect.Trigger> &
+    ComponentProps<typeof Button> & {
+      placeholder?: string;
+    },
+  ref: ForwardedRef<HTMLButtonElement>,
+) {
   return (
-    <RSelect.Trigger asChild {...props} className={className}>
+    <RSelect.Trigger
+      asChild
+      {...props}
+      className={className}
+      ref={children ? ref : undefined}
+    >
       {children || (
         <Button
           trailing={
@@ -120,6 +128,7 @@ function SelectTrigger({
               <ChevronDownIcon />
             </RSelect.Icon>
           }
+          ref={ref}
         >
           <RSelect.Value placeholder={placeholder} />
         </Button>
@@ -143,7 +152,7 @@ function SelectLabel({
 const Select = {
   Root: RSelect.Root,
   Item: SelectItem,
-  Trigger: SelectTrigger,
+  Trigger: forwardRef(SelectTrigger) as typeof SelectTrigger,
   Content: SelectContent,
   Group: RSelect.Group,
   Label: SelectLabel,

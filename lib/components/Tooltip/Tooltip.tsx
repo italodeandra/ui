@@ -1,16 +1,19 @@
 import * as RTooltip from "@radix-ui/react-tooltip";
-import { ReactNode } from "react";
+import { ForwardedRef, forwardRef, ReactNode } from "react";
 import clsx from "../../utils/clsx";
 
-export default function Tooltip({
-  children,
-  content,
-  side,
-}: {
-  children?: ReactNode;
-  content?: string;
-  side?: "top" | "bottom" | "left" | "right";
-}) {
+function Tooltip(
+  {
+    children,
+    content,
+    side,
+  }: {
+    children?: ReactNode;
+    content?: string;
+    side?: "top" | "bottom" | "left" | "right";
+  },
+  ref: ForwardedRef<HTMLButtonElement>,
+) {
   if (!content) {
     return <>{children}</>;
   }
@@ -18,7 +21,9 @@ export default function Tooltip({
   return (
     <RTooltip.Provider>
       <RTooltip.Root>
-        <RTooltip.Trigger asChild>{children}</RTooltip.Trigger>
+        <RTooltip.Trigger asChild ref={ref}>
+          {children}
+        </RTooltip.Trigger>
         <RTooltip.Portal>
           <RTooltip.Content
             className={clsx(
@@ -36,3 +41,5 @@ export default function Tooltip({
     </RTooltip.Provider>
   );
 }
+
+export default forwardRef(Tooltip) as typeof Tooltip;
