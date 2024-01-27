@@ -38,8 +38,8 @@ export const dropdownCheckboxItemClassName = clsx(
   dropdownItemClassName,
 );
 
-export const dropdownCheckboxItemIndicatorClassName = clsx(
-  "ui-dropdown-checkbox-item-indicator",
+export const dropdownItemIndicatorClassName = clsx(
+  "ui-dropdown-item-indicator",
   "absolute left-1.5 top-1.5 inline-flex items-center justify-center",
   "[&>svg]:w-4 [&>svg]:h-4",
 );

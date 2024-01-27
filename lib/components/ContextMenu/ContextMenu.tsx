@@ -3,6 +3,13 @@ import * as RContextMenu from "@radix-ui/react-context-menu";
 import { CheckIcon } from "@heroicons/react/16/solid";
 import Link from "next/link";
 import clsx from "../../utils/clsx";
+import {
+  dropdownCheckboxItemClassName,
+  dropdownItemIndicatorClassName,
+  dropdownContentClassName,
+  dropdownItemClassName,
+  dropdownSeparatorClassName,
+} from "../../styles/Dropdown.styles";
 
 function ContextMenuContent({
   className,
@@ -13,7 +20,11 @@ function ContextMenuContent({
     <RContextMenu.Portal>
       <RContextMenu.Content
         {...props}
-        className={clsx("ui-context-menu-content", className)}
+        className={clsx(
+          dropdownContentClassName,
+          "ui-context-menu-content",
+          className,
+        )}
       >
         {children}
       </RContextMenu.Content>
@@ -28,7 +39,11 @@ function ContextMenuSeparator({
   return (
     <RContextMenu.Separator
       {...props}
-      className={clsx("ui-context-menu-separator", className)}
+      className={clsx(
+        dropdownSeparatorClassName,
+        "ui-context-menu-separator",
+        className,
+      )}
     />
   );
 }
@@ -44,7 +59,11 @@ function ContextMenuItem({
     <Wrapper {...(href ? ({ href } as any) : {})}>
       <RContextMenu.Item
         {...props}
-        className={clsx("ui-context-menu-item", className)}
+        className={clsx(
+          dropdownItemClassName,
+          "ui-context-menu-item",
+          className,
+        )}
       />
     </Wrapper>
   );
@@ -53,14 +72,27 @@ function ContextMenuItem({
 function ContextMenuCheckboxItem({
   className,
   children,
+  indicatorClassName,
   ...props
-}: ComponentProps<typeof RContextMenu.CheckboxItem>) {
+}: ComponentProps<typeof RContextMenu.CheckboxItem> & {
+  indicatorClassName?: string;
+}) {
   return (
     <RContextMenu.CheckboxItem
       {...props}
-      className={clsx("ui-context-menu-checkbox-item", className)}
+      className={clsx(
+        dropdownCheckboxItemClassName,
+        "ui-context-menu-checkbox-item",
+        className,
+      )}
     >
-      <RContextMenu.ItemIndicator className="ui-context-menu-checkbox-item-indicator">
+      <RContextMenu.ItemIndicator
+        className={clsx(
+          dropdownItemIndicatorClassName,
+          "ui-context-menu-checkbox-item-indicator",
+          indicatorClassName,
+        )}
+      >
         <CheckIcon />
       </RContextMenu.ItemIndicator>
       {children}

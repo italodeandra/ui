@@ -7,6 +7,23 @@ import {
 } from "@heroicons/react/16/solid";
 import Button from "../Button";
 import clsx from "../../utils/clsx";
+import {
+  dropdownContentClassName,
+  dropdownItemClassName,
+  dropdownItemIndicatorClassName,
+  dropdownLabelClassName,
+  dropdownSeparatorClassName,
+} from "../../styles/Dropdown.styles";
+
+const selectScrollButtonClassName = clsx(
+  "ui-select-scroll-button",
+  "flex h-6 cursor-default items-center justify-center",
+
+  "bg-white",
+  "dark:bg-zinc-900",
+
+  "[&>svg]:w-4 [&>svg]:h-4",
+);
 
 function SelectContent({
   className,
@@ -17,13 +34,17 @@ function SelectContent({
     <RSelect.Portal>
       <RSelect.Content
         {...props}
-        className={clsx("ui-select-content", className)}
+        className={clsx(
+          dropdownContentClassName,
+          "ui-select-content",
+          className,
+        )}
       >
-        <RSelect.ScrollUpButton className="ui-select-scroll-button">
+        <RSelect.ScrollUpButton className={selectScrollButtonClassName}>
           <ChevronUpIcon />
         </RSelect.ScrollUpButton>
         <RSelect.Viewport>{children}</RSelect.Viewport>
-        <RSelect.ScrollDownButton className="ui-select-scroll-button">
+        <RSelect.ScrollDownButton className={selectScrollButtonClassName}>
           <ChevronDownIcon />
         </RSelect.ScrollDownButton>
       </RSelect.Content>
@@ -38,7 +59,11 @@ function SelectSeparator({
   return (
     <RSelect.Separator
       {...props}
-      className={clsx("ui-select-separator", className)}
+      className={clsx(
+        dropdownSeparatorClassName,
+        "ui-select-separator",
+        className,
+      )}
     />
   );
 }
@@ -47,19 +72,27 @@ function SelectItemComponent(
   {
     children,
     className,
+    indicatorClassName,
     ...props
   }: Omit<ComponentProps<typeof RSelect.Item>, "placeholder"> & {
     placeholder?: string;
+    indicatorClassName?: string;
   },
   forwardedRef: ForwardedRef<HTMLDivElement>,
 ) {
   return (
     <RSelect.Item
-      className={clsx("ui-select-item", className)}
+      className={clsx(dropdownItemClassName, "ui-select-item", className)}
       {...props}
       ref={forwardedRef}
     >
-      <RSelect.ItemIndicator className="ui-select-item-indicator">
+      <RSelect.ItemIndicator
+        className={clsx(
+          dropdownItemIndicatorClassName,
+          "ui-select-item-indicator",
+          indicatorClassName,
+        )}
+      >
         <CheckIcon />
       </RSelect.ItemIndicator>
       <RSelect.ItemText>{children}</RSelect.ItemText>
@@ -100,7 +133,10 @@ function SelectLabel({
   ...props
 }: ComponentProps<typeof RSelect.Label>) {
   return (
-    <RSelect.Label className={clsx("ui-select-label", className)} {...props} />
+    <RSelect.Label
+      className={clsx(dropdownLabelClassName, "ui-select-label", className)}
+      {...props}
+    />
   );
 }
 

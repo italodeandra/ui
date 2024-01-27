@@ -6,7 +6,7 @@ import Link from "next/link";
 import {
   dropdownArrowClassName,
   dropdownCheckboxItemClassName,
-  dropdownCheckboxItemIndicatorClassName,
+  dropdownItemIndicatorClassName,
   dropdownContentClassName,
   dropdownItemClassName,
   dropdownLabelClassName,
@@ -118,7 +118,7 @@ function DropdownMenuCheckboxItem({
     >
       <RDropdownMenu.ItemIndicator
         className={clsx(
-          dropdownCheckboxItemIndicatorClassName,
+          dropdownItemIndicatorClassName,
           "ui-dropdown-menu-checkbox-item-indicator",
           indicatorClassName,
         )}
