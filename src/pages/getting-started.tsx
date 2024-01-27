@@ -189,7 +189,7 @@ import setupNProgress from "@italodeandra/ui/bootstrap/nprogress";
 
 const appName = "@italodeandra/ui"; // TODO update with your app name
 const appDescription = "Extremely beautiful designed user interface."; // TODO update with a description of your app
-const appKeywords = "ui"; // TODO update with keywords for you app separated by commma
+const appKeywords = "ui"; // TODO update with keywords for you app separated by comma
 const appThemeColor = colors.sky["500"]; // TODO update with your app primary color
 
 setupNProgress(appThemeColor);
@@ -290,7 +290,7 @@ export default MyApp;`}
         npm i -D -E prettier prettier-plugin-tailwindcss
       </Code>
       <Text>
-        And create the file <Quote>./prettier.confing.js</Quote>:
+        And create the file <Quote>./prettier.config.js</Quote>:
       </Text>
       <Code language="javascript" copy>{`module.exports = {
   ...require("@italodeandra/ui/prettier.config.js")

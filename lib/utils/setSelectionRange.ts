@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-
 // noinspection JSUnresolvedReference
 
 function getTextNodesIn(node: Node) {

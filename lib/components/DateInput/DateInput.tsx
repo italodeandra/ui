@@ -1,55 +1,13 @@
-import { ForwardedRef, forwardRef, useEffect, useRef } from "react";
-import { format, parse } from "date-fns";
-import ptBrLocale from "date-fns/locale/pt-BR";
+import { ForwardedRef, forwardRef } from "react";
 import Input, { InputProps } from "../Input";
 import { CalendarIcon } from "@heroicons/react/20/solid";
-
-export function parseDate(value: string) {
-  try {
-    return parse(value, "yyyy-MM-dd", new Date(), {
-      locale: ptBrLocale,
-    }).toISOString();
-  } catch (e) {
-    return value;
-  }
-}
-
-export function formatDate(value: string) {
-  try {
-    return format(new Date(value), "yyyy-MM-dd", {
-      locale: ptBrLocale,
-    });
-  } catch (e) {
-    return value;
-  }
-}
+import { useRefValue } from "./useRefValue";
 
 function DateInput(
   { readOnly, ...props }: InputProps<false>,
-  ref: ForwardedRef<HTMLInputElement>
+  ref: ForwardedRef<HTMLInputElement>,
 ) {
-  const realRef = useRef<HTMLInputElement>(null);
-
-  const innerRef = useRef<HTMLInputElement>({
-    get value() {
-      return parseDate(realRef.current?.value || "");
-    },
-    set value(value) {
-      if (realRef.current) {
-        realRef.current.value = formatDate(value);
-      }
-    },
-  } as unknown as HTMLInputElement);
-
-  useEffect(() => {
-    if (ref) {
-      if (typeof ref === "function") {
-        ref(innerRef.current);
-      } else {
-        ref.current = innerRef.current;
-      }
-    }
-  }, [ref]);
+  const realRef = useRefValue(ref);
 
   return (
     <Input

@@ -22,7 +22,7 @@ function lagRadar(
     size?: number;
     inset?: number;
     parent?: HTMLElement;
-  } = {}
+  } = {},
 ) {
   const {
     frames = 50, // number of frames to draw, more = worse performance
@@ -31,8 +31,6 @@ function lagRadar(
     inset = 3, // circle inset px
     parent = document.body, // DOM node to attach to
   } = config;
-
-  const svgns = "http://www.w3.org/2000/svg";
 
   const styles = document.createTextNode(`
     .lagRadar {
@@ -58,9 +56,9 @@ function lagRadar(
   function $svg(
     tag: string,
     props: Record<string, string> = {},
-    children = []
+    children = [],
   ) {
-    const el = document.createElementNS(svgns, tag);
+    const el = document.createElementNS("http://www.w3.org/2000/svg", tag);
     Object.keys(props).forEach((prop) => el.setAttribute(prop, props[prop]));
     children.forEach((child) => el.appendChild(child));
     return el;
@@ -92,7 +90,7 @@ function lagRadar(
         r: radius as unknown as string,
       }),
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    ] as any
+    ] as any,
   );
 
   parent.appendChild($root);
@@ -110,6 +108,7 @@ function lagRadar(
     const max_hue = 120;
     const max_ms = 1000;
     const log_f = 10;
+    // noinspection SpellCheckingInspection
     const mult = max_hue / Math.log(max_ms / log_f);
     return function (ms_delta: number) {
       return (
@@ -121,13 +120,13 @@ function lagRadar(
 
   function animate() {
     const now = Date.now();
-    const rdelta = Math.min(PI2 - speed, speed * (now - last.now));
-    const rotation = (last.rotation + rdelta) % PI2;
+    const rDelta = Math.min(PI2 - speed, speed * (now - last.now));
+    const rotation = (last.rotation + rDelta) % PI2;
     const tx = middle + radius * Math.cos(rotation);
     const ty = middle + radius * Math.sin(rotation);
-    const bigArc = rdelta < Math.PI ? "0" : "1";
+    const bigArc = rDelta < Math.PI ? "0" : "1";
     const path = `M${tx} ${ty}A${radius} ${radius} 0 ${bigArc} 0 ${last.tx} ${last.ty}L${middle} ${middle}`;
-    const hue = calcHue(rdelta / speed);
+    const hue = calcHue(rDelta / speed);
 
     $arcs[framePtr % frames].setAttribute("d", path);
     $arcs[framePtr % frames].setAttribute("fill", `hsl(${hue}, 80%, 40%)`);

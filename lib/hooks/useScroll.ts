@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { isBrowser } from "../utils/isBrowser";
 
+// noinspection JSUnusedGlobalSymbols
 export function useIsScrolled(disabled?: boolean) {
   return useScrollY(disabled) > 0;
 }
@@ -27,7 +28,7 @@ export function useScrollY(disabled?: boolean) {
 export function useScrollYMovement(
   max = Infinity,
   callback: (scrollYMovement: number) => void,
-  disabled?: boolean
+  disabled?: boolean,
 ) {
   const scrollYMovement = useRef(0);
   const previousScrollYMovement = useRef(0);
@@ -40,8 +41,8 @@ export function useScrollYMovement(
         scrollYMovement.current > max
           ? max
           : scrollYMovement.current < 0 || window.scrollY <= 0
-          ? 0
-          : scrollYMovement.current;
+            ? 0
+            : scrollYMovement.current;
       callback(scrollYMovement.current);
       previousScrollYMovement.current = window.scrollY;
     }

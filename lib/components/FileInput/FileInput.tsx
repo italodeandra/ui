@@ -348,6 +348,7 @@ function FileInput(
   );
 }
 
+// noinspection JSUnusedGlobalSymbols
 export type FileInputProps = ComponentPropsWithRef<typeof FileInput>;
 
 export default forwardRef(FileInput);

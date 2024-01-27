@@ -19,6 +19,7 @@ const exampleCodeState = proxy({
 });
 
 export function useExampleCodeCallback() {
+  // noinspection JSUnusedGlobalSymbols
   return useCallback(
     (code: string) => ({
       onMouseOver() {
@@ -28,7 +29,7 @@ export function useExampleCodeCallback() {
         exampleCodeState.clearHoveredCode();
       },
     }),
-    []
+    [],
   );
 }
 

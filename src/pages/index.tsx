@@ -29,7 +29,7 @@ function SwitchExample(
   props: React.DetailedHTMLProps<
     React.HTMLAttributes<HTMLDivElement>,
     HTMLDivElement
-  >
+  >,
 ) {
   let [checked, setChecked] = useState(true);
 
@@ -60,7 +60,7 @@ function MultiSelectExample(
   props: React.DetailedHTMLProps<
     React.HTMLAttributes<HTMLDivElement>,
     HTMLDivElement
-  >
+  >,
 ) {
   return (
     <div {...props}>
@@ -91,8 +91,8 @@ export default function Page() {
           </p>
           <p className="text-xl text-gray-500 dark:text-gray-400">
             A collection of components, hooks and utility functions for creating
-            unique interfaces without forgetting to be responsive, acessible and
-            artistic at the same.
+            unique interfaces without forgetting to be responsive, accessible
+            and artistic at the same.
           </p>
           <p>
             <Button
@@ -120,7 +120,7 @@ export default function Page() {
             <Text
               variant="label"
               {...getExampleCodeMouseEvents(
-                `<Text variant="label">Examples</Text>`
+                `<Text variant="label">Examples</Text>`,
               )}
             >
               Examples
@@ -129,7 +129,7 @@ export default function Page() {
               <Button
                 variant="filled"
                 {...getExampleCodeMouseEvents(
-                  `<Button variant="filled">Filled</Button>`
+                  `<Button variant="filled">Filled</Button>`,
                 )}
               >
                 Filled
@@ -137,7 +137,7 @@ export default function Page() {
               <Button
                 variant="light"
                 {...getExampleCodeMouseEvents(
-                  `<Button variant="light">Light</Button>`
+                  `<Button variant="light">Light</Button>`,
                 )}
               >
                 Light
@@ -145,7 +145,7 @@ export default function Page() {
               <Button
                 variant="outlined"
                 {...getExampleCodeMouseEvents(
-                  `<Button variant="outlined">Outlined</Button>`
+                  `<Button variant="outlined">Outlined</Button>`,
                 )}
               >
                 Outlined
@@ -153,7 +153,7 @@ export default function Page() {
               <Button
                 variant="text"
                 {...getExampleCodeMouseEvents(
-                  `<Button variant="text">Text</Button>`
+                  `<Button variant="text">Text</Button>`,
                 )}
               >
                 Text
@@ -209,7 +209,7 @@ export default function Page() {
                 {...getExampleCodeMouseEvents(
                   `<FileSelectProvider>
   <ImageInput label="Profile picture" />
-</FileSelectProvider>`
+</FileSelectProvider>`,
                 )}
               />
             </FileSelectProvider>
