@@ -125,12 +125,10 @@ export type ButtonProps<T extends HTMLElement = HTMLButtonElement> = Omit<
   "size"
 > & {
   variant?: keyof (typeof styles)["variant"];
-  color?: keyof (typeof styles)["color"] | "white";
+  color?: keyof (typeof styles)["color"];
   size?: keyof (typeof styles)["size"];
   icon?: boolean;
-  leadingIcon?: ReactElement;
   leading?: ReactElement;
-  trailingIcon?: ReactElement;
   trailing?: ReactElement;
   loading?: boolean;
   disabled?: boolean;
@@ -145,9 +143,7 @@ const Button = <T extends HTMLElement = HTMLButtonElement>(
     className,
     icon,
     type = "button",
-    leadingIcon,
     leading,
-    trailingIcon,
     trailing,
     children,
     loading,
@@ -157,25 +153,6 @@ const Button = <T extends HTMLElement = HTMLButtonElement>(
   }: ButtonProps<T>,
   ref: ForwardedRef<T>,
 ) => {
-  if (color === "white") {
-    color = "default";
-    console.error(
-      `[Button] Color "white" was deprecated. Change to "default".`,
-    );
-  }
-  if (trailingIcon) {
-    trailing = trailingIcon;
-    console.error(
-      `[Button] Property "trailingIcon" was deprecated. Change to "trailing".`,
-    );
-  }
-  if (leadingIcon) {
-    leading = leadingIcon;
-    console.error(
-      `[Button] Property "leadingIcon" was deprecated. Change to "leading".`,
-    );
-  }
-
   if (loading) {
     if (icon) {
       children = (
