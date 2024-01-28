@@ -4,14 +4,16 @@ import clsx from "../../utils/clsx";
 import { CheckIcon } from "@heroicons/react/20/solid";
 import Link from "next/link";
 import {
-  dropdownArrowClassName,
   dropdownCheckboxItemClassName,
   dropdownItemIndicatorClassName,
-  dropdownContentClassName,
   dropdownItemClassName,
   dropdownLabelClassName,
   dropdownSeparatorClassName,
-} from "../../styles/Dropdown.styles";
+} from "../../styles/Dropdown.classNames";
+import {
+  modalArrowClassName,
+  modalContentClassName,
+} from "../../styles/Modal.classNames";
 
 function DropdownMenuContent({
   className,
@@ -28,7 +30,7 @@ function DropdownMenuContent({
         collisionPadding={collisionPadding}
         {...props}
         className={clsx(
-          dropdownContentClassName,
+          modalContentClassName,
           "ui-dropdown-menu-content",
           className,
         )}
@@ -36,7 +38,7 @@ function DropdownMenuContent({
         {children}
         <RDropdownMenu.Arrow
           className={clsx(
-            dropdownArrowClassName,
+            modalArrowClassName,
             "ui-dropdown-menu-arrow",
             arrowClassName,
           )}

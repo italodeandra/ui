@@ -6,10 +6,10 @@ import clsx from "../../utils/clsx";
 import {
   dropdownCheckboxItemClassName,
   dropdownItemIndicatorClassName,
-  dropdownContentClassName,
   dropdownItemClassName,
   dropdownSeparatorClassName,
-} from "../../styles/Dropdown.styles";
+} from "../../styles/Dropdown.classNames";
+import { modalContentClassName } from "../../styles/Modal.classNames";
 
 function ContextMenuContent({
   className,
@@ -21,7 +21,7 @@ function ContextMenuContent({
       <RContextMenu.Content
         {...props}
         className={clsx(
-          dropdownContentClassName,
+          modalContentClassName,
           "ui-context-menu-content",
           className,
         )}

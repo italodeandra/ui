@@ -1,19 +1,5 @@
 import clsx from "../utils/clsx";
 
-export const dropdownContentClassName = clsx(
-  "ui-dropdown-content",
-  "z-20 rounded overflow-hidden p-1 shadow-md text-sm ring-1",
-  "bg-white shadow-black/5 ring-black/5",
-  "dark:bg-zinc-900 dark:ring-white/10",
-);
-
-export const dropdownArrowClassName = clsx(
-  "ui-dropdown-arrow",
-  "mt-px",
-  "fill-black/5",
-  "dark:fill-white/[0.09]",
-);
-
 export const dropdownSeparatorClassName = clsx(
   "ui-dropdown-separator",
   "h-px my-1 mx-[6px]",

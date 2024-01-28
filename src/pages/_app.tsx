@@ -7,7 +7,7 @@ import colors from "tailwindcss/colors";
 import { hydrateNavigationDrawerState } from "../../lib/components/NavigationDrawer";
 import Notifications from "../../lib/components/Notifications";
 import setupNProgress from "../../lib/bootstrap/nprogress";
-import Dialogs from "../../lib/components/Dialog";
+import { Dialogs } from "../../lib/components/Dialog";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 import dayjs from "dayjs";
 

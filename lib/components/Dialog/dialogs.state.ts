@@ -1,19 +1,16 @@
 import { proxy, ref } from "valtio";
 import isomorphicObjectId from "@italodeandra/next/utils/isomorphicObjectId";
-import { CSSProperties, ReactElement, ReactNode } from "react";
+import { ReactNode } from "react";
 import { find } from "lodash";
 
 export type IDialog = {
   _id: string;
-  actions?: ReactNode | ((_id: string) => ReactNode);
-  title?: ReactNode;
-  content: ReactNode | ((_id: string) => ReactNode);
-  icon?: ReactElement;
-  open?: boolean;
-  hideCloseButton?: boolean;
-  panelClassName?: string;
-  dialogClassName?: string;
-  style?: CSSProperties;
+  open: boolean;
+  props: {
+    title?: ReactNode;
+    description?: ReactNode;
+    content: ReactNode;
+  };
 };
 
 const dialogsState = proxy({
@@ -26,22 +23,20 @@ const dialogsState = proxy({
     _id = isomorphicObjectId().toString(),
     open = true,
     ...dialog
-  }: Pick<Partial<IDialog>, "_id"> & Omit<IDialog, "_id">) {
+  }: Partial<Omit<IDialog, "props">> & IDialog["props"]) {
     if (!dialogsState.rendered) {
       console.error("<Dialogs /> is not rendered. The dialog will be ignored.");
     }
-    dialogsState.dialogs.push(
-      ref({
-        ...dialog,
-        open,
-        _id,
-      })
-    );
+    dialogsState.dialogs.push({
+      _id,
+      open,
+      props: ref(dialog),
+    });
   },
   remove(_id: string) {
     dialogsState.dialogs.splice(
       dialogsState.dialogs.findIndex((n) => n._id === _id),
-      1
+      1,
     );
   },
   update(dialog: Pick<IDialog, "_id"> & Partial<Omit<IDialog, "_id">>) {
@@ -53,7 +48,7 @@ const dialogsState = proxy({
 });
 
 export function showDialog(
-  dialog: Pick<Partial<IDialog>, "_id"> & Omit<IDialog, "_id">
+  dialog: Partial<Omit<IDialog, "props">> & IDialog["props"],
 ) {
   dialogsState.add(dialog);
 }
@@ -63,7 +58,7 @@ export function closeDialog(_id: string) {
     _id,
     open: false,
   });
-  setTimeout(() => dialogsState.remove(_id), 200);
+  setTimeout(() => dialogsState.remove(_id), 300);
 }
 
 export default dialogsState;

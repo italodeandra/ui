@@ -8,12 +8,12 @@ import {
 import Button from "../Button";
 import clsx from "../../utils/clsx";
 import {
-  dropdownContentClassName,
   dropdownItemClassName,
   dropdownItemIndicatorClassName,
   dropdownLabelClassName,
   dropdownSeparatorClassName,
-} from "../../styles/Dropdown.styles";
+} from "../../styles/Dropdown.classNames";
+import { modalContentClassName } from "../../styles/Modal.classNames";
 
 const selectScrollButtonClassName = clsx(
   "ui-select-scroll-button",
@@ -34,11 +34,7 @@ function SelectContent({
     <RSelect.Portal>
       <RSelect.Content
         {...props}
-        className={clsx(
-          dropdownContentClassName,
-          "ui-select-content",
-          className,
-        )}
+        className={clsx(modalContentClassName, "ui-select-content", className)}
       >
         <RSelect.ScrollUpButton className={selectScrollButtonClassName}>
           <ChevronUpIcon />
