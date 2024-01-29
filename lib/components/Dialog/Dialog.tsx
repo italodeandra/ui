@@ -24,6 +24,7 @@ export default function Dialog({
       <RDialog.Portal>
         <RDialog.Overlay
           className={clsx(
+            "ui-dialog-overlay",
             "z-20 bg-black/50 fixed inset-0",
             "data-[state=open]:animate-fadeIn data-[state=closed]:animate-fadeOut",
           )}
@@ -31,24 +32,38 @@ export default function Dialog({
         <RDialog.Content
           className={clsx(
             modalContentClassName,
+            "ui-dialog-content",
             "p-4 fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[450px] translate-x-[-50%] translate-y-[-50%] focus:outline-none flex flex-col gap-3",
             "data-[state=open]:animate-dialogContentShow data-[state=closed]:animate-fadeOut",
           )}
         >
           {title && (
-            <RDialog.Title className="text-zinc-900 dark:text-zinc-50 text-lg font-medium -mb-1">
+            <RDialog.Title
+              className={clsx(
+                "ui-dialog-title",
+                "text-zinc-900 dark:text-zinc-50 text-lg font-medium -mb-1",
+              )}
+            >
               {title}
             </RDialog.Title>
           )}
           {description && (
-            <RDialog.Description className="text-zinc-700 dark:text-zinc-300">
+            <RDialog.Description
+              className={clsx(
+                "ui-dialog-description",
+                "text-zinc-700 dark:text-zinc-300",
+              )}
+            >
               {description}
             </RDialog.Description>
           )}
           {children}
           <RDialog.Close asChild>
             <Button
-              className="absolute top-1 right-1"
+              className={clsx(
+                "ui-dialog-close-button",
+                "absolute top-1 right-1",
+              )}
               aria-label="Close"
               variant="text"
               icon
