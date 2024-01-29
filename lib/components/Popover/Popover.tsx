@@ -30,7 +30,9 @@ function PopoverContentWithRef(
   );
 }
 
-const PopoverContent = forwardRef(PopoverContentWithRef);
+const PopoverContent = forwardRef(
+  PopoverContentWithRef,
+) as typeof PopoverContentWithRef;
 
 function PopoverArrow({
   className,

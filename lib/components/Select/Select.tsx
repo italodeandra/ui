@@ -70,8 +70,7 @@ function SelectItemComponent(
     className,
     indicatorClassName,
     ...props
-  }: Omit<ComponentProps<typeof RSelect.Item>, "placeholder"> & {
-    placeholder?: string;
+  }: ComponentProps<typeof RSelect.Item> & {
     indicatorClassName?: string;
   },
   forwardedRef: ForwardedRef<HTMLDivElement>,
@@ -96,7 +95,9 @@ function SelectItemComponent(
   );
 }
 
-const SelectItem = forwardRef(SelectItemComponent);
+const SelectItem = forwardRef(
+  SelectItemComponent,
+) as typeof SelectItemComponent;
 
 function SelectTrigger(
   {
