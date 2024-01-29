@@ -9,7 +9,7 @@ export const dropdownSeparatorClassName = clsx(
 
 export const dropdownItemClassName = clsx(
   "ui-dropdown-item",
-  "relative rounded py-1 px-7 cursor-pointer outline-none select-none",
+  "relative rounded py-1 px-7 cursor-pointer outline-none select-none flex items-center gap-2",
   "data-[highlighted]:bg-black/5",
   "dark:data-[highlighted]:bg-white/5",
 );
