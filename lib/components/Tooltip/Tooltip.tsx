@@ -9,7 +9,7 @@ function Tooltip(
     side,
   }: {
     children?: ReactNode;
-    content?: string;
+    content?: ReactNode;
     side?: "top" | "bottom" | "left" | "right";
   },
   ref: ForwardedRef<HTMLButtonElement>,
