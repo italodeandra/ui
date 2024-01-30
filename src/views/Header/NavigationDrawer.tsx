@@ -28,7 +28,7 @@ export default function NavigationDrawer({
                         as={Button}
                         variant="text"
                         className={clsx(
-                          "w-full !justify-start !border-transparent"
+                          "w-full !justify-start !border-transparent",
                         )}
                       >
                         {route.title}
@@ -62,7 +62,7 @@ export default function NavigationDrawer({
                             >
                               {submenu.title}
                             </Text>
-                          )
+                          ),
                         )}
                       </Disclosure.Panel>
                     </>
@@ -78,7 +78,7 @@ export default function NavigationDrawer({
               >
                 {route.title}
               </NavigationItem>
-            )
+            ),
           )}
         </>
       }

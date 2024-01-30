@@ -14,7 +14,8 @@ export type DialogProps = {
   actions?: ReactNode;
   hideOverlay?: boolean;
   className?: string;
-  noPadding?: boolean
+  noPadding?: boolean;
+  panelClassName?: string;
 };
 
 export default function Drawer({
@@ -26,7 +27,8 @@ export default function Drawer({
   actions,
   hideOverlay,
   className,
-  noPadding
+  noPadding,
+  panelClassName,
 }: DialogProps) {
   const [open, setOpen] = useState(defaultOpen);
 
@@ -96,7 +98,12 @@ export default function Drawer({
                 }
               >
                 <HuiDialog.Panel className="pointer-events-auto w-screen max-w-md">
-                  <div className="flex h-full flex-col divide-y divide-zinc-200 bg-white shadow-xl dark:bg-zinc-900">
+                  <div
+                    className={clsx(
+                      "flex h-full flex-col divide-y divide-zinc-200 bg-white shadow-xl dark:bg-zinc-900",
+                      panelClassName,
+                    )}
+                  >
                     <div className="flex min-h-0 flex-1 flex-col overflow-y-auto pb-6">
                       <div className="sticky top-0 z-10 bg-white/95 px-4 py-6 backdrop-blur sm:px-6 [@supports(backdrop-filter:blur(0))]:bg-white/50 dark:[@supports(backdrop-filter:blur(0))]:bg-zinc-900/75">
                         <div className="flex items-start">
