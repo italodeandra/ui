@@ -13,8 +13,23 @@ button {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-pre[class*="language-"] {
-    color: theme("colors.slate.50");
+.prose input[type=checkbox], .prose input[type=radio], .ui-checkbox {
+    @apply h-4 w-4 ring-0 transition-colors
+
+    border-zinc-300 text-primary-600 ring-offset-zinc-100
+    dark:checked:bg-primary-500 dark:checked:border-primary-500 dark:border-zinc-600 dark:bg-zinc-900 dark:!ring-offset-zinc-900
+
+    hover:bg-zinc-100
+
+    focus:outline-none focus:ring-primary-500 focus-visible:ring-1
+}
+
+.prose input[type=checkbox], .ui-checkbox[type=checkbox] {
+    @apply rounded;
+}
+
+.prose input[type=radio], .ui-checkbox[type=radio] {
+    @apply rounded-full;
 }
 
 #__next {
