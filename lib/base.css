@@ -92,6 +92,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     z-index: 1;
 }
 
-.markdown code {
-    @apply bg-slate-700 before:hidden after:hidden px-2 py-1 text-white rounded select-all
+.prose {
+    @apply [&_.task-list-item]:my-0 prose-ul:!pl-5
 }
