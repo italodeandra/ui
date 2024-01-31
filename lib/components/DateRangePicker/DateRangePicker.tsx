@@ -1,4 +1,10 @@
-import React, { ComponentProps, ReactElement, useMemo, useState } from "react";
+import React, {
+  ComponentProps,
+  ReactElement,
+  ReactNode,
+  useMemo,
+  useState,
+} from "react";
 import { DateRange, DayPicker } from "react-day-picker";
 import dayjs from "dayjs";
 import { CalendarIcon } from "@heroicons/react/20/solid";
@@ -68,6 +74,8 @@ export default function DateRangePicker({
   toDate,
   min,
   max,
+  footer,
+  monthFooter,
 }: {
   value?: DateRange;
   onChangeValue?: (value?: DateRange) => void;
@@ -77,6 +85,8 @@ export default function DateRangePicker({
   toDate?: Date;
   min?: number;
   max?: number;
+  footer?: ReactNode;
+  monthFooter?: ReactNode;
 }) {
   let [range, setRange] = useState<DateRange | undefined>(value);
 
@@ -149,7 +159,9 @@ export default function DateRangePicker({
           toDate={toDate}
           min={min}
           max={max}
+          footer={monthFooter}
         />
+        {footer}
       </Popover.Content>
     </Popover.Root>
   );
