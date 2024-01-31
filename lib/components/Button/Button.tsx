@@ -96,28 +96,28 @@ const styles = {
       trailing: "ml-1.5 -mr-0.5",
     },
     sm: {
-      button: "p-1.5",
+      button: "p-2",
       icon: "w-4 h-4",
-      leading: "mr-1.5 -ml-0.5",
-      trailing: "ml-1.5 -mr-0.5",
+      leading: "mr-1.5",
+      trailing: "ml-1.5",
     },
     md: {
-      button: "p-1.5",
+      button: "p-2",
       icon: "w-5 h-5",
-      leading: "-my-0.5 mr-2 -ml-1.5",
-      trailing: "-my-0.5 ml-2 -mr-1.5",
+      leading: "-my-0.5 mr-2 -ml-1",
+      trailing: "-my-0.5 ml-2 -mr-1",
     },
     lg: {
-      button: "p-2",
+      button: "p-3",
       icon: "w-6 h-6",
-      leading: "-my-1 mr-3 -ml-3",
-      trailing: "-my-1 ml-3 -mr-3",
+      leading: "-my-1 mr-3 -ml-2",
+      trailing: "-my-1 ml-3 -mr-2",
     },
     xl: {
-      button: "p-2.5",
+      button: "p-4",
       icon: "w-7 h-7",
-      leading: "-my-2 mr-4 -ml-3.5",
-      trailing: "-my-2 ml-4 -mr-3.5",
+      leading: "-my-2 mr-4 -ml-2",
+      trailing: "-my-2 ml-4 -mr-2",
     },
   },
 };
@@ -157,13 +157,9 @@ const Button = <T extends HTMLElement = HTMLButtonElement>(
 ) => {
   if (loading) {
     if (icon) {
-      children = (
-        <Loading className={clsx(styles.icon[size].icon, "text-inherit")} />
-      );
+      children = <Loading className="my-auto" />;
     } else {
-      trailing = (
-        <Loading className={clsx(styles.icon[size].icon, "text-inherit")} />
-      );
+      trailing = <Loading className="w-auto h-auto mr-0" debounce />;
     }
   }
 
@@ -189,7 +185,6 @@ const Button = <T extends HTMLElement = HTMLButtonElement>(
       {leading &&
         cloneElement(leading, {
           className: clsx(
-            "",
             styles.icon[size].icon,
             styles.icon[size].leading,
             leading?.props?.className,
@@ -216,7 +211,6 @@ const Button = <T extends HTMLElement = HTMLButtonElement>(
       {trailing &&
         cloneElement(trailing, {
           className: clsx(
-            "",
             styles.icon[size].icon,
             styles.icon[size].trailing,
             trailing?.props?.className,

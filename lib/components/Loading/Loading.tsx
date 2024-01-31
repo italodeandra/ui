@@ -1,38 +1,68 @@
 import clsx from "../../utils/clsx";
+import Group from "../Group";
+import { useEffect, useState } from "react";
+import ms from "ms";
 
 export type LoadingProps = {
   className?: string;
+  dotClassName?: string;
+  debounce?: boolean | string;
 };
 
-export default function Loading({ className }: LoadingProps) {
-  return (
-    <svg
-      className={clsx(
-        "animate-spin",
-        {
-          "h-5": !className?.includes("h-"),
-          "w-5": !className?.includes("w-"),
-          "text-zinc-400": !className?.includes("text-"),
+export default function Loading({
+  className,
+  dotClassName,
+  debounce,
+}: LoadingProps) {
+  let [shouldRender, setShouldRender] = useState(false);
+
+  useEffect(() => {
+    if (debounce) {
+      setTimeout(
+        () => {
+          setShouldRender(true);
         },
+        ms(typeof debounce === "string" ? debounce : "1s"),
+      );
+    } else {
+      setShouldRender(true);
+    }
+  }, [debounce]);
+
+  dotClassName = clsx(
+    "bg-[currentColor] w-1 h-1 rounded-full shrink-0",
+    dotClassName,
+  );
+
+  if (!shouldRender) {
+    return null;
+  }
+
+  return (
+    <Group
+      className={clsx(
+        "gap-0.5 opacity-20 transition items-center justify-center",
         className,
       )}
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
     >
-      <circle
-        className="opacity-25"
-        cx="12"
-        cy="12"
-        r="10"
-        stroke="currentColor"
-        strokeWidth="4"
+      <div
+        className={clsx(
+          "animate-[pulsehide_2s_cubic-bezier(0.4,0,0.6,1)_infinite]",
+          dotClassName,
+        )}
       />
-      <path
-        className="opacity-75"
-        fill="currentColor"
-        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+      <div
+        className={clsx(
+          "animate-[pulsehide_2s_cubic-bezier(0.4,0,0.6,1)_infinite_300ms]",
+          dotClassName,
+        )}
       />
-    </svg>
+      <div
+        className={clsx(
+          "animate-[pulsehide_2s_cubic-bezier(0.4,0,0.6,1)_infinite_600ms]",
+          dotClassName,
+        )}
+      />
+    </Group>
   );
 }

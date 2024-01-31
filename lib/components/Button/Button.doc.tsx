@@ -102,7 +102,7 @@ function createColorExamples(color: ButtonProps["color"]) {
       </Button>,
       `<Button variant="filled" color="${color}">
   Filled ${color}
-</Button>`
+</Button>`,
     ),
     createExample(
       <Button variant="light" color={color}>
@@ -110,7 +110,7 @@ function createColorExamples(color: ButtonProps["color"]) {
       </Button>,
       `<Button variant="light" color="${color}">
   Light ${color}
-</Button>`
+</Button>`,
     ),
     createExample(
       <Button variant="outlined" color={color}>
@@ -118,7 +118,7 @@ function createColorExamples(color: ButtonProps["color"]) {
       </Button>,
       `<Button variant="outlined" color="${color}">
   Outlined ${color}
-</Button>`
+</Button>`,
     ),
     createExample(
       <Button variant="text" color={color}>
@@ -126,7 +126,7 @@ function createColorExamples(color: ButtonProps["color"]) {
       </Button>,
       `<Button variant="text" color="${color}">
   Text ${color}
-</Button>`
+</Button>`,
     ),
   ];
 }
@@ -139,7 +139,7 @@ function createSizeExamples(size?: ButtonProps["size"]) {
       </Button>,
       `<Button${size ? ` size="${size}"` : ""}>
   Size ${size || "md"}
-</Button>`
+</Button>`,
     ),
     createExample(
       <Button size={size} leading={<HomeIcon />} className="mb-auto">
@@ -147,7 +147,15 @@ function createSizeExamples(size?: ButtonProps["size"]) {
       </Button>,
       `<Button${size ? ` size="${size}"` : ""} leading={<HomeIcon />}>
   Size ${size || "md"}
-</Button>`
+</Button>`,
+    ),
+    createExample(
+      <Button size={size} trailing={<HomeIcon />} className="mb-auto">
+        Size {size || "md"}
+      </Button>,
+      `<Button${size ? ` size="${size}"` : ""} leading={<HomeIcon />}>
+  Size ${size || "md"}
+</Button>`,
     ),
     createExample(
       <Button icon size={size} className="mb-auto">
@@ -155,7 +163,7 @@ function createSizeExamples(size?: ButtonProps["size"]) {
       </Button>,
       `<Button icon size="${size}">
   <UserIcon />
-</Button>`
+</Button>`,
     ),
   ];
 }
@@ -175,7 +183,7 @@ let examples: (
   createExample(<Button>Default</Button>, `<Button>Default</Button>`),
   createExample(
     <Button disabled>Disabled</Button>,
-    `<Button disabled>Default</Button>`
+    `<Button disabled>Default</Button>`,
   ),
   exampleLineBreak,
   ...createColorExamples("default"),
@@ -194,7 +202,7 @@ let examples: (
     </Button>,
     `<Button icon>
   <UserIcon />
-</Button>`
+</Button>`,
   ),
   createExample(
     <Button icon rounded>
@@ -202,7 +210,7 @@ let examples: (
     </Button>,
     `<Button icon rounded>
   <UserIcon />
-</Button>`
+</Button>`,
   ),
   exampleLineBreak,
   ...createSizeExamples("xs"),
@@ -217,7 +225,7 @@ let examples: (
   exampleLineBreak,
   createExample(
     <Button loading>Loading</Button>,
-    `<Button loading>Loading</Button>`
+    `<Button loading>Loading</Button>`,
   ),
   createExample(
     <Button icon loading>
@@ -225,7 +233,7 @@ let examples: (
     </Button>,
     `<Button icon loading>
   <UserIcon />
-</Button>`
+</Button>`,
   ),
   exampleLineBreak,
   createExample(
@@ -240,7 +248,7 @@ let examples: (
   className="border-transparent bg-purple-500 text-onPrimary hover:bg-purple-500/80 active:border-purple-700 dark:active:border-purple-300"
 >
   Custom color
-</Button>`
+</Button>`,
   ),
 ];
 
@@ -269,7 +277,7 @@ export function ButtonDoc() {
             ) : (
               cloneElement(
                 example.render,
-                getExampleCodeMouseEvents(example.code)
+                getExampleCodeMouseEvents(example.code),
               )
             )}
           </Fragment>
