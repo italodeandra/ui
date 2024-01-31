@@ -33,7 +33,7 @@ export default function Dialog({
             className={clsx(
               modalContentClassName,
               "ui-dialog-content",
-              "p-4 max-h-[85vh] w-[90vw] max-w-[450px] focus:outline-none flex flex-col gap-3",
+              "p-4 max-h-[85vh] w-[90vw] max-w-[450px] focus:outline-none flex flex-col gap-3 relative",
             )}
           >
             {title && (
