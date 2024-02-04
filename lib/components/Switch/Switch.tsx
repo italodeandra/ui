@@ -26,7 +26,7 @@ export default function Switch({
   pointerClassName,
 }: SwitchProps) {
   return (
-    <HuiSwitch.Group as="div" className={clsx("flex items-center", className)}>
+    <HuiSwitch.Group as="div" className={clsx(className, "flex items-center")}>
       <HuiSwitch
         checked={checked}
         onChange={onChange}
