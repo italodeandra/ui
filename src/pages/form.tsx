@@ -11,14 +11,14 @@ import { Json } from "../../lib/components/Code";
 import { GetServerSideProps } from "next";
 import { getCookies } from "cookies-next";
 import Breadcrumbs from "../../lib/components/Breadcrumbs";
-import CleaveInput from "../../lib/components/Input/CleaveInput";
+import NumericInput from "../../lib/components/Input/NumericInput";
 import { useEffect } from "react";
 
 type FieldValues = {
   email: string;
   password: string;
   remember: boolean;
-  price: number;
+  price?: number;
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
@@ -32,6 +32,7 @@ const pages = [{ title: "Form" }];
 export default function Page() {
   const {
     register,
+    unregister,
     handleSubmit,
     watch,
     formState: { errors },
@@ -42,9 +43,19 @@ export default function Page() {
 
   useEffect(() => {
     setTimeout(() => {
-      setValue("price", 10.5);
+      setValue("price", 200);
     }, 1000);
   }, [setValue]);
+
+  useEffect(() => {
+    register("price", {
+      required: "Please fill with the price",
+    });
+
+    return () => {
+      unregister("price");
+    };
+  }, []);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -83,25 +94,21 @@ export default function Page() {
           </div>
         </div>
 
-        <div className="space-y-1">
-          <div className="mt-1">
-            <CleaveInput
-              label="Price"
-              required
-              {...register("price", {
-                required: "Please fill with the price",
-              })}
-              options={{
-                prefix: "R$",
-                numeral: true,
-                numeralDecimalMark: ",",
-                delimiter: ".",
-                noImmediatePrefix: true,
-                rawValueTrimPrefix: true,
-              }}
-            />
+        {watch("remember") && (
+          <div className="space-y-1">
+            <div className="mt-1">
+              <NumericInput
+                label="Price"
+                required
+                value={watch("price")}
+                onValueChange={({ floatValue }) =>
+                  setValue("price", floatValue)
+                }
+                trailing="km"
+              />
+            </div>
           </div>
-        </div>
+        )}
 
         <div className="flex items-center justify-between">
           <Checkbox label="Remember" {...register("remember")} />

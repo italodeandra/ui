@@ -5,7 +5,7 @@ import Breadcrumbs from "../../lib/components/Breadcrumbs";
 import Input from "../../lib/components/Input";
 import Stack from "../../lib/components/Stack";
 import getPublicLayout from "../views/publicLayout";
-import CleaveInput from "../../lib/components/Input/CleaveInput";
+import CleaveInput from "../../lib/components/Input/NumericInput";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   props: {

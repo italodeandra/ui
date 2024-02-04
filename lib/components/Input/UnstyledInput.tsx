@@ -59,6 +59,7 @@ function UnstyledInput<Select extends boolean | undefined>(
     children,
     as,
     innerClassName,
+    value,
     ...props
   }: UnstyledInputProps<Select>,
   ref: ForwardedRef<Select extends true ? HTMLSelectElement : HTMLInputElement>,
@@ -67,6 +68,18 @@ function UnstyledInput<Select extends boolean | undefined>(
   id = id || innerId;
 
   const Component = as || (select ? "select" : "input");
+
+  inputClassName = clsx(
+    inputClassName,
+    leadingInputClassName && {
+      [leadingInputClassName]: !!leading,
+    },
+    trailingInputClassName && {
+      [trailingInputClassName]: !!trailing,
+    },
+  );
+
+  console.log(inputClassName);
 
   return (
     <div className={className}>
@@ -80,18 +93,11 @@ function UnstyledInput<Select extends boolean | undefined>(
         <Component
           /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
           {...(props as any)}
-          className={clsx(
-            inputClassName,
-            leadingInputClassName && {
-              [leadingInputClassName]: !!leading,
-            },
-            trailingInputClassName && {
-              [trailingInputClassName]: !!trailing,
-            },
-          )}
+          className={inputClassName}
           id={id}
           type={type}
           ref={ref}
+          value={value}
         >
           {select ? children : undefined}
         </Component>
