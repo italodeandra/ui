@@ -27,7 +27,7 @@ export default function Page() {
       <Stack className="p-2">
         <DateRangePicker
           value={range}
-          onChangeValue={setRange}
+          onValueChange={setRange}
           fromDate={new Date()}
         />
       </Stack>

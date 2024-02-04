@@ -67,7 +67,7 @@ const classNames = {
 
 export default function DateRangePicker({
   value,
-  onChangeValue,
+  onValueChange,
   children,
   buttonProps,
   fromDate,
@@ -78,7 +78,7 @@ export default function DateRangePicker({
   monthFooter,
 }: {
   value?: DateRange;
-  onChangeValue?: (value?: DateRange) => void;
+  onValueChange?: (value?: DateRange) => void;
   children?: (value: string) => ReactElement;
   buttonProps?: ComponentProps<typeof Button>;
   fromDate?: Date;
@@ -91,7 +91,7 @@ export default function DateRangePicker({
   let [range, setRange] = useState<DateRange | undefined>(value);
 
   useDeepCompareEffect(() => {
-    onChangeValue?.(range);
+    onValueChange?.(range);
   }, [range || {}]);
 
   let buttonText = useMemo(() => {
