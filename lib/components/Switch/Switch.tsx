@@ -67,13 +67,18 @@ export default function Switch({
 
 export type SwitchInputProps = UnstyledInputCommonProps & SwitchProps;
 
-export function SwitchInput({ inputClassName, ...props }: SwitchInputProps) {
+export function SwitchInput({
+  inputClassName,
+  checked,
+  ...props
+}: SwitchInputProps) {
   return (
     <Input
       /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
       {...(props as any)}
       as={Switch}
       inputClassName={clsx("p-1.5 border bg-white", inputClassName)}
+      checked={!!checked}
     />
   );
 }
