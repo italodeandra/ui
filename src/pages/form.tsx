@@ -32,7 +32,6 @@ const pages = [{ title: "Form" }];
 export default function Page() {
   const {
     register,
-    unregister,
     handleSubmit,
     watch,
     formState: { errors },
@@ -51,11 +50,7 @@ export default function Page() {
     register("price", {
       required: "Please fill with the price",
     });
-
-    return () => {
-      unregister("price");
-    };
-  }, []);
+  }, [register]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

@@ -5,7 +5,7 @@ import Breadcrumbs from "../../lib/components/Breadcrumbs";
 import Input from "../../lib/components/Input";
 import Stack from "../../lib/components/Stack";
 import getPublicLayout from "../views/publicLayout";
-import CleaveInput from "../../lib/components/Input/NumericInput";
+import NumericInput from "../../lib/components/Input/NumericInput";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   props: {
@@ -46,18 +46,13 @@ export default function Page() {
           leadingInputClassName="pl-7"
         />
         <Input label="Loading input" loading placeholder="He's pulsating" />
-        <CleaveInput
+        <NumericInput
           label="Currency input"
-          options={{
-            prefix: "R$",
-            numeral: true,
-            numeralDecimalMark: ",",
-            delimiter: ".",
-            noImmediatePrefix: true,
-            rawValueTrimPrefix: true,
-          }}
+          prefix="R$"
+          decimalSeparator=","
+          thousandSeparator="."
           value={18.5}
-          onChange={(event) => console.info("value", event.target.value)}
+          onValueChange={console.info}
         />
       </Stack>
     </>

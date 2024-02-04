@@ -79,8 +79,6 @@ function UnstyledInput<Select extends boolean | undefined>(
     },
   );
 
-  console.log(inputClassName);
-
   return (
     <div className={className}>
       {label && (
