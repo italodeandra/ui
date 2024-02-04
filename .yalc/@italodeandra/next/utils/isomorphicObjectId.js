@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var isServer = typeof window === "undefined";
 var bson_objectid_1 = __importDefault(require("bson-objectid"));
 var bson_1 = require("bson");
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function isomorphicObjectId(inputId) {
     if (isServer) {
         return new bson_1.ObjectId(inputId);

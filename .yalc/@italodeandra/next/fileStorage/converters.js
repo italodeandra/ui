@@ -14,7 +14,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -48,9 +48,21 @@ function blobToBase64(blob) {
 }
 exports.blobToBase64 = blobToBase64;
 function blobUrlToObject(url) {
-    return fetch(url).then(function (r) { return r.blob(); });
+    return __awaiter(this, void 0, void 0, function () {
+        var r;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, fetch(url)];
+                case 1:
+                    r = _a.sent();
+                    return [4 /*yield*/, r.blob()];
+                case 2: return [2 /*return*/, _a.sent()];
+            }
+        });
+    });
 }
 exports.blobUrlToObject = blobUrlToObject;
+// noinspection JSUnusedGlobalSymbols
 function blobUrlToBase64(url) {
     return __awaiter(this, void 0, void 0, function () {
         var _a;
@@ -73,6 +85,7 @@ function base64ToBuffer(base64) {
     return Buffer.from(base64.replace(/^data:.+;base64,/, ""), "base64");
 }
 exports.base64ToBuffer = base64ToBuffer;
+// noinspection JSUnusedGlobalSymbols
 function base64ToBlobUrl(base64) {
     if (!base64.startsWith("data:")) {
         return base64;

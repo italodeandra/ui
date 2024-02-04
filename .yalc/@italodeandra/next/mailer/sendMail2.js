@@ -35,36 +35,72 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var axios_1 = __importDefault(require("axios"));
-var safeStringify_1 = __importDefault(require("./utils/safeStringify"));
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function log(content) {
-    return __awaiter(this, void 0, void 0, function () {
+/* eslint-disable no-var */
+var nodemailer_1 = require("nodemailer");
+var components_1 = require("@react-email/components");
+var cached = global.nodemailer;
+if (!cached) {
+    cached = global.nodemailer = { transporter: null };
+}
+var isProd = process.env.APP_ENV === "production";
+function prepareSendMail(props) {
+    var _this = this;
+    var smtp = (props === null || props === void 0 ? void 0 : props.smtp) || {
+        from: process.env.SMTP_FROM,
+        server: {
+            auth: {
+                pass: process.env.SMTP_PASS,
+                user: process.env.SMTP_USER,
+            },
+            host: process.env.SMTP_HOST,
+            port: parseInt(process.env.SMTP_PORT),
+        },
+    };
+    return function (to, subject, emailBody) { return __awaiter(_this, void 0, void 0, function () {
+        var testAccount, htmlString, info;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    if (!(process.env.LOG_API_URL && process.env.LOG_APP_ID)) return [3 /*break*/, 2];
-                    return [4 /*yield*/, axios_1.default.post(process.env.LOG_API_URL, {
-                            appId: process.env.LOG_APP_ID,
-                            content: content,
-                        }, {
-                            headers: {
-                                Authorization: "Bearer ".concat(process.env.LOG_TOKEN),
-                            },
-                        })];
+                    if (!!cached.transporter) return [3 /*break*/, 3];
+                    if (!!isProd) return [3 /*break*/, 2];
+                    return [4 /*yield*/, (0, nodemailer_1.createTestAccount)()];
                 case 1:
-                    _a.sent();
-                    return [3 /*break*/, 3];
+                    testAccount = _a.sent();
+                    smtp = {
+                        from: "Majapi <".concat(testAccount.user, ">"),
+                        server: {
+                            host: "smtp.ethereal.email",
+                            port: 587,
+                            auth: {
+                                user: testAccount.user,
+                                pass: testAccount.pass,
+                            },
+                        },
+                    };
+                    _a.label = 2;
                 case 2:
-                    console.info((0, safeStringify_1.default)(content));
+                    cached.transporter = (0, nodemailer_1.createTransport)(smtp.server);
                     _a.label = 3;
-                case 3: return [2 /*return*/];
+                case 3:
+                    htmlString = (0, components_1.render)(emailBody, {
+                        pretty: true,
+                    });
+                    return [4 /*yield*/, cached.transporter.sendMail({
+                            from: smtp.from,
+                            to: to,
+                            subject: subject,
+                            html: htmlString,
+                        })];
+                case 4:
+                    info = _a.sent();
+                    if (!isProd) {
+                        console.info("Message sent: %s", info.messageId);
+                        console.info("Preview URL: %s", (0, nodemailer_1.getTestMessageUrl)(info));
+                    }
+                    return [2 /*return*/];
             }
         });
-    });
+    }); };
 }
-exports.default = log;
+exports.default = prepareSendMail;
