@@ -20,7 +20,7 @@ export default function Page() {
       <NextSeo title={pages[0].title} />
       <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
       <Stack className="p-2">
-        <DateInput label="Birth date" />
+        <DateInput label="Birth date" onValueChange={console.info} />
         <DateTimeInput label="Event date" />
       </Stack>
     </>
