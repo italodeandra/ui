@@ -10,6 +10,7 @@ function PopoverContentWithRef(
   {
     className,
     sideOffset = 4,
+    collisionPadding = 8,
     children,
     ...props
   }: ComponentProps<typeof RPopover.Content>,
@@ -21,6 +22,7 @@ function PopoverContentWithRef(
         {...props}
         className={clsx(modalContentClassName, "ui-popover-content", className)}
         sideOffset={sideOffset}
+        collisionPadding={collisionPadding}
         ref={ref}
       >
         {children}

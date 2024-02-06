@@ -19,7 +19,7 @@ function DropdownMenuContent({
   className,
   arrowClassName,
   children,
-  sideOffset = 5,
+  sideOffset = 4,
   collisionPadding = 8,
   ...props
 }: ComponentProps<typeof RDropdownMenu.Content> & { arrowClassName?: string }) {
