@@ -145,7 +145,7 @@ function FileInput(
     onMouseOver,
     onMouseOut,
     readOnly,
-    defaultValue,
+    value,
     emptyText = "No files",
     downloadText = "Download",
     openText = "Open",
@@ -167,7 +167,7 @@ function FileInput(
   > &
     Omit<FileSelectProps, "onAcceptFiles" | "onRejectFiles"> & {
       readOnly?: boolean;
-      defaultValue?: FileInputFile[];
+      value?: FileInputFile[];
       onChange?: (event: { target: { value: FileInputFile[] } }) => void;
       emptyText?: string;
       downloadText?: string;
@@ -184,20 +184,20 @@ function FileInput(
   ref: ForwardedRef<HTMLInputElement>,
 ) {
   let [uploading, setUploading] = useState(false);
-  const [value, setValue] = useState<FileInputFile[]>(defaultValue || []);
+  const [innerValue, setInnerValue] = useState<FileInputFile[]>(value || []);
 
   useDeepCompareEffect(() => {
-    if (defaultValue && !isEqual(defaultValue, value)) {
-      setValue(defaultValue);
+    if (value && !isEqual(value, innerValue)) {
+      setInnerValue(value);
     }
-  }, [{ defaultValue }]);
+  }, [{ value: value }]);
 
   const innerRef = useRef<HTMLInputElement>({
     get value() {
-      return value;
+      return innerValue;
     },
     set value(value) {
-      setValue(value || []);
+      setInnerValue(value || []);
     },
   } as unknown as HTMLInputElement);
 
@@ -217,7 +217,7 @@ function FileInput(
 
   const handleAcceptFiles = async (files: File[]) => {
     if (!asyncUpload) {
-      setValue((value) => [
+      setInnerValue((value) => [
         ...value,
         ...files
           .filter((_file, index) => !limit || index <= limit - value.length - 1)
@@ -233,14 +233,14 @@ function FileInput(
       setUploading(true);
       if (onRejectFiles) {
         let rejectedFilesLimit = files.filter(
-          (_file, index) => !(!limit || index <= limit - value.length - 1),
+          (_file, index) => !(!limit || index <= limit - innerValue.length - 1),
         );
         if (rejectedFilesLimit.length) {
           onRejectFiles(rejectedFilesLimit, "limit");
         }
       }
       let acceptedFiles = files.filter(
-        (_file, index) => !limit || index <= limit - value.length - 1,
+        (_file, index) => !limit || index <= limit - innerValue.length - 1,
       );
       let filesNotUploaded: typeof acceptedFiles = [];
       for (let file of acceptedFiles) {
@@ -252,7 +252,7 @@ function FileInput(
             type: file.type,
             size: file.size,
           });
-          setValue((value) => [...value, uploadedFile]);
+          setInnerValue((value) => [...value, uploadedFile]);
         } catch (e) {
           filesNotUploaded.push(file);
         }
@@ -269,7 +269,7 @@ function FileInput(
       onChange({
         target: {
           name,
-          value: value.map((file) => ({
+          value: innerValue.map((file) => ({
             _id: file._id,
             url: (file as FileFile).file
               ? URL.createObjectURL((file as FileFile).file)
@@ -284,11 +284,13 @@ function FileInput(
       } as any);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [value]);
+  }, [innerValue]);
 
   const handleDeleteClick = useCallback(
     (clickedFile: FileInputFile) => () => {
-      setValue((value) => [...value.filter((file) => file !== clickedFile)]);
+      setInnerValue((value) => [
+        ...value.filter((file) => file !== clickedFile),
+      ]);
     },
     [],
   );
@@ -314,11 +316,11 @@ function FileInput(
       )}
       <div
         className={clsx("grid grid-cols-1 gap-4", {
-          "md:grid-cols-2": !!value.length,
-          "min-h-[140px]": !!value.length || !readOnly,
+          "md:grid-cols-2": !!innerValue.length,
+          "min-h-[140px]": !!innerValue.length || !readOnly,
         })}
       >
-        {value.map((file, i) => (
+        {innerValue.map((file, i) => (
           <PreviewFile
             key={i}
             file={file}
@@ -329,15 +331,15 @@ function FileInput(
             openText={openText}
           />
         ))}
-        {readOnly && !value.length && (
+        {readOnly && !innerValue.length && (
           <Text variant="secondary">{emptyText}</Text>
         )}
-        {!readOnly && (!limit || value.length < limit) && (
+        {!readOnly && (!limit || innerValue.length < limit) && (
           <FileSelect
             {...props}
             id={id}
             onAcceptFiles={handleAcceptFiles}
-            limit={limit ? limit - value.length : undefined}
+            limit={limit ? limit - innerValue.length : undefined}
             uploading={uploading}
             onRejectFiles={onRejectFiles}
           />

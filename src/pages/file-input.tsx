@@ -86,7 +86,7 @@ export default function Page() {
             }
           }}
         />
-        <FileInput label="Read-only" readOnly defaultValue={value} />
+        <FileInput label="Read-only" readOnly value={value} />
       </Stack>
     </FileSelectProvider>
   );

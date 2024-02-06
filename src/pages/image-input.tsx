@@ -28,7 +28,7 @@ export default function Page() {
           label="Profile picture"
           onChange={(e) => setValue(e.target.value)}
         />
-        <ImageInput label="Read-only" readOnly defaultValue={value} />
+        <ImageInput label="Read-only" readOnly value={value} />
       </Stack>
     </FileSelectProvider>
   );
