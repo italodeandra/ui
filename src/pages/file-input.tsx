@@ -87,6 +87,12 @@ export default function Page() {
           }}
         />
         <FileInput label="Read-only" readOnly value={value} />
+        <FileInput
+          required
+          label="Error"
+          error
+          helpText="Attach at least one file"
+        />
       </Stack>
     </FileSelectProvider>
   );

@@ -91,6 +91,7 @@ function FileSelect(
     disabled,
     additionalBottomInfo,
     onRejectFiles,
+    error,
   }: FileSelectProps,
   ref: ForwardedRef<HTMLInputElement>,
 ) {
@@ -161,8 +162,9 @@ function FileSelect(
         {
           "border-primary-300 dark:border-primary-700": isOver,
           "border-zinc-300 hover:border-zinc-400 dark:border-zinc-700 dark:hover:border-zinc-600":
-            !disabled,
+            !disabled && !error,
           "cursor-not-allowed border-zinc-200 dark:border-zinc-800": disabled,
+          "border-error-500": error,
         },
       )}
       onMouseMove={!disabled ? () => setPasteEnabled(true) : undefined}

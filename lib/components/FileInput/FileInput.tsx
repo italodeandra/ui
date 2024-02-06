@@ -297,9 +297,9 @@ function FileInput(
 
   return (
     <div
-      className={clsx("relative", className, {
-        ["error"]: error,
-      })}
+      data-input-name={name}
+      data-error={error}
+      className={clsx("relative", className)}
       onMouseOver={onMouseOver}
       onMouseOut={onMouseOut}
     >
@@ -342,10 +342,20 @@ function FileInput(
             limit={limit ? limit - innerValue.length : undefined}
             uploading={uploading}
             onRejectFiles={onRejectFiles}
+            error={error}
           />
         )}
       </div>
-      {helpText && <div className={defaultHelpTextClassName}>{helpText}</div>}
+      {helpText && (
+        <div
+          className={clsx(
+            defaultHelpTextClassName,
+            "[[data-error]_&]:text-error-500",
+          )}
+        >
+          {helpText}
+        </div>
+      )}
     </div>
   );
 }
