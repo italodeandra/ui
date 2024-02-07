@@ -54,7 +54,7 @@ export function PreviewFile({
             </div>
             {file.description && <div>{file.description}</div>}
             <Text size="sm">{file.type}</Text>
-            {file.size && (
+            {!!file.size && (
               <Text size="sm">{numeral(file.size).format("0b")}</Text>
             )}
             {!url.startsWith("blob") && (
