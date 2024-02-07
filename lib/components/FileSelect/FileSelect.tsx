@@ -38,6 +38,7 @@ const translateAllowedType = (type: string) =>
       "DOCX",
     "application/vnd.openxmlformats-officedocument.presentationml.presentation":
       "PPTX",
+    ".webp": "WEBP",
   })[type];
 
 export interface FileSelectProps {
