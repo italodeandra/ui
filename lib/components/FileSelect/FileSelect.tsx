@@ -39,6 +39,7 @@ const translateAllowedType = (type: string) =>
     "application/vnd.openxmlformats-officedocument.presentationml.presentation":
       "PPTX",
     ".webp": "WEBP",
+    "image/webp": "WEBP",
   })[type];
 
 export interface FileSelectProps {
