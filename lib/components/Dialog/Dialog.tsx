@@ -12,12 +12,16 @@ export default function Dialog({
   description,
   open,
   onOpenChange,
+  contentClassName,
+  contentOverflowClassName,
 }: {
   children: ReactNode;
   title?: ReactNode;
   description?: ReactNode;
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  contentClassName?: string;
+  contentOverflowClassName?: string;
 }) {
   return (
     <RDialog.Root open={open} onOpenChange={onOpenChange}>
@@ -33,44 +37,52 @@ export default function Dialog({
             className={clsx(
               modalContentClassName,
               "ui-dialog-content",
-              "p-4 max-h-[85vh] w-[90vw] max-w-[450px] focus:outline-none flex flex-col gap-3 relative",
+              "focus:outline-none relative p-0",
+              contentClassName,
             )}
           >
-            {title && (
-              <RDialog.Title
-                className={clsx(
-                  "ui-dialog-title",
-                  "text-zinc-900 dark:text-zinc-50 text-lg font-medium -mb-1",
-                )}
-              >
-                {title}
-              </RDialog.Title>
-            )}
-            {description && (
-              <RDialog.Description
-                className={clsx(
-                  "ui-dialog-description",
-                  "text-zinc-700 dark:text-zinc-300",
-                )}
-              >
-                {description}
-              </RDialog.Description>
-            )}
-            {children}
-            <RDialog.Close asChild>
-              <Button
-                className={clsx(
-                  "ui-dialog-close-button",
-                  "absolute top-1 right-1",
-                )}
-                aria-label="Close"
-                variant="text"
-                icon
-                size="sm"
-              >
-                <XMarkIcon />
-              </Button>
-            </RDialog.Close>
+            <div
+              className={clsx(
+                "flex flex-col gap-3 p-4 max-h-[85vh] w-[90vw] max-w-[450px] overflow-auto",
+                contentOverflowClassName,
+              )}
+            >
+              {title && (
+                <RDialog.Title
+                  className={clsx(
+                    "ui-dialog-title",
+                    "text-zinc-900 dark:text-zinc-50 text-lg font-medium -mb-1",
+                  )}
+                >
+                  {title}
+                </RDialog.Title>
+              )}
+              {description && (
+                <RDialog.Description
+                  className={clsx(
+                    "ui-dialog-description",
+                    "text-zinc-700 dark:text-zinc-300",
+                  )}
+                >
+                  {description}
+                </RDialog.Description>
+              )}
+              {children}
+              <RDialog.Close asChild>
+                <Button
+                  className={clsx(
+                    "ui-dialog-close-button",
+                    "absolute top-1 right-1",
+                  )}
+                  aria-label="Close"
+                  variant="text"
+                  icon
+                  size="sm"
+                >
+                  <XMarkIcon />
+                </Button>
+              </RDialog.Close>
+            </div>
           </RDialog.Content>
         </RDialog.Overlay>
       </RDialog.Portal>

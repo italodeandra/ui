@@ -21,7 +21,12 @@ export default function Dialogs() {
           title={dialog.props.title as ReactNode}
           description={dialog.props.description as ReactNode}
           open={dialog.open}
-          onOpenChange={() => closeDialog(dialog._id)}
+          onOpenChange={() => {
+            closeDialog(dialog._id);
+            dialog.props.onClose?.(dialog._id);
+          }}
+          contentClassName={dialog.props.contentClassName}
+          contentOverflowClassName={dialog.props.contentOverflowClassName}
         >
           {dialog.props.content as ReactNode}
         </Dialog>
