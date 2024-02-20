@@ -10,7 +10,6 @@ export const modalContentClassName = clsx(
 
 export const modalArrowClassName = clsx(
   "ui-modal-arrow",
-  "mt-px",
   "fill-black/5",
   "dark:fill-white/[0.09]",
 );
