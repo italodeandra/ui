@@ -115,14 +115,17 @@ export type Validation = {
 
 export function useForm<T extends ReturnType<typeof createFormState>>(
   state: T,
-  options?: { onSubmit?: (values: T["values"]) => void },
+  options?: {
+    onSubmit?: (values: T["values"]) => void;
+    resetOnUnmount?: boolean;
+  },
 ) {
   const snapshot = useSnapshot(state, {
     sync: true,
   });
 
   useUnmount(() => {
-    if (options?.onSubmit) {
+    if (options?.resetOnUnmount) {
       snapshot.reset();
     }
   });
