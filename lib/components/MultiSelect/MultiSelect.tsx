@@ -77,7 +77,7 @@ function MultiSelectInput<
   selectedItems,
   doRender,
   removeItem,
-  id,
+  valueProperty,
   readOnly,
   ...props
 }: {
@@ -85,7 +85,7 @@ function MultiSelectInput<
   selectedItems: T[];
   doRender: (item: T) => ReactNode;
   removeItem: (item: T) => () => void;
-  id: Id;
+  valueProperty: Id;
   readOnly?: boolean;
 }) {
   let ref = useRef<HTMLInputElement>(null);
@@ -101,7 +101,7 @@ function MultiSelectInput<
         <div className="flex flex-wrap items-center gap-1 p-1.5">
           {selectedItems.map((item) => (
             <Badge
-              key={getValue(id, item)}
+              key={getValue(valueProperty, item)}
               onActionClick={!readOnly ? removeItem(item) : undefined}
             >
               {doRender(item)}
@@ -109,13 +109,15 @@ function MultiSelectInput<
           ))}
         </div>
       )}
-      <Combobox.Input
-        /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-        {...(props as any)}
-        ref={ref}
-        className="rounded-md border-none !ring-transparent disabled:cursor-not-allowed disabled:text-zinc-500 sm:text-sm dark:bg-zinc-800 dark:disabled:bg-zinc-900/90"
-        readOnly={readOnly}
-      />
+      {!readOnly && (
+        <Combobox.Input
+          /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+          {...(props as any)}
+          ref={ref}
+          className="rounded-md border-none !ring-transparent disabled:cursor-not-allowed disabled:text-zinc-500 sm:text-sm dark:bg-zinc-800 dark:disabled:bg-zinc-900/90"
+          readOnly={readOnly}
+        />
+      )}
     </div>
   );
 }
@@ -291,6 +293,7 @@ export default function MultiSelect<T extends object | string>({
               required={required && !selectedItems.length}
               label={label}
               readOnly={readOnly}
+              valueProperty={valueProperty}
             />
 
             {!readOnly &&
