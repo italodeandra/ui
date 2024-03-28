@@ -47,6 +47,9 @@ export default function DateRangePicker({
   useDeepCompareEffect(() => {
     onValueChange?.(range);
   }, [range || {}]);
+  useDeepCompareEffect(() => {
+    setRange(value);
+  }, [value || {}]);
 
   let buttonText = useMemo(() => {
     let buttonText = "";
