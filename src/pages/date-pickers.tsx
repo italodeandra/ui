@@ -8,6 +8,8 @@ import DateRangePicker, {
   DateRange,
 } from "../../lib/components/DateRangePicker";
 import { useState } from "react";
+import Button from "../../lib/components/Button";
+import DatePicker from "../../lib/components/DatePicker";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   props: {
@@ -15,9 +17,10 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   },
 });
 
-const pages = [{ title: "Date range picker" }];
+const pages = [{ title: "Date pickers" }];
 
 export default function Page() {
+  let [date, setDate] = useState<Date | undefined>();
   let [range, setRange] = useState<DateRange | undefined>();
 
   return (
@@ -25,11 +28,24 @@ export default function Page() {
       <NextSeo title={pages[0].title} />
       <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
       <Stack className="p-2">
+        <DatePicker
+          value={date}
+          onValueChange={setDate}
+          fromDate={new Date()}
+        />
         <DateRangePicker
           value={range}
           onValueChange={setRange}
           fromDate={new Date()}
         />
+        <Button
+          onClick={() => {
+            setRange(undefined);
+            setDate(undefined);
+          }}
+        >
+          Clear date
+        </Button>
       </Stack>
     </>
   );
