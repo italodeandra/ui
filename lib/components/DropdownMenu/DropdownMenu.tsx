@@ -5,8 +5,8 @@ import { CheckIcon } from "@heroicons/react/20/solid";
 import Link from "next/link";
 import {
   dropdownCheckboxItemClassName,
-  dropdownItemIndicatorClassName,
   dropdownItemClassName,
+  dropdownItemIndicatorClassName,
   dropdownLabelClassName,
   dropdownSeparatorClassName,
 } from "../../styles/Dropdown.classNames";
@@ -101,6 +101,22 @@ function DropdownMenuLabel({
   );
 }
 
+function DropdownMenuItemIndicator({
+  className,
+  ...props
+}: ComponentProps<typeof RDropdownMenu.ItemIndicator>) {
+  return (
+    <RDropdownMenu.ItemIndicator
+      className={clsx(
+        dropdownItemIndicatorClassName,
+        "ui-dropdown-menu-checkbox-item-indicator",
+        className,
+      )}
+      {...props}
+    />
+  );
+}
+
 function DropdownMenuCheckboxItem({
   className,
   children,
@@ -118,15 +134,9 @@ function DropdownMenuCheckboxItem({
         className,
       )}
     >
-      <RDropdownMenu.ItemIndicator
-        className={clsx(
-          dropdownItemIndicatorClassName,
-          "ui-dropdown-menu-checkbox-item-indicator",
-          indicatorClassName,
-        )}
-      >
+      <DropdownMenuItemIndicator className={indicatorClassName}>
         <CheckIcon />
-      </RDropdownMenu.ItemIndicator>
+      </DropdownMenuItemIndicator>
       {children}
     </RDropdownMenu.CheckboxItem>
   );
@@ -140,6 +150,7 @@ const DropdownMenu = {
   Separator: DropdownMenuSeparator,
   CheckboxItem: DropdownMenuCheckboxItem,
   Label: DropdownMenuLabel,
+  ItemIndicator: DropdownMenuItemIndicator,
 };
 
 export default DropdownMenu;
