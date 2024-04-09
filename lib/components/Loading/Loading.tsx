@@ -14,18 +14,18 @@ export default function Loading({
   dotClassName,
   debounce,
 }: LoadingProps) {
-  let [shouldRender, setShouldRender] = useState(false);
+  const [shouldBeVisible, setShouldBeVisible] = useState(false);
 
   useEffect(() => {
     if (debounce) {
       setTimeout(
         () => {
-          setShouldRender(true);
+          setShouldBeVisible(true);
         },
-        ms(typeof debounce === "string" ? debounce : "1s"),
+        ms(typeof debounce === "string" ? debounce : "0.5s"),
       );
     } else {
-      setShouldRender(true);
+      setShouldBeVisible(true);
     }
   }, [debounce]);
 
@@ -34,14 +34,13 @@ export default function Loading({
     dotClassName,
   );
 
-  if (!shouldRender) {
-    return null;
-  }
-
   return (
     <Group
       className={clsx(
-        "gap-0.5 opacity-20 transition items-center justify-center",
+        "gap-0.5 opacity-0 transition items-center justify-center",
+        {
+          "opacity-20": !shouldBeVisible,
+        },
         className,
       )}
     >
