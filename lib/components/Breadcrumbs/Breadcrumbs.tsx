@@ -80,7 +80,7 @@ export default function Breadcrumbs({
           );
         })}
         {loading && (
-          <li className="!ml-auto mt-3">
+          <li className="!ml-auto items-center flex">
             <Loading className="-mr-3 ml-4" />
           </li>
         )}

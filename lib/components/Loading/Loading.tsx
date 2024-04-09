@@ -1,67 +1,41 @@
-import clsx from "../../utils/clsx";
-import Group from "../Group";
-import { useEffect, useState } from "react";
-import ms from "ms";
-
-export type LoadingProps = {
-  className?: string;
-  dotClassName?: string;
-  debounce?: boolean | string;
-};
-
-export default function Loading({
-  className,
-  dotClassName,
-  debounce,
-}: LoadingProps) {
-  const [shouldBeVisible, setShouldBeVisible] = useState(false);
-
-  useEffect(() => {
-    if (debounce) {
-      setTimeout(
-        () => {
-          setShouldBeVisible(true);
-        },
-        ms(typeof debounce === "string" ? debounce : "0.5s"),
-      );
-    } else {
-      setShouldBeVisible(true);
-    }
-  }, [debounce]);
-
-  dotClassName = clsx(
-    "bg-[currentColor] w-1 h-1 rounded-full shrink-0",
-    dotClassName,
-  );
-
+export default function Loading({ className }: { className?: string }) {
   return (
-    <Group
-      className={clsx(
-        "gap-0.5 opacity-0 transition items-center justify-center",
-        {
-          "opacity-20": !shouldBeVisible,
-        },
-        className,
-      )}
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="1em"
+      height="1em"
+      viewBox="0 0 24 24"
+      className={className}
     >
-      <div
-        className={clsx(
-          "animate-[pulsehide_2s_cubic-bezier(0.4,0,0.6,1)_infinite]",
-          dotClassName,
-        )}
-      />
-      <div
-        className={clsx(
-          "animate-[pulsehide_2s_cubic-bezier(0.4,0,0.6,1)_infinite_300ms]",
-          dotClassName,
-        )}
-      />
-      <div
-        className={clsx(
-          "animate-[pulsehide_2s_cubic-bezier(0.4,0,0.6,1)_infinite_600ms]",
-          dotClassName,
-        )}
-      />
-    </Group>
+      <circle cx="4" cy="12" r="3" fill="currentColor">
+        <animate
+          id="svgSpinners3DotsFade0"
+          fill="freeze"
+          attributeName="opacity"
+          begin="0;svgSpinners3DotsFade1.end-0.5s"
+          dur="1.5s"
+          values="1;0.2"
+        />
+      </circle>
+      <circle cx="12" cy="12" r="3" fill="currentColor" opacity="0.4">
+        <animate
+          fill="freeze"
+          attributeName="opacity"
+          begin="svgSpinners3DotsFade0.begin+0.3s"
+          dur="1.5s"
+          values="1;0.2"
+        />
+      </circle>
+      <circle cx="20" cy="12" r="3" fill="currentColor" opacity="0.3">
+        <animate
+          id="svgSpinners3DotsFade1"
+          fill="freeze"
+          attributeName="opacity"
+          begin="svgSpinners3DotsFade0.begin+0.6s"
+          dur="1.5s"
+          values="1;0.2"
+        />
+      </circle>
+    </svg>
   );
 }

@@ -20,7 +20,6 @@ const pages = [
 export default function Page() {
   return (
     <>
-      d
       <NextSeo title={pages[0].title} />
       <Breadcrumbs pages={pages} className="mb-2 md:mx-2" loading />
       <Stack className="p-2">
