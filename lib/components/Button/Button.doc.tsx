@@ -250,6 +250,18 @@ let examples: (
   Custom color
 </Button>`,
   ),
+  exampleLineBreak,
+  createExample(
+    <Button disabled href="#">
+      Disabled link
+    </Button>,
+    `<Button
+  disabled
+  href="#"
+>
+  Disabled link
+</Button>`,
+  ),
 ];
 
 export function ButtonDoc() {

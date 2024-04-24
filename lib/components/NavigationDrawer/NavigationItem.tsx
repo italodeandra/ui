@@ -13,6 +13,7 @@ export default function NavigationItem({
   exact,
   alternativeActiveHrefs,
   className,
+  disabled,
 }: {
   icon?: ReactElement;
 
@@ -21,6 +22,7 @@ export default function NavigationItem({
   exact?: boolean;
   alternativeActiveHrefs?: string[];
   className?: string;
+  disabled?: boolean;
 }) {
   let router = useRouter();
   let active = exact
@@ -43,6 +45,7 @@ export default function NavigationItem({
       }
       href={href}
       onClick={isMobile ? navigationDrawerState.close : undefined}
+      disabled={disabled}
     >
       {children}
     </Button>

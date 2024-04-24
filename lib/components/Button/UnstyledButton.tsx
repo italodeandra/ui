@@ -35,7 +35,12 @@ const UnstyledButton = <T extends HTMLElement = HTMLButtonElement>(
   if (href) {
     let props2 = props as UnstyledButtonProps<HTMLAnchorElement>;
     return (
-      <NextLink {...props2} href={href} ref={ref as Ref<HTMLAnchorElement>} />
+      <NextLink
+        {...props2}
+        href={href}
+        ref={ref as Ref<HTMLAnchorElement>}
+        tabIndex={props2.disabled ? -1 : undefined}
+      />
     );
   }
 

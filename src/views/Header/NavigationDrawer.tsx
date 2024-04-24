@@ -75,6 +75,7 @@ export default function NavigationDrawer({
                 icon={route.icon}
                 href={route.href}
                 exact={route.exact}
+                disabled
               >
                 {route.title}
               </NavigationItem>
