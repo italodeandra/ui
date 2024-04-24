@@ -41,6 +41,12 @@ export default function Page() {
           label="Read only"
           readOnly
         />
+        <SwitchInput
+          checked={checked}
+          onChange={setChecked}
+          label="Disabled"
+          disabled
+        />
       </Stack>
     </>
   );

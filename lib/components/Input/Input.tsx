@@ -13,12 +13,12 @@ export type InputProps<Select extends boolean | undefined> = {
 
 export const defaultLabelClassName = `ui-input-label block ${defaultTextStyles.variant.label} mb-1`;
 export const defaultInputClassNameUncolored =
-  "block w-full rounded-md shadow-sm sm:text-sm disabled:cursor-not-allowed dark:bg-zinc-800";
+  "block w-full rounded-md shadow-sm sm:text-sm data-[disabled]:cursor-not-allowed dark:bg-zinc-800";
 export const defaultInputClassName = clsx(
   "ui-input-input",
   defaultInputClassNameUncolored,
-  "border-zinc-300 focus:border-primary-500 focus:ring-primary-500 disabled:border-zinc-200 disabled:bg-zinc-50",
-  "dark:border-zinc-700 dark:focus:border-primary-500 dark:disabled:border-zinc-800 dark:disabled:bg-zinc-900/90 disabled:text-zinc-500",
+  "border-zinc-300 focus:border-primary-500 focus:ring-primary-500 data-[disabled]:border-zinc-200 data-[disabled]:bg-zinc-50",
+  "dark:border-zinc-700 dark:focus:border-primary-500 dark:data-[disabled]:border-zinc-800 dark:data-[disabled]:bg-zinc-900/90 data-[disabled]:text-zinc-500",
 );
 export const defaultHelpTextClassName = `mt-2 ${defaultTextStyles.variant.secondary}`;
 export const defaultTrailingClassName =
@@ -44,6 +44,7 @@ function Input<Select extends boolean | undefined>(
     loading,
     readOnly,
     children,
+    disabled,
     ...props
   }: InputProps<Select>,
   ref: ForwardedRef<Select extends true ? HTMLSelectElement : HTMLInputElement>,
@@ -107,9 +108,11 @@ function Input<Select extends boolean | undefined>(
       required={required}
       label={label}
       readOnly={readOnly}
+      disabled={disabled}
+      data-disabled={disabled}
     >
       {recursiveChildrenMap(children, (child) =>
-        cloneElement(child, { disabled: readOnly }),
+        cloneElement(child, { disabled: readOnly || disabled }),
       )}
     </UnstyledInput>
   );

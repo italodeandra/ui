@@ -11,6 +11,7 @@ export interface SwitchProps {
   switchClassName?: string;
   pointerClassName?: string;
   readOnly?: boolean;
+  disabled?: boolean;
 
   onChange?(checked: boolean): void;
 }
@@ -24,9 +25,14 @@ export default function Switch({
   readOnly,
   switchClassName,
   pointerClassName,
+  disabled,
 }: SwitchProps) {
   return (
-    <HuiSwitch.Group as="div" className={clsx(className, "flex items-center")}>
+    <HuiSwitch.Group
+      as="div"
+      className={clsx(className, "flex items-center")}
+      data-disabled={disabled}
+    >
       <HuiSwitch
         checked={checked}
         onChange={onChange}
@@ -34,12 +40,13 @@ export default function Switch({
           {
             "bg-primary-600": checked,
             "bg-zinc-300 dark:bg-zinc-600": !checked,
-            "cursor-pointer": !readOnly,
+            "cursor-pointer": !readOnly && !disabled,
+            "cursor-not-allowed": disabled,
           },
           "relative inline-flex h-6 w-11 flex-shrink-0 rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:ring-offset-zinc-900",
           switchClassName,
         )}
-        disabled={readOnly}
+        disabled={readOnly || disabled}
       >
         {srLabel && <span className="sr-only">{srLabel}</span>}
         <span
