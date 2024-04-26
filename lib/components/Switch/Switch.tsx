@@ -31,7 +31,7 @@ export default function Switch({
     <HuiSwitch.Group
       as="div"
       className={clsx(className, "flex items-center")}
-      data-disabled={disabled}
+      data-disabled={disabled || undefined}
     >
       <HuiSwitch
         checked={checked}

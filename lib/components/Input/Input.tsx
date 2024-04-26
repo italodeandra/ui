@@ -109,7 +109,7 @@ function Input<Select extends boolean | undefined>(
       label={label}
       readOnly={readOnly}
       disabled={disabled}
-      data-disabled={disabled}
+      data-disabled={disabled || undefined}
     >
       {recursiveChildrenMap(children, (child) =>
         cloneElement(child, { disabled: readOnly || disabled }),
