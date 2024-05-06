@@ -2,18 +2,15 @@ import { proxy, ref } from "valtio";
 import isomorphicObjectId from "@italodeandra/next/utils/isomorphicObjectId";
 import { ReactNode } from "react";
 import { find } from "lodash";
+import { DialogProps } from "./Dialog";
 
 export type IDialog = {
   _id: string;
   open: boolean;
   props: {
-    title?: ReactNode;
-    description?: ReactNode;
     content: ReactNode;
-    contentClassName?: string;
-    contentOverflowClassName?: string;
     onClose?: (_id: string) => void;
-  };
+  } & DialogProps;
 };
 
 const dialogsState = proxy({
@@ -43,7 +40,7 @@ const dialogsState = proxy({
     );
   },
   update(dialog: Pick<IDialog, "_id"> & Partial<Omit<IDialog, "_id">>) {
-    let updateDialog = find(dialogsState.dialogs, { _id: dialog._id });
+    const updateDialog = find(dialogsState.dialogs, { _id: dialog._id });
     if (updateDialog) {
       Object.assign(updateDialog, dialog);
     }

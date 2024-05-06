@@ -6,6 +6,15 @@ import clsx from "../../utils/clsx";
 
 import { modalContentClassName } from "../../styles/Modal.classNames";
 
+export interface DialogProps {
+  title?: ReactNode;
+  description?: ReactNode;
+  contentClassName?: string;
+  contentOverflowClassName?: string;
+  closeButtonClassName?: string;
+  overlayClassName?: string;
+}
+
 export default function Dialog({
   children,
   title,
@@ -14,15 +23,13 @@ export default function Dialog({
   onOpenChange,
   contentClassName,
   contentOverflowClassName,
+  closeButtonClassName,
+  overlayClassName,
 }: {
   children: ReactNode;
-  title?: ReactNode;
-  description?: ReactNode;
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  contentClassName?: string;
-  contentOverflowClassName?: string;
-}) {
+} & DialogProps) {
   return (
     <RDialog.Root open={open} onOpenChange={onOpenChange}>
       <RDialog.Portal>
@@ -31,6 +38,7 @@ export default function Dialog({
             "ui-dialog-overlay",
             "z-20 bg-black/50 fixed inset-0 flex items-center justify-center",
             "data-[state=open]:animate-slideUpAndFade data-[state=closed]:animate-fadeOut will-change-[opacity,transform]",
+            overlayClassName,
           )}
         >
           <RDialog.Content
@@ -73,6 +81,7 @@ export default function Dialog({
                   className={clsx(
                     "ui-dialog-close-button",
                     "absolute top-1 right-1",
+                    closeButtonClassName,
                   )}
                   aria-label="Close"
                   variant="text"

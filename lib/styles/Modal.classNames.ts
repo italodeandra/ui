@@ -5,7 +5,7 @@ export const modalContentClassName = clsx(
   "z-20 rounded overflow-hidden p-1 shadow-md text-sm ring-1",
   "bg-white shadow-black/5 ring-black/5",
   "dark:bg-zinc-900 dark:ring-white/10",
-  "data-[state=open]:animate-fadeIn data-[state=closed]:animate-fadeOut",
+  "data-[state=open]:animate-slideUpAndFade data-[state=closed]:animate-fadeOut",
 );
 
 export const modalArrowClassName = clsx(
