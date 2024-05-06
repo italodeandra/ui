@@ -1,7 +1,8 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { MouseEvent, useCallback, useEffect, useMemo, useState } from "react";
 import clsx from "../../utils/clsx";
 import { range } from "lodash";
+import UnstyledButton from "../Button/UnstyledButton";
 
 export interface PaginationProps {
   totalItems?: number;
@@ -9,6 +10,7 @@ export interface PaginationProps {
   currentPage: number;
   onChangePage?: (page: number) => void;
   className?: string;
+  pageHref?: (page: number) => string;
 }
 
 export default function Pagination({
@@ -17,8 +19,9 @@ export default function Pagination({
   currentPage,
   onChangePage,
   className,
+  pageHref,
 }: PaginationProps) {
-  let [page, setPage] = useState(currentPage);
+  const [page, setPage] = useState(currentPage);
   useEffect(() => {
     if (page !== currentPage) {
       setPage(currentPage);
@@ -31,19 +34,19 @@ export default function Pagination({
     }
   }, [onChangePage, page]);
 
-  let [previousTotalItems, setPreviousTotalItems] = useState(totalItems || 0);
+  const [previousTotalItems, setPreviousTotalItems] = useState(totalItems || 0);
   useEffect(() => {
     if (totalItems) {
       setPreviousTotalItems(totalItems);
     }
   }, [totalItems]);
 
-  let pageCount =
+  const pageCount =
     itemsPerPage !== undefined
       ? Math.ceil(previousTotalItems / itemsPerPage) || 1
       : 0;
 
-  let pages = useMemo(() => {
+  const pages = useMemo(() => {
     if (pageCount < 7) {
       return range(1, pageCount + 1);
     }
@@ -64,33 +67,48 @@ export default function Pagination({
     return [1, "...1", page - 1, page, page + 1, "...2", pageCount];
   }, [page, pageCount]);
 
-  let handlePageClick = useCallback((page: number) => () => setPage(page), []);
+  const handlePageClick = useCallback(
+    (page: number) => (e: MouseEvent) => {
+      e.preventDefault();
+      setPage(page);
+    },
+    [],
+  );
 
   return (
     <nav className={clsx("ui-pagination", className)} aria-label="Pagination">
-      <button disabled={page === 1} onClick={handlePageClick(page - 1)}>
+      <UnstyledButton
+        disabled={page === 1}
+        onClick={handlePageClick(page - 1)}
+        href={pageHref ? pageHref(page - 1) : undefined}
+      >
         <span className="sr-only">Previous</span>
         <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
-      </button>
+      </UnstyledButton>
       {pages.map((p) =>
         typeof p === "number" ? (
-          <button
+          <UnstyledButton
             key={p}
             onClick={handlePageClick(p)}
             data-active={page === p ? "" : undefined}
+            href={pageHref ? pageHref(p) : undefined}
           >
             {p}
-          </button>
+          </UnstyledButton>
         ) : (
           <button key={p} disabled>
             ...
           </button>
         ),
       )}
-      <button disabled={page === pageCount} onClick={handlePageClick(page + 1)}>
+      <UnstyledButton
+        disabled={page === pageCount}
+        onClick={handlePageClick(page + 1)}
+        href={pageHref ? pageHref(page + 1) : undefined}
+      >
         <span className="sr-only">Next</span>
         <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
-      </button>
+      </UnstyledButton>
     </nav>
   );
 }
