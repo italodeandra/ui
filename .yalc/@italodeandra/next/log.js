@@ -39,7 +39,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var axios_1 = __importDefault(require("axios"));
 var safeStringify_1 = __importDefault(require("./utils/safeStringify"));
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function log(content) {
@@ -48,19 +47,22 @@ function log(content) {
             switch (_a.label) {
                 case 0:
                     if (!(process.env.LOG_API_URL && process.env.LOG_APP_ID)) return [3 /*break*/, 2];
-                    return [4 /*yield*/, axios_1.default.post(process.env.LOG_API_URL, {
-                            appId: process.env.LOG_APP_ID,
-                            content: content,
-                        }, {
+                    return [4 /*yield*/, fetch(process.env.LOG_API_URL, {
+                            method: "POST",
                             headers: {
+                                "Content-Type": "application/json",
                                 Authorization: "Bearer ".concat(process.env.LOG_TOKEN),
                             },
+                            body: JSON.stringify({
+                                appId: process.env.LOG_APP_ID,
+                                content: content,
+                            }),
                         })];
                 case 1:
                     _a.sent();
                     return [3 /*break*/, 3];
                 case 2:
-                    console.info((0, safeStringify_1.default)(content));
+                    console.info((0, safeStringify_1.default)(content, 2));
                     _a.label = 3;
                 case 3: return [2 /*return*/];
             }

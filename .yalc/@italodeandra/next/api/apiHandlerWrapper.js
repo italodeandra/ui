@@ -51,16 +51,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.mutationFnWrapper = exports.queryFnWrapper = exports.apiHandlerWrapper = void 0;
-var errors_1 = require("./errors");
 var bsonToJson_1 = __importDefault(require("../utils/bsonToJson"));
-var lodash_1 = require("lodash");
-var log_1 = __importDefault(require("../log"));
-var safeStringify_1 = __importDefault(require("../utils/safeStringify"));
-function clearPromise() {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    delete global._dbPromise;
-}
 var config = {
     configurable: true,
     value: function () {
@@ -78,46 +69,19 @@ Object.defineProperty(Error.prototype, "toJSON", config);
 // noinspection JSUnusedGlobalSymbols
 var apiHandlerWrapper = function (handler) {
     return (function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-        var data, e_1, error;
+        var data;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     if (req.method === "OPTIONS")
                         return [2 /*return*/, res.send(undefined)];
-                    _a.label = 1;
-                case 1:
-                    _a.trys.push([1, 3, , 4]);
                     return [4 /*yield*/, handler((req.method === "POST"
                             ? req.body
                             : req.query) || {}, req, res)];
-                case 2:
+                case 1:
                     data = _a.sent();
                     res.send((0, bsonToJson_1.default)(data));
-                    return [3 /*break*/, 4];
-                case 3:
-                    e_1 = _a.sent();
-                    if (e_1.message === "Collection is not initialized!") {
-                        clearPromise();
-                        (0, errors_1.internalServerError)(res);
-                    }
-                    else {
-                        error = void 0;
-                        if (typeof e_1 === "function") {
-                            error = e_1(res);
-                        }
-                        else {
-                            error = JSON.parse((0, safeStringify_1.default)(e_1));
-                            if (!res.headersSent) {
-                                (0, errors_1.internalServerError)(res);
-                            }
-                        }
-                        void (0, log_1.default)({
-                            error: error,
-                            request: (0, lodash_1.pick)(req, ["body", "headers", "url", "method", "query"]),
-                        });
-                    }
-                    return [3 /*break*/, 4];
-                case 4: return [2 /*return*/];
+                    return [2 /*return*/];
             }
         });
     }); });
@@ -132,7 +96,7 @@ var queryFnWrapper = function (queryKey, args) {
                 : ""), {
             signal: reactQuerySignal === null || reactQuerySignal === void 0 ? void 0 : reactQuerySignal.signal,
         }).then(function (res) { return __awaiter(void 0, void 0, void 0, function () {
-            var data, e_2;
+            var data, e_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -142,7 +106,7 @@ var queryFnWrapper = function (queryKey, args) {
                         data = _a.sent();
                         return [3 /*break*/, 3];
                     case 2:
-                        e_2 = _a.sent();
+                        e_1 = _a.sent();
                         throw {
                             code: res.status,
                         };
@@ -167,7 +131,7 @@ var mutationFnWrapper = function (mutationKey) {
             },
             body: JSON.stringify(args),
         }).then(function (res) { return __awaiter(void 0, void 0, void 0, function () {
-            var data, e_3;
+            var data, e_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -177,7 +141,7 @@ var mutationFnWrapper = function (mutationKey) {
                         data = _a.sent();
                         return [3 /*break*/, 3];
                     case 2:
-                        e_3 = _a.sent();
+                        e_2 = _a.sent();
                         data = null;
                         return [3 /*break*/, 3];
                     case 3:

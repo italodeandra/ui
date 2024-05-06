@@ -64,6 +64,7 @@ function createApi(queryKey, handler, apiOptions) {
     // noinspection JSUnusedGlobalSymbols
     return {
         handler: apiHandler,
+        unwrappedHandler: handler,
         Types: Types,
         useQuery: function (args, options) {
             var _a;
@@ -153,9 +154,19 @@ function createApi(queryKey, handler, apiOptions) {
                     });
                 } }));
         },
-        invalidate: function (queryClient, args) {
+        invalidateQueries: function (queryClient, args) {
             var _a;
             return queryClient.invalidateQueries(__spreadArray([
+                queryKey
+            ], (((_a = apiOptions === null || apiOptions === void 0 ? void 0 : apiOptions.queryKeyMap) === null || _a === void 0 ? void 0 : _a.call(apiOptions, args)) || []), true));
+        },
+        prefetchQuery: function (queryClient, args) {
+            var _a;
+            return queryClient.prefetchQuery(__spreadArray([queryKey], (((_a = apiOptions === null || apiOptions === void 0 ? void 0 : apiOptions.queryKeyMap) === null || _a === void 0 ? void 0 : _a.call(apiOptions, args)) || []), true), function () { return handler(args); });
+        },
+        refetchQueries: function (queryClient, args) {
+            var _a;
+            return queryClient.refetchQueries(__spreadArray([
                 queryKey
             ], (((_a = apiOptions === null || apiOptions === void 0 ? void 0 : apiOptions.queryKeyMap) === null || _a === void 0 ? void 0 : _a.call(apiOptions, args)) || []), true));
         },

@@ -2,7 +2,7 @@
   "version": "v1",
   "packages": {
     "@italodeandra/next": {
-      "signature": "808b957ed1d7b8ff261720a5dd0a190a",
+      "signature": "6823cf22226f093a724e2c1ff5686d3e",
       "file": true,
       "replaced": "2.0.0"
     }

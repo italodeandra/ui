@@ -1,5 +1,8 @@
 {
   "name": "@italodeandra/next",
   "version": "2.0.0",
-  "yalcSig": "808b957ed1d7b8ff261720a5dd0a190a"
+  "dependencies": {
+    "form-data": "^4.0.0"
+  },
+  "yalcSig": "6823cf22226f093a724e2c1ff5686d3e"
 }
