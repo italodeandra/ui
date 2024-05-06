@@ -21,7 +21,10 @@ export default function Markdown({
 
   return (
     <div
-      className={clsx("prose prose-zinc dark:prose-invert", className)}
+      className={clsx(
+        "prose prose-zinc dark:prose-invert max-w-full",
+        className,
+      )}
       dangerouslySetInnerHTML={
         children
           ? {
