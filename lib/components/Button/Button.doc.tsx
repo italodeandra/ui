@@ -168,11 +168,11 @@ function createSizeExamples(size?: ButtonProps["size"]) {
   ];
 }
 
-let exampleLineBreak = {
+const exampleLineBreak = {
   lineBreak: true,
 } as const;
 
-let examples: (
+const examples: (
   | {
       render: ReactElement;
       code: string;
@@ -265,7 +265,7 @@ let examples: (
 ];
 
 export function ButtonDoc() {
-  let getExampleCodeMouseEvents = useExampleCodeCallback();
+  const getExampleCodeMouseEvents = useExampleCodeCallback();
 
   return (
     <DocPage title="Button" props={props}>

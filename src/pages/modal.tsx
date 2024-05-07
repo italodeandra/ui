@@ -17,7 +17,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
 const pages = [{ title: "Modal" }];
 
 export default function Page() {
-  let [modalOpen, { openModal, closeModal }] = useModalState();
+  const [modalOpen, { openModal, closeModal }] = useModalState();
 
   return (
     <>

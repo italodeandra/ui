@@ -43,15 +43,15 @@ function MultiText(
     invalidHelpText,
     error,
   }: MultiTextProps,
-  ref: ForwardedRef<HTMLDivElement>
+  ref: ForwardedRef<HTMLDivElement>,
 ) {
-  let innerId = useId();
+  const innerId = useId();
   id = id || innerId;
-  let inputRef = useRef<HTMLInputElement>(null);
-  let [innerFocused, setInnerFocused] = useState(false);
-  let [innerValue, setInnerValue] = useState<string[]>(value || []);
-  let [inputValue, setInputValue] = useState("");
-  let [invalid, setInvalid] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [innerFocused, setInnerFocused] = useState(false);
+  const [innerValue, setInnerValue] = useState<string[]>(value || []);
+  const [inputValue, setInputValue] = useState("");
+  const [invalid, setInvalid] = useState(false);
 
   useDeepCompareEffect(() => {
     if (value && onChangeValue && !isEqual(value, innerValue)) {
@@ -114,8 +114,8 @@ function MultiText(
         data-error={invalid || error ? "" : undefined}
       >
         {innerValue.map((item, i) => {
-          let removeItem = () => {
-            let newValue = [...innerValue];
+          const removeItem = () => {
+            const newValue = [...innerValue];
             newValue.splice(i, 1);
             setInnerValue(newValue);
             inputRef.current?.focus();
@@ -157,7 +157,7 @@ function MultiText(
             onBlur?.(e);
           }}
           onKeyDown={(e) => {
-            let value = e.currentTarget.value;
+            const value = e.currentTarget.value;
             if (e.code === "Enter") {
               e.preventDefault();
               if (!validate || validate(value)) {

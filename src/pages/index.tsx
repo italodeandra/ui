@@ -31,7 +31,7 @@ function SwitchExample(
     HTMLDivElement
   >,
 ) {
-  let [checked, setChecked] = useState(true);
+  const [checked, setChecked] = useState(true);
 
   return (
     <div {...props}>
@@ -76,7 +76,7 @@ function MultiSelectExample(
 }
 
 export default function Page() {
-  let getExampleCodeMouseEvents = useExampleCodeCallback();
+  const getExampleCodeMouseEvents = useExampleCodeCallback();
 
   return (
     <div className="mx-auto max-w-7xl py-16 px-4 sm:py-24 sm:px-6 lg:px-8">

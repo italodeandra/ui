@@ -64,7 +64,7 @@ export interface FileSelectProps {
   additionalBottomInfo?: ReactNode;
 }
 
-let defaultIcon = <DocumentIcon />;
+const defaultIcon = <DocumentIcon />;
 
 function checkAllowedFileTypesFn(file: File, allowedFileTypes?: string[]) {
   return (
@@ -105,7 +105,7 @@ function FileSelect(
       : maxFileSize;
   maxFileSize = maxFileSize || numeral("10MB").value() || undefined;
 
-  let checkAllowedFileTypes = useCallback(
+  const checkAllowedFileTypes = useCallback(
     (file: File) => checkAllowedFileTypesFn(file, allowedFileTypes),
     [allowedFileTypes],
   );
@@ -114,19 +114,19 @@ function FileSelect(
     if (!event.target.files) {
       throw Error("Files is falsy");
     }
-    let files = Array.from(event.target.files);
-    let acceptedFiles = files.filter(
+    const files = Array.from(event.target.files);
+    const acceptedFiles = files.filter(
       (file) =>
         checkAllowedFileTypes(file) && file.size <= (maxFileSize as number),
     );
     if (onRejectFiles) {
-      let rejectedFilesType = files.filter(
+      const rejectedFilesType = files.filter(
         (file) => !checkAllowedFileTypes(file),
       );
       if (rejectedFilesType.length) {
         onRejectFiles(rejectedFilesType, "type");
       }
-      let rejectedFilesSize = files.filter(
+      const rejectedFilesSize = files.filter(
         (file) => file.size > (maxFileSize as number),
       );
       if (rejectedFilesSize.length) {
@@ -137,7 +137,7 @@ function FileSelect(
     event.target.value = "";
   };
 
-  let [pasteEnabled, setPasteEnabled] = useState(false);
+  const [pasteEnabled, setPasteEnabled] = useState(false);
   useOnPasteFiles(pasteEnabled, onAcceptFiles, allowedFileTypes);
 
   const [{ canDrop, isOver }, drop] = useDrop(() => ({

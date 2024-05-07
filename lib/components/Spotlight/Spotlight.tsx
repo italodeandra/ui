@@ -23,7 +23,7 @@ export default function Spotlight<T extends { _id: string }>({
   emptyText = "No item found.",
   ...props
 }: SpotlightProps<T>) {
-  let [query, setQuery] = useState(defaultQuery);
+  const [query, setQuery] = useState(defaultQuery);
 
   useEffect(() => {
     if (query !== defaultQuery) {
@@ -38,7 +38,7 @@ export default function Spotlight<T extends { _id: string }>({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [onChangeQuery, query]);
 
-  let handleOnClose = useCallback(() => onClose?.(), [onClose]);
+  const handleOnClose = useCallback(() => onClose?.(), [onClose]);
 
   return (
     <Transition.Root

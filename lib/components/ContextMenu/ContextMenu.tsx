@@ -53,7 +53,7 @@ function ContextMenuItem({
   href,
   ...props
 }: ComponentProps<typeof RContextMenu.Item> & { href?: string }) {
-  let Wrapper = href ? Link : Fragment;
+  const Wrapper = href ? Link : Fragment;
   return (
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     <Wrapper {...(href ? ({ href } as any) : {})}>

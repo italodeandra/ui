@@ -102,7 +102,7 @@ export default function Page() {
         <div>
           <Button
             onClick={() => {
-              let _id = isomorphicObjectId().toString();
+              const _id = isomorphicObjectId().toString();
               showNotification({
                 _id,
                 icon: <InboxIcon />,

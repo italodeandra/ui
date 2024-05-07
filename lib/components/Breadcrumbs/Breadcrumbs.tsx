@@ -44,7 +44,7 @@ export default function Breadcrumbs({
           </div>
         </li>
         {pages.map((page, i) => {
-          let isLast = i === pages.length - 1;
+          const isLast = i === pages.length - 1;
           return (
             <li key={page.title} className="flex">
               <div className="flex items-center">

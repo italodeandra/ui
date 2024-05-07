@@ -14,12 +14,12 @@ export default function CopyButton({
   copyText = "Copy",
   copiedText = "Copied!",
 }: CopyButtonProps) {
-  let [copyCount, setCopyCount] = useState(0);
-  let copied = copyCount > 0;
+  const [copyCount, setCopyCount] = useState(0);
+  const copied = copyCount > 0;
 
   useEffect(() => {
     if (copyCount > 0) {
-      let timeout = setTimeout(() => setCopyCount(0), 1000);
+      const timeout = setTimeout(() => setCopyCount(0), 1000);
       return () => {
         clearTimeout(timeout);
       };

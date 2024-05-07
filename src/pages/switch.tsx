@@ -16,7 +16,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
 const pages = [{ title: "Switch" }];
 
 export default function Page() {
-  let [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(false);
 
   return (
     <>

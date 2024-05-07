@@ -25,10 +25,10 @@ export default function Carousel({
   plugins,
   ...options
 }: CarouselProps) {
-  let [emblaRef, embla] = useEmblaCarousel(options, plugins);
-  let [canScrollPrev, setCanScrollPrev] = useState(false);
-  let [canScrollNext, setCanScrollNext] = useState(false);
-  let [ref, { width, height }] = useMeasure();
+  const [emblaRef, embla] = useEmblaCarousel(options, plugins);
+  const [canScrollPrev, setCanScrollPrev] = useState(false);
+  const [canScrollNext, setCanScrollNext] = useState(false);
+  const [ref, { width, height }] = useMeasure();
 
   useEffect(() => {
     function updateCanScroll() {

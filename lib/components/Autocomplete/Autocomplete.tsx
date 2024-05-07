@@ -18,7 +18,7 @@ export default function Autocomplete<T extends { _id: string }>({
   className,
   ...props
 }: AutocompleteProps<T>) {
-  let [query, setQuery] = useState(defaultQuery);
+  const [query, setQuery] = useState(defaultQuery);
 
   useEffect(() => {
     if (query !== defaultQuery) {

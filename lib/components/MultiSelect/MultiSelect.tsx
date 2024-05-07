@@ -88,7 +88,7 @@ function MultiSelectInput<
   valueProperty: Id;
   readOnly?: boolean;
 }) {
-  let ref = useRef<HTMLInputElement>(null);
+  const ref = useRef<HTMLInputElement>(null);
   return (
     <div
       className={clsx(
@@ -156,8 +156,8 @@ export default function MultiSelect<T extends object | string>({
   readOnly,
   ...props
 }: MultiSelectProps<T>) {
-  let [query, setQuery] = useState(defaultQuery);
-  let [selectedItems, setSelectedItems] = useState<T[]>(value || []);
+  const [query, setQuery] = useState(defaultQuery);
+  const [selectedItems, setSelectedItems] = useState<T[]>(value || []);
 
   // noinspection DuplicatedCode
   useEffect(() => {
@@ -173,7 +173,7 @@ export default function MultiSelect<T extends object | string>({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [onChangeQuery, query]);
 
-  let filteredItems = useMemo(
+  const filteredItems = useMemo(
     () =>
       query === ""
         ? items
@@ -204,9 +204,9 @@ export default function MultiSelect<T extends object | string>({
     ) : undefined)
   );
 
-  let ComponentInput = as || UnstyledInput;
+  const ComponentInput = as || UnstyledInput;
 
-  let doRender = useCallback(
+  const doRender = useCallback(
     (item: T) =>
       renderFunction
         ? renderFunction(item)
@@ -228,7 +228,7 @@ export default function MultiSelect<T extends object | string>({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
 
-  let removeItem = useCallback(
+  const removeItem = useCallback(
     (item: T) => () =>
       setSelectedItems((selectedItems) => [
         ...selectedItems.filter(

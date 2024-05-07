@@ -19,7 +19,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
 const pages = [{ title: "MultiText" }];
 
 export default function Page() {
-  let { register, watch, handleSubmit } = useForm({
+  const { register, watch, handleSubmit } = useForm({
     defaultValues: {
       names: [],
     },

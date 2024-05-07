@@ -17,7 +17,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
 const pages = [{ title: "Date time input" }];
 
 export default function Page() {
-  let [date, setDate] = useState<string | undefined>(
+  const [date, setDate] = useState<string | undefined>(
     dayjs("2024-01-01").toISOString(),
   );
 

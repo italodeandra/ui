@@ -89,8 +89,8 @@ export default function DataTable<RowData>({
   resultsText,
   tableClassName,
 }: DataTableProps<RowData>) {
-  let [sort, setSort] = useState(defaultSort);
-  let [page, setPage] = useState(currentPage);
+  const [sort, setSort] = useState(defaultSort);
+  const [page, setPage] = useState(currentPage);
   useEffect(() => {
     if (page !== currentPage) {
       setPage(currentPage);
@@ -107,13 +107,13 @@ export default function DataTable<RowData>({
     [onRowClick],
   );
 
-  let getColumnSort = useCallback(
+  const getColumnSort = useCallback(
     (id: string) => sort.find((column) => id === column[0]),
     [sort],
   );
-  let handleColumnClick = useCallback(
+  const handleColumnClick = useCallback(
     (id: string) => () => {
-      let sort: [string, "asc" | "desc" | null] = getColumnSort(id) || [
+      const sort: [string, "asc" | "desc" | null] = getColumnSort(id) || [
         id,
         null,
       ];
@@ -129,9 +129,9 @@ export default function DataTable<RowData>({
           break;
       }
       setSort((oldSort) => {
-        let newSort = [...oldSort];
+        const newSort = [...oldSort];
         if (sort[1]) {
-          let column = newSort.find((column) => column[0] === id);
+          const column = newSort.find((column) => column[0] === id);
           if (column) {
             column[1] = sort[1];
           } else {
@@ -170,12 +170,12 @@ export default function DataTable<RowData>({
         <Table.Head>
           <Table.Row>
             {columns.map((column, i) => {
-              let id =
+              const id =
                 column.id ||
                 (typeof column.title === "string"
                   ? column.title
                   : i.toString());
-              let columnSort = getColumnSort(id);
+              const columnSort = getColumnSort(id);
               return (
                 <Table.Cell key={id} className={column.headerClassName}>
                   {column.sortable ? (
@@ -221,7 +221,7 @@ export default function DataTable<RowData>({
         </Table.Head>
         <Table.Body>
           {data?.map((item) => {
-            let RowComponent = rowWrapper || Fragment;
+            const RowComponent = rowWrapper || Fragment;
             return (
               <RowComponent
                 key={item[idAccessor] as string}
@@ -232,7 +232,7 @@ export default function DataTable<RowData>({
               >
                 <Table.Row onClick={handleRowClick(item)}>
                   {columns.map((column, i) => {
-                    let value = column.accessor
+                    const value = column.accessor
                       ? (item[column.accessor] as string)
                       : column.render && column.render(item);
                     return (
@@ -256,7 +256,7 @@ export default function DataTable<RowData>({
                   {actions && (
                     <Table.Cell actions>
                       {actions.map((action, i) => {
-                        let ActionComponent = action.wrapper || Fragment;
+                        const ActionComponent = action.wrapper || Fragment;
                         return (
                           <ActionComponent
                             key={i}

@@ -24,14 +24,14 @@ export default function NavigationItem({
   className?: string;
   disabled?: boolean;
 }) {
-  let router = useRouter();
-  let active = exact
+  const router = useRouter();
+  const active = exact
     ? router.pathname === href ||
       alternativeActiveHrefs?.some((href) => router.pathname === href)
     : router.pathname.includes(href) ||
       alternativeActiveHrefs?.some((href) => router.pathname.includes(href));
 
-  let isMobile = useMediaQuery(`(max-width: ${defaultTheme.screens.lg})`);
+  const isMobile = useMediaQuery(`(max-width: ${defaultTheme.screens.lg})`);
 
   return (
     <Button

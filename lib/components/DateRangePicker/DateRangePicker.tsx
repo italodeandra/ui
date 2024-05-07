@@ -42,7 +42,7 @@ export default function DateRangePicker({
   footer?: ReactNode;
   monthFooter?: ReactNode;
 }) {
-  let [range, setRange] = useState<DateRange | undefined>(value);
+  const [range, setRange] = useState<DateRange | undefined>(value);
 
   useDeepCompareEffect(() => {
     onValueChange?.(range);
@@ -51,7 +51,7 @@ export default function DateRangePicker({
     setRange(value);
   }, [value || {}]);
 
-  let buttonText = useMemo(() => {
+  const buttonText = useMemo(() => {
     let buttonText = "";
     if (range?.from) {
       if (!range.to) {
@@ -65,7 +65,7 @@ export default function DateRangePicker({
     return buttonText;
   }, [range]);
 
-  let children2 = children ? (
+  const children2 = children ? (
     children(buttonText)
   ) : (
     <Button

@@ -28,11 +28,11 @@ export default function TableFooterWithPagination({
   ofText = "of",
   resultsText = "results",
 }: TableFooterWithPaginationProps) {
-  let pageCount =
+  const pageCount =
     totalItems !== undefined && itemsPerPage !== undefined
       ? Math.floor(totalItems / itemsPerPage)
       : 0;
-  let [page, setPage] = useState(currentPage);
+  const [page, setPage] = useState(currentPage);
   useEffect(() => {
     if (page !== currentPage) {
       setPage(currentPage);
@@ -45,9 +45,12 @@ export default function TableFooterWithPagination({
     }
   }, [onChangePage, page]);
 
-  let handlePageClick = useCallback((page: number) => () => setPage(page), []);
+  const handlePageClick = useCallback(
+    (page: number) => () => setPage(page),
+    [],
+  );
 
-  let start = (page - 1) * itemsPerPage + 1;
+  const start = (page - 1) * itemsPerPage + 1;
   let end = page * itemsPerPage;
   if (totalItems !== undefined) {
     end = end > totalItems ? totalItems : end;

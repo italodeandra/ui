@@ -20,8 +20,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
 const pages = [{ title: "Date pickers" }];
 
 export default function Page() {
-  let [date, setDate] = useState<Date | undefined>();
-  let [range, setRange] = useState<DateRange | undefined>();
+  const [date, setDate] = useState<Date | undefined>();
+  const [range, setRange] = useState<DateRange | undefined>();
 
   return (
     <>

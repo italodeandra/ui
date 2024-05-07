@@ -14,7 +14,7 @@ const ModeToggle = forwardRef(function ModeToggle(
   { ariaLabel = "Toggle dark mode", className, iconClassName }: ModeToggleProps,
   ref: ForwardedRef<HTMLButtonElement>,
 ) {
-  let toggleMode = useModeToggle();
+  const toggleMode = useModeToggle();
 
   return (
     <Button

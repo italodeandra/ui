@@ -34,7 +34,7 @@ export function useExampleCodeCallback() {
 }
 
 export function ExampleCode() {
-  let { hoveredCode } = useSnapshot(exampleCodeState);
+  const { hoveredCode } = useSnapshot(exampleCodeState);
 
   return (
     <Code language="tsx" className="max-w-full" copy>

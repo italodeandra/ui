@@ -18,7 +18,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
 const pages = [{ title: "Carousel" }];
 
 export default function Page() {
-  let slides = range(1, 10);
+  const slides = range(1, 10);
 
   return (
     <>

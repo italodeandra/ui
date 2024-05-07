@@ -30,7 +30,7 @@ const notificationsState = proxy({
   }: Pick<Partial<Notification>, "_id"> & Omit<Notification, "_id">) {
     if (!notificationsState.rendered) {
       console.error(
-        "<Notifications /> is not rendered. The notification will be ignored."
+        "<Notifications /> is not rendered. The notification will be ignored.",
       );
     }
     notificationsState.notifications.push(
@@ -38,21 +38,21 @@ const notificationsState = proxy({
         ...notification,
         dismissable,
         _id,
-      })
+      }),
     );
     if (timeout) {
       setTimeout(
         () => {
           notificationsState.remove(_id);
         },
-        typeof timeout === "string" ? ms(timeout) : timeout
+        typeof timeout === "string" ? ms(timeout) : timeout,
       );
     }
   },
   remove(_id: string) {
     notificationsState.notifications.splice(
       notificationsState.notifications.findIndex((n) => n._id === _id),
-      1
+      1,
     );
   },
 });
@@ -60,16 +60,16 @@ const notificationsState = proxy({
 export function showNotification(
   notification:
     | string
-    | (Pick<Partial<Notification>, "_id"> & Omit<Notification, "_id">)
+    | (Pick<Partial<Notification>, "_id"> & Omit<Notification, "_id">),
 ) {
-  let notificationObject =
+  const notificationObject =
     typeof notification === "string" ? { message: notification } : notification;
   if (
     notificationObject.suppress &&
     notificationsState.notifications.find(
       (n) =>
         n.message === notificationObject.message &&
-        n.title === notificationObject.title
+        n.title === notificationObject.title,
     )
   ) {
     return;

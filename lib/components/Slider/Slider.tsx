@@ -21,8 +21,8 @@ export default function Slider({
   value?: number[];
   onValueChange?: (value: number[]) => void;
 }) {
-  let thumbs = value?.length || 1;
-  let [intervalValue, setInternalValue] = useState<number[]>(
+  const thumbs = value?.length || 1;
+  const [intervalValue, setInternalValue] = useState<number[]>(
     fakeArray(thumbs).map((n) => 10 * n),
   );
 

@@ -28,7 +28,7 @@ export function PreviewFile({
   openText: string;
   preview?: boolean;
 }) {
-  let url = (file as FileFile).file
+  const url = (file as FileFile).file
     ? URL.createObjectURL((file as FileFile).file)
     : (file as FileUrl).url;
 

@@ -21,7 +21,7 @@ const UnstyledButton = <T extends HTMLElement = HTMLButtonElement>(
   ref: ForwardedRef<T>,
 ) => {
   if (as) {
-    let Component = as;
+    const Component = as;
     return (
       <Component
         {...props}
@@ -33,7 +33,7 @@ const UnstyledButton = <T extends HTMLElement = HTMLButtonElement>(
   }
 
   if (href) {
-    let props2 = props as UnstyledButtonProps<HTMLAnchorElement>;
+    const props2 = props as UnstyledButtonProps<HTMLAnchorElement>;
     return (
       <NextLink
         {...props2}

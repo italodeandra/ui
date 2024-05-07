@@ -1,10 +1,13 @@
 import { useCallback, useMemo, useState } from "react";
 
 export default function useModalState() {
-  let [modalOpen, setModalOpen] = useState(false);
-  let handleModalToggle = useCallback(() => setModalOpen((open) => !open), []);
-  let handleModalOpen = useCallback(() => setModalOpen(true), []);
-  let handleModalClose = useCallback(() => setModalOpen(false), []);
+  const [modalOpen, setModalOpen] = useState(false);
+  const handleModalToggle = useCallback(
+    () => setModalOpen((open) => !open),
+    [],
+  );
+  const handleModalOpen = useCallback(() => setModalOpen(true), []);
+  const handleModalClose = useCallback(() => setModalOpen(false), []);
 
   return useMemo(
     () =>
@@ -17,6 +20,6 @@ export default function useModalState() {
           toggleModal: handleModalToggle,
         },
       ] as const,
-    [handleModalClose, handleModalOpen, handleModalToggle, modalOpen]
+    [handleModalClose, handleModalOpen, handleModalToggle, modalOpen],
   );
 }

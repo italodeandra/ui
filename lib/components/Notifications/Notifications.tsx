@@ -15,7 +15,8 @@ export default function Notifications({
 }: {
   notificationClassName?: string;
 }) {
-  let { notifications, remove, setRendered } = useSnapshot(notificationsState);
+  const { notifications, remove, setRendered } =
+    useSnapshot(notificationsState);
 
   useEffect(() => {
     setRendered(true);

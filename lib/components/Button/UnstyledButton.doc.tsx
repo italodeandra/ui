@@ -23,7 +23,7 @@ const props: DocPageProps[] = [
 ];
 
 export function UnstyledButtonDoc() {
-  let getExampleCodeMouseEvents = useExampleCodeCallback();
+  const getExampleCodeMouseEvents = useExampleCodeCallback();
 
   return (
     <DocPage title="UnstyledButton" props={props}>
@@ -43,7 +43,7 @@ export function UnstyledButtonDoc() {
         <UnstyledButton
           href="/"
           {...getExampleCodeMouseEvents(
-            `<UnstyledButton href="/">Home</UnstyledButton>`
+            `<UnstyledButton href="/">Home</UnstyledButton>`,
           )}
         >
           Home

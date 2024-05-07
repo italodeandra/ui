@@ -21,7 +21,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
 const pages = [{ title: "Dialogs" }];
 
 export default function Page() {
-  let [isOpen, setOpen] = useState(false);
+  const [isOpen, setOpen] = useState(false);
 
   return (
     <>
@@ -31,7 +31,7 @@ export default function Page() {
         <div>
           <Button
             onClick={() => {
-              let _id = isomorphicObjectId().toString();
+              const _id = isomorphicObjectId().toString();
               showDialog({
                 _id,
                 title: "Payment successful",

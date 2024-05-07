@@ -76,9 +76,9 @@ const actions = [
 const pages = [{ title: "DataTable" }];
 
 export default function Page() {
-  let [isLoading, setLoading] = useState(true);
-  let [page, setPage] = useState(1);
-  let [sort, setSort] = useState<[string, "asc" | "desc"][]>([]);
+  const [isLoading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [sort, setSort] = useState<[string, "asc" | "desc"][]>([]);
 
   useMount(() => {
     setTimeout(() => {
@@ -86,9 +86,9 @@ export default function Page() {
     }, ms("5s"));
   });
 
-  let sortedData = useMemo(
+  const sortedData = useMemo(
     () => orderBy(data, map(sort, 0), map(sort, 1)),
-    [sort]
+    [sort],
   );
 
   return (
@@ -107,7 +107,7 @@ export default function Page() {
           headerContent={<Button variant="filled">Add user</Button>}
           onRowClick={useCallback(
             (item: (typeof data)[0]) => window.open(item.url, "_blank"),
-            []
+            [],
           )}
           pagination
           itemsPerPage={2}

@@ -1,7 +1,7 @@
 import { useId } from "react";
 
 export default function GridPattern(props: JSX.IntrinsicElements["pattern"]) {
-  let patternId = useId();
+  const patternId = useId();
 
   return (
     <svg aria-hidden="true" className="absolute inset-0 h-full w-full">

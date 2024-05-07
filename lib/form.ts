@@ -113,6 +113,7 @@ export type Validation = {
   min?: [number, string];
 };
 
+// noinspection JSUnusedGlobalSymbols
 export function useForm<T extends ReturnType<typeof createFormState>>(
   state: T,
   options?: {

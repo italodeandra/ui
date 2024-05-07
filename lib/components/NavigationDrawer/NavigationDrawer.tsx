@@ -22,10 +22,10 @@ export default function NavigationDrawer({
   noPadding?: boolean;
   panelClassName?: string;
 }) {
-  let { isOpen, setOpen } = useSnapshot(navigationDrawerState);
+  const { isOpen, setOpen } = useSnapshot(navigationDrawerState);
 
-  let isDesktop = useMediaQuery(`(min-width: ${defaultTheme.screens.lg})`);
-  let isMobile = !isDesktop;
+  const isDesktop = useMediaQuery(`(min-width: ${defaultTheme.screens.lg})`);
+  const isMobile = !isDesktop;
 
   return (
     <>

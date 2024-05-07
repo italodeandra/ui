@@ -14,10 +14,10 @@ export default function createStateHydration(cookieName: string, state: any) {
   return function hydrate(cookies?: { state?: string }) {
     if (cookies?.[cookieName as keyof typeof cookies]) {
       try {
-        let cookieValueString = cookies[
+        const cookieValueString = cookies[
           cookieName as keyof typeof cookies
         ] as string;
-        let cookieValue = JSON.parse(cookieValueString);
+        const cookieValue = JSON.parse(cookieValueString);
         if (typeof cookieValue === "object") {
           Object.assign(state, cookieValue);
         }

@@ -35,7 +35,7 @@ export default function Modal({
   dialogOverflowClassName?: string;
   style?: CSSProperties;
 }) {
-  let handleOnClose = useCallback(() => onClose?.(), [onClose]);
+  const handleOnClose = useCallback(() => onClose?.(), [onClose]);
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -57,7 +57,7 @@ export default function Modal({
           <div
             className={clsx(
               "fixed inset-0 bg-white/75 transition-opacity dark:bg-black/75",
-              overlayClassName
+              overlayClassName,
             )}
           />
         </Transition.Child>
@@ -65,13 +65,13 @@ export default function Modal({
         <div
           className={clsx(
             "fixed inset-0 z-10 overflow-y-auto",
-            dialogOverflowClassName
+            dialogOverflowClassName,
           )}
         >
           <div
             className={clsx(
               "flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0",
-              dialogOuterPanelClassName
+              dialogOuterPanelClassName,
             )}
           >
             <Transition.Child
@@ -86,7 +86,7 @@ export default function Modal({
               <Dialog.Panel
                 className={clsx(
                   "relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm dark:bg-zinc-900 dark:ring-1 dark:ring-white/5",
-                  panelClassName
+                  panelClassName,
                 )}
               >
                 {children}
@@ -129,7 +129,7 @@ function ModalTitle({
       as="h3"
       className={clsx(
         "text-center text-lg font-medium leading-6 text-zinc-900 dark:text-zinc-100",
-        className
+        className,
       )}
     >
       {children}
@@ -150,7 +150,7 @@ function ModalContent({
     <div
       className={clsx(
         "text-center text-sm text-zinc-500 dark:text-zinc-400",
-        className
+        className,
       )}
     >
       {children}

@@ -82,8 +82,8 @@ export default function UnstyledAutocomplete<T extends { _id: string }>({
   displayValue =
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     displayValue || ((item: T | null) => item?.[renderProperty] || ("" as any));
-  let [query, setQuery] = useState(defaultQuery);
-  let [selectedItem, setSelectedItem] = useState<T | null>(null);
+  const [query, setQuery] = useState(defaultQuery);
+  const [selectedItem, setSelectedItem] = useState<T | null>(null);
 
   useEffect(() => {
     if (query !== defaultQuery) {
@@ -98,7 +98,7 @@ export default function UnstyledAutocomplete<T extends { _id: string }>({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [onChangeQuery, query]);
 
-  let filteredItems = useMemo(
+  const filteredItems = useMemo(
     () =>
       query === ""
         ? items
@@ -126,9 +126,9 @@ export default function UnstyledAutocomplete<T extends { _id: string }>({
     ) : undefined)
   );
 
-  let ComponentInput = as || UnstyledInput;
+  const ComponentInput = as || UnstyledInput;
 
-  let doRender = useCallback(
+  const doRender = useCallback(
     (item: T) =>
       renderFunction ? renderFunction(item) : (item[renderProperty] as string),
     [renderFunction, renderProperty],

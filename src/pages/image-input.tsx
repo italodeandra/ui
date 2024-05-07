@@ -18,7 +18,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
 const pages = [{ title: "Image input" }];
 
 export default function Page() {
-  let [value, setValue] = useState<FileInputFile[]>([]);
+  const [value, setValue] = useState<FileInputFile[]>([]);
   return (
     <FileSelectProvider>
       <NextSeo title={pages[0].title} />

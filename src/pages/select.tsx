@@ -17,7 +17,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
 const pages = [{ title: "Select" }];
 
 export default function Page() {
-  let [type, setType] = useState<"size" | "quantity">("quantity");
+  const [type, setType] = useState<"size" | "quantity">("quantity");
 
   return (
     <>

@@ -66,11 +66,11 @@ export default function DatePicker({
     setDate(convertedValue);
   }, [convertedValue || {}]);
 
-  let buttonText = useMemo(() => {
+  const buttonText = useMemo(() => {
     return date ? dayjs(date).format("ll") : "";
   }, [date]);
 
-  let children2 = children ? (
+  const children2 = children ? (
     children(buttonText)
   ) : (
     <Button

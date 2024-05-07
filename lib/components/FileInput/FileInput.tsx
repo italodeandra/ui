@@ -92,7 +92,7 @@ function FileInput(
     },
   ref: ForwardedRef<HTMLInputElement>,
 ) {
-  let [uploading, setUploading] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const [innerValue, setInnerValue] = useState<FileInputFile[]>(value || []);
 
   useDeepCompareEffect(() => {
@@ -141,20 +141,20 @@ function FileInput(
     } else {
       setUploading(true);
       if (onRejectFiles) {
-        let rejectedFilesLimit = files.filter(
+        const rejectedFilesLimit = files.filter(
           (_file, index) => !(!limit || index <= limit - innerValue.length - 1),
         );
         if (rejectedFilesLimit.length) {
           onRejectFiles(rejectedFilesLimit, "limit");
         }
       }
-      let acceptedFiles = files.filter(
+      const acceptedFiles = files.filter(
         (_file, index) => !limit || index <= limit - innerValue.length - 1,
       );
-      let filesNotUploaded: typeof acceptedFiles = [];
-      for (let file of acceptedFiles) {
+      const filesNotUploaded: typeof acceptedFiles = [];
+      for (const file of acceptedFiles) {
         try {
-          let uploadedFile = await asyncUpload({
+          const uploadedFile = await asyncUpload({
             _id: isomorphicObjectId().toString(),
             name: file.name,
             file,

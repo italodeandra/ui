@@ -21,26 +21,26 @@ export default function Resizable({
   width?: number;
   onResize: (width?: number) => void;
 }) {
-  let [internalWidth, setInternalWidth] = useState(width);
-  let [isResizing, setResizing] = useState(false);
-  let isResizingRef = useLatest(isResizing);
-  let initialMouseXPos = useRef(0);
-  let initialWidth = useRef(0);
+  const [internalWidth, setInternalWidth] = useState(width);
+  const [isResizing, setResizing] = useState(false);
+  const isResizingRef = useLatest(isResizing);
+  const initialMouseXPos = useRef(0);
+  const initialWidth = useRef(0);
 
   useEffect(() => {
     onResize(internalWidth);
   }, [internalWidth, onResize]);
 
-  let onMouseDown = (e: React.MouseEvent) => {
-    let parent = e.currentTarget?.parentNode as HTMLDivElement;
-    let rect = parent.getBoundingClientRect();
+  const onMouseDown = (e: React.MouseEvent) => {
+    const parent = e.currentTarget?.parentNode as HTMLDivElement;
+    const rect = parent.getBoundingClientRect();
     initialWidth.current = rect.width;
     initialMouseXPos.current = e.clientX;
     setResizing(true);
   };
 
   useEffect(() => {
-    let onMouseMove = (e: MouseEvent) => {
+    const onMouseMove = (e: MouseEvent) => {
       if (isResizingRef.current) {
         let newWidth =
           initialWidth.current - (e.clientX - initialMouseXPos.current);
@@ -54,7 +54,7 @@ export default function Resizable({
       }
     };
 
-    let onMouseUp = () => {
+    const onMouseUp = () => {
       setResizing(false);
     };
 

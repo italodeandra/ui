@@ -2,11 +2,11 @@
 // noinspection JSUnresolvedReference
 
 function getTextNodesIn(node: Node) {
-  let textNodes: Node[] = [];
+  const textNodes: Node[] = [];
   if (node.nodeType == 3) {
     textNodes.push(node);
   } else {
-    let children = node.childNodes;
+    const children = node.childNodes;
     for (let i = 0, len = children.length; i < len; ++i) {
       textNodes.push(...getTextNodesIn(children[i]));
     }
@@ -20,9 +20,9 @@ export default function setSelectionRange(
   end: number,
 ) {
   if (document.createRange && window.getSelection) {
-    let range = document.createRange();
+    const range = document.createRange();
     range.selectNodeContents(el);
-    let textNodes = getTextNodesIn(el);
+    const textNodes = getTextNodesIn(el);
     let foundStart = false;
     let charCount = 0,
       endCharCount;
@@ -46,14 +46,14 @@ export default function setSelectionRange(
       charCount = endCharCount;
     }
 
-    let sel = window.getSelection();
+    const sel = window.getSelection();
     sel!.removeAllRanges();
     sel!.addRange(range);
   } else {
     // @ts-ignore
     if (document.selection && document.body.createTextRange) {
       // @ts-ignore
-      let textRange = document.body.createTextRange();
+      const textRange = document.body.createTextRange();
       textRange.moveToElementText(el);
       textRange.collapse(true);
       textRange.moveEnd("character", end);

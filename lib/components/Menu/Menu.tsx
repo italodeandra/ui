@@ -93,7 +93,7 @@ const Label = function MenuLabel<
   );
 };
 
-let Menu = forwardRef(function Menu(
+const Menu = forwardRef(function Menu(
   {
     className,
     iconClassName,

@@ -7,7 +7,7 @@ export function useIsScrolled(disabled?: boolean) {
 }
 
 export function useScrollY(disabled?: boolean) {
-  let [scrollY, setScrollY] = useState(isBrowser ? window.scrollY : 0);
+  const [scrollY, setScrollY] = useState(isBrowser ? window.scrollY : 0);
 
   useEffect(() => {
     function onScroll() {

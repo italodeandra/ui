@@ -16,7 +16,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
 const pages = [{ title: "Tabs" }];
 
 export default function Page() {
-  let [tab, setTab] = useState(0);
+  const [tab, setTab] = useState(0);
 
   return (
     <>

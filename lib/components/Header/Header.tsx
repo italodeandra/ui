@@ -14,8 +14,8 @@ export default function Header({
   hideOnScroll,
   ...props
 }: HeaderProps) {
-  let ref = useRef<HTMLElement>(null);
-  let isMobile = useMediaQuery(`(max-width: ${defaultTheme.screens.md})`);
+  const ref = useRef<HTMLElement>(null);
+  const isMobile = useMediaQuery(`(max-width: ${defaultTheme.screens.md})`);
   useScrollYMovement(
     74,
     (scrollYMovement) => {
