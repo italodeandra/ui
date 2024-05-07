@@ -6,8 +6,8 @@
     "emitDeclarationOnly": false,
     "outDir": "../dist",
     "jsx": "react-jsx",
-    "module": "CommonJS",
-    "target": "es5"
+    "module": "commonjs",
+    "target": "esnext"
   },
   "include": [
     "**/*.ts",
