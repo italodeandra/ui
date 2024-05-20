@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import clsx from "../../utils/clsx";
+import Button, { ButtonProps } from "../Button";
 
 export default function Tabs({
   children,
@@ -15,18 +16,20 @@ export function Tab({
   children,
   selected,
   onClick,
-}: {
-  children: ReactNode;
+  className,
+  ...props
+}: Omit<ButtonProps, "variant"> & {
   selected?: boolean;
-  onClick?: () => void;
 }) {
   return (
-    <button
-      className="ui-tabs-tab"
+    <Button
+      className={clsx("ui-tabs-tab", className)}
       onClick={onClick}
       data-selected={selected ? "" : undefined}
+      variant="custom"
+      {...props}
     >
       {children}
-    </button>
+    </Button>
   );
 }
