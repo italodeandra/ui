@@ -20,7 +20,7 @@
 .ui-theme-default .ui-multi-text-item {
     @apply rounded flex items-center px-2 py-1 gap-2 max-w-full
     bg-zinc-100
-    dark:bg-zinc-800
+    dark:bg-zinc-700
 }
 
 .ui-theme-default .ui-multi-text-item:first-of-type {
