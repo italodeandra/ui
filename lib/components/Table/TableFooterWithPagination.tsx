@@ -50,10 +50,13 @@ export default function TableFooterWithPagination({
     [],
   );
 
-  const start = (page - 1) * itemsPerPage + 1;
+  let start = (page - 1) * itemsPerPage + 1;
   let end = page * itemsPerPage;
   if (totalItems !== undefined) {
     end = end > totalItems ? totalItems : end;
+  }
+  if (end === 0) {
+    start = 0;
   }
 
   return (

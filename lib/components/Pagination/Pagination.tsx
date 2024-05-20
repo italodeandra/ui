@@ -80,9 +80,10 @@ export default function Pagination({
       <UnstyledButton
         disabled={page === 1}
         onClick={handlePageClick(page - 1)}
-        href={pageHref ? pageHref(page - 1) : undefined}
+        href={page !== 1 && pageHref ? pageHref(page - 1) : undefined}
       >
         <span className="sr-only">Previous</span>
+        {/*TODO: intl*/}
         <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
       </UnstyledButton>
       {pages.map((p) =>
@@ -107,6 +108,7 @@ export default function Pagination({
         href={pageHref ? pageHref(page + 1) : undefined}
       >
         <span className="sr-only">Next</span>
+        {/*TODO: intl*/}
         <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
       </UnstyledButton>
     </nav>
