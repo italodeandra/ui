@@ -6,7 +6,7 @@
 
 .ui-theme-default .ui-tabs-tab {
     @apply text-sm px-2.5 py-1.5 transition rounded font-medium
-    text-zinc-900/70 hover:bg-zinc-900/10 active:bg-zinc-900/20
+    text-zinc-900/70 hover:bg-zinc-900/10 active:bg-zinc-900/20 border-transparent
     dark:text-zinc-100/70 dark:hover:bg-zinc-100/10 dark:active:bg-zinc-100/20
 
     after:block after:h-0.5 after:bottom-0 after:left-0 after:right-0 after:absolute after:opacity-0 after:transition after:-mb-1
