@@ -14,6 +14,7 @@ export default function NavigationItem({
   alternativeActiveHrefs,
   className,
   disabled,
+  active,
 }: {
   icon?: ReactElement;
 
@@ -23,19 +24,24 @@ export default function NavigationItem({
   alternativeActiveHrefs?: string[];
   className?: string;
   disabled?: boolean;
+  active?: boolean;
 }) {
   const router = useRouter();
-  const active = exact
-    ? router.pathname === href ||
-      alternativeActiveHrefs?.some((href) => router.pathname === href)
-    : router.pathname.includes(href) ||
-      alternativeActiveHrefs?.some((href) => router.pathname.includes(href));
+  active =
+    active === undefined
+      ? exact
+        ? router.pathname === href ||
+          alternativeActiveHrefs?.some((href) => router.pathname === href)
+        : router.pathname.includes(href) ||
+          alternativeActiveHrefs?.some((href) => router.pathname.includes(href))
+      : active;
 
   const isMobile = useMediaQuery(`(max-width: ${defaultTheme.screens.lg})`);
 
   return (
     <Button
       variant={active ? "light" : "text"}
+      color={active ? "primary" : "default"}
       className={clsx("w-full justify-start border-transparent", className)}
       leading={
         icon &&
