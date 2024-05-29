@@ -11,6 +11,10 @@ export interface PaginationProps {
   onChangePage?: (page: number) => void;
   className?: string;
   pageHref?: (page: number) => string;
+  paginationText?: string;
+  previousText?: string;
+  nextText?: string;
+  pagesToClickAmount?: number;
 }
 
 export default function Pagination({
@@ -20,6 +24,10 @@ export default function Pagination({
   onChangePage,
   className,
   pageHref,
+  paginationText = "Pagination",
+  previousText = "Previous",
+  nextText = "Next",
+  pagesToClickAmount = 7,
 }: PaginationProps) {
   const [page, setPage] = useState(currentPage);
   useEffect(() => {
@@ -47,25 +55,21 @@ export default function Pagination({
       : 0;
 
   const pages = useMemo(() => {
-    if (pageCount < 7) {
+    if (pageCount < pagesToClickAmount) {
       return range(1, pageCount + 1);
     }
-    if (page < 5) {
-      return [1, 2, 3, 4, 5, "...1", pageCount];
+    if (page < pagesToClickAmount - 2) {
+      return [...range(1, pagesToClickAmount - 1), "...1", pageCount];
     }
-    if (page > pageCount - 4) {
+    if (page > pageCount - (pagesToClickAmount - 3)) {
       return [
         1,
         "...1",
-        pageCount - 4,
-        pageCount - 3,
-        pageCount - 2,
-        pageCount - 1,
-        pageCount,
+        ...range(pageCount - (pagesToClickAmount - 3), pageCount + 1),
       ];
     }
     return [1, "...1", page - 1, page, page + 1, "...2", pageCount];
-  }, [page, pageCount]);
+  }, [page, pageCount, pagesToClickAmount]);
 
   const handlePageClick = useCallback(
     (page: number) => (e: MouseEvent) => {
@@ -76,14 +80,16 @@ export default function Pagination({
   );
 
   return (
-    <nav className={clsx("ui-pagination", className)} aria-label="Pagination">
+    <nav
+      className={clsx("ui-pagination", className)}
+      aria-label={paginationText}
+    >
       <UnstyledButton
         disabled={page === 1}
         onClick={handlePageClick(page - 1)}
         href={page !== 1 && pageHref ? pageHref(page - 1) : undefined}
       >
-        <span className="sr-only">Previous</span>
-        {/*TODO: intl*/}
+        <span className="sr-only">{previousText}</span>
         <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
       </UnstyledButton>
       {pages.map((p) =>
@@ -105,10 +111,9 @@ export default function Pagination({
       <UnstyledButton
         disabled={page === pageCount}
         onClick={handlePageClick(page + 1)}
-        href={pageHref ? pageHref(page + 1) : undefined}
+        href={page !== pageCount && pageHref ? pageHref(page + 1) : undefined}
       >
-        <span className="sr-only">Next</span>
-        {/*TODO: intl*/}
+        <span className="sr-only">{nextText}</span>
         <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
       </UnstyledButton>
     </nav>
