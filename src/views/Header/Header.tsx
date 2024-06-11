@@ -12,7 +12,7 @@ export default function Header() {
       <Button
         icon
         variant="text"
-        className="-my-2 -ml-2"
+        className="-my-2 md:-ml-2"
         onClick={navigationDrawerState.toggle}
       >
         <Bars3BottomLeftIcon />
