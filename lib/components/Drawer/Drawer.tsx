@@ -8,6 +8,7 @@ import clsx from "../../utils/clsx";
 export type DialogProps = {
   open?: boolean;
   onClose?: (open: boolean) => void;
+  onChangeOpen?: (open: boolean) => void;
   title?: ReactNode;
   children: ReactNode;
   position?: "left" | "right";
@@ -21,6 +22,7 @@ export type DialogProps = {
 export default function Drawer({
   open: defaultOpen,
   onClose,
+  onChangeOpen,
   title,
   children,
   position = "left",
@@ -36,7 +38,15 @@ export default function Drawer({
     if (onClose && !open) {
       onClose(false);
     }
-  }, [onClose, open]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open]);
+
+  useEffect(() => {
+    if (onChangeOpen) {
+      onChangeOpen(open || false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open]);
 
   useEffect(() => {
     setOpen(defaultOpen);

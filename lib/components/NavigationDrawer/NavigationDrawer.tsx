@@ -5,7 +5,6 @@ import { useSnapshot } from "valtio";
 import { Transition } from "@headlessui/react";
 import clsx from "../../utils/clsx";
 import defaultTheme from "tailwindcss/defaultTheme";
-import useMediaQuery from "../../hooks/useMediaQuery";
 
 export default function NavigationDrawer({
   children,
@@ -24,14 +23,15 @@ export default function NavigationDrawer({
 }) {
   const { isOpen, setOpen } = useSnapshot(navigationDrawerState);
 
-  const isDesktop = useMediaQuery(`(min-width: ${defaultTheme.screens.lg})`);
-  const isMobile = !isDesktop;
-
   return (
     <>
       <Drawer
-        open={isMobile && isOpen}
-        onClose={isMobile ? setOpen : undefined}
+        open={isOpen}
+        onChangeOpen={(open) => {
+          if (window.innerWidth <= +defaultTheme.screens.sm.replace("px", "")) {
+            setOpen(open);
+          }
+        }}
         className="lg:hidden"
         position={position}
         title={title}
@@ -61,7 +61,7 @@ export default function NavigationDrawer({
         className={clsx(
           "flex min-h-screen flex-col ring-offset-zinc-100 transition-all duration-300",
           {
-            "pl-80 duration-150": isOpen && !isMobile,
+            "lg:pl-80 lg:duration-150": isOpen,
           },
         )}
       >
