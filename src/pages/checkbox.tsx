@@ -37,6 +37,7 @@ export default function Page() {
         <Text variant="label">Radio group</Text>
         <Checkbox label="Male" type="radio" name="sex" />
         <Checkbox label="Female" type="radio" name="sex" />
+        <Checkbox label="With error" error helpText="This is an error" />
       </Stack>
     </>
   );

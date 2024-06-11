@@ -16,6 +16,8 @@ export type CheckboxProps = {
   descriptionClassName?: string;
   inputClassName?: string;
   labelOuterClassName?: string;
+  error?: boolean;
+  helpText?: ReactNode;
 } & DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 
 const defaultLabelClassName = defaultTextStyles.variant.label;
@@ -32,6 +34,8 @@ function Checkbox(
     inputClassName,
     labelOuterClassName,
     type = "checkbox",
+    error,
+    helpText,
     ...props
   }: CheckboxProps,
   ref: ForwardedRef<HTMLInputElement>,
@@ -47,6 +51,17 @@ function Checkbox(
     ? `${defaultDescriptionClassName} ${descriptionClassName}`
     : defaultDescriptionClassName;
   inputClassName = clsx("ui-checkbox", inputClassName);
+
+  if (error) {
+    labelClassName = clsx(labelClassName, "text-error-500 dark:text-error-500");
+    description = helpText || description;
+    if (description === helpText) {
+      descriptionClassName = clsx(
+        descriptionClassName,
+        "text-error-400 dark:text-error-600",
+      );
+    }
+  }
 
   return (
     <div className={clsx("relative flex items-start", className)}>
