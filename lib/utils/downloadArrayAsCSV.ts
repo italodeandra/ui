@@ -1,9 +1,24 @@
 export default function downloadArrayAsCSV(
-  data: Array<Array<unknown>>,
-  filename = "data.csv",
-) {
-  // Step 1: Convert the array to a CSV string
-  const csvContent: string = data.map((row) => row.join(",")).join("\n");
+  data: (string | undefined)[][],
+  filename: string = "data.csv",
+): void {
+  // Function to escape fields with commas or double quotes
+  const escapeCSVField = (field: string) => {
+    if (field.includes('"')) {
+      field = field.replace(/"/g, '""'); // Escape double quotes
+    }
+    if (field.includes(",") || field.includes("\n")) {
+      field = `"${field}"`; // Enclose in double quotes
+    }
+    return field;
+  };
+
+  // Step 1: Convert the array to a CSV string with proper escaping
+  const csvContent: string = data
+    .map((row) =>
+      (row.filter(Boolean) as string[]).map(escapeCSVField).join(","),
+    )
+    .join("\n");
 
   // Add BOM for UTF-8 encoding
   const bom = "\uFEFF";
