@@ -20,7 +20,7 @@ export default function NavigationDrawer({
   noPadding?: boolean;
   panelClassName?: string;
 }) {
-  const { isOpen, setOpen } = useSnapshot(navigationDrawerState);
+  const { isOpen } = useSnapshot(navigationDrawerState);
 
   const handleChangeOpen = useCallback((open: boolean) => {
     if (window.innerWidth <= +defaultTheme.screens.lg.replace("px", "")) {
