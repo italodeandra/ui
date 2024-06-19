@@ -5,7 +5,6 @@ import { NextSeo } from "next-seo";
 import { GetServerSideProps } from "next";
 import { getCookies } from "cookies-next";
 import Breadcrumbs from "../../lib/components/Breadcrumbs";
-import vsLight from "prism-react-renderer/themes/vsLight";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   props: {
@@ -30,7 +29,7 @@ export default function Page() {
             null: null,
           }}
         />
-        <Code copy language="jsx" theme={vsLight}>
+        <Code copy language="jsx">
           {`// Code component
 <Code language="json">
   {JSON.stringify(

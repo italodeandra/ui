@@ -9,7 +9,7 @@ export type JsonProps = {
 
 export default function Json({ json, className }: JsonProps) {
   return (
-    <Code language="json" className={className}>
+    <Code language="js" className={className}>
       {JSON.stringify(isNil(json) ? null : json, null, 2)}
     </Code>
   );
