@@ -22,14 +22,17 @@ export function Tab({
   selected?: boolean;
 }) {
   return (
-    <Button
-      className={clsx("ui-tabs-tab", className)}
-      onClick={onClick}
-      data-selected={selected ? "" : undefined}
-      variant="custom"
-      {...props}
-    >
-      {children}
-    </Button>
+    <div className="relative">
+      <Button
+        className={clsx("ui-tabs-tab", className)}
+        data-selected={selected ? "" : undefined}
+        onClick={onClick}
+        variant="custom"
+        {...props}
+      >
+        {children}
+      </Button>
+      {selected && <div className="ui-tabs-indicator" />}
+    </div>
   );
 }
