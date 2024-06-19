@@ -69,19 +69,15 @@ const Item = function MenuItem<T extends HTMLElement = HTMLButtonElement>({
   );
 };
 
-export type MenuLabelProps<
-  Inline extends boolean | undefined,
-  Href extends string | undefined,
-> = TextProps<Inline, Href>;
+export type MenuLabelProps = TextProps;
 
-const Label = function MenuLabel<
-  Inline extends boolean | undefined,
-  Href extends string | undefined,
->({ ref, ...props }: MenuLabelProps<Inline, Href>) {
+const Label = forwardRef(function MenuLabel(
+  props: MenuLabelProps,
+  ref: ForwardedRef<HTMLDivElement>,
+) {
   return (
     <Text
-      /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-      ref={ref as any}
+      ref={ref}
       {...props}
       variant="label"
       className={clsx(
@@ -91,7 +87,7 @@ const Label = function MenuLabel<
       )}
     />
   );
-};
+});
 
 const Menu = forwardRef(function Menu(
   {

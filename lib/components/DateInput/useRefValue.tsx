@@ -1,13 +1,13 @@
 import { ForwardedRef, useEffect, useRef } from "react";
-import { format, parse } from "date-fns";
-import ptBrLocale from "date-fns/locale/pt-BR";
+import dayjs from "dayjs";
+import "dayjs/locale/pt-br";
+
+dayjs.locale("pt-br");
 
 export function parseDate(value: string) {
   try {
     // noinspection SpellCheckingInspection
-    return parse(value, "yyyy-MM-dd'T'HH:mm", new Date(), {
-      locale: ptBrLocale,
-    }).toISOString();
+    return dayjs(value, "YYYY-MM-DDTHH:mm").toISOString();
   } catch (e) {
     return value;
   }
@@ -16,9 +16,7 @@ export function parseDate(value: string) {
 export function formatDate(value: string) {
   try {
     // noinspection SpellCheckingInspection
-    return format(new Date(value), "yyyy-MM-dd'T'HH:mm", {
-      locale: ptBrLocale,
-    });
+    return dayjs(value).format("YYYY-MM-DDTHH:mm");
   } catch (e) {
     return value;
   }

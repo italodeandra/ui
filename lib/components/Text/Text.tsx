@@ -1,10 +1,10 @@
 import {
+  ComponentProps,
   DetailedHTMLProps,
   ForwardedRef,
   forwardRef,
   HTMLAttributes,
 } from "react";
-import { ComponentProps } from "react";
 import clsx from "../../utils/clsx";
 import NextLink from "next/link";
 
@@ -25,26 +25,17 @@ export const defaultTextStyles = {
   },
 };
 
-export type TextProps<
-  Inline extends boolean | undefined,
-  Href extends string | undefined,
-> = {
+export type TextProps = {
   variant?: keyof (typeof defaultTextStyles)["variant"];
   size?: keyof (typeof defaultTextStyles)["size"];
-  inline?: Inline;
-  href?: Href;
-  target?: string;
-  rel?: string;
-} & (Href extends true
-  ? ComponentProps<typeof NextLink>
-  : Inline extends true
-    ? DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>
-    : DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>);
+  inline?: boolean;
+} & Partial<
+  DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> &
+    DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement> &
+    ComponentProps<typeof NextLink>
+>;
 
-function Text<
-  Inline extends boolean | undefined,
-  Href extends string | undefined,
->(
+function Text(
   {
     inline,
     variant = "default",
@@ -53,8 +44,8 @@ function Text<
     target,
     size = variant !== "label" ? "base" : "sm",
     ...props
-  }: TextProps<Inline, Href>,
-  ref: ForwardedRef<HTMLDivElement>,
+  }: TextProps,
+  ref: ForwardedRef<HTMLDivElement | HTMLAnchorElement>,
 ) {
   className = clsx(
     defaultTextStyles.variant[variant],
@@ -64,11 +55,10 @@ function Text<
   if (href) {
     return (
       <NextLink
-        ref={ref}
+        ref={ref as ForwardedRef<HTMLAnchorElement>}
         href={href}
         target={target}
-        /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-        {...(props as any)}
+        {...props}
         className={className}
       />
     );
@@ -76,8 +66,14 @@ function Text<
   if (inline) {
     return <span ref={ref} {...props} className={className} />;
   }
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return <div ref={ref} {...(props as any)} className={className} />;
+
+  return (
+    <div
+      ref={ref as ForwardedRef<HTMLDivElement>}
+      {...props}
+      className={className}
+    />
+  );
 }
 
 export default forwardRef(Text);

@@ -10,7 +10,7 @@ function DateInput(
     value,
     onValueChange,
     ...props
-  }: Omit<InputProps<false>, "value" | "crossOrigin"> & {
+  }: Omit<InputProps<false>, "value"> & {
     value?: string;
     onValueChange?: (value?: string) => void;
   },
