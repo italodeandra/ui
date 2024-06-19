@@ -1,9 +1,5 @@
 import { Fragment } from "react";
-import Highlight, {
-  defaultProps,
-  Language,
-  PrismTheme,
-} from "prism-react-renderer";
+import { Highlight, Language, PrismTheme } from "prism-react-renderer";
 import clsx from "../../utils/clsx";
 import CopyButton from "../CopyButton";
 
@@ -33,12 +29,7 @@ export default function Code({
       })}
     >
       <div className="prose max-w-none">
-        <Highlight
-          {...defaultProps}
-          code={children.trimEnd()}
-          language={language}
-          theme={theme}
-        >
+        <Highlight code={children.trimEnd()} language={language} theme={theme}>
           {({ className, style, tokens, getTokenProps }) => (
             <pre className={className} style={style}>
               <code>
