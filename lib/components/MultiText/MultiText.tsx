@@ -26,6 +26,11 @@ export interface MultiTextProps {
   validate?: (value: string) => boolean;
   invalidHelpText?: string;
   error?: boolean;
+  format?: (item: string) => string;
+}
+
+function defaultFormat(item: string) {
+  return item;
 }
 
 function MultiText(
@@ -42,6 +47,7 @@ function MultiText(
     validate,
     invalidHelpText,
     error,
+    format = defaultFormat,
   }: MultiTextProps,
   ref: ForwardedRef<HTMLDivElement>,
 ) {
@@ -130,7 +136,7 @@ function MultiText(
                 removeItem();
               }}
             >
-              <span className="ui-multi-text-item-content">{item}</span>
+              <span className="ui-multi-text-item-content">{format(item)}</span>
               <button
                 className="ui-multi-text-delete-button"
                 onClick={removeItem}
