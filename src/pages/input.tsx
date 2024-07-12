@@ -6,6 +6,8 @@ import Input from "../../lib/components/Input";
 import Stack from "../../lib/components/Stack";
 import getPublicLayout from "../views/publicLayout";
 import NumericInput from "../../lib/components/Input/NumericInput";
+import PatternInput from "../../lib/components/Input/PatternInput";
+import { useState } from "react";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   props: {
@@ -16,6 +18,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
 const pages = [{ title: "Input" }];
 
 export default function Page() {
+  const [document, setDocument] = useState("");
+
   return (
     <>
       <NextSeo title={pages[0].title} />
@@ -53,6 +57,15 @@ export default function Page() {
           thousandSeparator="."
           value={18.5}
           onValueChange={console.info}
+        />
+        <PatternInput
+          label="CPF/CNPJ"
+          format={
+            document.length <= 11 ? "###.###.###-###" : "##.###.###/####-##"
+          }
+          mask={"___________ __".split("")}
+          onValueChange={(val) => setDocument(val.value)}
+          value={document}
         />
       </Stack>
     </>
