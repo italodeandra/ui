@@ -49,17 +49,16 @@ export type PathImpl<K extends string | number, V, TraversedTypes> = V extends
   : true extends AnyIsEqual<TraversedTypes, V>
     ? `${K}`
     : `${K}` | `${K}.${PathInternal<V, TraversedTypes | V>}`;
-export type PathInternal<T, TraversedTypes = T> = T extends ReadonlyArray<
-  infer V
->
-  ? IsTuple<T> extends true
-    ? {
-        [K in TupleKeys<T>]-?: PathImpl<K & string, T[K], TraversedTypes>;
-      }[TupleKeys<T>]
-    : PathImpl<ArrayKey, V, TraversedTypes>
-  : {
-      [K in keyof T]-?: PathImpl<K & string, T[K], TraversedTypes>;
-    }[keyof T];
+export type PathInternal<T, TraversedTypes = T> =
+  T extends ReadonlyArray<infer V>
+    ? IsTuple<T> extends true
+      ? {
+          [K in TupleKeys<T>]-?: PathImpl<K & string, T[K], TraversedTypes>;
+        }[TupleKeys<T>]
+      : PathImpl<ArrayKey, V, TraversedTypes>
+    : {
+        [K in keyof T]-?: PathImpl<K & string, T[K], TraversedTypes>;
+      }[keyof T];
 export type Path<T> = T extends Any ? PathInternal<T> : never;
 export type FieldPath<TFieldValues extends FieldValues> = Path<TFieldValues>;
 
@@ -71,9 +70,15 @@ export type DeepRequiredByValidation<T, V extends { [K in keyof T]?: Any }> = {
     : T[P];
 };
 
+export type Validation = {
+  required?: string;
+  min?: [number, string];
+  pattern?: [RegExp, string];
+};
+
 export function createFormState<
   T extends object,
-  V extends PartialDeep<DeepMapValues<RequiredDeep<T>, { required: string }>>,
+  V extends PartialDeep<DeepMapValues<RequiredDeep<T>, Validation>>,
 >(options: { defaultValues: T; validation?: V }) {
   const defaultValues = cloneDeep(options.defaultValues);
   const valuesState = proxy(defaultValues);
@@ -107,11 +112,6 @@ export function createFormState<
 
   return formState;
 }
-
-export type Validation = {
-  required?: string;
-  min?: [number, string];
-};
 
 // noinspection JSUnusedGlobalSymbols
 export function useForm<T extends ReturnType<typeof createFormState>>(
@@ -155,6 +155,11 @@ export function useForm<T extends ReturnType<typeof createFormState>>(
           (Array.isArray(value) ? !value.length : !value)
         ) {
           set(state.errors, field, { message: validation.required });
+        } else if (
+          validation?.pattern &&
+          !validation.pattern[0].test(value as string)
+        ) {
+          set(state.errors, field, { message: validation.pattern[1] });
         } else if (
           !isNil(validation?.min) &&
           value.length < validation?.min[0]
