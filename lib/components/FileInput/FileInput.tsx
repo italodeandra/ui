@@ -61,6 +61,7 @@ function FileInput(
     preview,
     asyncUpload,
     onRejectFiles,
+    loading,
     ...props
   }: Pick<
     InputProps<false>,
@@ -89,6 +90,7 @@ function FileInput(
         files: File[],
         reason: "type" | "size" | "limit" | "upload-error",
       ) => void;
+      loading?: boolean;
     },
   ref: ForwardedRef<HTMLInputElement>,
 ) {
@@ -207,8 +209,9 @@ function FileInput(
   return (
     <div
       data-input-name={name}
-      data-error={error}
-      className={clsx("relative", className)}
+      data-error={error ? "" : undefined}
+      data-loading={loading ? "" : undefined}
+      className={clsx("relative data-[loading]:animate-pulse", className)}
       onMouseOver={onMouseOver}
       onMouseOut={onMouseOut}
     >

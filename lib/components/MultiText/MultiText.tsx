@@ -27,6 +27,8 @@ export interface MultiTextProps {
   invalidHelpText?: string;
   error?: boolean;
   format?: (item: string) => string;
+  readOnly?: boolean;
+  loading?: boolean;
 }
 
 function defaultFormat(item: string) {
@@ -48,6 +50,8 @@ function MultiText(
     invalidHelpText,
     error,
     format = defaultFormat,
+    readOnly,
+    loading,
   }: MultiTextProps,
   ref: ForwardedRef<HTMLDivElement>,
 ) {
@@ -118,6 +122,7 @@ function MultiText(
         onClick={() => inputRef.current?.focus()}
         data-focused={innerFocused ? "" : undefined}
         data-error={invalid || error ? "" : undefined}
+        data-loading={loading ? "" : undefined}
       >
         {innerValue.map((item, i) => {
           const removeItem = () => {
@@ -137,12 +142,14 @@ function MultiText(
               }}
             >
               <span className="ui-multi-text-item-content">{format(item)}</span>
-              <button
-                className="ui-multi-text-delete-button"
-                onClick={removeItem}
-              >
-                <XMarkIcon className="ui-multi-text-delete-icon" />
-              </button>
+              {!readOnly && (
+                <button
+                  className="ui-multi-text-delete-button"
+                  onClick={removeItem}
+                >
+                  <XMarkIcon className="ui-multi-text-delete-icon" />
+                </button>
+              )}
             </span>
           );
         })}
@@ -175,6 +182,7 @@ function MultiText(
             }
           }}
           onFocus={() => setInnerFocused(true)}
+          readOnly={readOnly}
         />
       </div>
     </InputWrapper>

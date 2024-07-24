@@ -2,6 +2,8 @@
     @apply border rounded flex flex-wrap gap-2 items-center px-2 py-1 shadow-sm transition-all
     border-zinc-300 bg-white
     dark:border-zinc-700 dark:bg-zinc-800
+    read-only:border-dashed
+    data-[loading]:animate-pulse
 }
 
 .ui-theme-default .ui-multi-text[data-error], .ui-theme-default .ui-multi-text[data-error][data-focused] {
