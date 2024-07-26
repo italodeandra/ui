@@ -48,6 +48,7 @@ export interface UnstyledAutocompleteProps<T extends { _id: string }>
   displayValue?: (item: T | null) => string;
   value?: T | null;
   itemsRenderLimit?: number;
+  disabledItems?: string[];
 }
 
 export default function UnstyledAutocomplete<T extends { _id: string }>({
@@ -77,6 +78,7 @@ export default function UnstyledAutocomplete<T extends { _id: string }>({
   value,
   readOnly,
   itemsRenderLimit,
+  disabledItems,
   ...props
 }: UnstyledAutocompleteProps<T>) {
   displayValue =
@@ -194,6 +196,10 @@ export default function UnstyledAutocomplete<T extends { _id: string }>({
                       "flex gap-2",
                       optionClassName && optionClassName({ active, selected }),
                     )
+                  }
+                  disabled={disabledItems?.includes(item._id)}
+                  data-disabled={
+                    disabledItems?.includes(item._id) ? "" : undefined
                   }
                 >
                   {({ selected, active }) => (

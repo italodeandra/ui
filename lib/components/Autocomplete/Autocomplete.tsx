@@ -50,7 +50,7 @@ export default function Autocomplete<T extends { _id: string }>({
         )}
         optionClassName={({ active }) =>
           clsx(
-            "cursor-default select-none px-4 py-2",
+            "cursor-default select-none px-4 py-2 data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50",
             active && "bg-primary-600 text-white",
           )
         }

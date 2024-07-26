@@ -32,6 +32,7 @@ export default function Page() {
           filterProperty="name"
           renderProperty="name"
           loading
+          disabledItems={["2"]}
         />
         <Autocomplete
           label="Default value"
