@@ -29,19 +29,21 @@ export default function Page() {
     <>
       <NextSeo title={pages[0].title} />
       <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
-      <Stack className="max-w-xl p-2">
-        <form onSubmit={handleSubmit(console.info)}>
+      <form onSubmit={handleSubmit(console.info)}>
+        <Stack className="max-w-xl p-2">
           <MultiText
             label="Emails"
             helpText="Type more than one"
             {...register("names")}
             validate={(value) => emailRegExp.test(value)}
             invalidHelpText="Invalid email"
+            required
           />
-        </form>
-        <Button type="submit">Submit</Button>
-        <Json json={watch()} />
-      </Stack>
+          <MultiText label="Times" helpText="Type more than one" type="time" />
+          <Button type="submit">Submit</Button>
+          <Json json={watch()} />
+        </Stack>
+      </form>
     </>
   );
 }

@@ -29,6 +29,8 @@ export interface MultiTextProps {
   format?: (item: string) => string;
   readOnly?: boolean;
   loading?: boolean;
+  type?: string;
+  required?: boolean;
 }
 
 function defaultFormat(item: string) {
@@ -52,6 +54,8 @@ function MultiText(
     format = defaultFormat,
     readOnly,
     loading,
+    type,
+    required,
   }: MultiTextProps,
   ref: ForwardedRef<HTMLDivElement>,
 ) {
@@ -116,6 +120,7 @@ function MultiText(
       helpText={(invalid ? invalidHelpText : undefined) || helpText}
       label={label}
       error={invalid || error}
+      required={required}
     >
       <div
         className="ui-multi-text"
@@ -123,6 +128,7 @@ function MultiText(
         data-focused={innerFocused ? "" : undefined}
         data-error={invalid || error ? "" : undefined}
         data-loading={loading ? "" : undefined}
+        data-readonly={readOnly ? "" : undefined}
       >
         {innerValue.map((item, i) => {
           const removeItem = () => {
@@ -156,7 +162,7 @@ function MultiText(
         <input
           id={id}
           ref={inputRef}
-          type="text"
+          type={type || "text"}
           className="ui-multi-text-input"
           value={inputValue}
           onChange={(e) => {
@@ -183,6 +189,7 @@ function MultiText(
           }}
           onFocus={() => setInnerFocused(true)}
           readOnly={readOnly}
+          required={required && innerValue.length === 0}
         />
       </div>
     </InputWrapper>

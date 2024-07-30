@@ -8,6 +8,7 @@ export interface InputWrapperProps {
   id?: string;
   helpText?: string;
   error?: boolean;
+  required?: boolean;
 }
 
 export default function InputWrapper({
@@ -17,6 +18,7 @@ export default function InputWrapper({
   id,
   helpText,
   error,
+  required,
 }: InputWrapperProps) {
   return (
     <div
@@ -26,6 +28,7 @@ export default function InputWrapper({
       {label && (
         <label htmlFor={id} className="ui-input-wrapper-label">
           {label}
+          {required && <span className="text-red-500"> *</span>}
         </label>
       )}
       {children}
