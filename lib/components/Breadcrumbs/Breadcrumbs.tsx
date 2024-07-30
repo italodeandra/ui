@@ -59,12 +59,13 @@ export default function Breadcrumbs({
                   <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
                 </svg>
                 <Text
-                  href={!isLast ? page.href : undefined}
+                  href={page.href}
                   className={clsx(
                     "ml-4 text-sm font-medium !text-zinc-500 dark:!text-zinc-400",
                     {
-                      "cursor-default": isLast,
-                      "hover:!text-zinc-700 dark:hover:!text-zinc-200": !isLast,
+                      "cursor-default": !page.href,
+                      "hover:!text-zinc-700 dark:hover:!text-zinc-200":
+                        !!page.href,
                     },
                   )}
                   aria-current={isLast ? "page" : undefined}
