@@ -57,6 +57,7 @@ export default function Page() {
               size: file.size,
             };
           }}
+          maxConcurrentUploads={5}
           limit={10}
           maxFileSize="20MB"
           onRejectFiles={(files, reason) => {

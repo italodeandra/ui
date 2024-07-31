@@ -19,6 +19,7 @@ import isomorphicObjectId from "@italodeandra/next/utils/isomorphicObjectId";
 import { isEqual } from "lodash";
 import Text from "../Text/Text";
 import { PreviewFile } from "./PreviewFile";
+import concurrentForOf from "@italodeandra/next/utils/concurrentForOf";
 
 export type FileFile = {
   _id: string;
@@ -62,6 +63,7 @@ function FileInput(
     asyncUpload,
     onRejectFiles,
     loading,
+    maxConcurrentUploads = 1,
     ...props
   }: Pick<
     InputProps<false>,
@@ -91,6 +93,7 @@ function FileInput(
         reason: "type" | "size" | "limit" | "upload-error",
       ) => void;
       loading?: boolean;
+      maxConcurrentUploads?: number;
     },
   ref: ForwardedRef<HTMLInputElement>,
 ) {
@@ -154,20 +157,24 @@ function FileInput(
         (_file, index) => !limit || index <= limit - innerValue.length - 1,
       );
       const filesNotUploaded: typeof acceptedFiles = [];
-      for (const file of acceptedFiles) {
-        try {
-          const uploadedFile = await asyncUpload({
-            _id: isomorphicObjectId().toString(),
-            name: file.name,
-            file,
-            type: file.type,
-            size: file.size,
-          });
-          setInnerValue((value) => [...value, uploadedFile]);
-        } catch (e) {
-          filesNotUploaded.push(file);
-        }
-      }
+      await concurrentForOf(
+        acceptedFiles,
+        async (file) => {
+          try {
+            const uploadedFile = await asyncUpload({
+              _id: isomorphicObjectId().toString(),
+              name: file.name,
+              file,
+              type: file.type,
+              size: file.size,
+            });
+            setInnerValue((value) => [...value, uploadedFile]);
+          } catch (e) {
+            filesNotUploaded.push(file);
+          }
+        },
+        maxConcurrentUploads,
+      );
       if (onRejectFiles && filesNotUploaded.length) {
         onRejectFiles(filesNotUploaded, "upload-error");
       }
