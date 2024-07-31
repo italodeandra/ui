@@ -3,9 +3,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var isServer = typeof window === "undefined";
-var bson_objectid_1 = __importDefault(require("bson-objectid"));
-var bson_1 = require("bson");
+const isServer = typeof window === "undefined";
+const bson_objectid_1 = __importDefault(require("bson-objectid"));
+const bson_1 = require("bson");
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function isomorphicObjectId(inputId) {
     if (isServer) {

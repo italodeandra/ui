@@ -1,23 +1,22 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 function getOrigin(req) {
-    var _a;
-    var origin;
+    let origin;
     if (req.headers["referer"]) {
-        origin = (_a = req.headers["referer"]) === null || _a === void 0 ? void 0 : _a.split("/").slice(0, 3).join("/");
+        origin = req.headers["referer"]?.split("/").slice(0, 3).join("/");
     }
     else if (req.headers["x-forwarded-host"]) {
-        origin = "".concat(req.headers["x-forwarded-proto"], "://").concat(req.headers["x-forwarded-host"]);
+        origin = `${req.headers["x-forwarded-proto"]}://${req.headers["x-forwarded-host"]}`;
     }
     else if (req.headers.origin) {
         origin = req.headers.origin;
     }
     else {
-        var host = req.headers.host || "";
-        var protocol = /^((localhost)|(\d+\.\d+\.\d+\.\d+))(:\d+)?$/.test(host)
+        const host = req.headers.host || "";
+        const protocol = /^((localhost)|(\d+\.\d+\.\d+\.\d+))(:\d+)?$/.test(host)
             ? "http"
             : "https";
-        origin = "".concat(protocol, "://").concat(host);
+        origin = `${protocol}://${host}`;
     }
     return origin;
 }

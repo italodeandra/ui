@@ -9,6 +9,7 @@ function bsonToJson(value) {
     }
     catch (e) {
         console.error(e);
+        return undefined;
     }
 }
 exports.default = bsonToJson;
