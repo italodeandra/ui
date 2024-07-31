@@ -152,6 +152,7 @@ function MultiText(
                 <button
                   className="ui-multi-text-delete-button"
                   onClick={removeItem}
+                  type="button"
                 >
                   <XMarkIcon className="ui-multi-text-delete-icon" />
                 </button>
