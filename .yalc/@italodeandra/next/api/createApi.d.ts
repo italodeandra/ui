@@ -17,16 +17,16 @@ export default function createApi<T extends (args: Any, req: NextApiRequest, res
     Types: {
         Args: InferApiArgs<T>;
         Response: InferApiResponse<T>;
-        QueryOptions: UseQueryOptions<InferApiResponse<T>, unknown, InferApiResponse<T>, import("@tanstack/react-query").QueryKey>;
-        MutationOptions: UseMutationOptions<InferApiResponse<T>, AxiosError<unknown, any>, InferApiArgs<T>, unknown>;
+        QueryOptions: Partial<UseQueryOptions<InferApiResponse<T>>>;
+        MutationOptions: Partial<UseMutationOptions<InferApiResponse<T>, AxiosError, InferApiArgs<T>>>;
     };
-    useQuery: (args?: InferApiArgs<T> | undefined, options?: UseQueryOptions<InferApiResponse<T>, unknown, InferApiResponse<T>, import("@tanstack/react-query").QueryKey> | undefined) => import("@tanstack/react-query").UseQueryResult<InferApiResponse<T>, unknown>;
-    useMutation: (options?: UseMutationOptions<InferApiResponse<T>, AxiosError<unknown, any>, InferApiArgs<T>, unknown> | undefined) => import("@tanstack/react-query").UseMutationResult<InferApiResponse<T>, AxiosError<unknown, any>, InferApiArgs<T>, C>;
-    invalidateQueries: (queryClient: QueryClient, args?: InferApiArgs<T> | undefined) => Promise<void>;
+    useQuery: (args?: InferApiArgs<T>, options?: Partial<UseQueryOptions<InferApiResponse<T>, Error, InferApiResponse<T>, import("@tanstack/react-query").QueryKey>>) => import("@tanstack/react-query").UseQueryResult<InferApiResponse<T>, Error>;
+    useMutation: (options?: Partial<UseMutationOptions<InferApiResponse<T>, AxiosError<unknown, any>, InferApiArgs<T>, unknown>>) => import("@tanstack/react-query").UseMutationResult<InferApiResponse<T>, AxiosError<unknown, any>, InferApiArgs<T>, C>;
+    invalidateQueries: (queryClient: QueryClient, args?: InferApiArgs<T>) => Promise<void>;
     prefetchQuery: (queryClient: QueryClient, args: InferApiArgs<T>, req?: NextApiRequest | GetServerSidePropsContext["req"], res?: NextApiResponse | GetServerSidePropsContext["res"]) => Promise<void>;
-    refetchQueries: (queryClient: QueryClient, args?: InferApiArgs<T> | undefined) => Promise<void>;
-    cancelQueries: (queryClient: QueryClient, args?: InferApiArgs<T> | undefined) => Promise<void>;
-    getQueryData: (queryClient: QueryClient, args?: InferApiArgs<T> | undefined) => InferApiResponse<T> | undefined;
-    setQueryData: (queryClient: QueryClient, updater: import("@tanstack/query-core/build/types/packages/query-core/src/utils").Updater<import("../utils/Jsonify").default<T extends import("type-fest/source/async-return-type").AsyncFunction ? Awaited<ReturnType<T>> : ReturnType<T>> | undefined, import("../utils/Jsonify").default<T extends import("type-fest/source/async-return-type").AsyncFunction ? Awaited<ReturnType<T>> : ReturnType<T>> | undefined>, args?: InferApiArgs<T> | undefined) => import("../utils/Jsonify").default<T extends import("type-fest/source/async-return-type").AsyncFunction ? Awaited<ReturnType<T>> : ReturnType<T>> | undefined;
+    refetchQueries: (queryClient: QueryClient, args?: InferApiArgs<T>) => Promise<void>;
+    cancelQueries: (queryClient: QueryClient, args?: InferApiArgs<T>) => Promise<void>;
+    getQueryData: (queryClient: QueryClient, args?: InferApiArgs<T>) => InferApiResponse<T> | undefined;
+    setQueryData: (queryClient: QueryClient, updater: Parameters<typeof QueryClient.prototype.setQueryData<InferApiResponse<T>>>[1], args?: InferApiArgs<T>) => import("../utils/Jsonify").default<T extends import("type-fest/source/async-return-type").AsyncFunction ? Awaited<ReturnType<T>> : ReturnType<T>> | undefined;
 };
 export {};

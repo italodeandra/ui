@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-function getIp(req) {
+export default function getIp(req) {
     let ip = req.headers["x-real-ip"];
     const forwardedFor = req.headers["x-forwarded-for"];
     if (!ip && forwardedFor) {
@@ -11,4 +9,3 @@ function getIp(req) {
     }
     return ip;
 }
-exports.default = getIp;

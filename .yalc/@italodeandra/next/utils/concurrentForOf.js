@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-async function concurrentForOf(items, callback, maxConcurrent) {
+export default async function concurrentForOf(items, callback, maxConcurrent) {
     const processInBatches = async (items, maxConcurrent) => {
         const results = [];
         const executing = new Set();
@@ -18,4 +16,3 @@ async function concurrentForOf(items, callback, maxConcurrent) {
     };
     await processInBatches(items, maxConcurrent);
 }
-exports.default = concurrentForOf;

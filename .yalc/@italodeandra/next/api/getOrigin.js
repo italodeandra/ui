@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-function getOrigin(req) {
+export default function getOrigin(req) {
     let origin;
     if (req.headers["referer"]) {
         origin = req.headers["referer"]?.split("/").slice(0, 3).join("/");
@@ -20,4 +18,3 @@ function getOrigin(req) {
     }
     return origin;
 }
-exports.default = getOrigin;

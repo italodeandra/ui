@@ -1,18 +1,12 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
 const isServer = typeof window === "undefined";
-const bson_objectid_1 = __importDefault(require("bson-objectid"));
-const bson_1 = require("bson");
+import BrowserObjectId from "bson-objectid";
+import { ObjectId as ServerObjectId } from "bson";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function isomorphicObjectId(inputId) {
+export default function isomorphicObjectId(inputId) {
     if (isServer) {
-        return new bson_1.ObjectId(inputId);
+        return new ServerObjectId(inputId);
     }
     else {
-        return new bson_objectid_1.default(inputId);
+        return new BrowserObjectId(inputId);
     }
 }
-exports.default = isomorphicObjectId;

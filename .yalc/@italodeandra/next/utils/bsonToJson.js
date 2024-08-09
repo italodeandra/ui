@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-function bsonToJson(value) {
+export default function bsonToJson(value) {
     if (value === undefined || value === null) {
         return value;
     }
@@ -12,4 +10,3 @@ function bsonToJson(value) {
         return undefined;
     }
 }
-exports.default = bsonToJson;

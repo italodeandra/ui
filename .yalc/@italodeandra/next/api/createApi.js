@@ -1,19 +1,23 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const apiHandlerWrapper_1 = require("./apiHandlerWrapper");
-const react_query_1 = require("@tanstack/react-query");
-function createApi(queryKey, handler, apiOptions) {
-    const apiHandler = (0, apiHandlerWrapper_1.apiHandlerWrapper)(handler);
+import { apiHandlerWrapper, mutationFnWrapper, queryFnWrapper, } from "./apiHandlerWrapper";
+import { useMutation, useQuery, useQueryClient, } from "@tanstack/react-query";
+export default function createApi(queryKey, handler, apiOptions) {
+    const apiHandler = apiHandlerWrapper(handler);
     const Types = {};
     // noinspection JSUnusedGlobalSymbols
     return {
         handler: apiHandler,
         unwrappedHandler: handler,
         Types,
-        useQuery: (args, options) => (0, react_query_1.useQuery)([queryKey, ...(apiOptions?.queryKeyMap?.(args) || [])], (0, apiHandlerWrapper_1.queryFnWrapper)(queryKey, args), options),
+        useQuery: (args, options) => useQuery({
+            queryKey: [queryKey, ...(apiOptions?.queryKeyMap?.(args) || [])],
+            queryFn: queryFnWrapper(queryKey, args),
+            ...options,
+        }),
         useMutation: (options) => {
-            const queryClient = (0, react_query_1.useQueryClient)();
-            return (0, react_query_1.useMutation)([queryKey], (0, apiHandlerWrapper_1.mutationFnWrapper)(queryKey), {
+            const queryClient = useQueryClient();
+            return useMutation({
+                mutationKey: [queryKey],
+                mutationFn: mutationFnWrapper(queryKey),
                 ...options,
                 async onMutate(...params) {
                     return {
@@ -41,19 +45,19 @@ function createApi(queryKey, handler, apiOptions) {
                 },
             });
         },
-        invalidateQueries: (queryClient, args) => queryClient.invalidateQueries([
-            queryKey,
-            ...(apiOptions?.queryKeyMap?.(args) || []),
-        ]),
-        prefetchQuery: (queryClient, args, req, res) => queryClient.prefetchQuery([queryKey, ...(apiOptions?.queryKeyMap?.(args) || [])], () => handler(args, req, res)),
-        refetchQueries: (queryClient, args) => queryClient.refetchQueries([
-            queryKey,
-            ...(apiOptions?.queryKeyMap?.(args) || []),
-        ]),
-        cancelQueries: (queryClient, args) => queryClient.cancelQueries([
-            queryKey,
-            ...(apiOptions?.queryKeyMap?.(args) || []),
-        ]),
+        invalidateQueries: (queryClient, args) => queryClient.invalidateQueries({
+            queryKey: [queryKey, ...(apiOptions?.queryKeyMap?.(args) || [])],
+        }),
+        prefetchQuery: (queryClient, args, req, res) => queryClient.prefetchQuery({
+            queryKey: [queryKey, ...(apiOptions?.queryKeyMap?.(args) || [])],
+            queryFn: () => handler(args, req, res),
+        }),
+        refetchQueries: (queryClient, args) => queryClient.refetchQueries({
+            queryKey: [queryKey, ...(apiOptions?.queryKeyMap?.(args) || [])],
+        }),
+        cancelQueries: (queryClient, args) => queryClient.cancelQueries({
+            queryKey: [queryKey, ...(apiOptions?.queryKeyMap?.(args) || [])],
+        }),
         getQueryData: (queryClient, args) => queryClient.getQueryData([
             queryKey,
             ...(apiOptions?.queryKeyMap?.(args) || []),
@@ -61,4 +65,3 @@ function createApi(queryKey, handler, apiOptions) {
         setQueryData: (queryClient, updater, args) => queryClient.setQueryData([queryKey, ...(apiOptions?.queryKeyMap?.(args) || [])], updater),
     };
 }
-exports.default = createApi;

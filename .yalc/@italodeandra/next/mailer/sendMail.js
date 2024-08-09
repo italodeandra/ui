@@ -1,17 +1,12 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
 /* eslint-disable no-var */
-const mailgen_1 = __importDefault(require("mailgen"));
-const nodemailer_1 = require("nodemailer");
+import Mailgen from "mailgen";
+import { createTestAccount, createTransport, getTestMessageUrl, } from "nodemailer";
 let cached = global.nodemailer;
 if (!cached) {
     cached = global.nodemailer = { transporter: null };
 }
 const isProd = process.env.APP_ENV === "production";
-function prepareSendMail({ product, smtp, }) {
+export default function prepareSendMail({ product, smtp, }) {
     smtp = smtp || {
         from: process.env.SMTP_FROM,
         server: {
@@ -26,7 +21,7 @@ function prepareSendMail({ product, smtp, }) {
     return async (to, subject, content) => {
         if (!cached.transporter) {
             if (!isProd) {
-                const testAccount = await (0, nodemailer_1.createTestAccount)();
+                const testAccount = await createTestAccount();
                 smtp = {
                     from: `Majapi <${testAccount.user}>`,
                     server: {
@@ -39,9 +34,9 @@ function prepareSendMail({ product, smtp, }) {
                     },
                 };
             }
-            cached.transporter = (0, nodemailer_1.createTransport)(smtp.server);
+            cached.transporter = createTransport(smtp.server);
         }
-        const mailGenerator = new mailgen_1.default({
+        const mailGenerator = new Mailgen({
             theme: "cerberus",
             product,
         });
@@ -56,8 +51,7 @@ function prepareSendMail({ product, smtp, }) {
         });
         if (!isProd) {
             console.info("Message sent: %s", info.messageId);
-            console.info("Preview URL: %s", (0, nodemailer_1.getTestMessageUrl)(info));
+            console.info("Preview URL: %s", getTestMessageUrl(info));
         }
     };
 }
-exports.default = prepareSendMail;

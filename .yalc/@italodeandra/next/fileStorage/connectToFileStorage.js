@@ -1,7 +1,5 @@
-"use strict";
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-Object.defineProperty(exports, "__esModule", { value: true });
-const minio_1 = require("minio");
+import { Client } from "minio";
 /**
  * Global is used here to maintain a cached connection across hot reloads
  * in development. This prevents connections growing exponentially
@@ -13,7 +11,7 @@ if (!cached) {
     // @ts-ignore
     cached = global.minio = { conn: null };
 }
-async function connectToFileStorage() {
+export default async function connectToFileStorage() {
     if (cached.conn) {
         return cached.conn;
     }
@@ -32,7 +30,7 @@ async function connectToFileStorage() {
     if (!process.env.S3_REGION) {
         throw Error("Missing S3_REGION env var");
     }
-    cached.conn = new minio_1.Client({
+    cached.conn = new Client({
         endPoint: process.env.S3_ENDPOINT,
         useSSL: process.env.S3_USE_SSL === "true",
         accessKey: process.env.S3_ACCESS_KEY,
@@ -46,4 +44,3 @@ async function connectToFileStorage() {
     }
     return cached.conn;
 }
-exports.default = connectToFileStorage;

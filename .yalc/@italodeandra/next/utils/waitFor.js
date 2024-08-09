@@ -1,10 +1,5 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const ms_1 = __importDefault(require("ms"));
-async function waitFor(asyncFunction, interval, timeout) {
+import ms from "ms";
+export default async function waitFor(asyncFunction, interval, timeout) {
     const start = Date.now();
     return new Promise((resolve, reject) => {
         const intervalId = setInterval(async () => {
@@ -22,11 +17,10 @@ async function waitFor(asyncFunction, interval, timeout) {
                 resolve(result);
             }
             else if (Date.now() - start >=
-                (typeof timeout === "string" ? (0, ms_1.default)(timeout) : timeout)) {
+                (typeof timeout === "string" ? ms(timeout) : timeout)) {
                 clearInterval(intervalId);
                 reject(new Error("Timeout reached"));
             }
-        }, typeof interval === "string" ? (0, ms_1.default)(interval) : interval);
+        }, typeof interval === "string" ? ms(interval) : interval);
     });
 }
-exports.default = waitFor;

@@ -4,7 +4,7 @@ import type { NextApiResponse } from "next";
  */
 export declare const badRequest: (res: NextApiResponse, body?: {
     [key: string]: any;
-} | undefined) => {
+}) => {
     body: {
         [key: string]: any;
     } | undefined;
@@ -16,7 +16,7 @@ export declare const badRequest: (res: NextApiResponse, body?: {
  */
 export declare const unauthorized: (res: NextApiResponse, body?: {
     [key: string]: any;
-} | undefined) => {
+}) => {
     body: {
         [key: string]: any;
     } | undefined;
@@ -28,7 +28,7 @@ export declare const unauthorized: (res: NextApiResponse, body?: {
  */
 export declare const notFound: (res: NextApiResponse, body?: {
     [key: string]: any;
-} | undefined) => {
+}) => {
     body: {
         [key: string]: any;
     } | undefined;
@@ -40,7 +40,7 @@ export declare const notFound: (res: NextApiResponse, body?: {
  */
 export declare const conflict: (res: NextApiResponse, body?: {
     [key: string]: any;
-} | undefined) => {
+}) => {
     body: {
         [key: string]: any;
     } | undefined;
@@ -52,7 +52,7 @@ export declare const conflict: (res: NextApiResponse, body?: {
  */
 export declare const internalServerError: (res: NextApiResponse, body?: {
     [key: string]: any;
-} | undefined) => {
+}) => {
     body: {
         [key: string]: any;
     } | undefined;
@@ -61,7 +61,7 @@ export declare const internalServerError: (res: NextApiResponse, body?: {
 };
 export declare const tooManyRequests: (res: NextApiResponse, body?: {
     [key: string]: any;
-} | undefined) => {
+}) => {
     body: {
         [key: string]: any;
     } | undefined;

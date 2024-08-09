@@ -1,14 +1,8 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.uploadFile = exports.uploadImage = void 0;
-const sharp_1 = __importDefault(require("sharp"));
-const connectToFileStorage_1 = __importDefault(require("./connectToFileStorage"));
-const converters_1 = require("./converters");
+import sharp from "sharp";
+import connectToFileStorage from "./connectToFileStorage";
+import { base64ToBuffer } from "./converters";
 // noinspection JSUnusedGlobalSymbols
-async function uploadImage(image, objectName, 
+export async function uploadImage(image, objectName, 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 metaData) {
     if (process.env.APP_ENV === "development") {
@@ -17,9 +11,9 @@ metaData) {
     if (!image?.startsWith("data:")) {
         return image;
     }
-    const fileStorage = await (0, connectToFileStorage_1.default)();
-    const buffer = (0, converters_1.base64ToBuffer)(image);
-    const resizedBuffer = await (0, sharp_1.default)(buffer)
+    const fileStorage = await connectToFileStorage();
+    const buffer = base64ToBuffer(image);
+    const resizedBuffer = await sharp(buffer)
         .resize({
         width: 500,
         withoutEnlargement: true,
@@ -30,7 +24,7 @@ metaData) {
     if (!process.env.S3_BUCKET_NAME) {
         throw Error("Missing S3_BUCKET_NAME env var");
     }
-    const result = await fileStorage.putObject(process.env.S3_BUCKET_NAME, objectName, resizedBuffer, {
+    const result = await fileStorage.putObject(process.env.S3_BUCKET_NAME, objectName, resizedBuffer, undefined, {
         "Content-Type": "image/jpeg",
         ...metaData,
     });
@@ -39,9 +33,8 @@ metaData) {
     }
     return `/file/${objectName}`;
 }
-exports.uploadImage = uploadImage;
 // noinspection JSUnusedGlobalSymbols
-async function uploadFile(file, objectFileName, contentType, 
+export async function uploadFile(file, objectFileName, contentType, 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 metaData) {
     if (process.env.APP_ENV === "development") {
@@ -50,12 +43,12 @@ metaData) {
     if (!file?.startsWith("data:")) {
         return file;
     }
-    const fileStorage = await (0, connectToFileStorage_1.default)();
-    const buffer = (0, converters_1.base64ToBuffer)(file);
+    const fileStorage = await connectToFileStorage();
+    const buffer = base64ToBuffer(file);
     if (!process.env.S3_BUCKET_NAME) {
         throw Error("Missing S3_BUCKET_NAME env var");
     }
-    const result = await fileStorage.putObject(process.env.S3_BUCKET_NAME, objectFileName, buffer, {
+    const result = await fileStorage.putObject(process.env.S3_BUCKET_NAME, objectFileName, buffer, undefined, {
         "Content-Type": contentType,
         ...metaData,
     });
@@ -64,4 +57,3 @@ metaData) {
     }
     return `/file/${objectFileName}`;
 }
-exports.uploadFile = uploadFile;

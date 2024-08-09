@@ -1,6 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-function querify(object) {
+export default function querify(object) {
     return object;
 }
-exports.default = querify;

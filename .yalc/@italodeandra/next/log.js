@@ -1,7 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-async function log(content) {
+export default async function log(content) {
     if (process.env.LOG_API_URL && process.env.LOG_APP_ID) {
         await fetch(process.env.LOG_API_URL, {
             method: "POST",
@@ -16,4 +14,3 @@ async function log(content) {
         });
     }
 }
-exports.default = log;

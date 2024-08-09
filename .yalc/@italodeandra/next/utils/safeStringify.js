@@ -1,7 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function safeStringify(obj, indent) {
+export default function safeStringify(obj, indent) {
     let cache = [];
     const retVal = JSON.stringify(obj, (key, value) => typeof value === "object" && value !== null
         ? cache.includes(value)
@@ -11,4 +9,3 @@ function safeStringify(obj, indent) {
     cache = [];
     return retVal;
 }
-exports.default = safeStringify;

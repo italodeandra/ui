@@ -1,20 +1,15 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const axios_1 = __importDefault(require("axios"));
-const form_data_1 = __importDefault(require("form-data"));
-const converters_1 = require("./fileStorage/converters");
-async function uploadToImgur(image) {
+import axios from "axios";
+import FormData from "form-data";
+import { base64ToBuffer } from "./fileStorage/converters";
+export default async function uploadToImgur(image) {
     if (typeof image === "string" && image.startsWith("http")) {
         return image;
     }
-    const data = new form_data_1.default();
+    const data = new FormData();
     data.append("image", typeof image == "string" && image.startsWith("data")
-        ? (0, converters_1.base64ToBuffer)(image)
+        ? base64ToBuffer(image)
         : image);
-    return (0, axios_1.default)({
+    return axios({
         method: "post",
         maxBodyLength: Infinity,
         url: "https://api.imgur.com/3/image",
@@ -25,4 +20,3 @@ async function uploadToImgur(image) {
         data: data,
     }).then((res) => res.data.data.link);
 }
-exports.default = uploadToImgur;

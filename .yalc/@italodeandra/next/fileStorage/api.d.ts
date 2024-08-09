@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import { NextApiHandler } from "next";
 export type GetFileArgs = {
     fileStorage?: [string, string];

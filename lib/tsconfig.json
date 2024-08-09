@@ -6,7 +6,6 @@
     "emitDeclarationOnly": false,
     "outDir": "../dist",
     "jsx": "react-jsx",
-    "module": "commonjs",
     "target": "esnext"
   },
   "include": [
