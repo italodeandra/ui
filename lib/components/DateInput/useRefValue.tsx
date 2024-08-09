@@ -8,6 +8,7 @@ export function parseDate(value: string) {
   try {
     // noinspection SpellCheckingInspection
     return dayjs(value, "YYYY-MM-DDTHH:mm").toISOString();
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (e) {
     return value;
   }
@@ -17,6 +18,7 @@ export function formatDate(value: string) {
   try {
     // noinspection SpellCheckingInspection
     return dayjs(value).format("YYYY-MM-DDTHH:mm");
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (e) {
     return value;
   }

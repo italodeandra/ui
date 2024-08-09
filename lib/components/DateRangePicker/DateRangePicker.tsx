@@ -77,6 +77,26 @@ export default function DateRangePicker({
     </Button>
   );
 
+  const hidden = useMemo(
+    () => [
+      ...(fromDate
+        ? [
+            {
+              before: fromDate,
+            },
+          ]
+        : []),
+      ...(toDate
+        ? [
+            {
+              after: toDate,
+            },
+          ]
+        : []),
+    ],
+    [fromDate, toDate],
+  );
+
   return (
     <Popover.Root>
       <Popover.Trigger asChild>{children2}</Popover.Trigger>
@@ -89,11 +109,13 @@ export default function DateRangePicker({
           numberOfMonths={2}
           showOutsideDays
           classNames={dayPickerClassNames}
-          fromDate={fromDate}
-          toDate={toDate}
+          startMonth={fromDate}
+          endMonth={toDate}
+          hidden={hidden}
           min={min}
           max={max}
           footer={monthFooter}
+          excludeDisabled
         />
         {footer}
       </Popover.Content>

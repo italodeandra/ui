@@ -21,6 +21,7 @@ export default function createStateHydration(cookieName: string, state: any) {
         if (typeof cookieValue === "object") {
           Object.assign(state, cookieValue);
         }
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (e) {
         // do nothing
       }

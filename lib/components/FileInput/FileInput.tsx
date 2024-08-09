@@ -122,6 +122,7 @@ function FileInput(
       } else {
         try {
           ref.current = innerRef.current;
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (e) {
           // do nothing
         }
@@ -169,6 +170,7 @@ function FileInput(
               size: file.size,
             });
             setInnerValue((value) => [...value, uploadedFile]);
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
           } catch (e) {
             filesNotUploaded.push(file);
           }

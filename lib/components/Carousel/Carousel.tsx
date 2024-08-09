@@ -4,7 +4,7 @@ import clsx from "../../utils/clsx";
 import { ReactNode, useEffect, useState } from "react";
 import Button from "../Button";
 import { useMeasure } from "react-use";
-import mergeRefs from "react-merge-refs";
+import { mergeRefs } from "react-merge-refs";
 import { EmblaOptionsType, EmblaPluginType } from "embla-carousel";
 
 export type CarouselProps = {

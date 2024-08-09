@@ -1,16 +1,8 @@
-/** @type {import("next").NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-  swcMinify: true,
-  webpack: (config, { isServer }) => {
-    if (!isServer) {
-      config.resolve.alias = {
-        ...config.resolve.alias,
-        bson: false,
-      };
-    }
-    return config;
-  },
-};
+/* eslint-disable @typescript-eslint/no-require-imports */
+const nextConfig = require("@italodeandra/next/next.config.js");
+const { merge } = require("lodash");
 
-module.exports = nextConfig;
+/** @type {import("next").NextConfig} */
+const config = {};
+
+module.exports = merge(nextConfig, config);

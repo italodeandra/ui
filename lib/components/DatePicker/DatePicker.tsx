@@ -2,14 +2,15 @@ import React, {
   ComponentProps,
   ReactElement,
   ReactNode,
+  useCallback,
   useMemo,
   useState,
 } from "react";
 import {
   DateRange,
-  DayModifiers,
   DayPicker,
   Matcher,
+  Modifiers,
   ModifiersClassNames,
 } from "react-day-picker";
 import dayjs from "dayjs";
@@ -47,7 +48,7 @@ export default function DatePicker({
   toDate?: Date;
   footer?: ReactNode;
   monthFooter?: ReactNode;
-  modifiers?: DayModifiers;
+  modifiers?: Modifiers;
   modifiersClassNames?: ModifiersClassNames;
   disabled?: Matcher | Matcher[];
   defaultMonth?: Date;
@@ -82,6 +83,31 @@ export default function DatePicker({
     </Button>
   );
 
+  const defaultDisabled = useMemo(
+    () => [
+      ...(fromDate
+        ? [
+            {
+              before: fromDate,
+            },
+          ]
+        : []),
+      ...(toDate
+        ? [
+            {
+              after: toDate,
+            },
+          ]
+        : []),
+    ],
+    [fromDate, toDate],
+  );
+
+  const onSelect = useCallback((value?: Date) => {
+    setOpen(false);
+    setDate(value);
+  }, []);
+
   return (
     <Popover.Root open={open} onOpenChange={setOpen}>
       <Popover.Trigger asChild>{children2}</Popover.Trigger>
@@ -89,18 +115,15 @@ export default function DatePicker({
         <DayPicker
           mode="single"
           selected={date}
-          onSelect={(value) => {
-            setOpen(false);
-            setDate(value);
-          }}
+          onSelect={onSelect}
           showOutsideDays
           classNames={dayPickerClassNames}
-          fromDate={fromDate}
-          toDate={toDate}
+          startMonth={fromDate}
+          endMonth={toDate}
           footer={monthFooter}
           modifiers={modifiers}
           modifiersClassNames={modifiersClassNames}
-          disabled={disabled}
+          disabled={disabled || defaultDisabled}
           defaultMonth={defaultMonth}
         />
         {footer}
