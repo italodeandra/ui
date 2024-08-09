@@ -10,7 +10,6 @@ import {
   DateRange,
   DayPicker,
   Matcher,
-  Modifiers,
   ModifiersClassNames,
 } from "react-day-picker";
 import dayjs from "dayjs";
@@ -23,6 +22,7 @@ import {
   dayPickerButtonClassName,
   dayPickerClassNames,
 } from "../../styles/DayPicker.classNames";
+import { DayPickerProps } from "react-day-picker/src/types/props";
 
 export type { DateRange };
 
@@ -48,7 +48,7 @@ export default function DatePicker({
   toDate?: Date;
   footer?: ReactNode;
   monthFooter?: ReactNode;
-  modifiers?: Modifiers;
+  modifiers?: DayPickerProps["modifiers"];
   modifiersClassNames?: ModifiersClassNames;
   disabled?: Matcher | Matcher[];
   defaultMonth?: Date;

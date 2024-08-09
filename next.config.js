@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/no-require-imports */
-const nextConfig = require("@italodeandra/next/next.config.js");
-const { merge } = require("lodash");
+import nextConfig from "@italodeandra/next/next.config.js";
+import { merge } from "lodash-es";
 
 /** @type {import("next").NextConfig} */
 const config = {};
 
-module.exports = merge(nextConfig, config);
+export default merge(nextConfig, config);

@@ -1,5 +1,3 @@
-"use strict";
-/** @type {import("next").NextConfig} */
 const nextConfig = {
     reactStrictMode: true,
     webpack: (config, { isServer }) => {
@@ -20,7 +18,8 @@ const nextConfig = {
                 "@hapi/boom": false,
                 minio: false,
                 openai: false,
-                "mime-types": false
+                "mime-types": false,
+                "@react-email": false
             };
         }
         return config;
@@ -35,4 +34,4 @@ const nextConfig = {
         ]
     }
 };
-module.exports = nextConfig;
+export default nextConfig;

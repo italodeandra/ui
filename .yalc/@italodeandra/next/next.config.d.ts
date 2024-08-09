@@ -1,3 +1,3 @@
-export = nextConfig;
-/** @type {import("next").NextConfig} */
-declare const nextConfig: import("next").NextConfig;
+import { NextConfig } from "next";
+declare const nextConfig: NextConfig;
+export default nextConfig;
