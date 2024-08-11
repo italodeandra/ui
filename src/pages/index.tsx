@@ -89,7 +89,7 @@ export default function Page() {
             </span>{" "}
             designed user interface.
           </p>
-          <p className="text-xl text-gray-500 dark:text-gray-400">
+          <p className="text-lg text-gray-500 dark:text-gray-400 leading-tight">
             A collection of components, hooks and utility functions for creating
             unique interfaces without forgetting to be responsive, accessible
             and artistic at the same.
@@ -98,7 +98,7 @@ export default function Page() {
             <Button
               href="/getting-started"
               variant="light"
-              color="primary"
+              color="default"
               trailing={<ArrowLongRightIcon />}
               className="!px-4 !text-lg"
               {...getExampleCodeMouseEvents(`<Button

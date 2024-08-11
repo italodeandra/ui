@@ -74,7 +74,7 @@
     "eslint-config-next": "^14.2.5",
     "postcss": "^8.4.41",
     "prettier": "^3.3.3",
-    "prettier-plugin-tailwindcss": "^0.6.5",
+    "prettier-plugin-tailwindcss": "^0.6.6",
     "shx": "^0.3.4",
     "tailwindcss": "^3.4.9",
     "type-fest": "^4.24.0",
