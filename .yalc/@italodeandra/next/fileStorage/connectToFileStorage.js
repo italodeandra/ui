@@ -1,19 +1,9 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Client } from "minio";
-/**
- * Global is used here to maintain a cached connection across hot reloads
- * in development. This prevents connections growing exponentially
- * during API Route usage.
- */
-// @ts-ignore
-let cached = global.minio;
-if (!cached) {
-    // @ts-ignore
-    cached = global.minio = { conn: null };
-}
+import { onlyServer } from "../utils/isServer";
+const _global = (onlyServer(() => global) || {});
 export default async function connectToFileStorage() {
-    if (cached.conn) {
-        return cached.conn;
+    if (_global._minio) {
+        return _global._minio;
     }
     if (!process.env.S3_ENDPOINT) {
         throw Error("Missing S3_ENDPOINT env var");
@@ -30,17 +20,17 @@ export default async function connectToFileStorage() {
     if (!process.env.S3_REGION) {
         throw Error("Missing S3_REGION env var");
     }
-    cached.conn = new Client({
+    _global._minio = new Client({
         endPoint: process.env.S3_ENDPOINT,
         useSSL: process.env.S3_USE_SSL === "true",
         accessKey: process.env.S3_ACCESS_KEY,
         secretKey: process.env.S3_SECRET_KEY,
         port: !isNaN(parseInt(process.env.S3_PORT || ""))
             ? parseInt(process.env.S3_PORT || "")
-            : undefined,
+            : undefined
     });
-    if (!(await cached.conn.bucketExists(process.env.S3_BUCKET_NAME))) {
-        await cached.conn.makeBucket(process.env.S3_BUCKET_NAME, process.env.S3_REGION);
+    if (!(await _global._minio.bucketExists(process.env.S3_BUCKET_NAME))) {
+        await _global._minio.makeBucket(process.env.S3_BUCKET_NAME, process.env.S3_REGION);
     }
-    return cached.conn;
+    return _global._minio;
 }

@@ -1,10 +1,8 @@
 /* eslint-disable no-var */
 import { createTestAccount, createTransport, getTestMessageUrl, } from "nodemailer";
 import { render } from "@react-email/components";
-let cached = global.nodemailer;
-if (!cached) {
-    cached = global.nodemailer = { transporter: null };
-}
+import { onlyServer } from "../utils/isServer";
+const _global = (onlyServer(() => global) || {});
 const isProd = process.env.APP_ENV === "production";
 export default function prepareSendMail(props) {
     let smtp = props?.smtp || {
@@ -19,7 +17,7 @@ export default function prepareSendMail(props) {
         },
     };
     return async (to, subject, emailBody) => {
-        if (!cached.transporter) {
+        if (!_global._nodemailerTransporter) {
             if (!isProd) {
                 const testAccount = await createTestAccount();
                 smtp = {
@@ -34,12 +32,12 @@ export default function prepareSendMail(props) {
                     },
                 };
             }
-            cached.transporter = createTransport(smtp.server);
+            _global._nodemailerTransporter = createTransport(smtp.server);
         }
         const htmlString = render(emailBody, {
             pretty: true,
         });
-        const info = await cached.transporter.sendMail({
+        const info = await _global._nodemailerTransporter.sendMail({
             from: smtp.from,
             to,
             subject,

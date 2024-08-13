@@ -19,7 +19,7 @@ const nextConfig = {
                 minio: false,
                 openai: false,
                 "mime-types": false,
-                "@react-email": false
+                "@react-email": false,
             };
         }
         return config;
@@ -29,9 +29,10 @@ const nextConfig = {
             {
                 protocol: "https",
                 hostname: "i.imgur.com",
-                pathname: "**"
-            }
-        ]
-    }
+                pathname: "**",
+            },
+        ],
+    },
+    transpilePackages: ["@italodeandra/auth", "@italodeandra/ui"],
 };
 export default nextConfig;

@@ -5,7 +5,6 @@
     "declaration": true,
     "emitDeclarationOnly": false,
     "outDir": "../dist",
-    "jsx": "react-jsx",
     "target": "esnext"
   },
   "include": [

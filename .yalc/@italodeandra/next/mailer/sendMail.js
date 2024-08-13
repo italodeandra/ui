@@ -1,10 +1,7 @@
-/* eslint-disable no-var */
 import Mailgen from "mailgen";
 import { createTestAccount, createTransport, getTestMessageUrl, } from "nodemailer";
-let cached = global.nodemailer;
-if (!cached) {
-    cached = global.nodemailer = { transporter: null };
-}
+import { onlyServer } from "../utils/isServer";
+const _global = (onlyServer(() => global) || {});
 const isProd = process.env.APP_ENV === "production";
 export default function prepareSendMail({ product, smtp, }) {
     smtp = smtp || {
@@ -19,7 +16,7 @@ export default function prepareSendMail({ product, smtp, }) {
         },
     };
     return async (to, subject, content) => {
-        if (!cached.transporter) {
+        if (!_global._nodemailerTransporter) {
             if (!isProd) {
                 const testAccount = await createTestAccount();
                 smtp = {
@@ -34,7 +31,7 @@ export default function prepareSendMail({ product, smtp, }) {
                     },
                 };
             }
-            cached.transporter = createTransport(smtp.server);
+            _global._nodemailerTransporter = createTransport(smtp.server);
         }
         const mailGenerator = new Mailgen({
             theme: "cerberus",
@@ -42,7 +39,7 @@ export default function prepareSendMail({ product, smtp, }) {
         });
         const emailBody = mailGenerator.generate({ body: content });
         const emailText = mailGenerator.generatePlaintext({ body: content });
-        const info = await cached.transporter.sendMail({
+        const info = await _global._nodemailerTransporter.sendMail({
             from: smtp.from,
             to,
             subject,
