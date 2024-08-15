@@ -7,10 +7,12 @@ function Tooltip(
     children,
     content,
     side,
+    delayDuration,
   }: {
     children?: ReactNode;
     content?: ReactNode;
     side?: "top" | "bottom" | "left" | "right";
+    delayDuration?: number;
   },
   ref: ForwardedRef<HTMLButtonElement>,
 ) {
@@ -20,7 +22,7 @@ function Tooltip(
 
   return (
     <RTooltip.Provider>
-      <RTooltip.Root>
+      <RTooltip.Root delayDuration={delayDuration}>
         <RTooltip.Trigger asChild ref={ref}>
           {children}
         </RTooltip.Trigger>
@@ -29,7 +31,7 @@ function Tooltip(
             className={clsx(
               "z-20 rounded bg-zinc-950 px-2 py-1 text-center text-sm text-zinc-50 shadow",
               "dark:bg-zinc-50 dark:text-zinc-950",
-              "data-[state=delayed-open]:data-[side=bottom]:animate-elasticSlideUpAndFade data-[state=delayed-open]:data-[side=left]:animate-elasticSlideRightAndFade data-[state=delayed-open]:data-[side=right]:animate-elasticSlideLeftAndFade data-[state=delayed-open]:data-[side=top]:animate-elasticSlideDownAndFade will-change-[transform,opacity] data-[state=closed]:animate-fadeOut",
+              "will-change-[transform,opacity] data-[state=closed]:animate-fadeOut data-[state=delayed-open]:data-[side=bottom]:animate-elasticSlideUpAndFade data-[state=delayed-open]:data-[side=left]:animate-elasticSlideRightAndFade data-[state=delayed-open]:data-[side=right]:animate-elasticSlideLeftAndFade data-[state=delayed-open]:data-[side=top]:animate-elasticSlideDownAndFade",
             )}
             sideOffset={5}
             side={side}
