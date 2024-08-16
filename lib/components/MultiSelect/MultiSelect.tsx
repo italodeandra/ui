@@ -114,7 +114,7 @@ function MultiSelectInput<
           /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
           {...(props as any)}
           ref={ref}
-          className="rounded-md border-none !ring-transparent disabled:cursor-not-allowed disabled:text-zinc-500 sm:text-sm dark:bg-zinc-800 dark:disabled:bg-zinc-900/90"
+          className="rounded-md border-none !ring-transparent disabled:cursor-not-allowed disabled:text-zinc-500 dark:bg-zinc-800 dark:disabled:bg-zinc-900/90 sm:text-sm"
           readOnly={readOnly}
         />
       )}
@@ -305,7 +305,7 @@ export default function MultiSelect<T extends object | string>({
                     "absolute z-10 mt-1 max-h-72 w-full scroll-py-2 overflow-y-auto py-2 text-sm text-zinc-800 dark:text-zinc-200",
                   )}
                 >
-                  {creatable && !filteredItems.length && !!query && (
+                  {creatable && !!query && (
                     <Combobox.Option
                       value={query}
                       className={({ active }) =>

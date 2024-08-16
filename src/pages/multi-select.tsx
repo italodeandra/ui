@@ -46,7 +46,6 @@ export default function Page() {
             creatable
             required
             value={["Leslie Alexander"]}
-            readOnly
           />
           <Button type="submit">Submit</Button>
         </form>
