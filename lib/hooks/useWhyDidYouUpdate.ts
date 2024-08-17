@@ -33,7 +33,7 @@ export default function useWhyDidYouUpdate(
           typeof props[key] === "object" &&
           typeof previousProps.current[key] === "object"
         ) {
-          if (isEqual(previousProps.current[key], props[key])) {
+          if (!isEqual(previousProps.current[key], props[key])) {
             // add to changesObj
             changesObj[key] = {
               from: previousProps.current[key],
