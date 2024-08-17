@@ -20,6 +20,8 @@ const nextConfig = {
                 openai: false,
                 "mime-types": false,
                 "@react-email": false,
+                "open-graph-scraper": false,
+                "playwright-core": false,
             };
         }
         return config;
@@ -34,5 +36,12 @@ const nextConfig = {
         ],
     },
     transpilePackages: ["@italodeandra/auth", "@italodeandra/ui"],
+    experimental: {
+        optimizePackageImports: [
+            "@italodeandra/next",
+            "@italodeandra/ui",
+            "@italodeandra/auth",
+        ],
+    },
 };
 export default nextConfig;

@@ -13,7 +13,7 @@ import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import clsx from "../../utils/clsx";
 import Button from "../Button/Button";
 import UnstyledButton, { UnstyledButtonProps } from "../Button/UnstyledButton";
-import Text, { TextProps } from "../Text/Text";
+import Text, { TextProps } from "../Text";
 import { useMount } from "react-use";
 
 export const defaultMenuItemsClassName =

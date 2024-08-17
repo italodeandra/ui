@@ -13,6 +13,7 @@ export function useScrollY(disabled?: boolean) {
     function onScroll() {
       setScrollY(window.scrollY);
     }
+
     if (!disabled) {
       onScroll();
       window.addEventListener("scroll", onScroll, { passive: true });

@@ -36,7 +36,7 @@ export default function Slider({
   return (
     <RSlider.Root
       className={clsx(
-        "relative flex items-center select-none touch-none h-5",
+        "relative flex h-5 touch-none select-none items-center",
         className,
       )}
       value={intervalValue}
@@ -45,14 +45,14 @@ export default function Slider({
       step={step}
       min={min}
     >
-      <RSlider.Track className="bg-black/30 relative grow rounded-full h-[3px]">
-        <RSlider.Range className="absolute bg-primary-500 rounded-full h-full" />
+      <RSlider.Track className="relative h-[3px] grow rounded-full bg-black/30">
+        <RSlider.Range className="absolute h-full rounded-full bg-primary-500" />
       </RSlider.Track>
       {fakeArray(thumbs).map((n) => (
         <RSlider.Thumb
           key={n}
           className={clsx(
-            "transition block w-5 h-5 bg-white shadow-md rounded-full hover:bg-primary-500 focus:outline-none focus-visible:ring-2 ring-offset-2 ring-offset-zinc-100 ring-primary-500 focus-visible:shadow-lg",
+            "block h-5 w-5 rounded-full bg-white shadow-md ring-primary-500 ring-offset-2 ring-offset-zinc-100 transition hover:bg-primary-500 focus:outline-none focus-visible:shadow-lg focus-visible:ring-2",
             thumbClassName,
           )}
         />

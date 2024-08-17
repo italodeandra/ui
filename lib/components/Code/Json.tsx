@@ -1,5 +1,5 @@
 import Code from "./Code";
-import { isNil } from "lodash";
+import { isNil } from "lodash-es";
 
 export type JsonProps = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

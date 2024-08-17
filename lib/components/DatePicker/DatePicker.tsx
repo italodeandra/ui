@@ -22,7 +22,7 @@ import {
   dayPickerButtonClassName,
   dayPickerClassNames,
 } from "../../styles/DayPicker.classNames";
-import { DayPickerProps } from "react-day-picker/src/types/props";
+import type { DayPickerProps } from "react-day-picker/src/types/props";
 
 export type { DateRange };
 

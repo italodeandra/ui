@@ -65,7 +65,7 @@ export default function Notifications({
                 <div className="p-4">
                   <div className="flex items-start">
                     {icon && (
-                      <div className="mr-2 flex-shrink-0 ">
+                      <div className="mr-2 flex-shrink-0">
                         {typeof icon === "string"
                           ? icon
                           : cloneElement(icon as ReactElement, {

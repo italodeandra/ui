@@ -159,7 +159,7 @@ const Button = <T extends HTMLElement = HTMLButtonElement>(
     if (icon) {
       children = <Loading className="my-auto" />;
     } else {
-      trailing = <Loading className="w-auto h-auto mr-0" />;
+      trailing = <Loading className="mr-0 h-auto w-auto" />;
     }
   }
 

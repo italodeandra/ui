@@ -16,8 +16,8 @@ import {
 } from "../Input";
 import FileSelect, { FileSelectProps } from "../FileSelect";
 import isomorphicObjectId from "@italodeandra/next/utils/isomorphicObjectId";
-import { isEqual } from "lodash";
-import Text from "../Text/Text";
+import { isEqual } from "lodash-es";
+import Text from "../Text";
 import { PreviewFile } from "./PreviewFile";
 import concurrentForOf from "@italodeandra/next/utils/concurrentForOf";
 

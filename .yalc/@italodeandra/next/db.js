@@ -19,8 +19,8 @@ export async function connectDb(afterConnected) {
             const mongod = await MongoMemoryServer.create({
                 instance: {
                     port: 5432,
-                    dbName: process.env.MONGODB_MEMORY_SERVER_DBNAME
-                }
+                    dbName: process.env.MONGODB_MEMORY_SERVER_DBNAME,
+                },
             });
             uri = `${mongod.getUri()}${process.env.MONGODB_MEMORY_SERVER_DBNAME || "test"}`;
         }

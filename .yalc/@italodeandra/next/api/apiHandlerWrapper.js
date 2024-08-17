@@ -47,6 +47,7 @@ export const queryFnWrapper = (queryKey, args) => (reactQuerySignal) => fetch(qu
     let data;
     try {
         data = await res.json();
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
     }
     catch (e) {
         throw {
@@ -72,6 +73,7 @@ export const mutationFnWrapper = (mutationKey) => (args) => fetch(mutationKey, {
     let data;
     try {
         data = await res.json();
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
     }
     catch (e) {
         data = null;

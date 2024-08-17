@@ -5,8 +5,8 @@ import Link from "next/link";
 import clsx from "../../utils/clsx";
 import {
   dropdownCheckboxItemClassName,
-  dropdownItemIndicatorClassName,
   dropdownItemClassName,
+  dropdownItemIndicatorClassName,
   dropdownSeparatorClassName,
 } from "../../styles/Dropdown.classNames";
 import { modalContentClassName } from "../../styles/Modal.classNames";

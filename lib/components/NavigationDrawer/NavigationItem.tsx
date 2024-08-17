@@ -1,5 +1,5 @@
 import clsx from "../../utils/clsx";
-import { useRouter } from "next/dist/client/router";
+import { useRouter } from "next/router";
 import { cloneElement, ReactElement, ReactNode } from "react";
 import Button from "../Button";
 import navigationDrawerState from "./navigationDrawer.state";

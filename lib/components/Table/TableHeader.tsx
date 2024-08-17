@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
-import Text from "../Text/Text";
-import Stack from "../Stack/Stack";
+import Text from "../Text";
+import Stack from "../Stack";
 
 export type TableHeaderProps = {
   title?: ReactNode;
@@ -27,7 +27,7 @@ export default function TableHeader({
           </Stack>
         )}
         {children && (
-          <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">{children}</div>
+          <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">{children}</div>
         )}
       </div>
     </div>

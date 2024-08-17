@@ -85,7 +85,7 @@ export default function Modal({
             >
               <Dialog.Panel
                 className={clsx(
-                  "relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm dark:bg-zinc-900 dark:ring-1 dark:ring-white/5",
+                  "relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all dark:bg-zinc-900 dark:ring-1 dark:ring-white/5 sm:my-8 sm:w-full sm:max-w-sm",
                   panelClassName,
                 )}
               >

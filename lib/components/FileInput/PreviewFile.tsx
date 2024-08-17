@@ -1,7 +1,7 @@
 import Group from "../Group";
 import { ArrowDownTrayIcon, DocumentIcon } from "@heroicons/react/24/outline";
 import Stack from "../Stack";
-import Text from "../Text/Text";
+import Text from "../Text";
 import numeral from "numeral";
 import Button from "../Button";
 import {

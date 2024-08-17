@@ -1,12 +1,10 @@
 import clsx from "../../utils/clsx";
-import { ClassAttributes, HTMLAttributes } from "react";
+import { DetailedHTMLProps, HTMLAttributes } from "react";
 
 export default function Skeleton({
   className,
   ...props
-}: JSX.IntrinsicAttributes &
-  ClassAttributes<HTMLDivElement> &
-  HTMLAttributes<HTMLDivElement>) {
+}: DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>) {
   return (
     <div
       className={clsx(

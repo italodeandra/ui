@@ -1,7 +1,7 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 import { MouseEvent, useCallback, useEffect, useMemo, useState } from "react";
 import clsx from "../../utils/clsx";
-import { range } from "lodash";
+import { range } from "lodash-es";
 import UnstyledButton from "../Button/UnstyledButton";
 
 export interface PaginationProps {

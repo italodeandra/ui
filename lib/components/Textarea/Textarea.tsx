@@ -13,7 +13,7 @@ export type TextareaProps = InputProps<false> &
 
 function Textarea(
   props: TextareaProps,
-  ref: ForwardedRef<HTMLTextAreaElement>
+  ref: ForwardedRef<HTMLTextAreaElement>,
 ) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return <Input as={TextareaAutosize} {...(props as any)} ref={ref} />;

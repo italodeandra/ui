@@ -1,4 +1,4 @@
-import { isNil } from "lodash";
+import { isNil } from "lodash-es";
 export default function removeEmptyProperties(doc) {
     const $unset = {};
     for (const key in doc) {

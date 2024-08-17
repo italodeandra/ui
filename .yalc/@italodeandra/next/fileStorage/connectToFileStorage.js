@@ -27,7 +27,7 @@ export default async function connectToFileStorage() {
         secretKey: process.env.S3_SECRET_KEY,
         port: !isNaN(parseInt(process.env.S3_PORT || ""))
             ? parseInt(process.env.S3_PORT || "")
-            : undefined
+            : undefined,
     });
     if (!(await _global._minio.bucketExists(process.env.S3_BUCKET_NAME))) {
         await _global._minio.makeBucket(process.env.S3_BUCKET_NAME, process.env.S3_REGION);

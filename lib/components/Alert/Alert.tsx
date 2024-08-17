@@ -96,7 +96,7 @@ export default function Alert({
           {actions && (
             <Group
               className={clsx(
-                "-mx-4 mt-1 -mb-2 sm:-mx-2 sm:-my-2",
+                "-mx-4 -mb-2 mt-1 sm:-mx-2 sm:-my-2",
                 styles.variants[variant].content,
               )}
             >

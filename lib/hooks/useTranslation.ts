@@ -1,11 +1,11 @@
 import { useCallback } from "react";
-import { get } from "lodash";
+import { get } from "lodash-es";
 
 export type Intl<T = string> = { [key: string]: Intl<T> | T };
 
 export default function useTranslation<K extends string>(
   intl?: Intl,
-  prePath?: string
+  prePath?: string,
 ) {
   return useCallback(
     (sentence: K, path?: string) => {
@@ -16,10 +16,10 @@ export default function useTranslation<K extends string>(
             ...(prePath?.split(".") || []),
             ...(path?.split(".") || []),
             sentence,
-          ].filter(Boolean)
+          ].filter(Boolean),
         ) as string) || sentence
       );
     },
-    [intl, prePath]
+    [intl, prePath],
   );
 }

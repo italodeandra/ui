@@ -6,6 +6,7 @@ export type TableRowProps = {
   onClick?: MouseEventHandler<HTMLTableRowElement>;
   className?: string;
 };
+
 function TableRow(
   { children, onClick, className, ...props }: TableRowProps,
   ref: ForwardedRef<HTMLTableRowElement>,

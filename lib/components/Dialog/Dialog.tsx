@@ -36,8 +36,8 @@ export default function Dialog({
         <RDialog.Overlay
           className={clsx(
             "ui-dialog-overlay",
-            "z-20 bg-black/50 fixed inset-0 flex items-center justify-center",
-            "data-[state=open]:animate-slideUpAndFade data-[state=closed]:animate-fadeOut will-change-[opacity,transform]",
+            "fixed inset-0 z-20 flex items-center justify-center bg-black/50",
+            "will-change-[opacity,transform] data-[state=closed]:animate-fadeOut data-[state=open]:animate-slideUpAndFade",
             overlayClassName,
           )}
         >
@@ -45,13 +45,13 @@ export default function Dialog({
             className={clsx(
               modalContentClassName,
               "ui-dialog-content",
-              "focus:outline-none relative p-0",
+              "relative p-0 focus:outline-none",
               contentClassName,
             )}
           >
             <div
               className={clsx(
-                "flex flex-col gap-3 p-4 max-h-[85vh] w-[90vw] max-w-[450px] overflow-auto",
+                "flex max-h-[85vh] w-[90vw] max-w-[450px] flex-col gap-3 overflow-auto p-4",
                 contentOverflowClassName,
               )}
             >
@@ -59,7 +59,7 @@ export default function Dialog({
                 <RDialog.Title
                   className={clsx(
                     "ui-dialog-title",
-                    "text-zinc-900 dark:text-zinc-50 text-lg font-medium -mb-1",
+                    "-mb-1 text-lg font-medium text-zinc-900 dark:text-zinc-50",
                   )}
                 >
                   {title}
@@ -80,7 +80,7 @@ export default function Dialog({
                 <Button
                   className={clsx(
                     "ui-dialog-close-button",
-                    "absolute top-1 right-1",
+                    "absolute right-1 top-1",
                     closeButtonClassName,
                   )}
                   aria-label="Close"

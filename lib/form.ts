@@ -5,7 +5,7 @@ import {
   IsTuple,
   TupleKeys,
 } from "react-hook-form/dist/types/path/common";
-import { cloneDeep, get, isNil, merge, set, unset } from "lodash";
+import { cloneDeep, get, isNil, merge, set, unset } from "lodash-es";
 import { Get, PartialDeep, RequiredDeep, WritableDeep } from "type-fest";
 import { DeepPartial } from "redux";
 import { useUnmount } from "react-use";

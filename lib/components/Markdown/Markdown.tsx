@@ -22,7 +22,7 @@ export default function Markdown({
   return (
     <div
       className={clsx(
-        "prose prose-zinc dark:prose-invert max-w-full",
+        "prose prose-zinc max-w-full dark:prose-invert",
         className,
       )}
       dangerouslySetInnerHTML={

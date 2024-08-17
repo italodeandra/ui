@@ -31,7 +31,7 @@ export default function CopyButton({
       type="button"
       color={copied ? "success" : undefined}
       size="sm"
-      className="absolute top-2.5 right-2.5 opacity-0 backdrop-blur focus:opacity-100 group-hover:opacity-100"
+      className="absolute right-2.5 top-2.5 opacity-0 backdrop-blur focus:opacity-100 group-hover:opacity-100"
       onClick={() => {
         window.navigator.clipboard.writeText(text).then(() => {
           setCopyCount((count) => count + 1);

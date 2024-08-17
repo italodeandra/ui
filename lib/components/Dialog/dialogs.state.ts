@@ -1,7 +1,7 @@
 import { proxy, ref } from "valtio";
 import isomorphicObjectId from "@italodeandra/next/utils/isomorphicObjectId";
 import { ReactNode } from "react";
-import { find } from "lodash";
+import { find } from "lodash-es";
 import { DialogProps } from "./Dialog";
 
 export type IDialog = {

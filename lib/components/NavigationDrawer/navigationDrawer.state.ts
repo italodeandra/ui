@@ -19,7 +19,7 @@ const navigationDrawerState = proxy({
 
 export const hydrateNavigationDrawerState = createStateHydration(
   "navigationDrawerState",
-  navigationDrawerState
+  navigationDrawerState,
 );
 
 export default navigationDrawerState;

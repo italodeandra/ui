@@ -7,4 +7,5 @@ export type NoUndefinedState<T> = T extends [
   ? [S, Dispatch<SetStateAction<S>>]
   : never;
 
+// noinspection JSUnusedGlobalSymbols
 export type UseStateTuple<T> = NoUndefinedState<ReturnType<typeof useState<T>>>;

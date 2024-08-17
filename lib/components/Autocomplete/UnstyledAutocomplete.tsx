@@ -12,7 +12,7 @@ import Input, {
 import clsx from "../../utils/clsx";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { useUpdateEffect } from "react-use";
-import { take } from "lodash";
+import { take } from "lodash-es";
 
 export interface UnstyledAutocompleteProps<T extends { _id: string }>
   extends Omit<

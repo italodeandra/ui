@@ -21,6 +21,7 @@ export async function blobUrlToBase64(url) {
 export function base64ToBuffer(base64) {
     return Buffer.from(base64.replace(/^data:.+;base64,/, ""), "base64");
 }
+// noinspection JSUnusedGlobalSymbols
 export function bufferToBase64(buffer) {
     return buffer.toString("base64");
 }

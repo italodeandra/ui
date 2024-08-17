@@ -18,7 +18,7 @@ import Input, {
   UnstyledInputProps,
 } from "../Input";
 import clsx from "../../utils/clsx";
-import { isEqual, take } from "lodash";
+import { isEqual, take } from "lodash-es";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import Badge from "../Badge";
 
