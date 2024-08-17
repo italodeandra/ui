@@ -12,7 +12,7 @@ import { useCallback, useMemo, useState } from "react";
 import { useMount } from "react-use";
 import ms from "ms";
 import Breadcrumbs from "../../lib/components/Breadcrumbs";
-import { map, orderBy } from "lodash";
+import { map, orderBy } from "lodash-es";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   props: {

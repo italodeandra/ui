@@ -5,7 +5,7 @@ import { GetServerSideProps } from "next";
 import { getCookies } from "cookies-next";
 import Breadcrumbs from "../../lib/components/Breadcrumbs";
 import Pagination from "../../lib/components/Pagination";
-import { range } from "lodash";
+import { range } from "lodash-es";
 import { useState } from "react";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({

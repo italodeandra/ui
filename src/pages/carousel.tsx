@@ -5,7 +5,7 @@ import { GetServerSideProps } from "next";
 import { getCookies } from "cookies-next";
 import Breadcrumbs from "../../lib/components/Breadcrumbs";
 import Carousel from "../../lib/components/Carousel";
-import { range } from "lodash";
+import { range } from "lodash-es";
 import Text from "../../lib/components/Text";
 import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 
