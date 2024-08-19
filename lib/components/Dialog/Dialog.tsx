@@ -1,6 +1,6 @@
 import * as RDialog from "@radix-ui/react-dialog";
 import { ReactNode } from "react";
-import { XMarkIcon } from "@heroicons/react/16/solid";
+import { XMarkIcon } from "@heroicons/react/20/solid";
 import Button from "../Button";
 import clsx from "../../utils/clsx";
 
@@ -48,6 +48,7 @@ export default function Dialog({
               "relative p-0 focus:outline-none",
               contentClassName,
             )}
+            {...(!description ? { "aria-describedby": undefined } : {})}
           >
             <div
               className={clsx(
@@ -59,7 +60,7 @@ export default function Dialog({
                 <RDialog.Title
                   className={clsx(
                     "ui-dialog-title",
-                    "-mb-1 text-lg font-medium text-zinc-900 dark:text-zinc-50",
+                    "-mb-1 text-lg font-medium leading-none text-zinc-900 dark:text-zinc-50",
                   )}
                 >
                   {title}
@@ -79,14 +80,13 @@ export default function Dialog({
               <RDialog.Close asChild>
                 <Button
                   className={clsx(
+                    "absolute right-1 top-1 p-1.5",
                     "ui-dialog-close-button",
-                    "absolute right-1 top-1",
                     closeButtonClassName,
                   )}
                   aria-label="Close"
                   variant="text"
                   icon
-                  size="sm"
                 >
                   <XMarkIcon />
                 </Button>
