@@ -13,7 +13,7 @@ export type InputProps<Select extends boolean | undefined> = {
 
 export const defaultLabelClassName = `ui-input-label block ${defaultTextStyles.variant.label} mb-1`;
 export const defaultInputClassNameUncolored =
-  "block w-full rounded-md shadow-sm sm:text-sm data-[disabled]:cursor-not-allowed dark:bg-zinc-800";
+  "block w-full rounded-md shadow-sm sm:text-sm data-[disabled]:cursor-not-allowed dark:bg-zinc-800 dark:placeholder:text-zinc-500 px-2.5";
 export const defaultInputClassName = clsx(
   "ui-input-input",
   defaultInputClassNameUncolored,
@@ -22,9 +22,9 @@ export const defaultInputClassName = clsx(
 );
 export const defaultHelpTextClassName = `mt-2 ${defaultTextStyles.variant.secondary}`;
 export const defaultTrailingClassName =
-  "pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-zinc-500 text-sm";
+  "pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2.5 text-zinc-500 text-sm";
 export const defaultLeadingClassName =
-  "pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-zinc-500 text-sm";
+  "pointer-events-none absolute inset-y-0 left-0 flex items-center pl-2.5 text-zinc-500 text-sm";
 export const defaultLeadingInputClassName = "pl-10";
 export const defaultTrailingInputClassName = "pr-10";
 
