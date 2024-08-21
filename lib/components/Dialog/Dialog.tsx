@@ -13,6 +13,8 @@ export interface DialogProps {
   contentOverflowClassName?: string;
   closeButtonClassName?: string;
   overlayClassName?: string;
+  titleClassName?: string;
+  descriptionClassName?: string;
 }
 
 export default function Dialog({
@@ -25,6 +27,8 @@ export default function Dialog({
   contentOverflowClassName,
   closeButtonClassName,
   overlayClassName,
+  titleClassName,
+  descriptionClassName,
 }: {
   children: ReactNode;
   open: boolean;
@@ -61,6 +65,7 @@ export default function Dialog({
                   className={clsx(
                     "ui-dialog-title",
                     "-mb-1 text-lg font-medium leading-none text-zinc-900 dark:text-zinc-50",
+                    titleClassName,
                   )}
                 >
                   {title}
@@ -71,6 +76,7 @@ export default function Dialog({
                   className={clsx(
                     "ui-dialog-description",
                     "text-zinc-700 dark:text-zinc-300",
+                    descriptionClassName,
                   )}
                 >
                   {description}
