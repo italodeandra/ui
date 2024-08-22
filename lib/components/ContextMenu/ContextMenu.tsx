@@ -8,8 +8,10 @@ import {
   dropdownItemClassName,
   dropdownItemIndicatorClassName,
   dropdownSeparatorClassName,
+  dropdownSubTriggerClassName,
 } from "../../styles/Dropdown.classNames";
 import { modalContentClassName } from "../../styles/Modal.classNames";
+import { ChevronRightIcon } from "@heroicons/react/20/solid";
 
 function ContextMenuContent({
   className,
@@ -69,6 +71,22 @@ function ContextMenuItem({
   );
 }
 
+function ContextMenuItemIndicator({
+  className,
+  ...props
+}: ComponentProps<typeof RContextMenu.ItemIndicator>) {
+  return (
+    <RContextMenu.ItemIndicator
+      className={clsx(
+        dropdownItemIndicatorClassName,
+        "ui-context-menu-checkbox-item-indicator",
+        className,
+      )}
+      {...props}
+    />
+  );
+}
+
 function ContextMenuCheckboxItem({
   className,
   children,
@@ -86,17 +104,73 @@ function ContextMenuCheckboxItem({
         className,
       )}
     >
-      <RContextMenu.ItemIndicator
+      <ContextMenuItemIndicator
         className={clsx(
-          dropdownItemIndicatorClassName,
           "ui-context-menu-checkbox-item-indicator",
           indicatorClassName,
         )}
       >
         <CheckIcon />
-      </RContextMenu.ItemIndicator>
+      </ContextMenuItemIndicator>
       {children}
     </RContextMenu.CheckboxItem>
+  );
+}
+
+function ContextMenuSubContent({
+  className,
+  children,
+  sideOffset = 2,
+  alignOffset = -4,
+  ...props
+}: ComponentProps<typeof RContextMenu.SubContent>) {
+  return (
+    <RContextMenu.Portal>
+      <RContextMenu.SubContent
+        sideOffset={sideOffset}
+        alignOffset={alignOffset}
+        {...props}
+        className={clsx(
+          modalContentClassName,
+          "ui-context-menu-sub-content",
+          className,
+        )}
+      >
+        {children}
+      </RContextMenu.SubContent>
+    </RContextMenu.Portal>
+  );
+}
+
+function ContextMenuSubTrigger({
+  className,
+  href,
+  children,
+  ...props
+}: ComponentProps<typeof RContextMenu.SubTrigger> & { href?: string }) {
+  const Wrapper = href ? Link : Fragment;
+  return (
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    <Wrapper {...(href ? ({ href } as any) : {})}>
+      <RContextMenu.SubTrigger
+        {...props}
+        className={clsx(
+          dropdownSubTriggerClassName,
+          "ui-context-menu-sub-trigger",
+          className,
+        )}
+      >
+        {children}
+        <div
+          className={clsx(
+            "absolute right-1.5 top-1.5 inline-flex items-center justify-center",
+            "[&>svg]:h-4 [&>svg]:w-4",
+          )}
+        >
+          <ChevronRightIcon />
+        </div>
+      </RContextMenu.SubTrigger>
+    </Wrapper>
   );
 }
 
@@ -107,6 +181,10 @@ const ContextMenu = {
   Item: ContextMenuItem,
   Separator: ContextMenuSeparator,
   CheckboxItem: ContextMenuCheckboxItem,
+  ItemIndicator: ContextMenuItemIndicator,
+  Sub: RContextMenu.Sub,
+  SubContent: ContextMenuSubContent,
+  SubTrigger: ContextMenuSubTrigger,
 };
 
 export default ContextMenu;

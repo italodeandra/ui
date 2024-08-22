@@ -30,6 +30,13 @@ export default function Page() {
           </DropdownMenu.Trigger>
           <DropdownMenu.Content>
             <DropdownMenu.Label>Label</DropdownMenu.Label>
+            <DropdownMenu.Sub>
+              <DropdownMenu.SubTrigger>Theme</DropdownMenu.SubTrigger>
+              <DropdownMenu.SubContent>
+                <DropdownMenu.Item>Light</DropdownMenu.Item>
+                <DropdownMenu.Item>Dark</DropdownMenu.Item>
+              </DropdownMenu.SubContent>
+            </DropdownMenu.Sub>
             <DropdownMenu.Item>Account settings</DropdownMenu.Item>
             <DropdownMenu.Item>Support</DropdownMenu.Item>
             <DropdownMenu.Item>License</DropdownMenu.Item>

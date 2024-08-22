@@ -38,6 +38,13 @@ export default function Page() {
             >
               Check this
             </ContextMenu.CheckboxItem>
+            <ContextMenu.Sub>
+              <ContextMenu.SubTrigger>Theme</ContextMenu.SubTrigger>
+              <ContextMenu.SubContent>
+                <ContextMenu.Item>Light</ContextMenu.Item>
+                <ContextMenu.Item>Dark</ContextMenu.Item>
+              </ContextMenu.SubContent>
+            </ContextMenu.Sub>
             <ContextMenu.Item>Account settings</ContextMenu.Item>
             <ContextMenu.Item>Support</ContextMenu.Item>
             <ContextMenu.Item>License</ContextMenu.Item>

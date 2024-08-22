@@ -14,6 +14,12 @@ export const dropdownItemClassName = clsx(
   "dark:data-[highlighted]:bg-white/5",
 );
 
+export const dropdownSubTriggerClassName = clsx(
+  dropdownItemClassName,
+  "data-[state=open]:bg-black/[0.025] data-[state=open]:data-[highlighted]:bg-black/5 dark:data-[state=open]:data-[highlighted]:bg-white/5",
+  "dark:data-[state=open]:bg-white/[0.025]",
+);
+
 export const dropdownLabelClassName = clsx(
   "ui-dropdown-label",
   "py-1 px-7 text-xs font-medium cursor-default text-zinc-500 outline-none",
