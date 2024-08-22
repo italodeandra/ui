@@ -14,7 +14,7 @@ export default async function uploadToImgur(image) {
         maxBodyLength: Infinity,
         url: "https://api.imgur.com/3/image",
         headers: {
-            Authorization: "Client-ID 4e33f012808af45",
+            Authorization: "Client-ID e5fe1e83d71a6cd",
             ...data.getHeaders(),
         },
         data: data,
