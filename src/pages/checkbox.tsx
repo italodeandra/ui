@@ -38,6 +38,7 @@ export default function Page() {
         <Checkbox label="Male" type="radio" name="sex" />
         <Checkbox label="Female" type="radio" name="sex" />
         <Checkbox label="With error" error helpText="This is an error" />
+        <Checkbox label="Indeterminate" defaultChecked indeterminate />
       </Stack>
     </>
   );

@@ -47,3 +47,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     background: none;
     z-index: 1;
 }
+
+input[type="checkbox"]:indeterminate {
+    @apply dark:bg-primary-500 dark:border-primary-500
+}

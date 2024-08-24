@@ -4,10 +4,13 @@ import {
   forwardRef,
   InputHTMLAttributes,
   ReactNode,
+  useEffect,
   useId,
+  useRef,
 } from "react";
 import { defaultTextStyles } from "../Text";
 import clsx from "../../utils/clsx";
+import { mergeRefs } from "react-merge-refs";
 
 export type CheckboxProps = {
   label?: ReactNode;
@@ -18,6 +21,7 @@ export type CheckboxProps = {
   labelOuterClassName?: string;
   error?: boolean;
   helpText?: ReactNode;
+  indeterminate?: boolean;
 } & DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 
 const defaultLabelClassName = defaultTextStyles.variant.label;
@@ -36,10 +40,12 @@ function Checkbox(
     type = "checkbox",
     error,
     helpText,
+    indeterminate,
     ...props
   }: CheckboxProps,
   ref: ForwardedRef<HTMLInputElement>,
 ) {
+  const innerRef = useRef<HTMLInputElement>(null);
   const defaultInputId = useId();
   const descriptionId = useId();
   id = id || defaultInputId;
@@ -63,6 +69,12 @@ function Checkbox(
     }
   }
 
+  useEffect(() => {
+    if (innerRef.current) {
+      innerRef.current.indeterminate = !!indeterminate;
+    }
+  }, [indeterminate]);
+
   return (
     <div className={clsx("relative flex items-start", className)}>
       <div className="flex h-5 items-center">
@@ -72,7 +84,7 @@ function Checkbox(
           aria-describedby={descriptionId}
           type={type}
           className={inputClassName}
-          ref={ref}
+          ref={mergeRefs([ref, innerRef])}
         />
       </div>
       {(label || description) && (
