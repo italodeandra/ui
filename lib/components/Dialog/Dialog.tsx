@@ -1,13 +1,14 @@
 import * as RDialog from "@radix-ui/react-dialog";
-import { ReactNode } from "react";
+import { Fragment, ReactNode } from "react";
 import { XMarkIcon } from "@heroicons/react/20/solid";
 import Button from "../Button";
 import clsx from "../../utils/clsx";
 
 import { modalContentClassName } from "../../styles/Modal.classNames";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 
 export interface DialogProps {
-  title?: ReactNode;
+  title: ReactNode;
   description?: ReactNode;
   contentClassName?: string;
   contentOverflowClassName?: string;
@@ -15,6 +16,7 @@ export interface DialogProps {
   overlayClassName?: string;
   titleClassName?: string;
   descriptionClassName?: string;
+  hideTitle?: boolean;
 }
 
 export default function Dialog({
@@ -29,11 +31,14 @@ export default function Dialog({
   overlayClassName,
   titleClassName,
   descriptionClassName,
+  hideTitle,
 }: {
   children: ReactNode;
   open: boolean;
   onOpenChange: (open: boolean) => void;
 } & DialogProps) {
+  const TitleWrapper = !hideTitle ? Fragment : VisuallyHidden;
+
   return (
     <RDialog.Root open={open} onOpenChange={onOpenChange}>
       <RDialog.Portal>
@@ -60,7 +65,7 @@ export default function Dialog({
                 contentOverflowClassName,
               )}
             >
-              {title && (
+              <TitleWrapper>
                 <RDialog.Title
                   className={clsx(
                     "ui-dialog-title",
@@ -70,7 +75,7 @@ export default function Dialog({
                 >
                   {title}
                 </RDialog.Title>
-              )}
+              </TitleWrapper>
               {description && (
                 <RDialog.Description
                   className={clsx(
