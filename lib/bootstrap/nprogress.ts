@@ -1,8 +1,7 @@
-import colors from "tailwindcss/colors";
 import ProgressBar from "@badrap/bar-of-progress";
 import Router from "next/router";
 
-export default function setupNProgress(color: string = colors.sky[500]) {
+export default function setupNProgress(color: string = "#0ea5e9") {
   const progress = new ProgressBar({
     size: 2,
     color,
