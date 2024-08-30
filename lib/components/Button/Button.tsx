@@ -135,6 +135,8 @@ export type ButtonProps<T extends HTMLElement = HTMLButtonElement> = Omit<
   loading?: boolean;
   disabled?: boolean;
   rounded?: boolean;
+  trailingClassName?: string;
+  leadingClassName?: string;
 };
 
 const Button = <T extends HTMLElement = HTMLButtonElement>(
@@ -143,6 +145,8 @@ const Button = <T extends HTMLElement = HTMLButtonElement>(
     color = "default",
     size = "md",
     className,
+    trailingClassName,
+    leadingClassName,
     icon,
     type = "button",
     leading,
@@ -188,6 +192,7 @@ const Button = <T extends HTMLElement = HTMLButtonElement>(
             styles.icon[size].icon,
             styles.icon[size].leading,
             leading?.props?.className,
+            leadingClassName,
           ),
         })}
       {!icon
@@ -214,6 +219,7 @@ const Button = <T extends HTMLElement = HTMLButtonElement>(
             styles.icon[size].icon,
             styles.icon[size].trailing,
             trailing?.props?.className,
+            trailingClassName,
           ),
         })}
     </UnstyledButton>
