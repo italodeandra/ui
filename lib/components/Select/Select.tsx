@@ -34,7 +34,11 @@ function SelectContent({
     <RSelect.Portal>
       <RSelect.Content
         {...props}
-        className={clsx(modalContentClassName, "ui-select-content", className)}
+        className={clsx(
+          modalContentClassName,
+          "ui-select-content -ml-[6px]",
+          className,
+        )}
       >
         <RSelect.ScrollUpButton className={selectScrollButtonClassName}>
           <ChevronUpIcon />
