@@ -108,6 +108,7 @@ function SelectTrigger(
     className,
     placeholder,
     children,
+    readOnly,
     ...props
   }: ComponentProps<typeof RSelect.Trigger> &
     ComponentProps<typeof Button> & {
@@ -125,11 +126,15 @@ function SelectTrigger(
       {children || (
         <Button
           trailing={
-            <RSelect.Icon>
-              <ChevronDownIcon />
-            </RSelect.Icon>
+            !readOnly ? (
+              <RSelect.Icon>
+                <ChevronDownIcon />
+              </RSelect.Icon>
+            ) : undefined
           }
           ref={ref}
+          disabled={readOnly}
+          className="opacity-100"
         >
           <RSelect.Value placeholder={placeholder} />
         </Button>
