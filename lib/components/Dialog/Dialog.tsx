@@ -1,4 +1,5 @@
 import * as RDialog from "@radix-ui/react-dialog";
+import { DialogContentProps } from "@radix-ui/react-dialog";
 import { Fragment, ReactNode } from "react";
 import { XMarkIcon } from "@heroicons/react/20/solid";
 import Button from "../Button";
@@ -17,6 +18,7 @@ export interface DialogProps {
   titleClassName?: string;
   descriptionClassName?: string;
   hideTitle?: boolean;
+  contentProps?: Omit<DialogContentProps, "children">;
 }
 
 export default function Dialog({
@@ -32,6 +34,7 @@ export default function Dialog({
   titleClassName,
   descriptionClassName,
   hideTitle,
+  contentProps,
 }: {
   children: ReactNode;
   open: boolean;
@@ -56,8 +59,10 @@ export default function Dialog({
               "ui-dialog-content",
               "relative p-0 focus:outline-none",
               contentClassName,
+              contentProps?.className,
             )}
             {...(!description ? { "aria-describedby": undefined } : {})}
+            {...contentProps}
           >
             <div
               className={clsx(
