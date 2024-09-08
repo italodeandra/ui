@@ -74,7 +74,7 @@ export default function Dialog({
                 <RDialog.Title
                   className={clsx(
                     "ui-dialog-title",
-                    "-mb-1 text-lg font-medium leading-none text-zinc-900 dark:text-zinc-50",
+                    "text-lg font-medium leading-none text-zinc-900 dark:text-zinc-50",
                     titleClassName,
                   )}
                 >
