@@ -20,6 +20,9 @@ export default function formatTime(time: number) {
 }
 
 export function parseFormattedTime(formattedTime: string) {
+  if (!formattedTime) {
+    return 0;
+  }
   const timeParts = formattedTime.split(" ");
   let totalMilliseconds = 0;
 
