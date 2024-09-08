@@ -18,3 +18,25 @@ export default function formatTime(time: number) {
 
   return formattedTime.trim();
 }
+
+export function parseFormattedTime(formattedTime: string) {
+  const timeParts = formattedTime.split(" ");
+  let totalMilliseconds = 0;
+
+  timeParts.forEach((part) => {
+    const unit = part.slice(-1); // Get the last character (h, m, or s)
+    const value = parseFloat(part.slice(0, -1)); // Get the numeric value
+
+    if (!isNaN(value)) {
+      if (unit === "h") {
+        totalMilliseconds += value * 3600000; // Convert hours to milliseconds
+      } else if (unit === "m") {
+        totalMilliseconds += value * 60000; // Convert minutes to milliseconds
+      } else if (unit === "s") {
+        totalMilliseconds += value * 1000; // Convert seconds to milliseconds
+      }
+    }
+  });
+
+  return totalMilliseconds;
+}
