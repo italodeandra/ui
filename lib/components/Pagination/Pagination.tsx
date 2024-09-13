@@ -44,7 +44,7 @@ export default function Pagination({
 
   const [previousTotalItems, setPreviousTotalItems] = useState(totalItems || 0);
   useEffect(() => {
-    if (totalItems) {
+    if (totalItems !== undefined) {
       setPreviousTotalItems(totalItems);
     }
   }, [totalItems]);
