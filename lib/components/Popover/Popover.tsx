@@ -12,8 +12,11 @@ function PopoverContentWithRef(
     sideOffset = 4,
     collisionPadding = 8,
     children,
+    noArrow,
     ...props
-  }: ComponentProps<typeof RPopover.Content>,
+  }: ComponentProps<typeof RPopover.Content> & {
+    noArrow?: boolean;
+  },
   ref: ForwardedRef<HTMLDivElement>,
 ) {
   return (
@@ -26,7 +29,7 @@ function PopoverContentWithRef(
         ref={ref}
       >
         {children}
-        <PopoverArrow />
+        {!noArrow && <PopoverArrow />}
       </RPopover.Content>
     </RPopover.Portal>
   );
