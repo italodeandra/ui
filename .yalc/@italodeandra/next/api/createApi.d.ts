@@ -5,6 +5,7 @@ import { AxiosError } from "axios";
 type Any = any;
 export default function createApi<T extends (args: Any, req: NextApiRequest, res: NextApiResponse, ...rest: Any) => Any, C extends Record<string, Any>>(queryKey: string, handler: T, apiOptions?: {
     queryKeyMap?: (args?: InferApiArgs<T>) => unknown[];
+    queryOptions?: Partial<UseQueryOptions<InferApiResponse<T>>>;
     mutationOptions?: {
         onMutate?: (variables: InferApiArgs<T>, queryClient: QueryClient) => Promise<C> | C | void;
         onSuccess?: (data: InferApiResponse<T>, variables: InferApiArgs<T>, context: C | undefined, queryClient: QueryClient) => Promise<C> | C | void;

@@ -17,8 +17,8 @@ export const apiHandlerWrapper = (handler) => (async (req, res) => {
         delete err.body?.noLog;
         const mongoError = e;
         console.error(err);
-        if (mongoError.errInfo) {
-            console.error(JSON.stringify(mongoError.errInfo, null, 2));
+        if (mongoError.errInfo || mongoError.writeErrors) {
+            console.error(JSON.stringify(mongoError.errInfo || mongoError.writeErrors, null, 2));
         }
         if (!noLog) {
             void log({
@@ -26,7 +26,7 @@ export const apiHandlerWrapper = (handler) => (async (req, res) => {
                 requestHeaders: req.headers,
                 errorMessage: err.message,
                 errorStack: err.stack,
-                errorInfo: mongoError.errInfo || err.body,
+                errorInfo: mongoError.errInfo || mongoError.writeErrors || err.body,
                 requestBody: req.body,
                 requestQuery: req.query,
                 statusCode: err.status || 500,
