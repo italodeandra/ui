@@ -2,8 +2,11 @@ import { setCookie } from "cookies-next";
 import ms from "ms";
 import { snapshot, subscribe } from "valtio";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function createStateHydration(cookieName: string, state: any) {
+export default function createStateHydration<T extends object>(
+  cookieName: string,
+  state: T,
+  properties?: (keyof T)[],
+) {
   subscribe(state, () => {
     setCookie(cookieName, snapshot(state), {
       maxAge: ms("30d"),
@@ -19,7 +22,11 @@ export default function createStateHydration(cookieName: string, state: any) {
         ] as string;
         const cookieValue = JSON.parse(cookieValueString);
         if (typeof cookieValue === "object") {
-          Object.assign(state, cookieValue);
+          for (const property of properties || Object.keys(state)) {
+            if (cookieValue[property]) {
+              state[property as keyof typeof state] = cookieValue[property];
+            }
+          }
         }
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (e) {
