@@ -12,6 +12,7 @@ export const dropdownItemClassName = clsx(
   "relative rounded py-1 px-7 cursor-pointer outline-none select-none flex items-center gap-2",
   "data-[highlighted]:bg-black/5",
   "dark:data-[highlighted]:bg-white/5",
+  "data-[disabled]:cursor-default data-[disabled]:opacity-50",
 );
 
 export const dropdownSubTriggerClassName = clsx(
