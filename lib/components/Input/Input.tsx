@@ -7,7 +7,6 @@ import recursiveChildrenMap from "../../utils/recursiveChildrenMap";
 import clsx from "../../utils/clsx";
 
 export type InputProps<Select extends boolean | undefined> = {
-  error?: boolean;
   loading?: boolean;
 } & UnstyledInputProps<Select>;
 
@@ -45,6 +44,7 @@ function Input<Select extends boolean | undefined>(
     readOnly,
     children,
     disabled,
+    helpText,
     ...props
   }: InputProps<Select>,
   ref: ForwardedRef<Select extends true ? HTMLSelectElement : HTMLInputElement>,
@@ -76,6 +76,10 @@ function Input<Select extends boolean | undefined>(
     defaultTrailingInputClassName,
     trailingInputClassName,
   );
+  if (typeof error === "string") {
+    helpText = error;
+    error = true;
+  }
   if (error) {
     inputClassName = `${inputClassName} border-error-300 dark:border-error-500 text-error-900 dark:text-error-500 placeholder-error-300 focus:border-error-500 dark:focus:border-error-500 focus:ring-error-500`;
     helpTextClassName = `${helpTextClassName} !text-error-600 dark:!text-error-500`;
@@ -110,6 +114,7 @@ function Input<Select extends boolean | undefined>(
       readOnly={readOnly}
       disabled={disabled}
       data-disabled={disabled || undefined}
+      helpText={helpText}
     >
       {recursiveChildrenMap(children, (child) =>
         cloneElement(child, { disabled: readOnly || disabled }),

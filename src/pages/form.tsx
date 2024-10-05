@@ -2,9 +2,7 @@ import Text from "../../lib/components/Text";
 import Stack from "../../lib/components/Stack";
 import getPublicLayout from "../views/publicLayout";
 import { NextSeo } from "next-seo";
-import { useForm } from "react-hook-form";
 import Input from "../../lib/components/Input";
-import emailRegExp from "../../lib/utils/emailRegExp";
 import Checkbox from "../../lib/components/Checkbox";
 import Button from "../../lib/components/Button";
 import { Json } from "../../lib/components/Code";
@@ -13,13 +11,18 @@ import { getCookies } from "cookies-next";
 import Breadcrumbs from "../../lib/components/Breadcrumbs";
 import NumericInput from "../../lib/components/Input/NumericInput";
 import { useEffect } from "react";
+import { z } from "zod";
+import { Controller, useForm } from "../../lib/form2";
 
-type FieldValues = {
-  email: string;
-  password: string;
-  remember: boolean;
-  price?: number;
-};
+const schema = z.object({
+  email: z.string().email().optional(),
+  password: z
+    .string()
+    .min(8, { message: "Password must be at least 8 characters" }),
+  remember: z.boolean(),
+  price: z.number().optional(),
+  name: z.string().optional(),
+});
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   props: {
@@ -30,30 +33,26 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
 const pages = [{ title: "Form" }];
 
 export default function Page() {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-    setValue,
-  } = useForm<FieldValues>();
+  const form = useForm({
+    schema,
+  });
 
-  const onSubmit = (data: FieldValues) => console.info(data);
+  const onSubmit = () => console.info(form.getValues());
 
   useEffect(() => {
     setTimeout(() => {
-      setValue("price", 200);
+      form.setValue("price", 200);
     }, 1000);
-  }, [setValue]);
+  }, [form]);
 
   useEffect(() => {
-    register("price", {
+    form.register("price", {
       required: "Please fill with the price",
     });
-  }, [register]);
+  }, [form]);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={form.handleSubmit(onSubmit)}>
       <NextSeo title={pages[0].title} />
       <Breadcrumbs pages={pages} className="mb-2 md:mx-2" />
       <Stack className="max-w-xl p-2">
@@ -62,16 +61,7 @@ export default function Page() {
             label="Email"
             type="email"
             autoComplete="email"
-            required
-            {...register("email", {
-              required: "Please fill with your email",
-              pattern: {
-                value: emailRegExp,
-                message: "Please fill with a valid email",
-              },
-            })}
-            error={!!errors.email}
-            helpText={errors.email?.message}
+            {...form.register("email")}
           />
         </div>
 
@@ -81,32 +71,43 @@ export default function Page() {
               label="Password"
               type="password"
               autoComplete="current-password"
-              required
-              {...register("password", {
-                required: "Please fill with your password",
-              })}
+              {...form.register("password")}
             />
           </div>
         </div>
 
-        {watch("remember") && (
+        <div className="space-y-1">
+          <div className="mt-1">
+            <Input label="Name" {...form.register("name")} />
+          </div>
+        </div>
+
+        {form.watch("remember") && (
           <div className="space-y-1">
             <div className="mt-1">
-              <NumericInput
-                label="Price"
-                required
-                value={watch("price")}
-                onValueChange={({ floatValue }) =>
-                  setValue("price", floatValue)
-                }
-                trailing="km"
+              <Controller
+                name="price"
+                control={form.control}
+                // defaultValue=""
+                render={({ field }) => (
+                  <NumericInput
+                    label="Price"
+                    required
+                    value={field.value}
+                    onValueChange={({ floatValue }) =>
+                      field.onChange(floatValue)
+                    }
+                    error={field.error}
+                    trailing="km"
+                  />
+                )}
               />
             </div>
           </div>
         )}
 
         <div className="flex items-center justify-between">
-          <Checkbox label="Remember" {...register("remember")} />
+          <Checkbox label="Remember" {...form.register("remember")} />
 
           <div className="text-sm">
             <Text href="/">Forgot your password?</Text>
@@ -120,7 +121,7 @@ export default function Page() {
         </div>
 
         <div>
-          <Json json={watch()} />
+          <Json json={form.watch()} />
         </div>
       </Stack>
     </form>
