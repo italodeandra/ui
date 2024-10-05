@@ -1,4 +1,5 @@
 import {
+  ComponentType,
   DetailedHTMLProps,
   ForwardedRef,
   forwardRef,
@@ -7,7 +8,6 @@ import {
   useId,
 } from "react";
 import clsx from "../../utils/clsx";
-import { Combobox } from "@headlessui/react";
 
 export type UnstyledInputCommonProps = {
   label?: ReactNode;
@@ -21,7 +21,7 @@ export type UnstyledInputCommonProps = {
   helpText?: ReactNode;
   trailing?: ReactNode;
   leading?: ReactNode;
-  as?: typeof Combobox.Input;
+  as?: ComponentType;
   innerClassName?: string;
   error?: boolean | string;
 };
@@ -97,7 +97,7 @@ function UnstyledInput<Select extends boolean | undefined>(
           ref={ref}
           value={value}
         >
-          {select ? children : undefined}
+          {children}
         </Component>
         {trailing && <div className={trailingClassName}>{trailing}</div>}
       </div>

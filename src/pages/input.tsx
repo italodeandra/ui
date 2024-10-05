@@ -8,6 +8,7 @@ import getPublicLayout from "../views/publicLayout";
 import NumericInput from "../../lib/components/Input/NumericInput";
 import PatternInput from "../../lib/components/Input/PatternInput";
 import { useState } from "react";
+import SelectInput from "../../lib/components/Input/MultiSelectInput";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   props: {
@@ -19,6 +20,7 @@ const pages = [{ title: "Input" }];
 
 export default function Page() {
   const [document, setDocument] = useState("");
+  const [selected, setSelected] = useState<string[]>([]);
 
   return (
     <>
@@ -66,6 +68,16 @@ export default function Page() {
           mask={"___________ __".split("")}
           onValueChange={(val) => setDocument(val.value)}
           value={document}
+        />
+        <SelectInput
+          label="Select"
+          options={[
+            { name: "Option 1", value: "1" },
+            { name: "Option 2", value: "2" },
+            { name: "Option 3", value: "3" },
+          ]}
+          value={selected}
+          onChange={setSelected}
         />
       </Stack>
     </>
