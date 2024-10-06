@@ -66,7 +66,7 @@ export default function TableFooterWithPagination({
           {previousText}
         </Button>
         <Button
-          disabled={page === pageCount}
+          disabled={page === pageCount - 1}
           onClick={handlePageClick(page + 1)}
         >
           {nextText}
