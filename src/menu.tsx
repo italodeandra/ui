@@ -82,6 +82,10 @@ export const menu = [
         title: "Slider",
         href: "/slider",
       },
+      {
+        title: "Picture crop input",
+        href: "/picture-crop-input",
+      },
       //
       {
         title: "Feedback",

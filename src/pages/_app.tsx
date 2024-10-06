@@ -10,6 +10,7 @@ import setupNProgress from "../../lib/bootstrap/nprogress";
 import { Dialogs } from "../../lib/components/Dialog";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 import dayjs from "dayjs";
+import "react-image-crop/dist/ReactCrop.css";
 
 dayjs.extend(localizedFormat);
 
