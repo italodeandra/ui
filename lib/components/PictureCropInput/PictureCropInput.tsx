@@ -5,25 +5,35 @@ import { canvasPreview } from "./canvasPreview";
 import Skeleton from "../Skeleton";
 import Button from "../Button";
 import { PhotoIcon } from "@heroicons/react/24/outline";
+import clsx from "clsx";
 
 export default function PictureCropInput({
   value,
   onChange,
   loading,
+  className,
+  previewSizeClassNames = "h-52 w-52",
+  previewContainerClassName,
+  cropButtonClassName,
+  aspect = 1,
 }: {
   value: string;
   onChange: (value: string) => void;
   loading?: boolean;
-  src?: string;
+  className?: string;
+  previewSizeClassNames?: string;
+  previewContainerClassName?: string;
+  cropButtonClassName?: string;
+  aspect?: number;
 }) {
   const id = useId();
   const [src, setSrc] = useState<string>();
   const [crop, setCrop] = useState<Crop>({
     unit: "%",
-    x: 25,
-    y: 25,
-    width: 50,
-    height: 50,
+    x: 25 * aspect,
+    y: 25 * aspect,
+    width: 50 * aspect,
+    height: 50 * aspect,
   });
   const [completedCrop, setCompletedCrop] = useState<PixelCrop>();
   const previewCanvasRef = useRef<HTMLCanvasElement>(null);
@@ -104,17 +114,17 @@ export default function PictureCropInput({
   };
 
   return (
-    <div className="flex gap-2">
-      {loading && <Skeleton className="h-52 w-52" />}
+    <div className={clsx("flex gap-2", className)}>
+      {loading && <Skeleton className={previewSizeClassNames} />}
       {src && (
         <>
           <ReactCrop
             crop={crop}
             onChange={(c) => setCrop(c)}
             onComplete={(c) => setCompletedCrop(c)}
-            aspect={1}
-            minWidth={50}
-            minHeight={50}
+            aspect={aspect}
+            minWidth={50 * aspect}
+            minHeight={50 * aspect}
             className="max-h-96 max-w-96"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -126,15 +136,19 @@ export default function PictureCropInput({
             />
           </ReactCrop>
           {completedCrop && (
-            <div className="flex flex-col gap-2">
+            <div
+              className={clsx("flex flex-col gap-2", previewContainerClassName)}
+            >
               <canvas
                 ref={previewCanvasRef}
-                className="h-52 w-52"
+                className={previewSizeClassNames}
                 style={{
                   objectFit: "cover",
                 }}
               />
-              <Button onClick={handleCrop}>Crop</Button>
+              <Button onClick={handleCrop} className={cropButtonClassName}>
+                Crop
+              </Button>
             </div>
           )}
         </>
@@ -143,7 +157,7 @@ export default function PictureCropInput({
         <>
           {value && (
             <div
-              className="flex h-52 w-52 shrink-0 rounded"
+              className={clsx("flex shrink-0 rounded", previewSizeClassNames)}
               style={
                 {
                   background: value
