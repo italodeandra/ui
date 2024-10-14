@@ -6,6 +6,8 @@ import Skeleton from "../Skeleton";
 import Button from "../Button";
 import { PhotoIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
+import { CheckIcon, TrashIcon } from "@heroicons/react/20/solid";
+import Tooltip from "../Tooltip";
 
 export default function PictureCropInput({
   value,
@@ -28,13 +30,7 @@ export default function PictureCropInput({
 }) {
   const id = useId();
   const [src, setSrc] = useState<string>();
-  const [crop, setCrop] = useState<Crop>({
-    unit: "%",
-    x: 25 * aspect,
-    y: 25 * aspect,
-    width: 50 * aspect,
-    height: 50 * aspect,
-  });
+  const [crop, setCrop] = useState<Crop>();
   const [completedCrop, setCompletedCrop] = useState<PixelCrop>();
   const previewCanvasRef = useRef<HTMLCanvasElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
@@ -43,6 +39,19 @@ export default function PictureCropInput({
     const file = event.target.files?.[0];
     if (file) {
       setSrc(URL.createObjectURL(file));
+      setTimeout(() => {
+        const smallestSide = Math.min(
+          imgRef.current?.getBoundingClientRect().width || 0,
+          imgRef.current?.getBoundingClientRect().height || 0,
+        );
+        setCrop({
+          unit: "px",
+          x: 0,
+          y: 0,
+          width: smallestSide,
+          height: smallestSide,
+        });
+      }, 100);
     }
   };
 
@@ -113,6 +122,11 @@ export default function PictureCropInput({
     setSrc(undefined);
   };
 
+  const handleClear = () => {
+    setCrop(undefined);
+    setSrc(undefined);
+  };
+
   return (
     <div className={clsx("flex gap-2", className)}>
       {loading && <Skeleton className={previewSizeClassNames} />}
@@ -126,6 +140,7 @@ export default function PictureCropInput({
             minWidth={50 * aspect}
             minHeight={50 * aspect}
             className="max-h-96 max-w-96"
+            keepSelection
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -146,9 +161,20 @@ export default function PictureCropInput({
                   objectFit: "cover",
                 }}
               />
-              <Button onClick={handleCrop} className={cropButtonClassName}>
-                Crop
-              </Button>
+              <div className="flex gap-2">
+                <Button
+                  onClick={handleCrop}
+                  className={clsx("w-full", cropButtonClassName)}
+                  leading={<CheckIcon />}
+                >
+                  Crop
+                </Button>
+                <Tooltip content="Clear">
+                  <Button onClick={handleClear} variant="text" icon>
+                    <TrashIcon />
+                  </Button>
+                </Tooltip>
+              </div>
             </div>
           )}
         </>
@@ -172,7 +198,7 @@ export default function PictureCropInput({
             id={id}
             className="hidden"
             onChange={onFileSelect}
-            accept=".jpg,.jpeg,.png,.gif"
+            accept=".jpg,.jpeg,.png"
           />
           <Button
             variant="outlined"
@@ -187,7 +213,7 @@ export default function PictureCropInput({
                 Change picture
               </div>
               <div className="text-xs text-zinc-500">
-                JPG, GIF, PNG - Max size 10MB
+                JPG, PNG - Max size 10MB
               </div>
             </div>
           </Button>
