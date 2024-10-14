@@ -12,6 +12,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import React from "react";
+import { get } from "lodash-es";
 
 export function useForm<
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -34,7 +35,7 @@ export function useForm<
       ?.shape?.[name];
     return {
       ...registerReturn,
-      error: formReturn.formState.errors[name]?.message,
+      error: get(formReturn.formState.errors, name)?.message,
       required: !!zodProperty && !zodProperty.isOptional(),
     };
   };
