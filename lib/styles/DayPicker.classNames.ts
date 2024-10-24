@@ -2,7 +2,7 @@ import clsx from "../utils/clsx";
 
 export const dayPickerButtonClassName = "justify-start pl-4 min-h-[38px]";
 export const dayPickerCaptionClassName =
-  "text-center h-9 flex items-center justify-center mx-9";
+  "text-center h-9 flex items-center justify-center mx-9 capitalize mt-1";
 export const dayPickerNavButtonPreviousClassName = "left-2 top-2";
 export const dayPickerNavButtonNextClassName = "right-2 top-2";
 export const dayPickerNavButtonClassName = clsx(
@@ -28,7 +28,7 @@ export const dayPickerDayRangeStartClassName = clsx(
 );
 export const dayPickerDaySelectedClassName = clsx(
   "ui-date-picker-day-selected",
-  "[&:not(.ui-date-picker-day-range-middle)]:!text-onPrimary dark:[&:not(.ui-date-picker-day-range-middle)]:!text-onPrimary",
+  "[&:not(.ui-date-picker-day-range-middle)_button]:!text-onPrimary dark:[&:not(.ui-date-picker-day-range-middle)_button]:!text-onPrimary",
   "[&:not(.ui-date-picker-day-range-middle)]:bg-primary-500 hover:[&:not(.ui-date-picker-day-range-middle)]:bg-primary-500/50",
   "dark:[&:not(.ui-date-picker-day-range-middle)]:bg-primary-600 dark:hover:[&:not(.ui-date-picker-day-range-middle)]:bg-primary-600/50",
 );
