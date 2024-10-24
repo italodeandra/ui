@@ -17,7 +17,8 @@ function TableRow(
       onClick={onClick}
       className={clsx(
         {
-          "cursor-pointer hover:bg-black/5 dark:hover:bg-white/5": !!onClick,
+          "group/row cursor-pointer hover:bg-black/5 dark:hover:bg-white/5":
+            !!onClick,
         },
         className,
       )}
