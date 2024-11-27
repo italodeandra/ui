@@ -1,4 +1,4 @@
-import { ChangeEvent, useId, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useId, useRef, useState } from "react";
 import ReactCrop, { type Crop, PixelCrop } from "react-image-crop";
 import useDebounceEffect from "../../hooks/useDebounceEffect";
 import { canvasPreview } from "./canvasPreview";
@@ -8,6 +8,7 @@ import { PhotoIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import { CheckIcon, TrashIcon } from "@heroicons/react/20/solid";
 import Tooltip from "../Tooltip";
+import { useLatest } from "react-use";
 
 export default function PictureCropInput({
   value,
@@ -31,29 +32,53 @@ export default function PictureCropInput({
   const id = useId();
   const [src, setSrc] = useState<string>();
   const [crop, setCrop] = useState<Crop>();
+  const cropRef = useLatest(crop);
   const [completedCrop, setCompletedCrop] = useState<PixelCrop>();
   const previewCanvasRef = useRef<HTMLCanvasElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
+  const parentRef = useRef<HTMLDivElement>(null);
+
+  const autoCrop = () => {
+    const smallestSide = Math.min(
+      imgRef.current?.getBoundingClientRect().width || 0,
+      imgRef.current?.getBoundingClientRect().height || 0,
+    );
+    setCrop({
+      unit: "px",
+      x: 0,
+      y: 0,
+      width: smallestSide,
+      height: smallestSide,
+    });
+  };
 
   const onFileSelect = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
       setSrc(URL.createObjectURL(file));
       setTimeout(() => {
-        const smallestSide = Math.min(
-          imgRef.current?.getBoundingClientRect().width || 0,
-          imgRef.current?.getBoundingClientRect().height || 0,
-        );
-        setCrop({
-          unit: "px",
-          x: 0,
-          y: 0,
-          width: smallestSide,
-          height: smallestSide,
-        });
+        autoCrop();
       }, 100);
     }
   };
+
+  useEffect(() => {
+    const resizeObserver = new ResizeObserver(() => {
+      if (cropRef.current) {
+        autoCrop();
+      }
+    });
+    const el = parentRef.current;
+    if (el) {
+      resizeObserver.observe(el);
+    }
+    return () => {
+      if (el) {
+        resizeObserver.unobserve(el);
+      }
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useDebounceEffect(
     async () => {
@@ -128,7 +153,7 @@ export default function PictureCropInput({
   };
 
   return (
-    <div className={clsx("flex gap-2", className)}>
+    <div ref={parentRef} className={clsx("flex gap-2", className)}>
       {loading && <Skeleton className={previewSizeClassNames} />}
       {src && (
         <>
