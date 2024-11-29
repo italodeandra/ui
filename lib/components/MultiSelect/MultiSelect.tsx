@@ -98,11 +98,12 @@ function MultiSelectInput<
       onClick={() => ref.current?.focus()}
     >
       {!!selectedItems.length && (
-        <div className="flex flex-wrap items-center gap-1 p-1.5">
+        <div className="flex flex-wrap items-center gap-1 p-1.5 pb-0">
           {selectedItems.map((item) => (
             <Badge
               key={getValue(valueProperty, item)}
               onActionClick={!readOnly ? removeItem(item) : undefined}
+              className="dark:bg-zinc-700"
             >
               {doRender(item)}
             </Badge>
@@ -270,7 +271,7 @@ export default function MultiSelect<T extends object | string>({
               )}
               inputClassName={clsx(
                 defaultInputClassName,
-                "bg-white dark:bg-zinc-800",
+                "bg-white dark:bg-zinc-800 pl-0",
                 inputElementClassName,
                 {
                   "border-dashed": readOnly,
