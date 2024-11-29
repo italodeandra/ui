@@ -11,9 +11,9 @@ import {
 
 const colorMap = {
   default: {
-    badge: "bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-100",
+    badge: "bg-zinc-200 dark:bg-zinc-700 text-zinc-700 dark:text-zinc-100",
     button:
-      "text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-500 dark:hover:text-zinc-300 focus:bg-zinc-500",
+      "text-zinc-400 hover:bg-zinc-300 dark:hover:bg-zinc-600 hover:text-zinc-500 dark:hover:text-zinc-300 dark:focus:bg-zinc-500 focus:bg-zinc-500",
   },
   primary: {
     badge:

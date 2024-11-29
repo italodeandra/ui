@@ -103,7 +103,6 @@ function MultiSelectInput<
             <Badge
               key={getValue(valueProperty, item)}
               onActionClick={!readOnly ? removeItem(item) : undefined}
-              className="dark:bg-zinc-700"
             >
               {doRender(item)}
             </Badge>
