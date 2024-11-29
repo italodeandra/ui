@@ -1,10 +1,11 @@
 import { apiHandlerWrapper, mutationFnWrapper, queryFnWrapper, } from "./apiHandlerWrapper";
-import { useMutation, useQuery, useQueryClient, } from "@tanstack/react-query";
+import { useInfiniteQuery, useMutation, useQuery, useQueryClient, } from "@tanstack/react-query";
 export default function createApi(queryKey, handler, apiOptions) {
     const apiHandler = apiHandlerWrapper(handler);
     const Types = {};
     // noinspection JSUnusedGlobalSymbols
     return {
+        queryKey,
         handler: apiHandler,
         unwrappedHandler: handler,
         Types,
@@ -12,6 +13,12 @@ export default function createApi(queryKey, handler, apiOptions) {
             queryKey: [queryKey, ...(apiOptions?.queryKeyMap?.(args) || [])],
             queryFn: queryFnWrapper(queryKey, args),
             ...apiOptions?.queryOptions,
+            ...options,
+        }),
+        useInfiniteQuery: (args, options) => useInfiniteQuery({
+            queryKey: [queryKey, ...(apiOptions?.queryKeyMap?.(args) || [])],
+            queryFn: ({ pageParam }) => queryFnWrapper(queryKey, { ...args, pageParam })(),
+            ...apiOptions?.infiniteQueryOptions,
             ...options,
         }),
         useMutation: (options) => {

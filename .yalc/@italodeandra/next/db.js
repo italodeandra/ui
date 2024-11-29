@@ -16,13 +16,14 @@ export async function connectDb(afterConnected) {
     const connect = async () => {
         if (!uri && appEnv !== "production") {
             const { MongoMemoryServer } = await import("mongodb-memory-server");
+            const dbName = process.env.MONGODB_MEMORY_SERVER_DBNAME;
             const mongod = await MongoMemoryServer.create({
                 instance: {
                     port: 5432,
-                    dbName: process.env.MONGODB_MEMORY_SERVER_DBNAME,
+                    dbName,
                 },
             });
-            uri = `${mongod.getUri()}${process.env.MONGODB_MEMORY_SERVER_DBNAME || "test"}`;
+            uri = mongod.getUri(dbName);
         }
         if (!uri) {
             throw Error("[MongoDB] URI not found");
@@ -47,3 +48,6 @@ export function clearPromise() {
     delete _global._dbPromise;
 }
 export default _global._papr;
+export function getMongoClient() {
+    return _global._mongoClient;
+}

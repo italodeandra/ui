@@ -28,6 +28,7 @@ export default async function connectToFileStorage() {
         port: !isNaN(parseInt(process.env.S3_PORT || ""))
             ? parseInt(process.env.S3_PORT || "")
             : undefined,
+        region: process.env.S3_REGION,
     });
     if (!(await _global._minio.bucketExists(process.env.S3_BUCKET_NAME))) {
         await _global._minio.makeBucket(process.env.S3_BUCKET_NAME, process.env.S3_REGION);
