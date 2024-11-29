@@ -246,6 +246,10 @@ export default function MultiSelect<T extends object | string>({
     );
   }
 
+  const renderedItems = itemsRenderLimit
+    ? take(filteredItems, itemsRenderLimit)
+    : filteredItems;
+
   return (
     <div className={clsx("relative", className)}>
       <Combobox
@@ -305,27 +309,28 @@ export default function MultiSelect<T extends object | string>({
                     "absolute z-10 mt-1 max-h-72 w-full scroll-py-2 overflow-y-auto py-2 text-sm text-zinc-800 dark:text-zinc-200",
                   )}
                 >
-                  {creatable && !!query && (
-                    <Combobox.Option
-                      value={query}
-                      className={({ active }) =>
-                        clsx("cursor-default select-none px-4 py-2", {
-                          "bg-primary-600 text-white": active,
-                        })
-                      }
-                    >
-                      {({ selected }) => (
-                        <div className="flex">
-                          {selected && <CheckIcon className="mr-2 w-5" />}
-                          {selected ? query : getCreateLabel(query)}
-                        </div>
-                      )}
-                    </Combobox.Option>
-                  )}
-                  {(itemsRenderLimit
-                    ? take(filteredItems, itemsRenderLimit)
-                    : filteredItems
-                  ).map((item) => (
+                  {!renderedItems.some(
+                    (item) => getValue(valueProperty, item) === query,
+                  ) &&
+                    creatable &&
+                    !!query && (
+                      <Combobox.Option
+                        value={query}
+                        className={({ active }) =>
+                          clsx("cursor-default select-none px-4 py-2", {
+                            "bg-primary-600 text-white": active,
+                          })
+                        }
+                      >
+                        {({ selected }) => (
+                          <div className="flex">
+                            {selected && <CheckIcon className="mr-2 w-5" />}
+                            {selected ? query : getCreateLabel(query)}
+                          </div>
+                        )}
+                      </Combobox.Option>
+                    )}
+                  {renderedItems.map((item) => (
                     <Combobox.Option
                       key={getValue(valueProperty, item)}
                       value={item}
