@@ -3,6 +3,7 @@ import {
   ComponentPropsWithRef,
   ForwardedRef,
   forwardRef,
+  ReactNode,
   useCallback,
   useEffect,
   useRef,
@@ -59,11 +60,12 @@ function FileInput(
     emptyText = "No files",
     downloadText = "Download",
     openText = "Open",
-    preview,
+    fileDisplay,
     asyncUpload,
     onRejectFiles,
     loading,
     maxConcurrentUploads = 1,
+    fileAdditionalInfo,
     ...props
   }: Pick<
     InputProps<false>,
@@ -84,7 +86,7 @@ function FileInput(
       emptyText?: string;
       downloadText?: string;
       openText?: string;
-      preview?: boolean;
+      fileDisplay?: "info" | "preview" | "both";
       asyncUpload?: (
         file: FileFile & { _id: string },
       ) => Promise<FileUrl & { _id: string }>;
@@ -94,6 +96,7 @@ function FileInput(
       ) => void;
       loading?: boolean;
       maxConcurrentUploads?: number;
+      fileAdditionalInfo?: (file: FileInputFile, index: number) => ReactNode;
     },
   ref: ForwardedRef<HTMLInputElement>,
 ) {
@@ -190,14 +193,10 @@ function FileInput(
         target: {
           name,
           value: innerValue.map((file) => ({
-            _id: file._id,
+            ...file,
             url: (file as FileFile).file
               ? URL.createObjectURL((file as FileFile).file)
               : (file as FileUrl).url,
-            description: file.description,
-            name: (file as FileUrl).name,
-            type: file.type,
-            size: file.size,
           })),
         },
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -241,15 +240,17 @@ function FileInput(
           "min-h-[140px]": !!innerValue.length || !readOnly,
         })}
       >
-        {innerValue.map((file, i) => (
+        {innerValue.map((file, index) => (
           <PreviewFile
-            key={i}
+            key={index}
             file={file}
             readOnly={readOnly}
             handleDeleteClick={handleDeleteClick(file)}
             downloadText={downloadText}
-            preview={preview}
+            display={fileDisplay}
             openText={openText}
+            additionalInfo={fileAdditionalInfo}
+            index={index}
           />
         ))}
         {readOnly && !innerValue.length && (

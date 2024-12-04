@@ -17,7 +17,7 @@ function ImageInput(
     icon = defaultIcon,
     uploadAFileText = "Upload an image",
     allowedFileTypes = [".png", ".jpg", ".jpeg", ".webp"],
-    preview = true,
+    fileDisplay = "preview",
     ...props
   }: ComponentProps<typeof FileInput>,
   ref: ForwardedRef<HTMLInputElement>,
@@ -29,7 +29,7 @@ function ImageInput(
       icon={icon}
       uploadAFileText={uploadAFileText}
       allowedFileTypes={allowedFileTypes}
-      preview={preview}
+      fileDisplay={fileDisplay}
     />
   );
 }
