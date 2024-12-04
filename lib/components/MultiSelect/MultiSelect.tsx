@@ -259,7 +259,7 @@ export default function MultiSelect<T extends object | string>({
         multiple
       >
         {({ open }) => (
-          <>
+          <div>
             <ComponentInput
               /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
               {...(props as any)}
@@ -366,7 +366,7 @@ export default function MultiSelect<T extends object | string>({
                   {emptyText}
                 </p>
               )}
-          </>
+          </div>
         )}
       </Combobox>
     </div>

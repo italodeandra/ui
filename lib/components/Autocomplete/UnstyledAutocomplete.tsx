@@ -151,7 +151,7 @@ export default function UnstyledAutocomplete<T extends { _id: string }>({
   return (
     <Combobox onChange={setSelectedItem} value={selectedItem} nullable>
       {({ open }) => (
-        <>
+        <div>
           <div className="relative">
             <ComponentInput
               /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
@@ -225,7 +225,7 @@ export default function UnstyledAutocomplete<T extends { _id: string }>({
           {open && emptyText && query !== "" && filteredItems.length === 0 && (
             <p className={emptyTextClassName}>{emptyText}</p>
           )}
-        </>
+        </div>
       )}
     </Combobox>
   );
