@@ -117,7 +117,9 @@ function Input<Select extends boolean | undefined>(
       helpText={helpText}
     >
       {recursiveChildrenMap(children, (child) =>
-        cloneElement(child, { disabled: readOnly || disabled }),
+        cloneElement(child, {
+          disabled: readOnly || disabled || child.props.disabled,
+        }),
       )}
     </UnstyledInput>
   );
