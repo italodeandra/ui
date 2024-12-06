@@ -157,7 +157,6 @@ function FileSelect(
 
   return (
     <div
-      // @ts-expect-error trust me
       ref={drop}
       className={clsx(
         "flex justify-center rounded-md border-2 border-dashed px-6 pb-6 pt-5",
