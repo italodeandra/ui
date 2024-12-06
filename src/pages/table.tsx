@@ -12,7 +12,7 @@ import Breadcrumbs from "../../lib/components/Breadcrumbs";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   props: {
-    cookies: getCookies({ req, res }),
+    cookies: await getCookies({ req, res }),
   },
 });
 
@@ -44,7 +44,7 @@ export default function Page() {
             <Table.Row
               onClick={useCallback(
                 () => window.open("https://italodeandra.de", "_blank"),
-                []
+                [],
               )}
             >
               <Table.Cell>Ítalo Andrade</Table.Cell>

@@ -7,7 +7,7 @@ import GridPattern from "../../lib/components/GridPattern";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   props: {
-    cookies: getCookies({ req, res }),
+    cookies: await getCookies({ req, res }),
   },
 });
 

@@ -1,4 +1,4 @@
-import { AnimatePresence, motion, MotionStyle } from "framer-motion";
+import { AnimatePresence, motion, MotionStyle } from "motion/react";
 import { useSnapshot } from "valtio";
 import notificationsState from "./notifications.state";
 import {

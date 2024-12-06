@@ -6,7 +6,7 @@ import { ButtonDoc } from "../../lib/components/Button/Button.doc";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   props: {
-    cookies: getCookies({ req, res }),
+    cookies: await getCookies({ req, res }),
   },
 });
 

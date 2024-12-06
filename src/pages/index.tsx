@@ -21,7 +21,7 @@ import {
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   props: {
-    cookies: getCookies({ req, res }),
+    cookies: await getCookies({ req, res }),
   },
 });
 
@@ -79,7 +79,7 @@ export default function Page() {
   const getExampleCodeMouseEvents = useExampleCodeCallback();
 
   return (
-    <div className="mx-auto max-w-7xl py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
       <Group className="grid grid-cols-1 gap-10 md:grid-cols-2">
         <Stack className="max-w-xl gap-5">
           <p className="mt-1 text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-5xl lg:text-6xl">
@@ -89,7 +89,7 @@ export default function Page() {
             </span>{" "}
             designed user interface.
           </p>
-          <p className="text-lg text-gray-500 dark:text-gray-400 leading-tight">
+          <p className="text-lg leading-tight text-gray-500 dark:text-gray-400">
             A collection of components, hooks and utility functions for creating
             unique interfaces without forgetting to be responsive, accessible
             and artistic at the same.

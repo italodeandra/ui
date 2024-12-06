@@ -14,7 +14,7 @@ import isomorphicObjectId from "@italodeandra/next/utils/isomorphicObjectId";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => ({
   props: {
-    cookies: getCookies({ req, res }),
+    cookies: await getCookies({ req, res }),
   },
 });
 

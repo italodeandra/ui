@@ -74,7 +74,7 @@ export default function Resizable({
       <>
         <div
           className={clsx(
-            "absolute left-0 top-0 bottom-0 z-10 w-1 cursor-e-resize select-none transition-colors hover:bg-zinc-700",
+            "absolute bottom-0 left-0 top-0 z-10 w-1 cursor-e-resize select-none transition-colors hover:bg-zinc-700",
             {
               "bg-zinc-700": isResizing,
             },
