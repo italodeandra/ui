@@ -53,3 +53,17 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 input[type="checkbox"]:indeterminate {
     @apply dark:bg-primary-500 dark:border-primary-500
 }
+
+@page {
+    margin: 0;
+}
+
+.tsqd-parent-container {
+    pointer-events: auto;
+}
+
+@media print {
+    .tsqd-parent-container {
+        display: none;
+    }
+}
