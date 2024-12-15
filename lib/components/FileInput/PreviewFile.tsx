@@ -54,6 +54,7 @@ export function PreviewFile({
         (isVideo ? (
           <video className="max-h-96 rounded-md" src={url} controls />
         ) : (
+          // eslint-disable-next-line @next/next/no-img-element
           <img
             src={url}
             alt={file.description}
